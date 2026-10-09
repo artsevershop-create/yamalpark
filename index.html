@@ -188,6 +188,21 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     }
     return p + rest;
   };
+  /* Прототип (страницы *.html, например на GitHub Pages в подпапке): ссылки вида /events, /, /#forecast, /en/zoo,
+     которые на сайте Tilda работают как есть, переводим в events.html, index.html#forecast, en-zoo.html — иначе пустая страница 404 */
+  YP.protoHref = function(href){
+    if(!file || !href || href.charAt(0) !== "/" || href.charAt(1) === "/") return href;
+    var mm = href.match(/^\/(?:(en|zh)(?:\/|$))?([^?#]*)(.*)$/); if(!mm) return href;
+    var lang = mm[1] || "", name = mm[2].replace(/\/$/, "") || "index", rest = mm[3];
+    if(/\.[a-z0-9]{2,5}$/i.test(name)) return href;                      /* файлы (картинки, видео) не трогаем */
+    return (lang ? lang + "-" : "") + name + ".html" + rest;
+  };
+  if(file) ["click", "mouseover", "focusin", "auxclick", "contextmenu"].forEach(function(ev){ document.addEventListener(ev, function(e){
+    var a = e.target.closest && e.target.closest("a[href]"); if(!a) return;
+    var h = a.getAttribute("href"), n = YP.protoHref(h); if(n === h) return;
+    if(YP.lang !== "ru" && !/^(en|zh)-/.test(n)) n = YP.langHref(n);
+    a.setAttribute("href", n);
+  }, true); });
   YP.selfHref = function(){ return (file ? (path.split("/").pop() || "index.html") : path) + location.hash; };
 
   /* hreflang для поисковиков (на сайте Tilda) */
@@ -999,7 +1014,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <a href="bani.html" style="--c:var(--yp-red)">Бани</a>
       <a href="grill.html" style="--c:var(--yp-red)">Гриль-дома</a>
       <a href="etno.html" style="--c:var(--yp-green)">Этно</a>
-      <a href="zoo.html" style="--c:var(--yp-green)">Зоопарк</a>
+      <a href="zoo.html" style="--c:var(--yp-green)">Мини-зоопарк</a>
       <a href="severnoe-siyanie.html" style="--c:var(--yp-green)">Сияние</a>
       <a href="events.html" style="--c:var(--yp-blue)">Мероприятия</a>
       <a href="contacts.html" style="--c:var(--yp-blue)">Контакты</a>
@@ -1873,7 +1888,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <a class="yp-pcard" href="zoo.html" style="--c:var(--yp-green)">
         <img src="img/fox.jpg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
         <span class="yp-pcard__tag"><i></i>бесплатно</span>
-        <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в зоопарке <span>→</span></span>
+        <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в мини-зоопарке <span>→</span></span>
       </a>
     </div>
   </div>
@@ -3066,7 +3081,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var sec = document.getElementById("gallery"); if(!sec) return;
   var YP = window.YP || {}, G = window.gsap, motion = !!G && !YP.reduced;
-  var CATS = [["all","Все"],["aurora","Сияние"],["winter","Зима"],["summer","Лето и осень"],["glamp","Глэмпинг"],["banya","Бани"],["grill","Гриль-дома"],["etno","Чум и зоопарк"]];
+  var CATS = [["all","Все"],["aurora","Сияние"],["winter","Зима"],["summer","Лето и осень"],["glamp","Глэмпинг"],["banya","Бани"],["grill","Гриль-дома"],["etno","Чум и мини-зоопарк"]];
   /* s: t — высокая плитка, w — широкая */
   var P = [
     {src:"img/p/dome-aurora-arc.jpg", c:"aurora glamp winter", s:"w", cap:"Сияние над купольным домиком"},
