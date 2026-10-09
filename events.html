@@ -97,16 +97,19 @@ html.lenis,html.lenis body{height:auto}
 .yp-ph__lead{margin:0;max-width:48ch;font-size:clamp(16px,1.3vw,19px);color:#DCE5EA}
 .yp-ph__chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .yp-ph__chips span{font:500 13px/1 var(--yp-mono);padding:9px 13px;border-radius:999px;background:rgba(10,18,28,.45);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@media (max-width:768px){.yp-ph__chips span{font-size:12px;padding:8px 11px}}
 .yp-ph__cta{display:flex;gap:10px;flex-wrap:wrap}
 .yp-ph .yp-btn--ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
 .yp-ph .yp-btn--ghost::before{background:rgba(255,255,255,.14)}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
+@media (max-width:768px){.hotbot-widget-buttons-wrap-chat,.hotbot-widget-buttons-wrap-shop{right:12px!important;transform:scale(.72);transform-origin:100% 100%}.hotbot-widget-buttons-wrap-chat{bottom:12px!important}.hotbot-widget-buttons-wrap-shop{bottom:66px!important}}
 /* общий лист, наезжающий на первый экран */
 .yp-sheet{border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
 /* ---------- Блок «Вопросы» (общий) ---------- */
-.yp-faq{padding-block:clamp(90px,10vw,150px)}
+.yp-faq{padding-block:clamp(56px,10vw,150px)}
 .yp-faq__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px)}
 .yp-faq__side p{color:var(--yp-muted);margin:20px 0 26px;max-width:36ch}
 .yp-faq__list{border-top:1px solid var(--yp-line)}
@@ -1104,7 +1107,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <div class="r t-rec">
 <!-- Мероприятия · 02 · Подбор площадки по числу гостей + карточки площадок (каталог сайта). Ползунок подсвечивает подходящие -->
 <style>
-.yp-vn{padding-block:clamp(90px,10vw,150px) clamp(60px,7vw,100px)}
+.yp-vn{padding-block:clamp(56px,10vw,150px) clamp(60px,7vw,100px)}
 .yp-pick{margin-top:clamp(30px,4vw,50px);border-radius:30px;background:var(--yp-ink);color:#fff;padding:clamp(22px,3vw,40px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:center}
 .yp-pick label{display:block;font:500 12px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:#A9B0AD}
 .yp-pick__num{font:300 clamp(56px,6vw,96px)/1 var(--yp-fd);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
@@ -1191,7 +1194,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Мероприятия · 04 · Шатёр «Сияние севера»: переключатель «День / Ночь» (днём — купол на террасе, ночью — сияние сквозь грани),
      лента фото, характеристики и цены (по каталогу сайта). Фото — папка «Шатер - сияние севера». -->
 <style>
-.yp-tn{padding-block:clamp(80px,9vw,140px);overflow:hidden}
+.yp-tn{padding-block:clamp(56px,9vw,140px);overflow:hidden}
 .yp-tn__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
 .yp-tn__view{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:4/3.4;background:#0b1118;box-shadow:0 50px 90px -45px rgba(0,0,0,.8)}
 .yp-tn__view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.1s,transform 1.6s var(--yp-ease)}
@@ -1283,7 +1286,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- 18 · Свободные даты и время по каждому дому — живые данные TravelLine (глэмпинг) и HotBot (бани, гриль- и гостевые дома, чум, шатёр, зал).
      Набор домов зависит от страницы: главная — все, /glamping — дома, /bani — бани, /grill — гриль- и гостевые дома, /etno — чум, /events — площадки. -->
 <style>
-.yp-free{padding-block:clamp(70px,8vw,120px)}
+.yp-free{padding-block:clamp(56px,8vw,120px)}
 .yp-free__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
 .yp-free__box{margin-top:clamp(26px,3.5vw,44px);border-radius:30px;background:var(--yp-ink);color:#fff;padding:clamp(16px,2.2vw,30px);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(16px,2.2vw,30px);position:relative;overflow:hidden}
 .yp-free__box::before{content:"";position:absolute;inset:-40% -20% auto auto;width:60%;height:120%;background:radial-gradient(closest-side,rgba(92,255,192,.12),transparent);pointer-events:none}
@@ -1327,7 +1330,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__err{grid-column:1/-1;padding:14px 16px;border-radius:14px;background:rgba(255,178,122,.12);color:#FFD9BD;font-size:14px}
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
-@media (max-width:560px){.yp-free__days{grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}.yp-free__day b{font-size:17px}}
+/* телефон: дни одной лентой с прокруткой вбок вместо сетки на два экрана */
+@media (max-width:768px){.yp-free__days{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin-inline:-4px;padding:2px 4px 6px;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}.yp-free__days::-webkit-scrollbar{display:none}.yp-free__day{flex:0 0 64px;scroll-snap-align:start;min-height:0;padding:8px 4px 7px}.yp-free__day b{font-size:18px}.yp-free__day small{font-size:10px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -1414,6 +1418,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     cur.date = iso; var u = U[cur.u];
     dEl.querySelectorAll(".sel").forEach(function(b){ b.classList.remove("sel"); });
     var btn = dEl.querySelector('[data-d="' + iso + '"]'); if(btn) btn.classList.add("sel");
+    /* лента дней на телефоне: выбранный день — в поле зрения */
+    if(btn && dEl.scrollWidth > dEl.clientWidth + 4) dEl.scrollTo({left:Math.max(0, dEl.scrollLeft + btn.getBoundingClientRect().left - dEl.getBoundingClientRect().left - 8), behavior:"smooth"});
     load(cur.u, groups[cur.g].days, u.hourly && cur.long).then(function(list){
       var x = list.filter(function(d){ return d.date === iso; })[0]; if(!x) return;
       var day = cap(fmt(iso, {weekday:"long", day:"numeric", month:"long"}));
@@ -1447,7 +1453,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      главная — все, /glamping — купол и «Волк», /bani — «Брусника», /events — шатёр и парк.
      Для Tilda загрузите img/video/*.mp4 на свой хостинг или в облако и замените пути (см. README). -->
 <style>
-.yp-wk{padding-block:clamp(80px,9vw,140px);overflow:hidden}
+.yp-wk{padding-block:clamp(56px,9vw,140px);overflow:hidden}
 .yp-wk__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
 .yp-wk__head .yp-lead{margin:0}
 .yp-wk__stage{position:relative;margin-top:clamp(28px,3vw,40px);border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#0b1118;box-shadow:0 50px 90px -45px rgba(0,0,0,.8);isolation:isolate}
@@ -1492,7 +1498,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
 .yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
 @media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
-@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:1/1;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
 </style>
 <section class="yp yp-wk" id="walk">
   <div class="yp-wrap">
@@ -1700,7 +1706,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <div class="r t-rec">
 <!-- Мероприятия · 03 · Форматы (бегущие ленты в двух направлениях) и прошедший фестиваль «Лето в Ямал Парке» (12 июня 2026) -->
 <style>
-.yp-fm{padding-block:clamp(70px,8vw,120px);background:var(--yp-paper);overflow:hidden}
+.yp-fm{padding-block:clamp(56px,8vw,120px);background:var(--yp-paper);overflow:hidden}
 .yp-fm__rows{margin-top:clamp(30px,4vw,50px);display:grid;gap:12px}
 .yp-fm__row{display:flex;gap:12px;white-space:nowrap;will-change:transform}
 .yp-fm__row span{flex:0 0 auto;font:300 clamp(24px,3vw,44px)/1 var(--yp-fd);letter-spacing:-.02em;padding:16px 26px;border-radius:999px;background:var(--yp-bg)}
@@ -1759,7 +1765,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <div class="r t-rec">
 <!-- SEO-текст и частые вопросы страницы (видимый текст для поисковиков; вопросы попадают в разметку FAQPage при сборке) -->
 <style>
-.yp-seo{padding-block:clamp(70px,8vw,120px)}
+.yp-seo{padding-block:clamp(56px,8vw,120px)}
 .yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
 .yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
 .yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
@@ -1791,7 +1797,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      Бронирование как на текущем yamalpark.ru: проживание — модуль TravelLine (TL-INT-yamalpark-ru_2024-08-22, форма поиска в #tl-search-form),
      бани, гриль-дома, чум и праздники — магазин HotBot (подключается в 00-head.html, YP.openShop). -->
 <style>
-.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(90px,10vw,150px)}
+.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
 .yp-booking__glow{position:absolute;inset:-20% -10% auto;height:90%;z-index:-1;pointer-events:none;filter:blur(60px);opacity:.55;
   background:radial-gradient(40% 50% at 25% 55%,rgba(92,255,192,.55),transparent 70%),radial-gradient(35% 45% at 70% 35%,rgba(130,110,255,.45),transparent 70%)}
 .yp-booking__stars{position:absolute;inset:0;z-index:-1;opacity:.6;background:

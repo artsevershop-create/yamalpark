@@ -96,16 +96,19 @@ html.lenis,html.lenis body{height:auto}
 .yp-ph__lead{margin:0;max-width:48ch;font-size:clamp(16px,1.3vw,19px);color:#DCE5EA}
 .yp-ph__chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .yp-ph__chips span{font:500 13px/1 var(--yp-mono);padding:9px 13px;border-radius:999px;background:rgba(10,18,28,.45);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@media (max-width:768px){.yp-ph__chips span{font-size:12px;padding:8px 11px}}
 .yp-ph__cta{display:flex;gap:10px;flex-wrap:wrap}
 .yp-ph .yp-btn--ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
 .yp-ph .yp-btn--ghost::before{background:rgba(255,255,255,.14)}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
+@media (max-width:768px){.hotbot-widget-buttons-wrap-chat,.hotbot-widget-buttons-wrap-shop{right:12px!important;transform:scale(.72);transform-origin:100% 100%}.hotbot-widget-buttons-wrap-chat{bottom:12px!important}.hotbot-widget-buttons-wrap-shop{bottom:66px!important}}
 /* общий лист, наезжающий на первый экран */
 .yp-sheet{border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
 /* ---------- Блок «Вопросы» (общий) ---------- */
-.yp-faq{padding-block:clamp(90px,10vw,150px)}
+.yp-faq{padding-block:clamp(56px,10vw,150px)}
 .yp-faq__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px)}
 .yp-faq__side p{color:var(--yp-muted);margin:20px 0 26px;max-width:36ch}
 .yp-faq__list{border-top:1px solid var(--yp-line)}
@@ -1103,7 +1106,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <div class="r t-rec">
 <!-- Контакты · 02 · Как добраться и связаться: адрес, координаты (копируются), телефоны, соцсети -->
 <style>
-.yp-rt{padding-block:clamp(90px,10vw,150px) clamp(50px,6vw,90px)}
+.yp-rt{padding-block:clamp(56px,10vw,150px) clamp(50px,6vw,90px)}
 .yp-rt__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);margin-top:clamp(36px,4vw,56px);align-items:stretch}
 .yp-rt__steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
 .yp-rt__steps li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--yp-line)}
@@ -1165,7 +1168,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Контакты · 05 · Анимированная схема проезда: из центра Салехарда по дороге на Горнокнязевск до арки «Ямал Парк» (12-й км, ~16 минут).
      Схема, не в масштабе. Машинка едет по дороге, счётчик показывает километры и минуты, по пути загораются шаги маршрута. -->
 <style>
-.yp-dr{padding-block:clamp(70px,8vw,120px);background:var(--yp-bg)}
+.yp-dr{padding-block:clamp(56px,8vw,120px);background:var(--yp-bg)}
 .yp-dr__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
 .yp-dr__box{margin-top:clamp(26px,3.5vw,44px);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(16px,2.4vw,30px);align-items:stretch}
 .yp-dr__map{position:relative;border-radius:30px;overflow:hidden;background:#E9EEE8;box-shadow:0 1px 0 var(--yp-line),0 30px 60px -40px rgba(20,30,25,.35)}
@@ -1312,7 +1315,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- 17 · Погода и сияние: сейчас в Ямал Парке + 4 дня (Open-Meteo) и шанс северного сияния каждую ночь (NOAA Kp × облачность, YP.forecast).
      Данные живые; если запросы недоступны — снимок на момент сборки (tilda/00-snapshot.html), с подписью «Данные на …». -->
 <style>
-.yp-wx{padding-block:clamp(70px,8vw,120px)}
+.yp-wx{padding-block:clamp(56px,8vw,120px)}
 .yp-wx__head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
 .yp-wx__head .yp-lead{margin:0}
 .yp-wx__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(12px,1.4vw,18px);margin-top:clamp(26px,3vw,40px)}
@@ -1430,7 +1433,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      главная — все, /glamping — купол и «Волк», /bani — «Брусника», /events — шатёр и парк.
      Для Tilda загрузите img/video/*.mp4 на свой хостинг или в облако и замените пути (см. README). -->
 <style>
-.yp-wk{padding-block:clamp(80px,9vw,140px);overflow:hidden}
+.yp-wk{padding-block:clamp(56px,9vw,140px);overflow:hidden}
 .yp-wk__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
 .yp-wk__head .yp-lead{margin:0}
 .yp-wk__stage{position:relative;margin-top:clamp(28px,3vw,40px);border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#0b1118;box-shadow:0 50px 90px -45px rgba(0,0,0,.8);isolation:isolate}
@@ -1475,7 +1478,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
 .yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
 @media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
-@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:1/1;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
 </style>
 <section class="yp yp-wk" id="walk">
   <div class="yp-wrap">
@@ -1857,7 +1860,7 @@ window.YP_MAP = [
 <div class="r t-rec">
 <!-- SEO-текст и частые вопросы страницы (видимый текст для поисковиков; вопросы попадают в разметку FAQPage при сборке) -->
 <style>
-.yp-seo{padding-block:clamp(70px,8vw,120px)}
+.yp-seo{padding-block:clamp(56px,8vw,120px)}
 .yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
 .yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
 .yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
@@ -1889,7 +1892,7 @@ window.YP_MAP = [
      Бронирование как на текущем yamalpark.ru: проживание — модуль TravelLine (TL-INT-yamalpark-ru_2024-08-22, форма поиска в #tl-search-form),
      бани, гриль-дома, чум и праздники — магазин HotBot (подключается в 00-head.html, YP.openShop). -->
 <style>
-.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(90px,10vw,150px)}
+.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
 .yp-booking__glow{position:absolute;inset:-20% -10% auto;height:90%;z-index:-1;pointer-events:none;filter:blur(60px);opacity:.55;
   background:radial-gradient(40% 50% at 25% 55%,rgba(92,255,192,.55),transparent 70%),radial-gradient(35% 45% at 70% 35%,rgba(130,110,255,.45),transparent 70%)}
 .yp-booking__stars{position:absolute;inset:0;z-index:-1;opacity:.6;background:

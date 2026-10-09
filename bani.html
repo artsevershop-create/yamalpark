@@ -97,16 +97,19 @@ html.lenis,html.lenis body{height:auto}
 .yp-ph__lead{margin:0;max-width:48ch;font-size:clamp(16px,1.3vw,19px);color:#DCE5EA}
 .yp-ph__chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .yp-ph__chips span{font:500 13px/1 var(--yp-mono);padding:9px 13px;border-radius:999px;background:rgba(10,18,28,.45);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@media (max-width:768px){.yp-ph__chips span{font-size:12px;padding:8px 11px}}
 .yp-ph__cta{display:flex;gap:10px;flex-wrap:wrap}
 .yp-ph .yp-btn--ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
 .yp-ph .yp-btn--ghost::before{background:rgba(255,255,255,.14)}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
+@media (max-width:768px){.hotbot-widget-buttons-wrap-chat,.hotbot-widget-buttons-wrap-shop{right:12px!important;transform:scale(.72);transform-origin:100% 100%}.hotbot-widget-buttons-wrap-chat{bottom:12px!important}.hotbot-widget-buttons-wrap-shop{bottom:66px!important}}
 /* общий лист, наезжающий на первый экран */
 .yp-sheet{border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
 /* ---------- Блок «Вопросы» (общий) ---------- */
-.yp-faq{padding-block:clamp(90px,10vw,150px)}
+.yp-faq{padding-block:clamp(56px,10vw,150px)}
 .yp-faq__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px)}
 .yp-faq__side p{color:var(--yp-muted);margin:20px 0 26px;max-width:36ch}
 .yp-faq__list{border-top:1px solid var(--yp-line)}
@@ -1197,7 +1200,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Бани · 02 · Три бани главами: слева закреплённое фото сменяется «огненной шторкой», справа листаются главы.
      На телефоне фото стоит в начале каждой главы. Какое фото к какой бане — проверьте. -->
 <style>
-.yp-bb{padding-block:clamp(90px,10vw,150px) clamp(40px,5vw,80px);border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
+.yp-bb{padding-block:clamp(56px,10vw,150px) clamp(40px,5vw,80px);border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
 .yp-bb__head{max-width:780px;margin-bottom:clamp(30px,4vw,60px)}
 .yp-bb__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(30px,5vw,80px)}
 .yp-bb__stick{position:sticky;top:96px;height:calc(100vh - 136px);height:calc(100svh - 136px);border-radius:28px;overflow:hidden;background:#1a0f0a}
@@ -1341,7 +1344,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- 18 · Свободные даты и время по каждому дому — живые данные TravelLine (глэмпинг) и HotBot (бани, гриль- и гостевые дома, чум, шатёр, зал).
      Набор домов зависит от страницы: главная — все, /glamping — дома, /bani — бани, /grill — гриль- и гостевые дома, /etno — чум, /events — площадки. -->
 <style>
-.yp-free{padding-block:clamp(70px,8vw,120px)}
+.yp-free{padding-block:clamp(56px,8vw,120px)}
 .yp-free__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
 .yp-free__box{margin-top:clamp(26px,3.5vw,44px);border-radius:30px;background:var(--yp-ink);color:#fff;padding:clamp(16px,2.2vw,30px);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(16px,2.2vw,30px);position:relative;overflow:hidden}
 .yp-free__box::before{content:"";position:absolute;inset:-40% -20% auto auto;width:60%;height:120%;background:radial-gradient(closest-side,rgba(92,255,192,.12),transparent);pointer-events:none}
@@ -1385,7 +1388,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__err{grid-column:1/-1;padding:14px 16px;border-radius:14px;background:rgba(255,178,122,.12);color:#FFD9BD;font-size:14px}
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
-@media (max-width:560px){.yp-free__days{grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}.yp-free__day b{font-size:17px}}
+/* телефон: дни одной лентой с прокруткой вбок вместо сетки на два экрана */
+@media (max-width:768px){.yp-free__days{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin-inline:-4px;padding:2px 4px 6px;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}.yp-free__days::-webkit-scrollbar{display:none}.yp-free__day{flex:0 0 64px;scroll-snap-align:start;min-height:0;padding:8px 4px 7px}.yp-free__day b{font-size:18px}.yp-free__day small{font-size:10px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -1472,6 +1476,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     cur.date = iso; var u = U[cur.u];
     dEl.querySelectorAll(".sel").forEach(function(b){ b.classList.remove("sel"); });
     var btn = dEl.querySelector('[data-d="' + iso + '"]'); if(btn) btn.classList.add("sel");
+    /* лента дней на телефоне: выбранный день — в поле зрения */
+    if(btn && dEl.scrollWidth > dEl.clientWidth + 4) dEl.scrollTo({left:Math.max(0, dEl.scrollLeft + btn.getBoundingClientRect().left - dEl.getBoundingClientRect().left - 8), behavior:"smooth"});
     load(cur.u, groups[cur.g].days, u.hourly && cur.long).then(function(list){
       var x = list.filter(function(d){ return d.date === iso; })[0]; if(!x) return;
       var day = cap(fmt(iso, {weekday:"long", day:"numeric", month:"long"}));
@@ -1503,7 +1509,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Бани · 03 · Постер «Тепло настоящего Севера» (img/p/bani-poster.jpg — загрузить в Tilda).
      Постер наклоняется за курсором, по нему проходит блик, вокруг поднимается пар. -->
 <style>
-.yp-bpo{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(80px,9vw,140px);background:#140b06;color:#F6EEE6}
+.yp-bpo{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,9vw,140px);background:#140b06;color:#F6EEE6}
 .yp-bpo::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 30% 50%,rgba(255,150,70,.22),transparent 70%),radial-gradient(40% 60% at 85% 30%,rgba(255,110,60,.12),transparent 70%)}
 .yp-bpo__steam{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none;opacity:.7}
 .yp-bpo__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(36px,6vw,100px);align-items:center}
@@ -1588,7 +1594,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- 05 · Умные бани с Алисой. Реальные команды по зонам: Морошка (парная, фито-сауна), Брусника (парная).
      Нажатие на команду (или автодемо) печатает фразу и включает эффект на фото: дождь, вьюга, туман, ветер, фито, свет, музыка. -->
 <style>
-.yp-ban{position:relative;padding-block:clamp(90px,10vw,150px);overflow:hidden;background:radial-gradient(50% 40% at 80% 20%,rgba(227,30,36,.08),transparent 70%),var(--yp-bg)}
+.yp-ban{position:relative;padding-block:clamp(56px,10vw,150px);overflow:hidden;background:radial-gradient(50% 40% at 80% 20%,rgba(227,30,36,.08),transparent 70%),var(--yp-bg)}
 .yp-ban__head{display:grid;justify-items:center;text-align:center}
 .yp-ban__say{display:inline-grid;vertical-align:bottom;overflow:hidden;color:var(--yp-red);font-weight:600}
 .yp-ban__say span{grid-area:1/1;white-space:nowrap}
@@ -1871,7 +1877,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <div class="r t-rec">
 <!-- Бани · 04 · Стоимость: цена за час по баням, дням и времени (каталог сайта). Калькулятор показывает сумму за выбранные часы -->
 <style>
-.yp-bp{padding-block:clamp(80px,9vw,140px);background:var(--yp-paper)}
+.yp-bp{padding-block:clamp(56px,9vw,140px);background:var(--yp-paper)}
 .yp-bp__grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);margin-top:clamp(36px,4vw,60px);align-items:start}
 .yp-ptbl{border-radius:26px;overflow:hidden;background:var(--yp-bg)}
 .yp-ptbl table{width:100%;border-collapse:collapse;font-size:15px}
@@ -1969,7 +1975,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      главная — все, /glamping — купол и «Волк», /bani — «Брусника», /events — шатёр и парк.
      Для Tilda загрузите img/video/*.mp4 на свой хостинг или в облако и замените пути (см. README). -->
 <style>
-.yp-wk{padding-block:clamp(80px,9vw,140px);overflow:hidden}
+.yp-wk{padding-block:clamp(56px,9vw,140px);overflow:hidden}
 .yp-wk__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
 .yp-wk__head .yp-lead{margin:0}
 .yp-wk__stage{position:relative;margin-top:clamp(28px,3vw,40px);border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#0b1118;box-shadow:0 50px 90px -45px rgba(0,0,0,.8);isolation:isolate}
@@ -2014,7 +2020,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
 .yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
 @media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
-@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:1/1;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
 </style>
 <section class="yp yp-wk" id="walk">
   <div class="yp-wrap">
@@ -2223,7 +2229,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- 14 · Отзывы: рейтинг на Яндекс Картах (организация 31555403788) + официальный виджет отзывов Яндекса — живые отзывы гостей.
      Цифры (5,0 · 137 отзывов · 325 оценок) взяты из виджета Яндекс Карт 7 октября 2026 — обновляйте в RATING ниже или оставьте только виджет. -->
 <style>
-.yp-rv{padding-block:clamp(80px,9vw,140px);overflow:hidden}
+.yp-rv{padding-block:clamp(56px,9vw,140px);overflow:hidden}
 .yp-rv__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,80px);align-items:start}
 .yp-rv__score{display:flex;align-items:flex-end;gap:18px;margin-top:clamp(26px,3vw,40px)}
 .yp-rv__num{font:300 clamp(96px,11vw,170px)/.8 var(--yp-fd);letter-spacing:-.06em;background:linear-gradient(90deg,var(--yp-green),var(--yp-blue));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
@@ -2324,7 +2330,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <div class="r t-rec">
 <!-- Бани · 05 · Вопросы о банях (по FAQ текущего сайта). Также ставит «Баня» по умолчанию в форме брони -->
 <style>
-.yp-faq{padding-block:clamp(90px,10vw,150px)}
+.yp-faq{padding-block:clamp(56px,10vw,150px)}
 .yp-faq__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px)}
 .yp-faq__side p{color:var(--yp-muted);margin:20px 0 26px;max-width:36ch}
 .yp-faq__list{border-top:1px solid var(--yp-line)}
@@ -2381,7 +2387,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      Бронирование как на текущем yamalpark.ru: проживание — модуль TravelLine (TL-INT-yamalpark-ru_2024-08-22, форма поиска в #tl-search-form),
      бани, гриль-дома, чум и праздники — магазин HotBot (подключается в 00-head.html, YP.openShop). -->
 <style>
-.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(90px,10vw,150px)}
+.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
 .yp-booking__glow{position:absolute;inset:-20% -10% auto;height:90%;z-index:-1;pointer-events:none;filter:blur(60px);opacity:.55;
   background:radial-gradient(40% 50% at 25% 55%,rgba(92,255,192,.55),transparent 70%),radial-gradient(35% 45% at 70% 35%,rgba(130,110,255,.45),transparent 70%)}
 .yp-booking__stars{position:absolute;inset:0;z-index:-1;opacity:.6;background:
