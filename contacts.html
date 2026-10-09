@@ -192,7 +192,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      которые на сайте Tilda работают как есть, переводим в events.html, index.html#forecast, en-zoo.html — иначе пустая страница 404 */
   YP.protoHref = function(href){
     if(!file || !href || href.charAt(0) !== "/" || href.charAt(1) === "/") return href;
-    var mm = href.match(/^\/(?:(en|zh)(?:\/|$))?([^?#]*)(.*)$/); if(!mm) return href;
+    var mm = href.match(/^\/(?:(en|zh)(?=[\/?#]|$)\/?)?([^?#]*)(.*)$/); if(!mm) return href;
     var lang = mm[1] || "", name = mm[2].replace(/\/$/, "") || "index", rest = mm[3];
     if(/\.[a-z0-9]{2,5}$/i.test(name)) return href;                      /* файлы (картинки, видео) не трогаем */
     return (lang ? lang + "-" : "") + name + ".html" + rest;
@@ -984,7 +984,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-hdr.is-dark .yp-hdr__call{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
 .yp-hdr__call:hover{background:rgba(127,127,127,.12)}
 .yp-hdr__call svg{width:18px;height:18px}
-@media (max-width:1500px){.yp-hdr__call{display:grid}}
+.yp-hdr__in>.yp-hdr__call{display:grid}
 /* переключатель языков */
 .yp-lang{display:flex;gap:2px;padding:3px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--yp-line);flex:0 0 auto}
 .yp-hdr.is-dark .yp-lang{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
@@ -994,13 +994,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-hdr.is-dark .yp-lang a.is-on{background:#fff;color:var(--yp-ink)}
 .yp-menu .yp-lang{align-self:flex-start;margin-top:18px}
 .yp-menu .yp-lang a{font-size:14px;padding:11px 14px}
-@media (max-width:1100px){.yp-hdr__in>.yp-hdr__call{margin-left:auto}.yp-hdr__in>.yp-hdr__call+.yp-btn+.yp-lang{margin-left:0}.yp-hdr__in>.yp-lang{margin-left:auto}.yp-hdr__in>.yp-lang+.yp-burger{margin-left:0}}
+@media (max-width:1320px){.yp-hdr__in>.yp-hdr__call{margin-left:auto}.yp-hdr__in>.yp-hdr__call+.yp-btn+.yp-lang{margin-left:0}.yp-hdr__in>.yp-lang{margin-left:auto}.yp-hdr__in>.yp-lang+.yp-burger{margin-left:0}}
 @media (max-width:420px){.yp-hdr__in>.yp-lang{display:none}}
-@media (max-width:1500px){.yp-hdr__in>.yp-hdr__tel{display:none}}
+.yp-hdr__in>.yp-hdr__tel{display:none}
 .yp-hdr__in>.yp-btn{flex:0 0 auto}
-@media (max-width:1240px){.yp-nav a{padding:10px 8px;font-size:14px}}
-@media (max-width:1100px){.yp-nav,.yp-hdr__in>.yp-btn{display:none}.yp-burger{display:block}}
-@media (min-width:1101px){.yp-menu{display:none}}
+.yp-hdr__in{gap:16px}.yp-nav a{padding:10px 8px}
+@media (max-width:1320px){.yp-nav,.yp-hdr__in>.yp-btn{display:none}.yp-burger{display:block}}
+@media (min-width:1321px){.yp-menu{display:none}}
 </style>
 <header class="yp yp-hdr" id="yp-hdr">
   <div class="yp-wrap yp-hdr__in">
@@ -1377,7 +1377,10 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var sec = document.getElementById("weather"); if(!sec) return;
   var YP = window.YP || {}, G = window.gsap;
   function q(s){ return sec.querySelector(s); }
-  if(!document.getElementById("forecast")){ var a = sec.querySelector('a[href="#forecast"]'); if(a){ a.setAttribute("href", "/#forecast"); } }
+  /* на странице без прогноза сияния ссылка «Почасовой прогноз» ведёт на главную, к прогнозу (проверяем, когда все блоки уже на странице) */
+  function fcLink(){ if(document.getElementById("forecast")) return; var a = sec.querySelector('a[href="#forecast"]'); if(!a) return;
+    var h = YP.langHref ? YP.langHref("/#forecast") : "/#forecast"; a.setAttribute("href", YP.protoHref ? YP.protoHref(h) : h); }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fcLink); else fcLink();
   var ICON = {
     sun:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><g class="sun" stroke="#F5B53D"><circle cx="32" cy="32" r="11" fill="#FFD36B"/><path d="M32 8v7M32 49v7M8 32h7M49 32h7M15 15l5 5M44 44l5 5M49 15l-5 5M20 44l-5 5"/></g></svg>',
     partly:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><g class="sun" stroke="#F5B53D"><circle cx="24" cy="24" r="9" fill="#FFD36B"/><path d="M24 6v5M6 24h5M11 11l4 4M37 11l-4 4"/></g><path class="cl" d="M22 50h26a9 9 0 0 0 0-18 13 13 0 0 0-25 3 8 8 0 0 0-1 15z" fill="#DDE6EE" stroke="#9EB1C1"/></svg>',
@@ -2037,7 +2040,7 @@ window.YP_MAP = [
       <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
-    <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/9CWPyRLW2ggYvQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
+    <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
   </div>
 </footer>
 <script>
