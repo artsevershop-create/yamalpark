@@ -1226,6 +1226,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-sky__sw button:hover:not([aria-pressed="true"]){background:rgba(234,241,244,.12)}
 .yp-sky__sw .lbl{position:absolute;right:calc(100% + 10px);top:50%;transform:translate(6px,-50%);padding:7px 12px;border-radius:999px;background:rgba(6,10,16,.78);color:var(--yp-snow);font:500 13px var(--yp-f);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s,transform .35s var(--yp-ease);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .yp-sky__sw button:hover .lbl,.yp-sky__sw button:focus-visible .lbl,.yp-sky__sw button.is-flash .lbl{opacity:1;transform:translate(0,-50%)}
+/* разделы — строкой вверху экрана, под шапкой; на широком экране их дублирует меню шапки, поэтому там прячем */
+@media (min-width:1101px){.yp-hero__svc{display:none!important}}
 /* разделы — строкой вверху экрана, под шапкой */
 .yp-hero__svc{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0;z-index:4;grid-template-columns:none;max-width:100%}
 .yp-hero__svc a{padding:7px 15px 7px 7px;border-radius:999px}
@@ -1745,6 +1747,159 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   bookLabel(); mobile.addEventListener && mobile.addEventListener("change", bookLabel);
   form.addEventListener("submit", function(e){ if(mobile.matches && !form.classList.contains("is-open")){ e.preventDefault(); e.stopImmediatePropagation(); form.classList.add("is-open"); bookLabel(); } }, true);
   form.addEventListener("submit", function(e){ e.preventDefault(); YP.openBooking && YP.openBooking({type:form.querySelector("#yp-hb-type").value, date:date.value, guests:form.querySelector("#yp-hb-guests").value}); });
+})();
+</script>
+
+</div>
+<div class="r t-rec">
+<!-- 03 · Цифры комплекса: светлая секция, счётчики, треугольники-маркеры в цветах логотипа -->
+<style>
+.yp-facts{padding-block:clamp(70px,9vw,130px) clamp(50px,6vw,90px);border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
+.yp-facts__intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-facts__intro p{margin:0;color:var(--yp-muted);font-size:clamp(16px,1.3vw,19px);max-width:52ch}
+.yp-facts__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(40px,5vw,70px);border-top:1px solid var(--yp-line)}
+.yp-fact{padding:24px 22px 0 0;border-right:1px solid var(--yp-line);margin-right:22px;min-width:0}
+.yp-fact:last-child{border-right:0;margin-right:0}
+.yp-fact i{display:block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--c);margin-bottom:16px}
+.yp-fact b{display:block;font-weight:300;font-size:clamp(30px,3.3vw,52px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.yp-fact b small{font-size:.45em;letter-spacing:0;margin-left:4px;color:var(--c)}
+.yp-fact>span{display:block;margin-top:12px;font-size:14px;color:var(--yp-muted);line-height:1.45}
+@media (max-width:980px){.yp-facts__intro{grid-template-columns:minmax(0,1fr)}.yp-facts__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-fact{border-right:0;margin-right:0;padding:22px 0;border-bottom:1px solid var(--yp-line)}.yp-fact:nth-child(odd){padding-right:16px}}
+</style>
+<section class="yp yp-facts" id="about">
+  <div class="yp-wrap">
+    <div class="yp-facts__intro">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>О комплексе</span><h2 class="yp-h2" data-yp-split>Ямал Парк — место, где <b>тепло и тихо</b></h2></div>
+      <p data-yp-reveal>Загородный комплекс на Полярном круге: глэмпинг с панорамными окнами, бани с голосовым управлением, гриль-домики, чумы и мини-зоопарк. Работаем круглый год.</p>
+    </div>
+    <div class="yp-facts__grid">
+      <div class="yp-fact" style="--c:var(--yp-blue)"><i></i><b><span data-yp-count="66">66</span>°33′</b><span>Салехард стоит прямо на Полярном круге</span></div>
+      <div class="yp-fact" style="--c:var(--yp-green)"><i></i><b><span data-yp-count="12">12</span><small>км</small></b><span>от города, парковка на 50 машин</span></div>
+      <div class="yp-fact" style="--c:var(--yp-blue)"><i></i><b>−<span data-yp-count="40">40</span><small>°C</small></b><span>за окном, а в домиках тёплые полы</span></div>
+      <div class="yp-fact" style="--c:var(--yp-green)"><i></i><b><span data-yp-count="23">23</span></b><span>объекта: дома, бани, чумы, вольеры</span></div>
+      <div class="yp-fact" style="--c:var(--yp-red)"><i></i><b><span data-yp-count="3">3</span></b><span>бани: «Морошка», «Брусника», «Черника»</span></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var YP = window.YP || {};
+  var els = document.querySelectorAll("#about [data-yp-count]");
+  if(els.length && !YP.reduced && window.IntersectionObserver){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return; io.unobserve(en.target);
+        var el = en.target, end = +el.getAttribute("data-yp-count"), t0 = performance.now(), dur = 1500;
+        (function step(now){ var k = Math.min(1,(now-t0)/dur); k = 1-Math.pow(1-k,4); el.textContent = Math.round(end*k); if(k < 1) requestAnimationFrame(step); })(t0);
+      });
+    },{threshold:.6});
+    els.forEach(function(el){ io.observe(el); });
+  }
+  if(window.gsap && window.ScrollTrigger && !YP.reduced)
+    gsap.from("#about .yp-fact", {y:40, opacity:0, stagger:.1, duration:1, ease:"power3.out", scrollTrigger:{trigger:"#about .yp-facts__grid", start:"top 88%"}});
+})();
+</script>
+
+</div>
+<div class="r t-rec">
+<!-- 04 · Пять продуктов: горизонтальная лента с закреплением (desktop) и свайпом (mobile).
+     Движение: фото внутри карточек сдвигаются при прокрутке ленты, лента слегка наклоняется от скорости, подсветка под курсором -->
+<style>
+.yp-prod{position:relative;overflow:hidden}
+.yp-prod__pin{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,3vw,40px);padding-block:96px 48px}
+.yp-prod__head{display:flex;justify-content:space-between;align-items:end;gap:32px;width:100%}
+.yp-prod__head>div{min-width:0}
+.yp-prod__bar{flex:0 0 220px;height:3px;background:var(--yp-line);border-radius:2px;overflow:hidden}
+.yp-prod__bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--yp-blue),var(--yp-green),var(--yp-red));transform-origin:0 50%;transform:scaleX(.2)}
+.yp-prod__track{display:flex;gap:clamp(14px,1.6vw,24px);padding-inline:var(--yp-gutter);width:max-content;will-change:transform}
+.yp-pcard{position:relative;flex:0 0 auto;width:clamp(300px,31vw,500px);height:clamp(380px,calc(100svh - 340px),600px);border-radius:var(--yp-radius);overflow:hidden;background:#1d2328;isolation:isolate;text-decoration:none;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(20px,2vw,30px);transition:transform .5s var(--yp-ease)}
+.yp-pcard img{position:absolute;top:0;left:-10%;width:120%;height:100%;object-fit:cover;z-index:-2;transition:scale 1s var(--yp-ease)}
+.yp-pcard::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,10,16,.15) 0%,rgba(6,10,16,.1) 28%,rgba(6,10,16,.72) 56%,rgba(6,10,16,.97) 100%)}
+.yp-pcard h3,.yp-pcard p,.yp-pcard__more{text-shadow:0 2px 16px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.5)}
+.yp-pcard::after{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;background:radial-gradient(380px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--c) 45%,transparent),transparent 60%);mix-blend-mode:screen}
+.yp-pcard:hover::after{opacity:1}
+.yp-pcard:hover img{scale:1.06}
+.yp-pcard__tag{position:absolute;top:clamp(18px,1.8vw,26px);left:clamp(18px,1.8vw,26px);display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--yp-mono);letter-spacing:.04em;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--yp-ink)}
+.yp-pcard__tag i{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid var(--c)}
+.yp-pcard h3{margin:0;font-weight:400;font-size:clamp(24px,2.1vw,34px);line-height:1.05;letter-spacing:-.02em}
+.yp-pcard p{margin:10px 0 0;color:#D3DCE1;font-size:15px;max-width:38ch}
+.yp-pcard__more{display:inline-flex;gap:8px;align-items:center;margin-top:18px;font-weight:600;font-size:14px}
+.yp-pcard__more span{display:inline-block;transition:transform .35s var(--yp-ease)}
+.yp-pcard:hover .yp-pcard__more span{transform:translateX(6px)}
+.yp-pcard--intro{background:var(--yp-paper);color:var(--yp-ink);justify-content:space-between;width:clamp(260px,22vw,340px);box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-pcard--intro::before,.yp-pcard--intro::after{display:none}
+.yp-pcard--intro strong{font:300 clamp(60px,6vw,96px)/1 var(--yp-fd);letter-spacing:-.05em;background:linear-gradient(90deg,var(--yp-green),var(--yp-blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.yp-pcard--intro p{color:var(--yp-muted)}
+.yp-pcard--intro .tris{display:flex;gap:6px}
+.yp-pcard--intro .tris i{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:15px solid var(--c)}
+@media (max-width:900px){
+  .yp-prod__pin{min-height:0}
+  .yp-prod__bar{display:none}
+  .yp-prod__track{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:6px;scroll-padding-inline:var(--yp-gutter)}
+  .yp-prod__track::-webkit-scrollbar{display:none}
+  .yp-pcard{scroll-snap-align:start;width:min(82vw,380px);height:480px}
+  .yp-pcard img{left:0;width:100%}
+  .yp-pcard--intro{display:none}
+}
+</style>
+<section class="yp yp-prod" id="services">
+  <div class="yp-prod__pin">
+    <div class="yp-wrap yp-prod__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Что есть в комплексе</span><h2 class="yp-h2" data-yp-split>Пять способов остаться <b>в Ямал Парке подольше</b></h2></div>
+      <div class="yp-prod__bar" aria-hidden="true"><i></i></div>
+    </div>
+    <div class="yp-prod__track">
+      <div class="yp-pcard yp-pcard--intro"><div class="tris" aria-hidden="true"><i style="--c:var(--yp-blue)"></i><i style="--c:var(--yp-green)"></i><i style="--c:var(--yp-red)"></i></div><strong>5</strong><p>Проживание, бани, гриль-домики, этно-комплекс и животные. Всё на одной территории, в пешей доступности.</p></div>
+      <a class="yp-pcard" href="glamping.html" style="--c:var(--yp-blue)">
+        <img src="img/p/dome-aurora-arc.jpg" alt="Северное сияние над купольным домиком" loading="lazy">
+        <span class="yp-pcard__tag"><i></i>от 8 000 ₽ / сутки</span>
+        <h3>Глэмпинг</h3><p>Купол 30 м² под небом и два разных дома с террасой — светлый «Волк» и уютный «Медведь» по 50 м².</p><span class="yp-pcard__more">Выбрать дом <span>→</span></span>
+      </a>
+      <a class="yp-pcard" href="bani.html" style="--c:var(--yp-red)">
+        <img src="img/p/moroshka-steam.jpg" alt="Пар в парной бани «Морошка»" loading="lazy">
+        <span class="yp-pcard__tag"><i></i>от 2 500 ₽ / час</span>
+        <h3>Умные бани</h3><p>«Морошка», «Брусника» и «Черника» на 6–10 гостей. Дождь, туман и пар на каменку по команде Алисе.</p><span class="yp-pcard__more">Всё о банях <span>→</span></span>
+      </a>
+      <a class="yp-pcard" href="grill.html" style="--c:var(--yp-red)">
+        <img src="img/p/grill-aurora-a.jpg" alt="Северное сияние над гриль-домом и заиндевелым мостиком" loading="lazy">
+        <span class="yp-pcard__tag"><i></i>от 6 000 ₽ / день</span>
+        <h3>Гриль-дома</h3><p>Три гриль-дома и два гостевых дома на 15–25 гостей. Аренда на весь день, с 12:00 до 22:00.</p><span class="yp-pcard__more">Свободные дни <span>→</span></span>
+      </a>
+      <a class="yp-pcard" href="etno.html" style="--c:var(--yp-green)">
+        <img src="img/p/chum-aurora.jpg" alt="Северное сияние над чумом" loading="lazy">
+        <span class="yp-pcard__tag"><i></i>чум до 20 гостей</span>
+        <h3>Этно-комплекс</h3><p>Обогретый оленеводческий чум, костровище и казан. «Ямал» по-ненецки значит «край земли».</p><span class="yp-pcard__more">Про этно-комплекс <span>→</span></span>
+      </a>
+      <a class="yp-pcard" href="zoo.html" style="--c:var(--yp-green)">
+        <img src="img/fox.jpg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
+        <span class="yp-pcard__tag"><i></i>бесплатно</span>
+        <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в зоопарке <span>→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("services"); if(!sec) return;
+  var YP = window.YP || {};
+  var track = sec.querySelector(".yp-prod__track"), bar = sec.querySelector(".yp-prod__bar i");
+  sec.querySelectorAll(".yp-pcard").forEach(function(c){
+    c.addEventListener("pointermove", function(e){ var r=c.getBoundingClientRect(); c.style.setProperty("--x",(e.clientX-r.left)+"px"); c.style.setProperty("--y",(e.clientY-r.top)+"px"); });
+  });
+  if(!(window.gsap && window.ScrollTrigger) || YP.reduced) return;
+  gsap.matchMedia().add("(min-width:901px)", function(){
+    function dist(){ return Math.max(0, track.scrollWidth - window.innerWidth); }
+    var skew = gsap.quickTo(track, "skewX", {duration:.6, ease:"power3"});
+    var tween = gsap.to(track, {x:function(){ return -dist(); }, ease:"none",
+      scrollTrigger:{trigger:sec, start:"top top", end:function(){ return "+=" + dist(); }, pin:sec.querySelector(".yp-prod__pin"), scrub:.8, anticipatePin:1, invalidateOnRefresh:true,
+        onUpdate:function(st){ bar.style.transform = "scaleX(" + (0.2 + st.progress*0.8) + ")"; skew(gsap.utils.clamp(-4, 4, st.getVelocity() / -400)); },
+        onScrubComplete:function(){ skew(0); }}});
+    /* фото внутри карточек смещаются, пока лента едет */
+    track.querySelectorAll(".yp-pcard:not(.yp-pcard--intro) img").forEach(function(img){
+      gsap.fromTo(img, {xPercent:6}, {xPercent:-6, ease:"none", scrollTrigger:{trigger:img.parentNode, containerAnimation:tween, start:"left right", end:"right left", scrub:true}});
+    });
+    gsap.fromTo(track.children, {y:80, opacity:0}, {y:0, opacity:1, duration:1.1, ease:"power3.out", stagger:.08, clearProps:"transform,opacity", scrollTrigger:{trigger:sec, start:"top 70%", once:true}});
+  });
 })();
 </script>
 
@@ -2382,159 +2537,6 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   /* грузим, когда блок рядом с экраном */
   var started = false, go = function(){ if(started) return; started = true; selGroup(0); };
   if(window.IntersectionObserver) new IntersectionObserver(function(e, o){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, {rootMargin:"600px"}).observe(sec); else go();
-})();
-</script>
-
-</div>
-<div class="r t-rec">
-<!-- 03 · Цифры комплекса: светлая секция, счётчики, треугольники-маркеры в цветах логотипа -->
-<style>
-.yp-facts{padding-block:clamp(70px,9vw,130px) clamp(50px,6vw,90px);border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
-.yp-facts__intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
-.yp-facts__intro p{margin:0;color:var(--yp-muted);font-size:clamp(16px,1.3vw,19px);max-width:52ch}
-.yp-facts__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(40px,5vw,70px);border-top:1px solid var(--yp-line)}
-.yp-fact{padding:24px 22px 0 0;border-right:1px solid var(--yp-line);margin-right:22px;min-width:0}
-.yp-fact:last-child{border-right:0;margin-right:0}
-.yp-fact i{display:block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--c);margin-bottom:16px}
-.yp-fact b{display:block;font-weight:300;font-size:clamp(30px,3.3vw,52px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.yp-fact b small{font-size:.45em;letter-spacing:0;margin-left:4px;color:var(--c)}
-.yp-fact>span{display:block;margin-top:12px;font-size:14px;color:var(--yp-muted);line-height:1.45}
-@media (max-width:980px){.yp-facts__intro{grid-template-columns:minmax(0,1fr)}.yp-facts__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-fact{border-right:0;margin-right:0;padding:22px 0;border-bottom:1px solid var(--yp-line)}.yp-fact:nth-child(odd){padding-right:16px}}
-</style>
-<section class="yp yp-facts" id="about">
-  <div class="yp-wrap">
-    <div class="yp-facts__intro">
-      <div><span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>О комплексе</span><h2 class="yp-h2" data-yp-split>Ямал Парк — место, где <b>тепло и тихо</b></h2></div>
-      <p data-yp-reveal>Загородный комплекс на Полярном круге: глэмпинг с панорамными окнами, бани с голосовым управлением, гриль-домики, чумы и мини-зоопарк. Работаем круглый год.</p>
-    </div>
-    <div class="yp-facts__grid">
-      <div class="yp-fact" style="--c:var(--yp-blue)"><i></i><b><span data-yp-count="66">66</span>°33′</b><span>Салехард стоит прямо на Полярном круге</span></div>
-      <div class="yp-fact" style="--c:var(--yp-green)"><i></i><b><span data-yp-count="12">12</span><small>км</small></b><span>от города, парковка на 50 машин</span></div>
-      <div class="yp-fact" style="--c:var(--yp-blue)"><i></i><b>−<span data-yp-count="40">40</span><small>°C</small></b><span>за окном, а в домиках тёплые полы</span></div>
-      <div class="yp-fact" style="--c:var(--yp-green)"><i></i><b><span data-yp-count="23">23</span></b><span>объекта: дома, бани, чумы, вольеры</span></div>
-      <div class="yp-fact" style="--c:var(--yp-red)"><i></i><b><span data-yp-count="3">3</span></b><span>бани: «Морошка», «Брусника», «Черника»</span></div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var YP = window.YP || {};
-  var els = document.querySelectorAll("#about [data-yp-count]");
-  if(els.length && !YP.reduced && window.IntersectionObserver){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(!en.isIntersecting) return; io.unobserve(en.target);
-        var el = en.target, end = +el.getAttribute("data-yp-count"), t0 = performance.now(), dur = 1500;
-        (function step(now){ var k = Math.min(1,(now-t0)/dur); k = 1-Math.pow(1-k,4); el.textContent = Math.round(end*k); if(k < 1) requestAnimationFrame(step); })(t0);
-      });
-    },{threshold:.6});
-    els.forEach(function(el){ io.observe(el); });
-  }
-  if(window.gsap && window.ScrollTrigger && !YP.reduced)
-    gsap.from("#about .yp-fact", {y:40, opacity:0, stagger:.1, duration:1, ease:"power3.out", scrollTrigger:{trigger:"#about .yp-facts__grid", start:"top 88%"}});
-})();
-</script>
-
-</div>
-<div class="r t-rec">
-<!-- 04 · Пять продуктов: горизонтальная лента с закреплением (desktop) и свайпом (mobile).
-     Движение: фото внутри карточек сдвигаются при прокрутке ленты, лента слегка наклоняется от скорости, подсветка под курсором -->
-<style>
-.yp-prod{position:relative;overflow:hidden}
-.yp-prod__pin{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,3vw,40px);padding-block:96px 48px}
-.yp-prod__head{display:flex;justify-content:space-between;align-items:end;gap:32px;width:100%}
-.yp-prod__head>div{min-width:0}
-.yp-prod__bar{flex:0 0 220px;height:3px;background:var(--yp-line);border-radius:2px;overflow:hidden}
-.yp-prod__bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--yp-blue),var(--yp-green),var(--yp-red));transform-origin:0 50%;transform:scaleX(.2)}
-.yp-prod__track{display:flex;gap:clamp(14px,1.6vw,24px);padding-inline:var(--yp-gutter);width:max-content;will-change:transform}
-.yp-pcard{position:relative;flex:0 0 auto;width:clamp(300px,31vw,500px);height:clamp(380px,calc(100svh - 340px),600px);border-radius:var(--yp-radius);overflow:hidden;background:#1d2328;isolation:isolate;text-decoration:none;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(20px,2vw,30px);transition:transform .5s var(--yp-ease)}
-.yp-pcard img{position:absolute;top:0;left:-10%;width:120%;height:100%;object-fit:cover;z-index:-2;transition:scale 1s var(--yp-ease)}
-.yp-pcard::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,10,16,.15) 0%,rgba(6,10,16,.1) 28%,rgba(6,10,16,.72) 56%,rgba(6,10,16,.97) 100%)}
-.yp-pcard h3,.yp-pcard p,.yp-pcard__more{text-shadow:0 2px 16px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.5)}
-.yp-pcard::after{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;background:radial-gradient(380px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--c) 45%,transparent),transparent 60%);mix-blend-mode:screen}
-.yp-pcard:hover::after{opacity:1}
-.yp-pcard:hover img{scale:1.06}
-.yp-pcard__tag{position:absolute;top:clamp(18px,1.8vw,26px);left:clamp(18px,1.8vw,26px);display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--yp-mono);letter-spacing:.04em;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--yp-ink)}
-.yp-pcard__tag i{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid var(--c)}
-.yp-pcard h3{margin:0;font-weight:400;font-size:clamp(24px,2.1vw,34px);line-height:1.05;letter-spacing:-.02em}
-.yp-pcard p{margin:10px 0 0;color:#D3DCE1;font-size:15px;max-width:38ch}
-.yp-pcard__more{display:inline-flex;gap:8px;align-items:center;margin-top:18px;font-weight:600;font-size:14px}
-.yp-pcard__more span{display:inline-block;transition:transform .35s var(--yp-ease)}
-.yp-pcard:hover .yp-pcard__more span{transform:translateX(6px)}
-.yp-pcard--intro{background:var(--yp-paper);color:var(--yp-ink);justify-content:space-between;width:clamp(260px,22vw,340px);box-shadow:inset 0 0 0 1px var(--yp-line)}
-.yp-pcard--intro::before,.yp-pcard--intro::after{display:none}
-.yp-pcard--intro strong{font:300 clamp(60px,6vw,96px)/1 var(--yp-fd);letter-spacing:-.05em;background:linear-gradient(90deg,var(--yp-green),var(--yp-blue));-webkit-background-clip:text;background-clip:text;color:transparent}
-.yp-pcard--intro p{color:var(--yp-muted)}
-.yp-pcard--intro .tris{display:flex;gap:6px}
-.yp-pcard--intro .tris i{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:15px solid var(--c)}
-@media (max-width:900px){
-  .yp-prod__pin{min-height:0}
-  .yp-prod__bar{display:none}
-  .yp-prod__track{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:6px;scroll-padding-inline:var(--yp-gutter)}
-  .yp-prod__track::-webkit-scrollbar{display:none}
-  .yp-pcard{scroll-snap-align:start;width:min(82vw,380px);height:480px}
-  .yp-pcard img{left:0;width:100%}
-  .yp-pcard--intro{display:none}
-}
-</style>
-<section class="yp yp-prod" id="services">
-  <div class="yp-prod__pin">
-    <div class="yp-wrap yp-prod__head">
-      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Что есть в комплексе</span><h2 class="yp-h2" data-yp-split>Пять способов остаться <b>в Ямал Парке подольше</b></h2></div>
-      <div class="yp-prod__bar" aria-hidden="true"><i></i></div>
-    </div>
-    <div class="yp-prod__track">
-      <div class="yp-pcard yp-pcard--intro"><div class="tris" aria-hidden="true"><i style="--c:var(--yp-blue)"></i><i style="--c:var(--yp-green)"></i><i style="--c:var(--yp-red)"></i></div><strong>5</strong><p>Проживание, бани, гриль-домики, этно-комплекс и животные. Всё на одной территории, в пешей доступности.</p></div>
-      <a class="yp-pcard" href="glamping.html" style="--c:var(--yp-blue)">
-        <img src="img/p/dome-aurora-arc.jpg" alt="Северное сияние над купольным домиком" loading="lazy">
-        <span class="yp-pcard__tag"><i></i>от 8 000 ₽ / сутки</span>
-        <h3>Глэмпинг</h3><p>Купол 30 м² под небом и два разных дома с террасой — светлый «Волк» и уютный «Медведь» по 50 м².</p><span class="yp-pcard__more">Выбрать дом <span>→</span></span>
-      </a>
-      <a class="yp-pcard" href="bani.html" style="--c:var(--yp-red)">
-        <img src="img/p/moroshka-steam.jpg" alt="Пар в парной бани «Морошка»" loading="lazy">
-        <span class="yp-pcard__tag"><i></i>от 2 500 ₽ / час</span>
-        <h3>Умные бани</h3><p>«Морошка», «Брусника» и «Черника» на 6–10 гостей. Дождь, туман и пар на каменку по команде Алисе.</p><span class="yp-pcard__more">Всё о банях <span>→</span></span>
-      </a>
-      <a class="yp-pcard" href="grill.html" style="--c:var(--yp-red)">
-        <img src="img/p/grill-aurora-a.jpg" alt="Северное сияние над гриль-домом и заиндевелым мостиком" loading="lazy">
-        <span class="yp-pcard__tag"><i></i>от 6 000 ₽ / день</span>
-        <h3>Гриль-дома</h3><p>Три гриль-дома и два гостевых дома на 15–25 гостей. Аренда на весь день, с 12:00 до 22:00.</p><span class="yp-pcard__more">Свободные дни <span>→</span></span>
-      </a>
-      <a class="yp-pcard" href="etno.html" style="--c:var(--yp-green)">
-        <img src="img/p/chum-aurora.jpg" alt="Северное сияние над чумом" loading="lazy">
-        <span class="yp-pcard__tag"><i></i>чум до 20 гостей</span>
-        <h3>Этно-комплекс</h3><p>Обогретый оленеводческий чум, костровище и казан. «Ямал» по-ненецки значит «край земли».</p><span class="yp-pcard__more">Про этно-комплекс <span>→</span></span>
-      </a>
-      <a class="yp-pcard" href="zoo.html" style="--c:var(--yp-green)">
-        <img src="img/fox.jpg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
-        <span class="yp-pcard__tag"><i></i>бесплатно</span>
-        <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в зоопарке <span>→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var sec = document.getElementById("services"); if(!sec) return;
-  var YP = window.YP || {};
-  var track = sec.querySelector(".yp-prod__track"), bar = sec.querySelector(".yp-prod__bar i");
-  sec.querySelectorAll(".yp-pcard").forEach(function(c){
-    c.addEventListener("pointermove", function(e){ var r=c.getBoundingClientRect(); c.style.setProperty("--x",(e.clientX-r.left)+"px"); c.style.setProperty("--y",(e.clientY-r.top)+"px"); });
-  });
-  if(!(window.gsap && window.ScrollTrigger) || YP.reduced) return;
-  gsap.matchMedia().add("(min-width:901px)", function(){
-    function dist(){ return Math.max(0, track.scrollWidth - window.innerWidth); }
-    var skew = gsap.quickTo(track, "skewX", {duration:.6, ease:"power3"});
-    var tween = gsap.to(track, {x:function(){ return -dist(); }, ease:"none",
-      scrollTrigger:{trigger:sec, start:"top top", end:function(){ return "+=" + dist(); }, pin:sec.querySelector(".yp-prod__pin"), scrub:.8, anticipatePin:1, invalidateOnRefresh:true,
-        onUpdate:function(st){ bar.style.transform = "scaleX(" + (0.2 + st.progress*0.8) + ")"; skew(gsap.utils.clamp(-4, 4, st.getVelocity() / -400)); },
-        onScrubComplete:function(){ skew(0); }}});
-    /* фото внутри карточек смещаются, пока лента едет */
-    track.querySelectorAll(".yp-pcard:not(.yp-pcard--intro) img").forEach(function(img){
-      gsap.fromTo(img, {xPercent:6}, {xPercent:-6, ease:"none", scrollTrigger:{trigger:img.parentNode, containerAnimation:tween, start:"left right", end:"right left", scrub:true}});
-    });
-    gsap.fromTo(track.children, {y:80, opacity:0}, {y:0, opacity:1, duration:1.1, ease:"power3.out", stagger:.08, clearProps:"transform,opacity", scrollTrigger:{trigger:sec, start:"top 70%", once:true}});
-  });
 })();
 </script>
 
