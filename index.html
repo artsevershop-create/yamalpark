@@ -135,6 +135,18 @@ html.lenis,html.lenis body{height:auto}
 .yp-cur.is-label .yp-cur__dot,.yp-cur.is-hidden{opacity:0}
 @media (hover:none),(pointer:coarse){.yp-cur{display:none}}
 @media (prefers-reduced-motion:reduce){.yp-curtain,.yp-cur{display:none}}
+/* ---------- Кнопка «Наверх»: слева внизу (справа — виджеты HotBot), кольцо показывает, сколько страницы пройдено ---------- */
+.yp-top{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:9980;width:52px;height:52px;border:0;padding:0;border-radius:50%;cursor:pointer;background:rgba(30,36,35,.86);color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.25);display:grid;place-items:center;opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .4s,transform .5s var(--yp-ease),background .3s}
+.yp-top.is-on{opacity:1;transform:none;pointer-events:auto}
+.yp-top:hover{background:var(--yp-ink)}
+.yp-top:hover svg.a{transform:translateY(-3px)}
+.yp-top svg{position:absolute;inset:0;width:100%;height:100%}
+.yp-top svg.a{position:static;width:20px;height:20px;transition:transform .35s var(--yp-ease)}
+.yp-top circle{fill:none;stroke-width:2.5}
+.yp-top .bg{stroke:rgba(255,255,255,.18)}
+.yp-top .pr{stroke:var(--yp-aurora);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:144.5;stroke-dashoffset:144.5}
+@media (max-width:768px){.yp-top{width:46px;height:46px}}
+@media print{.yp-top{display:none}}
 /* ---------- Языки: пока перевод не готов, страница скрыта (не дольше 4 с) ---------- */
 html.yp-tr-wait body{opacity:0!important}
 html[lang^="zh"]{--yp-fd:"Unbounded","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;--yp-f:"Onest","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;--yp-mono:"JetBrains Mono","PingFang SC","Microsoft YaHei",ui-monospace,monospace}
@@ -866,7 +878,19 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     });
     document.addEventListener("keydown", function(e){ if(e.key==="Enter" && e.target.matches && e.target.matches("[data-yp-book]:not(button):not(a)")) e.target.click(); });
     var bar = document.createElement("div"); bar.className = "yp-progress"; document.body.appendChild(bar);
-    function prog(){ var h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = "scaleX(" + (h > 0 ? scrollY/h : 0) + ")"; }
+    /* кнопка «Наверх» */
+    var up = document.createElement("button"); up.type = "button"; up.className = "yp-top"; up.setAttribute("aria-label", YP.t ? YP.t("Наверх") : "Наверх"); up.title = up.getAttribute("aria-label");
+    up.innerHTML = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle class="bg" cx="26" cy="26" r="23"/><circle class="pr" cx="26" cy="26" r="23"/></svg><svg class="a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    document.body.appendChild(up); var upRing = up.querySelector(".pr");
+    up.addEventListener("click", function(){
+      var y0 = window.scrollY;
+      if(YP.lenis){ YP.lenis.scrollTo(y0, {immediate:true, force:true}); YP.lenis.scrollTo(0, {duration:1.6, force:true}); }
+      else window.scrollTo({top:0, behavior:YP.reduced ? "auto" : "smooth"});
+      /* запасной путь: если плавная прокрутка не сработала, едем средствами браузера */
+      setTimeout(function(){ if(window.scrollY >= y0 - 5 && y0 > 0) window.scrollTo({top:0, behavior:"smooth"}); }, 350);
+    });
+    function prog(){ var h = document.documentElement.scrollHeight - innerHeight, k = h > 0 ? scrollY/h : 0; bar.style.transform = "scaleX(" + k + ")";
+      up.classList.toggle("is-on", scrollY > innerHeight*.9); upRing.style.strokeDashoffset = (144.5*(1 - k)).toFixed(1); }
     window.addEventListener("scroll", prog, {passive:true}); prog();
     if(YP.reduced || !hasG) return;
     pageTransitions(); cursor();
