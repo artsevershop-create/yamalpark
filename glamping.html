@@ -2211,6 +2211,67 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 
 </div>
 <div class="r t-rec">
+<!-- 19 · «Прямо сейчас»: инфоборд (#today), погода (#weather) и прогноз сияния (#forecast) в одном блоке с вкладками.
+     Ставится сразу после этих блоков: скрипт переносит их сюда, каждый становится вкладкой (на странице остаются те, что есть). -->
+<style>
+.yp-now{padding-block:clamp(70px,8vw,120px) 0;background:var(--yp-bg)}
+.yp-now__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.yp-now__tabs{display:flex;gap:4px;padding:5px;border-radius:999px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line),0 10px 30px rgba(30,36,35,.06);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.yp-now__tabs::-webkit-scrollbar{display:none}
+.yp-now__tabs button{display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;cursor:pointer;font:500 14.5px var(--yp-f);color:var(--yp-ink);padding:12px 18px;border-radius:999px;white-space:nowrap;transition:background .3s,color .3s}
+.yp-now__tabs button i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.yp-now__tabs button[aria-selected="true"]{background:var(--yp-ink);color:#fff}
+.yp-now__tabs button:hover:not([aria-selected="true"]){background:var(--yp-bg)}
+.yp-now__panes{margin-top:clamp(18px,2.4vw,30px)}
+/* у вкладок свой общий заголовок — заголовки перенесённых блоков прячем, отступы уменьшаем */
+.yp-now__pane>section{padding-top:clamp(28px,3vw,44px)!important}
+.yp-now__pane>section>.yp-wrap>:first-child>div:first-child:has(.yp-h2){display:none}
+.yp-now__pane [data-yp-reveal]{opacity:1!important;transform:none!important}
+.yp-now__pane[hidden]{display:none}
+@media (max-width:768px){.yp-now__tabs button{padding:10px 14px;font-size:13.5px}}
+</style>
+<section class="yp yp-now" id="now">
+  <div class="yp-wrap">
+    <div class="yp-now__top">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Прямо сейчас</span><h2 class="yp-h2" data-yp-split>Погода, сияние <b>и день в парке</b></h2></div>
+      <div class="yp-now__tabs" role="tablist" aria-label="Что показать" data-yp-nowtabs></div>
+    </div>
+  </div>
+  <div class="yp-now__panes" data-yp-nowpanes></div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("now"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
+  var tabs = sec.querySelector("[data-yp-nowtabs]"), panes = sec.querySelector("[data-yp-nowpanes]");
+  var LIST = [["today", "Сегодня в парке", "var(--yp-blue)"], ["weather", "Погода на 4 дня", "var(--yp-green)"], ["forecast", "Прогноз сияния", "var(--yp-aurora)"]];
+  var items = LIST.filter(function(x){ var el = document.getElementById(x[0]); return el && !sec.contains(el); });
+  if(items.length < 2){ sec.hidden = true; return; }
+  items.forEach(function(x, i){
+    var el = document.getElementById(x[0]), pane = document.createElement("div");
+    pane.className = "yp-now__pane"; pane.setAttribute("role", "tabpanel"); pane.setAttribute("data-pane", x[0]); if(i) pane.hidden = true;
+    pane.appendChild(el); panes.appendChild(pane);
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(!i)); b.setAttribute("data-tab", x[0]);
+    b.style.setProperty("--c", x[2]); b.innerHTML = "<i></i>" + x[1]; tabs.appendChild(b);
+  });
+  function select(id){
+    tabs.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(b.getAttribute("data-tab") === id)); });
+    panes.querySelectorAll(".yp-now__pane").forEach(function(p){ p.hidden = p.getAttribute("data-pane") !== id; });
+    document.dispatchEvent(new Event("yp:theme"));
+    if(window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 60);
+  }
+  tabs.addEventListener("click", function(e){ var b = e.target.closest("[data-tab]"); if(b) select(b.getAttribute("data-tab")); });
+  /* ссылки на #forecast, #weather, #today (например, кнопка «Северное сияние» на первом экране) открывают нужную вкладку */
+  function fromHash(h){ var id = (h || "").replace("#", ""); if(items.some(function(x){ return x[0] === id; })) select(id); }
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("a[href*='#']"); if(!a) return;
+    var h = a.getAttribute("href"); fromHash(h.slice(h.indexOf("#")));
+  }, true);
+  fromHash(location.hash); window.addEventListener("hashchange", function(){ fromHash(location.hash); });
+})();
+</script>
+
+</div>
+<div class="r t-rec">
 <!-- 14 · Отзывы: рейтинг на Яндекс Картах (организация 31555403788) + официальный виджет отзывов Яндекса — живые отзывы гостей.
      Цифры (5,0 · 137 отзывов · 325 оценок) взяты из виджета Яндекс Карт 7 октября 2026 — обновляйте в RATING ниже или оставьте только виджет. -->
 <style>
