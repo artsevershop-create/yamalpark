@@ -1782,6 +1782,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-fact b small{font-size:.45em;letter-spacing:0;margin-left:4px;color:var(--c)}
 .yp-fact>span{display:block;margin-top:12px;font-size:14px;color:var(--yp-muted);line-height:1.45}
 @media (max-width:980px){.yp-facts__intro{grid-template-columns:minmax(0,1fr)}.yp-facts__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-fact{border-right:0;margin-right:0;padding:22px 0;border-bottom:1px solid var(--yp-line)}.yp-fact:nth-child(odd){padding-right:16px}}
+.yp-facts__ph{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:clamp(36px,4vw,56px)}
+.yp-facts__ph figure{position:relative;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/3;background:#0b1118}
+.yp-facts__ph figure:first-child{aspect-ratio:auto}
+.yp-facts__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--yp-ease)}
+.yp-facts__ph figure:hover img{transform:scale(1.04)}
+.yp-facts__ph figcaption{position:absolute;left:14px;bottom:14px;z-index:1;padding:7px 12px;border-radius:999px;background:rgba(11,19,32,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font:500 12px var(--yp-mono);letter-spacing:.04em}
+@media (max-width:768px){.yp-facts__ph figcaption{font-size:11px;padding:6px 10px;left:10px;bottom:10px;letter-spacing:0}.yp-facts__ph{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.yp-facts__ph figure:first-child{grid-column:1/-1;aspect-ratio:16/9}}
 </style>
 <section class="yp yp-facts" id="about">
   <div class="yp-wrap">
@@ -1795,6 +1802,11 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-fact" style="--c:var(--yp-blue)"><i></i><b>−<span data-yp-count="40">40</span><small>°C</small></b><span>за окном, а в домиках тёплые полы</span></div>
       <div class="yp-fact" style="--c:var(--yp-green)"><i></i><b><span data-yp-count="23">23</span></b><span>объекта: дома, бани, чумы, вольеры</span></div>
       <div class="yp-fact" style="--c:var(--yp-red)"><i></i><b><span data-yp-count="3">3</span></b><span>бани: «Морошка», «Брусника», «Черника»</span></div>
+    </div>
+    <div class="yp-facts__ph" data-yp-reveal>
+      <figure><img src="img/new/summer-aerial-1.jpg" alt="Ямал Парк с высоты летом: тайга до горизонта" loading="lazy"><figcaption>Ямал Парк сверху · лето</figcaption></figure>
+      <figure><img src="img/new/summer-sunset-domes.jpg" alt="Закат над тайгой и купольными домиками" loading="lazy"><figcaption>Закат над куполами</figcaption></figure>
+      <figure><img src="img/new/summer-aerial-2.jpg" alt="Территория комплекса летним вечером" loading="lazy"><figcaption>Летний вечер</figcaption></figure>
     </div>
   </div>
 </section>
@@ -3116,6 +3128,14 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     {src:"img/p/tent-frost.jpg", c:"winter", s:"", cap:"Шатёр в инее"},
     {src:"img/p/chum-table.jpg", c:"etno", s:"", cap:"Стол в чуме"},
     {src:"img/p/dome-forest-autumn.jpg", c:"summer", s:"w", cap:"Осенняя тайга вокруг парка"},
+    {src:"img/new/summer-sunset.jpg", c:"summer", s:"w", cap:"Белая ночь над тайгой"},
+    {src:"img/new/fest-flags.jpg", c:"summer", s:"", cap:"Летний фестиваль на поляне"},
+    {src:"img/new/summer-aerial-3.jpg", c:"summer", s:"", cap:"Ямал Парк сверху летом"},
+    {src:"img/new/fest-aerial-1.jpg", c:"summer", s:"w", cap:"Фестиваль с высоты"},
+    {src:"img/new/fest-stage.jpg", c:"summer", s:"", cap:"Сцена у вышки"},
+    {src:"img/new/fest-tower.jpg", c:"summer", s:"t", cap:"Смотровая вышка и шатёр"},
+    {src:"img/new/fest-stage-top-2.jpg", c:"summer", s:"", cap:"Танцпол под флажками"},
+    {src:"img/new/fest-aerial-2.jpg", c:"summer", s:"w", cap:"Праздник в тайге"},
     {src:"img/p/grill-terrace-night.jpg", c:"grill winter", s:"", cap:"Терраса гриль-дома ночью"},
     {src:"img/p/medved-dusk.jpg", c:"glamp winter", s:"", cap:"«Медведь» вечером"},
     {src:"img/p/frost-cat.jpg", c:"winter", s:"t", cap:"Иней на заборе"},
