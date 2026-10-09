@@ -1081,6 +1081,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-hero__stars--2{background-position:37px 53px;animation-delay:-2s;opacity:.7}
 @keyframes ypTwinkle{from{opacity:.35}to{opacity:1}}
 .yp-hero__sun{position:absolute;left:50%;bottom:18%;width:90vmax;height:40vmax;margin-left:-45vmax;border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,170,.85),rgba(255,170,140,.35) 45%,transparent);opacity:0;pointer-events:none;mix-blend-mode:screen}
+/* солнечный день: диск солнца с мягким ореолом и медленно вращающимися лучами */
+.yp-hero__sunny{position:absolute;right:16%;top:13%;width:clamp(90px,10vw,150px);aspect-ratio:1;border-radius:50%;opacity:0;pointer-events:none;background:radial-gradient(circle,#FFFDF4 0 38%,#FFF1BF 46%,rgba(255,226,140,.55) 58%,rgba(255,226,140,0) 72%);filter:drop-shadow(0 0 40px rgba(255,236,170,.9))}
+.yp-hero__sunny::before{content:"";position:absolute;inset:-120%;border-radius:50%;background:repeating-conic-gradient(rgba(255,246,210,.22) 0 4deg,transparent 4deg 18deg);-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%);animation:ypSunRays 60s linear infinite}
+.yp-hero__sunny::after{content:"";position:absolute;inset:-260%;border-radius:50%;background:radial-gradient(circle,rgba(255,250,225,.35),rgba(255,250,225,0) 55%)}
+@keyframes ypSunRays{to{transform:rotate(360deg)}}
+@media (max-width:768px){.yp-hero__sunny{right:10%;top:20%}}
+@media (prefers-reduced-motion:reduce){.yp-hero__sunny::before{animation:none}}
 .yp-hero__shoot{position:absolute;top:14%;left:8%;width:180px;height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);transform:rotate(-16deg);opacity:0;pointer-events:none;filter:drop-shadow(0 0 6px #bff)}
 .yp-hero__aurora{position:absolute;inset:-4%;width:108%;height:108%;mix-blend-mode:screen;pointer-events:none;transform-origin:50% 70%}
 .yp-hero__snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -1114,13 +1121,18 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-land .Hb{fill:hsl(357 16% calc(19% + var(--lt) * 22%))}
 .yp-land .Hd{fill:hsl(228 14% calc(23% + var(--lt) * 22%))}
 .yp-land .Hc{fill:hsl(118 12% calc(19% + var(--lt) * 22%))}
+.yp-land .Hg{fill:hsl(24 18% calc(20% + var(--lt) * 22%))}
 .yp-land .Sb,.yp-land .Sd,.yp-land .Sc{fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .yp-land .Sb{stroke:hsl(357 18% calc(30% + var(--lt) * 22%))}
 .yp-land .Sd{stroke:hsl(228 16% calc(36% + var(--lt) * 20%))}
 .yp-land .Sc{stroke:hsl(118 14% calc(30% + var(--lt) * 22%))}
+.yp-land .Sg{fill:none;stroke-width:1.4;stroke-linecap:round;stroke:hsl(24 20% calc(31% + var(--lt) * 22%))}
 .yp-land .win{fill:#FFC978;opacity:calc(.38 - var(--lt) * .3)}
 .yp-land .ho:hover .Hb{fill:hsl(357 66% calc(42% + var(--lt) * 8%))}
 .yp-land .ho:hover .Hd{fill:hsl(228 52% calc(52% + var(--lt) * 8%))}
+.yp-land .ho:hover .Hg{fill:hsl(24 70% calc(40% + var(--lt) * 8%))}
+.yp-land .ho:hover .Sg{stroke:hsl(30 90% 66%)}
+.yp-land .ho--g:hover>g{filter:drop-shadow(0 0 14px rgba(255,130,40,.75)) drop-shadow(0 0 4px rgba(255,190,110,.9))}
 .yp-land .ho:hover .Hc{fill:hsl(118 50% calc(38% + var(--lt) * 8%))}
 .yp-land .ho:hover .Sb{stroke:hsl(357 85% 68%)}
 .yp-land .ho:hover .Sd{stroke:hsl(228 80% 80%)}
@@ -1248,6 +1260,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <div class="yp-hero__milky" aria-hidden="true"></div>
     <canvas class="yp-hero__stars yp-hero__cosmos" aria-hidden="true"></canvas>
     <div class="yp-hero__sun" aria-hidden="true"></div>
+    <div class="yp-hero__sunny" aria-hidden="true"></div>
     <div class="yp-hero__shoot" aria-hidden="true"></div>
     <canvas class="yp-hero__aurora" aria-hidden="true"></canvas>
     <canvas class="yp-hero__snow" aria-hidden="true"></canvas>
@@ -1279,6 +1292,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-sky" data-yp-sky>
         <div class="yp-sky__sw" role="group" aria-label="Небо над Ямал Парком">
           <span class="yp-sky__pill" aria-hidden="true"></span>
+          <button type="button" aria-pressed="false" data-mode="sunny"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13"/></svg><span class="lbl">Солнечный день</span></button>
           <button type="button" aria-pressed="true" data-mode="aurora"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 11c3-6 5 2 7-4s4 1 7-3"/><path d="M1 14c3-4 5 1 7-3s4 1 7-2" opacity=".5"/></svg><span class="lbl">Сияние</span></button>
           <button type="button" aria-pressed="false" data-mode="snow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1v14M2 4.5l12 7M14 4.5l-12 7"/></svg><span class="lbl">Снегопад</span></button>
           <button type="button" aria-pressed="false" data-mode="stars"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1.5l1.8 4.2 4.5.4-3.4 3 1 4.4L8 11.2l-3.9 2.3 1-4.4-3.4-3 4.5-.4z"/></svg><span class="lbl">Звёзды</span></button>
@@ -1304,7 +1318,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var sec = document.getElementById("top"); if(!sec) return;
   var YP = window.YP || {}, G = window.gsap, motion = !!G && !YP.reduced;
   function q(s){ return sec.querySelector(s); }
-  var pin = q(".yp-hero__pin"), sky = q(".yp-hero__sky"), milky = q(".yp-hero__milky"), sun = q(".yp-hero__sun");
+  var pin = q(".yp-hero__pin"), sky = q(".yp-hero__sky"), milky = q(".yp-hero__milky"), sun = q(".yp-hero__sun"), sunny = q(".yp-hero__sunny");
   var canvas = q(".yp-hero__aurora"), snowCv = q(".yp-hero__snow"), trees = q(".yp-hero__trees"), clouds = q(".yp-hero__clouds");
   var title = q(".yp-hero__title"), l1 = q(".l1"), l2 = q(".l2"), cap = q(".yp-hero__cap"), kicker = q(".yp-hero__kicker"), svc = q(".yp-hero__svc");
   var skyBox = q("[data-yp-sky]"), book = q(".yp-book"), note = q("[data-yp-skynote]");
@@ -1320,6 +1334,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
             note:"Снегопад за окном, а в домиках тёплые полы — комфортно даже в −40 °C", land:0.12},
     stars: {s1:"#02040A", s2:"#050C1C", s3:"#0B1830", sg:"rgba(20,40,80,.55)", stars:1, milky:1, inten:0, snow:0, sun:0, l2:"hue-rotate(40deg)",
             note:"Небо над Ямал Парком прямо сейчас: звёзды, Млечный Путь и далёкие галактики", land:0},
+    sunny: {s1:"#2C6CB6", s2:"#69A3DA", s3:"#D3E7F4", sg:"rgba(255,250,232,.65)", stars:0, milky:0, inten:0, snow:0, sun:0, sunny:1, l2:"hue-rotate(-25deg) brightness(1.05)",
+            note:"Солнечный день: зимой — искрящийся снег, летом — зелёная тайга", land:0.62},
     day:   {s1:"#3A6496", s2:"#7EA3C8", s3:"#C9D9E6", sg:"rgba(255,240,220,.55)", stars:0, milky:0, inten:0, snow:0, sun:.45, l2:"hue-rotate(-20deg) saturate(.9) brightness(1.1)",
             note:"Сейчас день", land:0.5},
     dayover:{s1:"#55636F", s2:"#8695A1", s3:"#C3CBD2", sg:"rgba(220,226,232,.5)", stars:0, milky:0, inten:0, snow:0, sun:0, l2:"saturate(.6) brightness(1.15)",
@@ -1415,7 +1431,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     /* 2 — дальний лес */
     out.push('<g class="ly" data-k=".35"><path class="L" style="--b:15%" d="M0,420V' + (GY - 2) + 'C300,' + (GY - 10) + ' 600,' + (GY + 4) + ' 900,' + (GY - 4) + 'S1400,' + (GY - 8) + ' 1600,' + (GY - 2) + 'V420Z"/><path class="L" style="--b:15%" d="' + forest(-10, 1610, GY, 18, 40, 10) + '"/></g>');
     /* 3 — домики: бани слева, купольные домики в центре, чумы справа; ели между ними */
-    var B = [[110,150,46,34],[300,132,42,30],[470,118,38,28]], D = [[700,60],[880,54],[1050,48]], C = [[1230,104],[1310,124],[1395,96]];
+    var B = [[110,150,46,34],[300,132,42,30],[470,118,38,28]], D = [[700,60],[880,54]], GH = [[975,74,40],[1075,82,44]], C = [[1230,104],[1310,124],[1395,96]];
     var smoke = "", hs = "";
     /* домик: при наведении загорается (см. стили .ho), никуда не ведёт */
     function house(k, body, lines, win){ return '<g class="ho ho--' + k + '"><g><path class="H' + k + '" d="' + body + '"/><path class="S' + k + '" d="' + lines + '"/><path class="win" d="' + win + '"/></g></g>'; }
@@ -1424,6 +1440,16 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       hs += house("b", banya(o[0], GY, o[1], o[2], o[3]), banyaLines(o[0], GY, o[1], o[2]), win);
       smoke += '<path class="smoke" d="M' + f1(o[0] + o[1]*.74 + 4.5) + "," + (GY - o[2] - o[3]*.45 - o[3]*.55 - 12) + 'c-6,-12 6,-18 0,-30"/>'; });
     D.forEach(function(o){ var r = o[1]*.34; hs += house("d", dome(o[0], GY - 8, o[1]), domeLines(o[0], GY - 8, o[1]), "M" + f1(o[0] - r) + "," + (GY - 8) + "A" + f1(r) + "," + f1(r) + " 0 0 1 " + f1(o[0] + r) + "," + (GY - 8) + "Z"); });
+    /* гриль-домики: низкий дом с широким окном (внутри горит гриль), труба вытяжки с дымком */
+    GH.forEach(function(o){
+      var x = o[0], w = o[1], h = o[2], r = 14, body = "M" + x + "," + GY + "V" + (GY - h) + "H" + (x + w) + "V" + GY + "Z" +
+        "M" + (x - 8) + "," + (GY - h + 2) + "L" + (x + w*.5) + "," + (GY - h - r) + "L" + (x + w + 8) + "," + (GY - h + 2) + "L" + (x + w + 4) + "," + (GY - h + 6) + "L" + (x + w*.5) + "," + (GY - h - r + 4) + "L" + (x - 4) + "," + (GY - h + 6) + "Z" +
+        "M" + (x + w*.3) + "," + (GY - h - r*.6) + "h7v-" + (r + 4) + "h-7Z" + "M" + (x + w*.3 - 3) + "," + (GY - h - r*.6 - r - 4) + "h13v4h-13Z";
+      var lines = ""; for(var k = 1; k < 6; k++) lines += "M" + f1(x + w*k/6) + "," + (GY - 2) + "V" + f1(GY - h + 3);
+      var win = "M" + f1(x + w*.14) + "," + f1(GY - h*.72) + "h" + f1(w*.72) + "v" + f1(h*.38) + "h-" + f1(w*.72) + "Z";
+      hs += house("g", body, lines, win);
+      smoke += '<path class="smoke" d="M' + f1(x + w*.3 + 3.5) + "," + f1(GY - h - r*.6 - r - 10) + 'c-6,-12 6,-18 0,-30"/>';
+    });
     C.forEach(function(o){ var w = o[1]*.42; hs += house("c", chum(o[0], GY, o[1]), chumLines(o[0], GY, o[1]), "M" + f1(o[0] - w*.16) + "," + GY + "L" + o[0] + "," + f1(GY - o[1]*.33) + "L" + f1(o[0] + w*.16) + "," + GY + "Z"); smoke += '<path class="smoke" d="M' + o[0] + "," + (GY - o[1] - 20) + 'c-6,-12 6,-18 0,-30"/>'; });
     out.push('<g class="ly" data-k=".6"><path class="L" style="--b:10%" d="M0,420V' + GY + 'C400,' + (GY - 4) + ' 800,' + (GY + 6) + ' 1200,' + (GY - 2) + 'S1500,' + (GY + 2) + ' 1600,' + GY + 'V420Z"/>' +
       '<path class="L" style="--b:10%" d="' + forest(-10, 1610, GY + 2, 40, 96, 22, [[70,620],[610,1130],[1160,1450]]) + forest(80, 1450, GY + 2, 22, 40, 70) + '"/>' +
@@ -1596,7 +1622,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     note.style.opacity = 0; setTimeout(function(){ note.textContent = liveNote || sc.note; note.style.opacity = 1; }, d ? 300 : 0);
     l2.style.filter = sc.l2;
     if(!G){ sky.style.setProperty("--s1", sc.s1); sky.style.setProperty("--s2", sc.s2); sky.style.setProperty("--s3", sc.s3); sky.style.setProperty("--sg", sc.sg);
-            stars.forEach(function(s){ s.style.opacity = sc.stars; }); milky.style.opacity = sc.milky; SKY.milky = sc.milky; trees.style.setProperty("--lt", sc.land || 0); sun.style.opacity = sc.sun; S.snow = sc.snow; A.inten = sc.inten; kickSnow(); return; }
+            stars.forEach(function(s){ s.style.opacity = sc.stars; }); milky.style.opacity = sc.milky; SKY.milky = sc.milky; trees.style.setProperty("--lt", sc.land || 0); sun.style.opacity = sc.sun; sunny.style.opacity = sc.sunny || 0; S.snow = sc.snow; A.inten = sc.inten; kickSnow(); return; }
     G.to(sky, {"--s1":sc.s1, "--s2":sc.s2, "--s3":sc.s3, "--sg":sc.sg, duration:d, ease:"power2.inOut"});
     G.to(stars, {opacity:sc.stars, duration:d, ease:"power2.inOut"});
     G.to(milky, {opacity:sc.milky, duration:d*1.2, ease:"power2.inOut"});
@@ -1604,6 +1630,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     G.to(trees, {"--lt":sc.land || 0, duration:d, ease:"power2.inOut"});
     G.to(clouds, {"--lt":sc.land || 0, opacity:key === "stars" ? 0 : key === "aurora" ? .12 : .35 + (sc.land || 0)*.6, duration:d, ease:"power2.inOut"});
     G.to(sun, {opacity:sc.sun, y:sc.sun ? 0 : 60, duration:d*1.1, ease:"power2.inOut"});
+    G.to(sunny, {opacity:sc.sunny || 0, y:sc.sunny ? 0 : 50, scale:sc.sunny ? 1 : .7, duration:d*1.2, ease:"power3.inOut"});
     G.to(A, {inten:sc.inten, duration:d, ease:"power2.inOut"});
     G.to(S, {snow:sc.snow, duration:d*.8, ease:"power1.inOut", onStart:kickSnow, onUpdate:kickSnow});
     if(key === "stars") shootingStar(.6);
