@@ -1491,6 +1491,10 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
     banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
           cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
+          cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
+    deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
+          cap:"Общий вольер под лиственницами · косуля и две козы", chips:["Вход бесплатный","Для всей семьи"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
           cap:"Арка «Ямал Парк» · тайга в инее", chips:["12-й км дороги на Горнокнязевск","Парковка на 50 машин"]}
   };
@@ -1501,7 +1505,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     /etno/.test(p)     ? ["chum"] :
     /events/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
-    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","tent","banquet","arch"];
+    /zoo/.test(p)      ? ["lynx","deer"] :
+    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
   var L = SET.map(function(k){ return ALL[k]; }), cur = 0, playing = !YP.reduced, inView = false;
   if(L.length === 1) sec.classList.add("is-single");
   var stage = sec.querySelector("[data-yp-wks]"), bars = sec.querySelector("[data-yp-wkb]"), nav = sec.querySelector("[data-yp-wkn]"), btn = sec.querySelector("[data-yp-wkp]");

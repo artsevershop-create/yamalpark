@@ -1150,15 +1150,15 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <span class="yp-ac__b"><h4>Лисы и песец</h4><p>Песец — полярная лиса: зимой его мех становится белым, а густая шерсть на лапах помогает не мёрзнуть на снегу.</p><span class="tag">Два вольера у входа</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#6B5A3A" aria-label="Рыси — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/lynx-enclosure.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Рыси</h3><small>2 рыси · новый вольер</small></span></span>
+        <span class="yp-ac__f"><img src="img/new/zoo-lynx.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Рыси</h3><small>2 рыси · новый вольер</small></span></span>
         <span class="yp-ac__b"><h4>Две рыси</h4><p>Единственная дикая кошка северной тайги. Кисточки на ушах и широкие лапы-«снегоступы» узнаются сразу.</p><span class="tag">Новый вольер</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#4E6B3A" aria-label="Козы — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">2</span><span><h3>Козы</h3><small>общий вольер с косулей</small></span></span>
+        <span class="yp-ac__f"><img src="img/new/zoo-goats.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Козы</h3><small>общий вольер с косулей</small></span></span>
         <span class="yp-ac__b"><h4>Две козы</h4><p>Самые общительные жители мини-зоопарка — дети обычно начинают знакомство именно с них.</p><span class="tag">Вольер с косулей</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#7A5A3A" aria-label="Косуля — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">1</span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
+        <span class="yp-ac__f"><img src="img/new/zoo-roe.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
         <span class="yp-ac__b"><h4>Косуля</h4><p>Небольшой изящный олень с белым «зеркальцем» сзади. Очень пугливы — подходите тихо.</p><span class="tag">Вольер с козами</span></span>
       </span></button>
     </div>
@@ -1183,6 +1183,262 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   });
   if(window.gsap && window.ScrollTrigger && !YP.reduced)
     gsap.from(box.children, {y:80, rotateY:-25, opacity:0, duration:1.1, ease:"power3.out", stagger:.1, scrollTrigger:{trigger:box, start:"top 80%"}});
+})();
+</script>
+
+</div>
+<div class="r t-rec">
+<!-- 16 · Видео-прогулка по Ямал Парку: короткие ролики по каждому объекту (снято владельцем, 1280×720, без звука).
+     Ролики идут подряд как «истории»: закончился один — начинается следующий. Набор зависит от страницы:
+     главная — все, /glamping — купол и «Волк», /bani — «Брусника», /events — шатёр и парк.
+     Для Tilda загрузите img/video/*.mp4 на свой хостинг или в облако и замените пути (см. README). -->
+<style>
+.yp-wk{padding-block:clamp(80px,9vw,140px);overflow:hidden}
+.yp-wk__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-wk__head .yp-lead{margin:0}
+.yp-wk__stage{position:relative;margin-top:clamp(28px,3vw,40px);border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#0b1118;box-shadow:0 50px 90px -45px rgba(0,0,0,.8);isolation:isolate}
+.yp-wk__stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .9s,transform 1.4s var(--yp-ease)}
+.yp-wk__stage video.is-on{opacity:1;transform:none}
+.yp-wk__stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,16,.55),transparent 22%,transparent 62%,rgba(6,10,16,.8))}
+.yp-wk__bars{position:absolute;left:22px;right:22px;top:18px;z-index:2;display:flex;gap:6px}
+.yp-wk__bars button{flex:1;height:20px;border:0;padding:8px 0;background-clip:content-box!important;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden;cursor:pointer}
+.yp-wk__bars i{display:block;height:100%;width:0;background:#fff}
+.yp-wk__bars button.is-done i{width:100%}
+.yp-wk__title{position:absolute;left:24px;top:38px;z-index:2;color:#fff;max-width:70%}
+.yp-wk__title small{display:block;font:500 12px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--yp-aurora)}
+.yp-wk__title b{display:block;margin-top:8px;font:300 clamp(22px,2.6vw,40px)/1.05 var(--yp-fd);letter-spacing:-.02em}
+.yp-wk__ui{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;gap:14px;padding:18px 22px;color:#fff}
+.yp-wk__btn{flex:0 0 auto;width:50px;height:50px;border-radius:50%;border:0;background:#fff;color:var(--yp-ink);cursor:pointer;display:grid;place-items:center;transition:transform .3s var(--yp-ease)}
+.yp-wk__btn:hover{transform:scale(1.08)}
+.yp-wk__btn svg{width:18px;height:18px}
+.yp-wk__btn--ghost{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.yp-wk__cap{flex:1;font:500 13px/1.45 var(--yp-mono);letter-spacing:.04em;min-width:0}
+.yp-wk__nav{display:flex;gap:10px;margin-top:14px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px;scroll-snap-type:x proximity}
+.yp-wk__nav::-webkit-scrollbar{display:none}
+.yp-wk__nav button{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:0;border-radius:16px;background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1px var(--yp-line);scroll-snap-align:start;transition:background .3s,color .3s,transform .4s var(--yp-ease)}
+.yp-wk__nav button:hover{transform:translateY(-3px)}
+.yp-wk__nav button[aria-selected="true"]{background:var(--yp-ink);color:#fff;box-shadow:none}
+.yp-wk__nav img{width:64px;height:42px;border-radius:11px;object-fit:cover}
+.yp-wk__nav b{display:block;font:600 14px/1.2 var(--yp-f);white-space:nowrap}
+.yp-wk__nav small{display:block;font-size:12px;opacity:.6;white-space:nowrap}
+.yp-wk.is-single .yp-wk__nav,.yp-wk.is-single .yp-wk__bars{display:none}
+.yp-wk__chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.yp-wk__chips span{font-size:14px;padding:8px 12px;border-radius:999px;background:var(--yp-paper);box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-wk__stage video.yp-wk__real{z-index:1;opacity:0;transform:scale(1.05);transition:opacity 1s,transform 1.6s var(--yp-ease)}
+.yp-wk__stage video.yp-wk__real.is-on{opacity:1;transform:none}
+.yp-wk__fx{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.yp-wk__fxp{position:absolute;right:20px;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:10px;max-width:46%}
+.yp-wk__fxp[hidden]{display:none}
+.yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
+.yp-wk__say.is-on{opacity:1;transform:none}
+.yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
+.yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
+.yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
+.yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
+@media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+</style>
+<section class="yp yp-wk" id="walk">
+  <div class="yp-wrap">
+    <div class="yp-wk__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Видео-прогулка</span><h2 class="yp-h2" data-yp-split>Пройдитесь <b>по Ямал Парку</b></h2></div>
+      <p class="yp-lead" data-yp-reveal>Каждый дом, баня и площадка — в коротком ролике. Ролики идут подряд, а в банях можно включить дождь, туман и пар прямо на видео.</p>
+    </div>
+    <div class="yp-wk__stage" data-yp-wks data-yp-cursor="Пауза">
+      <video class="yp-wk__real" data-yp-wkreal muted playsinline loop preload="none" aria-hidden="true"></video>
+      <canvas class="yp-wk__fx" data-yp-wkfx aria-hidden="true"></canvas>
+      <div class="yp-wk__fxp" data-yp-wkfxp hidden><span class="yp-wk__say" data-yp-wksay></span><div class="yp-wk__fxb" data-yp-wkfxb></div></div>
+      <div class="yp-wk__bars" data-yp-wkb></div>
+      <div class="yp-wk__title" aria-live="polite"><small data-yp-wkk></small><b data-yp-wkt></b></div>
+      <div class="yp-wk__ui">
+        <button class="yp-wk__btn" type="button" data-yp-wkp aria-label="Пауза"></button>
+        <span class="yp-wk__cap" data-yp-wkc></span>
+        <button class="yp-wk__btn yp-wk__btn--ghost yp-wk__fs" type="button" data-yp-wkf aria-label="На весь экран"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg></button>
+      </div>
+    </div>
+    <div class="yp-wk__nav" role="tablist" aria-label="Выберите объект" data-yp-wkn></div>
+    <div class="yp-wk__chips" data-yp-wkch></div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("walk"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  /* video — снятые ролики; photo — фото-прогулка из фотографий (медленный наезд и панорама) */
+  var V = "Видео", F = "Фото-прогулка";
+  var ALL = {
+    park:{kick:"Ямал Парк за минуту", title:"Зима в парке", src:"img/video/promo", short:"Весь парк", sub:V + " · 1 мин",
+          cap:"Тайга в инее · купол · чум · бани · гости", chips:["Ролик о парке","Зима на Полярном круге","Для всей семьи"]},
+    dome:{kick:"Глэмпинг · " + V, title:"Купольный домик", src:"img/video/walk-dome", short:"Купольный домик", sub:V + " · 46 с",
+          cap:"Мостик к куполу · спальня · антресоль · столик у окна · кухня · душ · мангал · терраса", chips:["Панорамное окно","Антресоль","Печь","Терраса с креслами"]},
+    volk:{kick:"Глэмпинг · " + V, title:"Дом «Волк»", src:"img/video/walk-volk", short:"Дом «Волк»", sub:V + " · 29 с",
+          cap:"Прихожая · гостиная · кухня · спальня · ванная", chips:["Светлый интерьер","Кухня с кофемашиной","Спальня 160×200","Терраса"]},
+    medved:{kick:"Глэмпинг · " + V, title:"Дом «Медведь»", src:"img/video/walk-medved", short:"Дом «Медведь»", sub:V + " · 35 с",
+          cap:"Прихожая · душ · гостиная · спальня · кухня · люстра-«птицы» · терраса", chips:["Уютный интерьер","Кухня-гостиная","Спальня 160×200","Мангальная зона"]},
+    moroshka:{kick:"Умные бани · " + V, title:"Баня «Морошка»", src:"img/video/walk-moroshka", short:"Баня «Морошка»", sub:V + " · 35 с",
+          cap:"Вход · комната отдыха · душ · парная · туман по полу в фито-сауне", chips:["Парная до 100 °C","Фито-сауна","Алиса"],
+          fx:["rain","steam","fog","wind","fito"], alice:true, real:{fog:"img/video/fx-fog-moroshka"}},
+    brusnika:{kick:"Умные бани · " + V, title:"Баня «Брусника»", src:"img/video/walk-brusnika", short:"Баня «Брусника»", sub:V + " · 38 с",
+          cap:"Прихожая · комната отдыха · каменка · панель Алисы · парная · туман по полу", chips:["Комната отдыха","Кухня","Парная","Хаммам"],
+          fx:["rain","steam","fog"], alice:true, real:{fog:"img/video/fx-fog-brusnika"}},
+    chernika:{kick:"Умные бани · " + V, title:"Баня «Черника»", src:"img/video/walk-chernika", short:"Баня «Черника»", sub:V + " · 23 с",
+          cap:"Баня снаружи · кухня и комната отдыха · душ · парная с подсветкой", chips:["Печь на дровах","До 8 гостей","Дождь и ветер по кнопкам"],
+          fx:["rain","wind"], alice:false},
+    grill23:{kick:"Гриль-дома · " + V, title:"Гриль-дома №2 и №3", src:"img/video/walk-grill23", short:"Гриль-дома №2–3", sub:V + " · 12 с",
+          cap:"Терраса с шезлонгами · дом · зал · гриль под вытяжкой · окна в тайгу", chips:["15–20 гостей","12:00–22:00","Гриль под вытяжкой"]},
+    grill1:{kick:"Гриль-дома · " + V, title:"Гриль-дом №1", src:"img/video/walk-grill1", short:"Гриль-дом №1", sub:V + " · 17 с",
+          cap:"Терраса · дом · зал со столом · гриль под вытяжкой · светильники", chips:["15–20 гостей","Гриль в центре","Лавки вокруг гриля"]},
+    guest:{kick:"Гостевые дома · " + F, title:"Гостевые дома №1 и №2", src:"img/video/walk-guest", short:"Гостевые дома", sub:F + " · 12 с",
+          cap:"Дом №1 · комната · зал со столом · дом №2 и гриль-зона", chips:["20–25 гостей","Гриль-зона рядом","Стол и 4 лавки"]},
+    chum:{kick:"Этно · " + V, title:"Чум и смотровая площадка", src:"img/video/walk-chum", short:"Чум", sub:V + " · 25 с",
+          cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
+    tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
+          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
+    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
+          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
+          cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
+    deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
+          cap:"Общий вольер под лиственницами · косуля и две козы", chips:["Вход бесплатный","Для всей семьи"]},
+    arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
+          cap:"Арка «Ямал Парк» · тайга в инее", chips:["12-й км дороги на Горнокнязевск","Парковка на 50 машин"]}
+  };
+  var p = location.pathname, SET =
+    /glamping/.test(p) ? ["dome","volk","medved"] :
+    /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
+    /grill/.test(p)    ? ["grill23","grill1","guest"] :
+    /etno/.test(p)     ? ["chum"] :
+    /events/.test(p)   ? ["tent","banquet","park"] :
+    /contacts/.test(p) ? ["arch","park"] :
+    /zoo/.test(p)      ? ["lynx","deer"] :
+    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
+  var L = SET.map(function(k){ return ALL[k]; }), cur = 0, playing = !YP.reduced, inView = false;
+  if(L.length === 1) sec.classList.add("is-single");
+  var stage = sec.querySelector("[data-yp-wks]"), bars = sec.querySelector("[data-yp-wkb]"), nav = sec.querySelector("[data-yp-wkn]"), btn = sec.querySelector("[data-yp-wkp]");
+  var PAUSE = '<svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg>',
+      PLAY = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+  /* видео, полосы «историй» и кнопки объектов */
+  var vids = L.map(function(o, i){
+    var v = document.createElement("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = i === 0 ? "metadata" : "none";
+    v.poster = o.src + ".jpg"; v.src = o.src + ".mp4"; v.setAttribute("aria-label", "Видео: " + o.title);
+    v.loop = L.length === 1; stage.insertBefore(v, bars); return v;
+  });
+  bars.innerHTML = L.map(function(o, i){ return '<button type="button" aria-label="' + o.title + '"><i></i></button>'; }).join("");
+  nav.innerHTML = L.map(function(o, i){ return '<button type="button" role="tab" aria-selected="false" data-i="' + i + '"><img src="' + o.src + '.jpg" alt="" loading="lazy"><span><b>' + o.short + "</b><small>" + o.sub + "</small></span></button>"; }).join("");
+  var barEls = [].slice.call(bars.children), navEls = [].slice.call(nav.children);
+  function sync(){
+    vids.forEach(function(v, i){ if(i === cur && playing && inView) v.play().catch(function(){}); else v.pause(); });
+    btn.innerHTML = playing ? PAUSE : PLAY; btn.setAttribute("aria-label", playing ? "Пауза" : "Смотреть");
+    stage.setAttribute("data-yp-cursor", playing ? "Пауза" : "Смотреть");
+  }
+  /* ---------- эффекты бани поверх видео: дождь, вьюга (пар на каменку), туман, ветер, фито ---------- */
+  var FXI = {
+    rain:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2v4M8 4v4M12 2v4M4 10v4M8 12v2M12 10v4"/></svg>',
+    steam:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14c-2-3 2-4 0-7M8 14c-2-3 2-4 0-7M12 14c-2-3 2-4 0-7"/></svg>',
+    fog:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h12M1 8h14M3 11h10"/></svg>',
+    wind:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h9a2 2 0 1 0-2-2M1 10h12a2 2 0 1 1-2 2"/></svg>',
+    fito:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 14V6M8 9C5 9 3 7 3 4c3 0 5 2 5 5zM8 8c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg>'
+  };
+  var FXN = {rain:"дождь", steam:"вьюгу", fog:"туман", wind:"ветер", fito:"фито"}, FXL = {rain:"Дождь", steam:"Вьюга · пар", fog:"Туман", wind:"Ветер", fito:"Фито"};
+  var fxCv = sec.querySelector("[data-yp-wkfx]"), fctx = fxCv.getContext("2d"), FP = [], FW = 0, FH = 0, fraf = 0, fxOn = null, fxUser = 0, fxDemo = 0;
+  var fxp = sec.querySelector("[data-yp-wkfxp]"), fxb = sec.querySelector("[data-yp-wkfxb]"), say = sec.querySelector("[data-yp-wksay]");
+  function fsize(){ var r = fxCv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); FW = r.width; FH = r.height; fxCv.width = FW*d; fxCv.height = FH*d; fctx.setTransform(d,0,0,d,0,0); }
+  function spawn(k, init){
+    var q = {k:k, a:0, x:Math.random()*FW, y:init ? Math.random()*FH : -20};
+    if(k === "rain"){ q.vx = -1.4; q.vy = 15 + Math.random()*9; q.l = 16 + Math.random()*18; }
+    if(k === "steam"){ q.x = FW*(.2 + Math.random()*.6); q.y = init ? FH*(.3 + Math.random()*.7) : FH + 40; q.vx = (Math.random()-.5)*.9; q.vy = -(1.3 + Math.random()*2); q.r = 40 + Math.random()*60; q.g = .6 + Math.random()*1; q.w = Math.random()*6.28; }
+    if(k === "fog"){ q.y = FH*(.25 + Math.random()*.75); q.vx = (Math.random() < .5 ? -1 : 1)*(.2 + Math.random()*.4); q.vy = 0; q.r = 160 + Math.random()*260; }
+    if(k === "wind"){ q.x = init ? q.x : -200; q.y = Math.random()*FH; q.vx = 18 + Math.random()*14; q.vy = Math.random()*.6 - .3; q.l = 80 + Math.random()*160; }
+    if(k === "fito"){ q.y = init ? q.y : FH + 20; q.vx = 0; q.vy = -(.7 + Math.random()*1.2); q.r = 3 + Math.random()*5; q.w = Math.random()*6.28; q.rot = Math.random()*6.28; q.c = Math.random() < .6 ? "120,200,90" : "200,215,110"; }
+    return q;
+  }
+  var FXC = {rain:220, steam:40, fog:18, wind:46, fito:80};
+  var real = sec.querySelector("[data-yp-wkreal]");
+  function setFx(k){
+    fxOn = k; FP.forEach(function(q){ q.dying = true; });
+    /* если для эффекта есть настоящая съёмка (туман в «Бруснике» и «Морошке») — показываем её поверх ролика */
+    var o = L[cur], src = k && o && o.real && o.real[k];
+    if(src){ if(real.getAttribute("data-src") !== src){ real.setAttribute("data-src", src); real.poster = src + ".jpg"; real.src = src + ".mp4"; }
+      real.currentTime = 0; real.play().catch(function(){}); real.classList.add("is-on"); vids[cur] && vids[cur].pause(); }
+    else if(real.classList.contains("is-on")){ real.classList.remove("is-on"); setTimeout(function(){ if(!real.classList.contains("is-on")) real.pause(); }, 1000); if(playing && inView && vids[cur]) vids[cur].play().catch(function(){}); }
+    if(k && !src && !YP.reduced) for(var i = 0; i < FXC[k]; i++) FP.push(spawn(k, true));
+    if(src && !YP.reduced) for(var j = 0; j < 6; j++) FP.push(spawn("fog", true));
+    fxb.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-fx") === k)); });
+    if(!fraf) fraf = requestAnimationFrame(floop);
+  }
+  function floop(){
+    fraf = 0; if(!FW) fsize(); fctx.clearRect(0, 0, FW, FH);
+    for(var i = FP.length - 1; i >= 0; i--){
+      var q = FP[i]; q.a = q.dying ? q.a - .035 : Math.min(1, q.a + .03);
+      if(q.dying && q.a <= 0){ FP.splice(i, 1); continue; }
+      q.x += q.vx; q.y += q.vy;
+      if(q.k === "rain"){ fctx.strokeStyle = "rgba(205,228,255," + (.5*q.a) + ")"; fctx.lineWidth = 1.3; fctx.beginPath(); fctx.moveTo(q.x, q.y); fctx.lineTo(q.x + q.vx*1.5, q.y + q.l); fctx.stroke(); if(q.y > FH){ q.y = -20; q.x = Math.random()*FW; } }
+      else if(q.k === "steam"){ q.w += .02; q.x += Math.sin(q.w)*.6; q.r += q.g; var fd = Math.max(0, 1 - q.r/320), sg = fctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, q.r); sg.addColorStop(0, "rgba(255,250,245," + (.36*q.a*fd) + ")"); sg.addColorStop(1, "rgba(255,250,245,0)"); fctx.fillStyle = sg; fctx.fillRect(q.x-q.r, q.y-q.r, q.r*2, q.r*2); if(q.r > 320 || q.y < -q.r){ q.x = FW*(.2 + Math.random()*.6); q.y = FH + 40; q.r = 40 + Math.random()*60; } }
+      else if(q.k === "fog"){ var g = fctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, q.r); g.addColorStop(0, "rgba(235,240,245," + (.42*q.a) + ")"); g.addColorStop(1, "rgba(235,240,245,0)"); fctx.fillStyle = g; fctx.fillRect(q.x-q.r, q.y-q.r, q.r*2, q.r*2); if(q.x < -q.r) q.x = FW + q.r; if(q.x > FW + q.r) q.x = -q.r; }
+      else if(q.k === "wind"){ var lg = fctx.createLinearGradient(q.x, q.y, q.x + q.l, q.y); lg.addColorStop(0, "rgba(255,255,255,0)"); lg.addColorStop(1, "rgba(255,255,255," + (.55*q.a) + ")"); fctx.strokeStyle = lg; fctx.lineWidth = 1.3; fctx.beginPath(); fctx.moveTo(q.x, q.y); fctx.quadraticCurveTo(q.x + q.l/2, q.y - 6, q.x + q.l, q.y); fctx.stroke(); if(q.x > FW + 20){ q.x = -q.l - Math.random()*200; q.y = Math.random()*FH; } }
+      else if(q.k === "fito"){ q.w += .03; q.rot += .02; q.x += Math.sin(q.w)*.8; fctx.save(); fctx.translate(q.x, q.y); fctx.rotate(q.rot); fctx.fillStyle = "rgba(" + q.c + "," + (.85*q.a) + ")"; fctx.beginPath(); fctx.ellipse(0, 0, q.r, q.r*.45, 0, 0, 6.28); fctx.fill(); fctx.restore(); if(q.y < -20){ q.y = FH + 20; q.x = Math.random()*FW; } }
+    }
+    if(FP.length && inView) fraf = requestAnimationFrame(floop);
+  }
+  window.addEventListener("resize", function(){ FW = 0; });
+  function speak(k, o){
+    var t = !k ? "" : o.alice ? "«Алиса, включи " + FXN[k] + "»" : "Кнопка «" + FXL[k].toLowerCase() + "»";
+    say.textContent = t; say.classList.toggle("is-on", !!t);
+  }
+  function runFx(k, user){
+    var o = L[cur]; if(!o.fx) return;
+    if(user) fxUser = Date.now();
+    var next = fxOn === k ? null : k; setFx(next); speak(next, o);
+  }
+  function fxPanel(o){
+    clearTimeout(fxDemo); setFx(null); speak(null, o);
+    if(!o.fx){ fxp.hidden = true; return; }
+    fxp.hidden = false;
+    fxb.innerHTML = "<small>" + (o.alice ? "Алиса, включи…" : "Кнопки на панели") + "</small>" + o.fx.map(function(k){ return '<button type="button" aria-pressed="false" data-fx="' + k + '"' + (k === "steam" ? ' title="Вьюга — подача пара на каменку"' : "") + ">" + FXI[k] + FXL[k] + "</button>"; }).join("");
+    /* показ: если никто не нажимал, через 2,5 с включаем первый эффект, потом следующий */
+    if(!YP.reduced){ var n = 0; (function demo(){ fxDemo = setTimeout(function(){ if(L[cur] !== o) return; if(Date.now() - fxUser > 8000 && inView){ runFx(o.fx[n++ % o.fx.length]); } demo(); }, n ? 4500 : 2500); })(); }
+  }
+  fxb.addEventListener("click", function(e){ e.stopPropagation(); var b = e.target.closest("button[data-fx]"); if(b) runFx(b.getAttribute("data-fx"), true); });
+
+  function select(i, user){
+    cur = (i + L.length) % L.length; var o = L[cur];
+    vids.forEach(function(v, k){ v.classList.toggle("is-on", k === cur); if(k === cur && v.preload !== "auto") v.preload = "auto"; });
+    if(vids[cur + 1]) vids[cur + 1].preload = "metadata";
+    barEls.forEach(function(b, k){ b.classList.toggle("is-done", k < cur); if(k >= cur) b.firstChild.style.width = "0"; });
+    navEls.forEach(function(b, k){ b.setAttribute("aria-selected", String(k === cur)); });
+    if(user && navEls[cur]) nav.scrollTo({left:navEls[cur].offsetLeft - 20, behavior:"smooth"});
+    sec.querySelector("[data-yp-wkk]").textContent = o.kick;
+    sec.querySelector("[data-yp-wkt]").textContent = o.title;
+    sec.querySelector("[data-yp-wkc]").textContent = o.cap;
+    sec.querySelector("[data-yp-wkch]").innerHTML = o.chips.map(function(c){ return "<span>" + c + "</span>"; }).join("");
+    if(G && !YP.reduced){
+      G.fromTo(sec.querySelectorAll(".yp-wk__title small,.yp-wk__title b"), {y:24, opacity:0, filter:"blur(8px)"}, {y:0, opacity:1, filter:"blur(0px)", duration:.9, ease:"power3.out", stagger:.08});
+      G.fromTo(sec.querySelectorAll(".yp-wk__chips span"), {y:12, opacity:0}, {y:0, opacity:1, duration:.5, ease:"power3.out", stagger:.05});
+    }
+    fxPanel(o);
+    try{ vids[cur].currentTime = 0; }catch(e){}
+    sync();
+  }
+  vids.forEach(function(v, i){
+    v.addEventListener("timeupdate", function(){ if(i === cur && v.duration && barEls[i]) barEls[i].firstChild.style.width = (v.currentTime / v.duration * 100) + "%"; });
+    v.addEventListener("ended", function(){ if(i === cur && L.length > 1) select(cur + 1); });
+  });
+  nav.addEventListener("click", function(e){ var b = e.target.closest("button[data-i]"); if(b){ playing = true; select(+b.getAttribute("data-i"), true); } });
+  bars.addEventListener("click", function(e){ var b = e.target.closest("button"); if(b){ playing = true; select(barEls.indexOf(b), true); } });
+  btn.addEventListener("click", function(e){ e.stopPropagation(); playing = !playing; sync(); });
+  stage.addEventListener("click", function(e){ if(e.target.closest("button")) return; playing = !playing; sync(); });
+  sec.querySelector("[data-yp-wkf]").addEventListener("click", function(e){
+    e.stopPropagation(); var v = vids[cur];
+    if(v.requestFullscreen) v.requestFullscreen(); else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+  });
+  if(window.IntersectionObserver) new IntersectionObserver(function(e){ inView = e[0].isIntersecting; sync(); }, {threshold:.35}).observe(stage);
+  else inView = true;
+  /* вход блока: видео-окно раскрывается из узкой полосы */
+  if(G && window.ScrollTrigger && !YP.reduced)
+    G.fromTo(stage, {clipPath:"inset(18% 10% 18% 10% round 30px)"}, {clipPath:"inset(0% 0% 0% 0% round 30px)", ease:"none", scrollTrigger:{trigger:stage, start:"top 90%", end:"top 35%", scrub:true}});
+  select(0);
 })();
 </script>
 
