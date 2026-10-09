@@ -27,7 +27,7 @@
 <style>
 /* Ночь (первый экран, бронь, подвал) + светлые секции между ними. Цвета логотипа — акценты, сияние — градиент заголовков */
 :root{
-  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24;
+  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24; --yp-green-d:#2E8C2C; /* зелёный фон под белым текстом — темнее, чтобы читалось */
   --yp-bg:#F3F4F1; --yp-paper:#FFFFFF; --yp-mist:#E6E6E6; --yp-ink:#1E2423; --yp-muted:#646B69; --yp-line:rgba(30,36,35,.12);
   --yp-night:#060A10; --yp-night2:#0B131D; --yp-nightline:rgba(234,241,244,.12); --yp-snow:#EAF1F4; --yp-snowmuted:#8FA2AF;
   --yp-aurora:#5CFFC0; --yp-violet:#9AA8FF;
@@ -67,7 +67,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-btn:hover::before{transform:none}
 .yp-btn--aurora{background:var(--yp-aurora);color:#03140D}
 .yp-btn--aurora::before{background:#fff}
-.yp-btn--green{background:var(--yp-green)}
+.yp-btn--green{background:var(--yp-green-d)}
 .yp-btn--green::before{background:var(--yp-ink)}
 .yp-btn--red{background:var(--yp-red)}
 .yp-btn--red::before{background:var(--yp-ink)}
@@ -118,7 +118,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-faq__a{overflow:hidden}
 .yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
 .yp-faq__a p{margin:0 0 8px}
-@media (max-width:900px){.yp-faq__in{grid-template-columns:1fr}.yp-faq__a>div{padding-right:0}}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
 /* ---------- Переход между страницами: шторка из трёх полос цветов логотипа ---------- */
 .yp-curtain{position:fixed;inset:0;z-index:10050;pointer-events:none;display:grid;grid-template-columns:repeat(3,1fr)}
 .yp-curtain i{display:block;transform-origin:50% 0;transform:scaleY(0)}
@@ -387,6 +387,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var YP = window.YP = window.YP || {};
   YP.phone = "+7 900 399-10-33"; YP.tel = "+79003991033";
+  YP.MAX_URL = "";                                     /* ссылка на канал Ямал Парка в мессенджере Max, например https://max.ru/… — строка в контактах появится сама */
   YP.tz = "Asia/Yekaterinburg"; YP.coords = {lat:66.568, lon:66.860};            /* комплекс: 12-й км дороги Салехард — Горнокнязевск */
   YP.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   YP.fine = window.matchMedia && matchMedia("(hover:hover) and (pointer:fine)").matches;
@@ -1710,7 +1711,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-fact b{display:block;font-weight:300;font-size:clamp(30px,3.3vw,52px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
 .yp-fact b small{font-size:.45em;letter-spacing:0;margin-left:4px;color:var(--c)}
 .yp-fact>span{display:block;margin-top:12px;font-size:14px;color:var(--yp-muted);line-height:1.45}
-@media (max-width:980px){.yp-facts__intro{grid-template-columns:1fr}.yp-facts__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-fact{border-right:0;margin-right:0;padding:22px 0;border-bottom:1px solid var(--yp-line)}.yp-fact:nth-child(odd){padding-right:16px}}
+@media (max-width:980px){.yp-facts__intro{grid-template-columns:minmax(0,1fr)}.yp-facts__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-fact{border-right:0;margin-right:0;padding:22px 0;border-bottom:1px solid var(--yp-line)}.yp-fact:nth-child(odd){padding-right:16px}}
 </style>
 <section class="yp yp-facts" id="about">
   <div class="yp-wrap">
@@ -1969,7 +1970,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-ban__price{display:grid;gap:14px;justify-items:start}
 .yp-ban__price strong{font-weight:300;font-size:clamp(30px,2.8vw,44px);line-height:1;letter-spacing:-.03em}
 .yp-ban__price small{display:block;margin-top:6px;font-size:14px;color:var(--yp-muted);letter-spacing:0}
-@media (max-width:900px){.yp-bs{grid-template-columns:1fr}.yp-bs__photo{min-height:400px}.yp-ban__foot{grid-template-columns:1fr}}
+@media (max-width:900px){.yp-bs{grid-template-columns:minmax(0,1fr)}.yp-bs__photo{min-height:400px}.yp-ban__foot{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.yp-ring,.yp-eq i,.yp-bs__said::after,.yp-bs__photo.is-music>img{animation:none}}
 </style>
 <section class="yp yp-ban" id="banya">
@@ -2240,7 +2241,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wx-ico i{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--yp-blue);animation:ypFlake 3s linear infinite}
 @keyframes ypFlake{0%{transform:translateY(-6px);opacity:0}20%{opacity:1}100%{transform:translateY(60px);opacity:0}}
 @media (max-width:1100px){.yp-bento{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-t-grill{grid-row:span 1}}
-@media (max-width:640px){.yp-bento{grid-template-columns:1fr}.yp-t-aurora,.yp-t-map{grid-column:auto}}
+@media (max-width:640px){.yp-bento{grid-template-columns:minmax(0,1fr)}.yp-t-aurora,.yp-t-map{grid-column:auto}}
 @media (prefers-reduced-motion:reduce){.yp-today__clock b span,.yp-live i,.yp-wx-ico i{animation:none}}
 </style>
 <section class="yp yp-today" id="today">
@@ -2426,7 +2427,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 @keyframes ypSpin{to{transform:rotate(360deg)}}
 @keyframes ypDrift{to{transform:translateX(4px)}}
 @keyframes ypDrop{0%{transform:translateY(-4px);opacity:0}30%{opacity:1}100%{transform:translateY(8px);opacity:0}}
-@media (max-width:1000px){.yp-wx__grid{grid-template-columns:1fr}.yp-wx__days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1000px){.yp-wx__grid{grid-template-columns:minmax(0,1fr)}.yp-wx__days{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.yp-ic *{animation:none!important}}
 </style>
 <section class="yp yp-wx" id="weather">
@@ -2535,7 +2536,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-af__legend span{display:inline-flex;align-items:center;gap:8px}
 .yp-af__legend i{width:14px;height:10px;border-radius:2px}
 .yp-af__msg{grid-column:1/-1;border-radius:24px;padding:26px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);color:#C3D0D8}
-@media (max-width:1000px){.yp-af__head{grid-template-columns:1fr}.yp-af__grid{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-af__head{grid-template-columns:minmax(0,1fr)}.yp-af__grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 <section class="yp yp-dark yp-af" id="forecast" data-yp-theme="dark">
   <canvas class="yp-af__bg" aria-hidden="true"></canvas>
@@ -2713,6 +2714,10 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-pk__pin.is-off::before,.yp-pk__pin.is-off::after{animation:none}
 .yp-pk__tip{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px);white-space:nowrap;font:600 12px/1 var(--yp-f);padding:7px 10px;border-radius:999px;background:#fff;color:var(--yp-ink);box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .25s,transform .3s var(--yp-ease)}
 .yp-pk__pin:hover .yp-pk__tip,.yp-pk__pin:focus-visible .yp-pk__tip{opacity:1;transform:translate(-50%,0)}
+/* у краёв схемы подсказка прижимается внутрь, чтобы не уходить за экран */
+.yp-pk__pin.tip-l .yp-pk__tip{left:auto;right:-4px;transform:translate(0,6px)}
+.yp-pk__pin.tip-r .yp-pk__tip{left:-4px;transform:translate(0,6px)}
+.yp-pk__pin.tip-l:hover .yp-pk__tip,.yp-pk__pin.tip-l:focus-visible .yp-pk__tip,.yp-pk__pin.tip-r:hover .yp-pk__tip,.yp-pk__pin.tip-r:focus-visible .yp-pk__tip{transform:none}
 .yp-pk__ui{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;align-items:end;gap:10px;pointer-events:none}
 .yp-pk__ui>*{pointer-events:auto}
 .yp-pk__all{border:0;border-radius:999px;padding:10px 14px;font:600 13px var(--yp-f);background:rgba(255,255,255,.94);color:var(--yp-ink);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.18);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s var(--yp-ease)}
@@ -2739,7 +2744,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-pk__list button{border:0;border-radius:12px;padding:9px 12px;font:600 13px var(--yp-f);background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--yp-line);transition:background .25s,color .25s,transform .3s var(--yp-ease)}
 .yp-pk__list button:hover{transform:translateY(-2px)}
 .yp-pk__list button.is-on{background:var(--c);color:#fff;box-shadow:none}
-@media (max-width:1000px){.yp-pk__grid{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-pk__grid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:560px){.yp-pk__pin{width:28px;height:28px;margin:-14px 0 0 -14px;border-width:2px}.yp-pk__pin svg{width:13px;height:13px}.yp-pk__hint{display:none}.yp-pk__stage{border-radius:22px}}
 @media (prefers-reduced-motion:reduce){.yp-pk__pin::before,.yp-pk__pin::after{animation:none}}
 </style>
@@ -2805,7 +2810,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
     {id:"h1", cat:"grill", n:6, pt:[91.3,40.4], name:"Гостевой дом №1", img:"img/p/guest1-in.jpg", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
     {id:"h2", cat:"grill", n:7, pt:[82.8,46.8], name:"Гостевой дом №2", img:"img/p/guest2-ext.jpg", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
     {id:"chum", cat:"etno", n:12, pt:[65.4,69.6], name:"Чум и смотровая площадка", img:"img/p/chum-in.jpg", meta:["15–20 гостей","своя терраса"], price:15000, unit:"₽ за аренду", feat:["Обогретый чум","Костровище","Казан и мангал"], type:"chum", page:"/etno"},
-    {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"img/p/tent-aurora-in.jpg", meta:["40 м²","25–30 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
+    {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"img/p/tent-aurora-in.jpg", meta:["40 м²","до 20 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
   ];
   var view = sec.querySelector("[data-yp-pkv]"), zoom = sec.querySelector("[data-yp-pkz]"), dim = zoom.querySelector(".yp-pk__dim");
   var card = sec.querySelector("[data-yp-pkc]"), ph = sec.querySelector("[data-yp-pkph]"), wipe = ph.querySelector(".yp-pk__wipe");
@@ -2814,6 +2819,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
     var b = document.createElement("button"); b.type = "button"; b.className = "yp-pk__pin"; b.style.left = u.pt[0] + "%"; b.style.top = u.pt[1] + "%";
     b.style.setProperty("--c", COL[u.cat]); b.setAttribute("aria-label", u.name); b.setAttribute("data-yp-cursor", "Выбрать");
     b.innerHTML = ICON[u.cat] + '<span class="yp-pk__tip">' + u.name + "</span>";
+    if(u.pt[0] > 70) b.classList.add("tip-l"); else if(u.pt[0] < 30) b.classList.add("tip-r");
     b.addEventListener("click", function(){ if(u.cat !== cat) setCat(u.cat, true); select(u, true); });
     zoom.appendChild(b); pins[u.id] = b;
   });
@@ -2915,7 +2921,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-free__units button{font-size:13.5px;padding:10px 14px;display:flex;align-items:center;gap:8px}
 .yp-free__units button i{width:7px;height:7px;border-radius:50%;background:#5D6461;flex:0 0 auto;transition:background .3s}
 .yp-free__units button i.ok{background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
-.yp-free__units button[aria-selected="true"]{background:var(--yp-green);color:#fff}
+.yp-free__units button[aria-selected="true"]{background:var(--yp-green-d);color:#fff}
 .yp-free__groups button:hover,.yp-free__units button:hover{transform:translateY(-1px)}
 .yp-free__days{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
 .yp-free__day{position:relative;border:0;border-radius:14px;padding:10px 6px 9px;text-align:center;cursor:pointer;font:500 12px/1.2 var(--yp-mono);background:rgba(255,255,255,.08);color:#E6ECEA;transition:transform .2s,background .2s,box-shadow .2s;min-height:74px}
@@ -2923,9 +2929,9 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-free__day small{display:block;font-size:11px;color:var(--yp-aurora);white-space:nowrap}
 .yp-free__day.we{background:rgba(227,30,36,.18)}
 .yp-free__day:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
-.yp-free__day.busy{background:rgba(255,255,255,.03);color:#5D6461;cursor:not-allowed;transform:none}
-.yp-free__day.busy small{color:#5D6461}
-.yp-free__day.sel{background:var(--yp-green);color:#fff;box-shadow:0 0 0 2px #fff inset}
+.yp-free__day.busy{background:rgba(255,255,255,.04);color:#98A19D;cursor:not-allowed;transform:none}
+.yp-free__day.busy small{color:#98A19D}
+.yp-free__day.sel{background:var(--yp-green-d);color:#fff;box-shadow:0 0 0 2px #fff inset}
 .yp-free__day.sel small{color:#fff}
 .yp-free__day.sk{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12),rgba(255,255,255,.05));background-size:200% 100%;animation:yp-free-sk 1.2s linear infinite;cursor:default}
 @keyframes yp-free-sk{to{background-position:-200% 0}}
@@ -2946,7 +2952,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-free__note i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--yp-aurora);margin-right:6px;animation:yp-free-pulse 1.6s ease-in-out infinite}
 @keyframes yp-free-pulse{50%{opacity:.25}}
 .yp-free__err{grid-column:1/-1;padding:14px 16px;border-radius:14px;background:rgba(255,178,122,.12);color:#FFD9BD;font-size:14px}
-@media (max-width:1000px){.yp-free__box{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 @media (max-width:560px){.yp-free__days{grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}.yp-free__day b{font-size:17px}}
 </style>
@@ -3099,7 +3105,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-gc__fade.is-hide>*{opacity:0;transform:translateY(14px)}
 .yp-glamp .yp-btn:not(.yp-btn--ghost){background:var(--yp-blue)}
 .yp-glamp .yp-btn::before{background:var(--yp-ink)}
-@media (max-width:900px){.yp-glamp__head{grid-template-columns:1fr}.yp-gc__slide{width:80%;margin-left:-40%}.yp-gc__slide[data-pos="-1"]{transform:translateX(-96%) scale(.82)}.yp-gc__slide[data-pos="1"]{transform:translateX(96%) scale(.82)}.yp-gc__info{grid-template-columns:1fr}}
+@media (max-width:900px){.yp-glamp__head{grid-template-columns:minmax(0,1fr)}.yp-gc__slide{width:80%;margin-left:-40%}.yp-gc__slide[data-pos="-1"]{transform:translateX(-96%) scale(.82)}.yp-gc__slide[data-pos="1"]{transform:translateX(96%) scale(.82)}.yp-gc__info{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.yp-gc__slide,.yp-gc__slide img,.yp-gc__fade>*{transition:none}}
 </style>
 <section class="yp yp-glamp" id="glamping">
@@ -3212,7 +3218,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-wk__btn:hover{transform:scale(1.08)}
 .yp-wk__btn svg{width:18px;height:18px}
 .yp-wk__btn--ghost{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.yp-wk__cap{flex:1;font:500 13px var(--yp-mono);letter-spacing:.04em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.yp-wk__cap{flex:1;font:500 13px/1.45 var(--yp-mono);letter-spacing:.04em;min-width:0}
 .yp-wk__nav{display:flex;gap:10px;margin-top:14px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px;scroll-snap-type:x proximity}
 .yp-wk__nav::-webkit-scrollbar{display:none}
 .yp-wk__nav button{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:0;border-radius:16px;background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1px var(--yp-line);scroll-snap-align:start;transition:background .3s,color .3s,transform .4s var(--yp-ease)}
@@ -3238,7 +3244,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
 .yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
 @media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
-@media (max-width:900px){.yp-wk__head{grid-template-columns:1fr}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
 </style>
 <section class="yp yp-wk" id="walk">
   <div class="yp-wrap">
@@ -3295,7 +3301,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
     chum:{kick:"Этно · " + V, title:"Чум и смотровая площадка", src:"img/video/walk-chum", short:"Чум", sub:V + " · 25 с",
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
-          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["25–30 гостей","Панорамное окно","Дровяная печь"]},
+          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
     banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
           cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
@@ -3662,7 +3668,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-rv__frame iframe{z-index:1}
 .yp-rv__q{position:absolute;right:-10px;top:-50px;font:300 clamp(160px,18vw,260px)/1 var(--yp-fd);color:var(--yp-green);opacity:.12;pointer-events:none;z-index:2}
 .yp-rv__link{display:inline-block;margin-top:12px;font-size:13px;color:var(--yp-muted)}
-@media (max-width:980px){.yp-rv__grid{grid-template-columns:1fr}.yp-rv__frame{height:640px}}
+@media (max-width:980px){.yp-rv__grid{grid-template-columns:minmax(0,1fr)}.yp-rv__frame{height:640px}}
 </style>
 <section class="yp yp-rv" id="reviews">
   <div class="yp-wrap yp-rv__grid">
@@ -3754,7 +3760,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
       <p class="yp-lead">Соберём программу под ваш повод: баня и ужин в гриль-домике, ночь в глэмпинге, пейнтбол, вечер в чуме.</p>
       <ul class="yp-events__list">
         <li>Банкетный зал под куполом<span>100–150 гостей</span></li>
-        <li>Шатёр «Сияние севера»<span>25–30 гостей</span></li>
+        <li>Шатёр «Сияние севера»<span>до 20 гостей</span></li>
         <li>Гостевые дома №1 и №2<span>20–25 гостей</span></li>
         <li>Гриль-дома и чум<span>15–20 гостей</span></li>
       </ul>
@@ -3791,7 +3797,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-faq__a{overflow:hidden}
 .yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
 .yp-faq__a p{margin:0 0 8px}
-@media (max-width:900px){.yp-faq__in{grid-template-columns:1fr}.yp-faq__a>div{padding-right:0}}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
 </style>
 <section class="yp yp-faq" id="faq">
   <div class="yp-wrap yp-faq__in">
@@ -3879,8 +3885,8 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
-@media (max-width:900px){.yp-booking__in{grid-template-columns:1fr}.yp-foot__grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.yp-foot__grid{grid-template-columns:1fr}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr)}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
 </style>
 <section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
   <div class="yp-booking__glow" aria-hidden="true"></div><div class="yp-booking__stars" aria-hidden="true"></div>
@@ -3894,6 +3900,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
         <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
         <a href="https://t.me/yamalpark" target="_blank" rel="noopener">@yamalpark<span>Telegram</span></a>
         <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">vk.com/yamalpark<span>ВКонтакте</span></a>
+        <a href="#" target="_blank" rel="noopener" data-yp-max hidden>Ямал Парк<span>канал в Max</span></a>
       </div>
     </div>
     <div id="yp-booking-widget" data-yp-reveal>
@@ -3908,6 +3915,10 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
           <h3>Купольный домик, «Волк» или «Медведь»</h3>
           <p>Онлайн-бронирование с мгновенным подтверждением. Выберите даты заезда и выезда.</p>
           <!-- TravelLine: форма поиска (код с текущего yamalpark.ru) -->
+          <script>
+          /* канал в Max: строка в контактах появляется, когда задан YP.MAX_URL (00-head) */
+          (function(){ var a = document.querySelector("[data-yp-max]"); if(a && window.YP && YP.MAX_URL){ a.href = YP.MAX_URL; a.hidden = false; } })();
+          </script>
           <script type="text/javascript">
           (function(w){
             var q = [["setContext", "TL-INT-yamalpark-ru_2024-08-22", window.YP && YP.lang !== "ru" ? "en" : "ru"], ["embed", "search-form", {container:"tl-search-form"}]];
@@ -3947,7 +3958,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
         </div>
         <div class="yp-bk__pane" id="yp-bk-event" role="tabpanel" hidden>
           <h3>Свадьба, юбилей, корпоратив</h3>
-          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» на 25–30, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
+          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» до 20 гостей, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
           <ul class="yp-bk__list">
             <li><div><b>Банкетный зал под куполом</b><small>весь день 12:00–23:00</small></div><span>от 50 000 ₽</span></li>
             <li><div><b>Шатёр «Сияние севера»</b><small>панорамное окно, дровяная печь</small></div><span>от 10 000 ₽</span></li>

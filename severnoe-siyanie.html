@@ -27,7 +27,7 @@
 <style>
 /* Ночь (первый экран, бронь, подвал) + светлые секции между ними. Цвета логотипа — акценты, сияние — градиент заголовков */
 :root{
-  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24;
+  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24; --yp-green-d:#2E8C2C; /* зелёный фон под белым текстом — темнее, чтобы читалось */
   --yp-bg:#F3F4F1; --yp-paper:#FFFFFF; --yp-mist:#E6E6E6; --yp-ink:#1E2423; --yp-muted:#646B69; --yp-line:rgba(30,36,35,.12);
   --yp-night:#060A10; --yp-night2:#0B131D; --yp-nightline:rgba(234,241,244,.12); --yp-snow:#EAF1F4; --yp-snowmuted:#8FA2AF;
   --yp-aurora:#5CFFC0; --yp-violet:#9AA8FF;
@@ -67,7 +67,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-btn:hover::before{transform:none}
 .yp-btn--aurora{background:var(--yp-aurora);color:#03140D}
 .yp-btn--aurora::before{background:#fff}
-.yp-btn--green{background:var(--yp-green)}
+.yp-btn--green{background:var(--yp-green-d)}
 .yp-btn--green::before{background:var(--yp-ink)}
 .yp-btn--red{background:var(--yp-red)}
 .yp-btn--red::before{background:var(--yp-ink)}
@@ -118,7 +118,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-faq__a{overflow:hidden}
 .yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
 .yp-faq__a p{margin:0 0 8px}
-@media (max-width:900px){.yp-faq__in{grid-template-columns:1fr}.yp-faq__a>div{padding-right:0}}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
 /* ---------- Переход между страницами: шторка из трёх полос цветов логотипа ---------- */
 .yp-curtain{position:fixed;inset:0;z-index:10050;pointer-events:none;display:grid;grid-template-columns:repeat(3,1fr)}
 .yp-curtain i{display:block;transform-origin:50% 0;transform:scaleY(0)}
@@ -387,6 +387,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var YP = window.YP = window.YP || {};
   YP.phone = "+7 900 399-10-33"; YP.tel = "+79003991033";
+  YP.MAX_URL = "";                                     /* ссылка на канал Ямал Парка в мессенджере Max, например https://max.ru/… — строка в контактах появится сама */
   YP.tz = "Asia/Yekaterinburg"; YP.coords = {lat:66.568, lon:66.860};            /* комплекс: 12-й км дороги Салехард — Горнокнязевск */
   YP.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   YP.fine = window.matchMedia && matchMedia("(hover:hover) and (pointer:fine)").matches;
@@ -1122,7 +1123,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-af__legend span{display:inline-flex;align-items:center;gap:8px}
 .yp-af__legend i{width:14px;height:10px;border-radius:2px}
 .yp-af__msg{grid-column:1/-1;border-radius:24px;padding:26px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);color:#C3D0D8}
-@media (max-width:1000px){.yp-af__head{grid-template-columns:1fr}.yp-af__grid{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-af__head{grid-template-columns:minmax(0,1fr)}.yp-af__grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 <section class="yp yp-dark yp-af" id="forecast" data-yp-theme="dark">
   <canvas class="yp-af__bg" aria-hidden="true"></canvas>
@@ -1247,7 +1248,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 @keyframes ypSpin{to{transform:rotate(360deg)}}
 @keyframes ypDrift{to{transform:translateX(4px)}}
 @keyframes ypDrop{0%{transform:translateY(-4px);opacity:0}30%{opacity:1}100%{transform:translateY(8px);opacity:0}}
-@media (max-width:1000px){.yp-wx__grid{grid-template-columns:1fr}.yp-wx__days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1000px){.yp-wx__grid{grid-template-columns:minmax(0,1fr)}.yp-wx__days{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.yp-ic *{animation:none!important}}
 </style>
 <section class="yp yp-wx" id="weather">
@@ -1353,8 +1354,8 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-ag__wear li{display:flex;gap:10px;font-size:15px;color:#D5E0E7}
 .yp-ag__wear li::before{content:"";flex:0 0 auto;margin-top:7px;width:8px;height:8px;border-radius:50%;background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
 .yp-ag__wear p{margin:18px 0 0;font-size:14px;color:#9FB6C8}
-@media (max-width:1000px){.yp-ag__intro,.yp-ag__two{grid-template-columns:1fr}.yp-ag__when,.yp-ag__where{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.yp-ag__when,.yp-ag__where{grid-template-columns:1fr}.yp-ag__w{min-height:300px}}
+@media (max-width:1000px){.yp-ag__intro,.yp-ag__two{grid-template-columns:minmax(0,1fr)}.yp-ag__when,.yp-ag__where{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.yp-ag__when,.yp-ag__where{grid-template-columns:minmax(0,1fr)}.yp-ag__w{min-height:300px}}
 </style>
 <section class="yp yp-ag" id="guide">
   <div class="yp-wrap">
@@ -1485,8 +1486,8 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 .yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
-@media (max-width:900px){.yp-booking__in{grid-template-columns:1fr}.yp-foot__grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.yp-foot__grid{grid-template-columns:1fr}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr)}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
 </style>
 <section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
   <div class="yp-booking__glow" aria-hidden="true"></div><div class="yp-booking__stars" aria-hidden="true"></div>
@@ -1500,6 +1501,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
         <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
         <a href="https://t.me/yamalpark" target="_blank" rel="noopener">@yamalpark<span>Telegram</span></a>
         <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">vk.com/yamalpark<span>ВКонтакте</span></a>
+        <a href="#" target="_blank" rel="noopener" data-yp-max hidden>Ямал Парк<span>канал в Max</span></a>
       </div>
     </div>
     <div id="yp-booking-widget" data-yp-reveal>
@@ -1514,6 +1516,10 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
           <h3>Купольный домик, «Волк» или «Медведь»</h3>
           <p>Онлайн-бронирование с мгновенным подтверждением. Выберите даты заезда и выезда.</p>
           <!-- TravelLine: форма поиска (код с текущего yamalpark.ru) -->
+          <script>
+          /* канал в Max: строка в контактах появляется, когда задан YP.MAX_URL (00-head) */
+          (function(){ var a = document.querySelector("[data-yp-max]"); if(a && window.YP && YP.MAX_URL){ a.href = YP.MAX_URL; a.hidden = false; } })();
+          </script>
           <script type="text/javascript">
           (function(w){
             var q = [["setContext", "TL-INT-yamalpark-ru_2024-08-22", window.YP && YP.lang !== "ru" ? "en" : "ru"], ["embed", "search-form", {container:"tl-search-form"}]];
@@ -1553,7 +1559,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
         </div>
         <div class="yp-bk__pane" id="yp-bk-event" role="tabpanel" hidden>
           <h3>Свадьба, юбилей, корпоратив</h3>
-          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» на 25–30, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
+          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» до 20 гостей, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
           <ul class="yp-bk__list">
             <li><div><b>Банкетный зал под куполом</b><small>весь день 12:00–23:00</small></div><span>от 50 000 ₽</span></li>
             <li><div><b>Шатёр «Сияние севера»</b><small>панорамное окно, дровяная печь</small></div><span>от 10 000 ₽</span></li>

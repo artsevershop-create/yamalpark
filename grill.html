@@ -28,7 +28,7 @@
 <style>
 /* Ночь (первый экран, бронь, подвал) + светлые секции между ними. Цвета логотипа — акценты, сияние — градиент заголовков */
 :root{
-  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24;
+  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24; --yp-green-d:#2E8C2C; /* зелёный фон под белым текстом — темнее, чтобы читалось */
   --yp-bg:#F3F4F1; --yp-paper:#FFFFFF; --yp-mist:#E6E6E6; --yp-ink:#1E2423; --yp-muted:#646B69; --yp-line:rgba(30,36,35,.12);
   --yp-night:#060A10; --yp-night2:#0B131D; --yp-nightline:rgba(234,241,244,.12); --yp-snow:#EAF1F4; --yp-snowmuted:#8FA2AF;
   --yp-aurora:#5CFFC0; --yp-violet:#9AA8FF;
@@ -68,7 +68,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-btn:hover::before{transform:none}
 .yp-btn--aurora{background:var(--yp-aurora);color:#03140D}
 .yp-btn--aurora::before{background:#fff}
-.yp-btn--green{background:var(--yp-green)}
+.yp-btn--green{background:var(--yp-green-d)}
 .yp-btn--green::before{background:var(--yp-ink)}
 .yp-btn--red{background:var(--yp-red)}
 .yp-btn--red::before{background:var(--yp-ink)}
@@ -119,7 +119,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-faq__a{overflow:hidden}
 .yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
 .yp-faq__a p{margin:0 0 8px}
-@media (max-width:900px){.yp-faq__in{grid-template-columns:1fr}.yp-faq__a>div{padding-right:0}}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
 /* ---------- Переход между страницами: шторка из трёх полос цветов логотипа ---------- */
 .yp-curtain{position:fixed;inset:0;z-index:10050;pointer-events:none;display:grid;grid-template-columns:repeat(3,1fr)}
 .yp-curtain i{display:block;transform-origin:50% 0;transform:scaleY(0)}
@@ -388,6 +388,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var YP = window.YP = window.YP || {};
   YP.phone = "+7 900 399-10-33"; YP.tel = "+79003991033";
+  YP.MAX_URL = "";                                     /* ссылка на канал Ямал Парка в мессенджере Max, например https://max.ru/… — строка в контактах появится сама */
   YP.tz = "Asia/Yekaterinburg"; YP.coords = {lat:66.568, lon:66.860};            /* комплекс: 12-й км дороги Салехард — Горнокнязевск */
   YP.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   YP.fine = window.matchMedia && matchMedia("(hover:hover) and (pointer:fine)").matches;
@@ -1087,8 +1088,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-dh__c--more{background:linear-gradient(160deg,#2a1208,#130805 70%);color:#FBEFE6;justify-content:center;padding:28px;gap:14px}
 .yp-dh__c--more h3{margin:0;font-weight:300;font-size:clamp(26px,2.4vw,34px);line-height:1.1}
 .yp-dh__c--more p{margin:0;color:#EAD4C6}
-@media (max-width:1000px){.yp-gh2__head{grid-template-columns:1fr}.yp-dh{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.yp-dh{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-gh2__head{grid-template-columns:minmax(0,1fr)}.yp-dh{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.yp-dh{grid-template-columns:minmax(0,1fr)}}
 </style>
 <section class="yp yp-sheet yp-gh2" id="houses">
   <div class="yp-wrap">
@@ -1138,7 +1139,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__units button{font-size:13.5px;padding:10px 14px;display:flex;align-items:center;gap:8px}
 .yp-free__units button i{width:7px;height:7px;border-radius:50%;background:#5D6461;flex:0 0 auto;transition:background .3s}
 .yp-free__units button i.ok{background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
-.yp-free__units button[aria-selected="true"]{background:var(--yp-green);color:#fff}
+.yp-free__units button[aria-selected="true"]{background:var(--yp-green-d);color:#fff}
 .yp-free__groups button:hover,.yp-free__units button:hover{transform:translateY(-1px)}
 .yp-free__days{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
 .yp-free__day{position:relative;border:0;border-radius:14px;padding:10px 6px 9px;text-align:center;cursor:pointer;font:500 12px/1.2 var(--yp-mono);background:rgba(255,255,255,.08);color:#E6ECEA;transition:transform .2s,background .2s,box-shadow .2s;min-height:74px}
@@ -1146,9 +1147,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__day small{display:block;font-size:11px;color:var(--yp-aurora);white-space:nowrap}
 .yp-free__day.we{background:rgba(227,30,36,.18)}
 .yp-free__day:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
-.yp-free__day.busy{background:rgba(255,255,255,.03);color:#5D6461;cursor:not-allowed;transform:none}
-.yp-free__day.busy small{color:#5D6461}
-.yp-free__day.sel{background:var(--yp-green);color:#fff;box-shadow:0 0 0 2px #fff inset}
+.yp-free__day.busy{background:rgba(255,255,255,.04);color:#98A19D;cursor:not-allowed;transform:none}
+.yp-free__day.busy small{color:#98A19D}
+.yp-free__day.sel{background:var(--yp-green-d);color:#fff;box-shadow:0 0 0 2px #fff inset}
 .yp-free__day.sel small{color:#fff}
 .yp-free__day.sk{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12),rgba(255,255,255,.05));background-size:200% 100%;animation:yp-free-sk 1.2s linear infinite;cursor:default}
 @keyframes yp-free-sk{to{background-position:-200% 0}}
@@ -1169,7 +1170,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__note i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--yp-aurora);margin-right:6px;animation:yp-free-pulse 1.6s ease-in-out infinite}
 @keyframes yp-free-pulse{50%{opacity:.25}}
 .yp-free__err{grid-column:1/-1;padding:14px 16px;border-radius:14px;background:rgba(255,178,122,.12);color:#FFD9BD;font-size:14px}
-@media (max-width:1000px){.yp-free__box{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 @media (max-width:560px){.yp-free__days{grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}.yp-free__day b{font-size:17px}}
 </style>
@@ -1363,7 +1364,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__btn:hover{transform:scale(1.08)}
 .yp-wk__btn svg{width:18px;height:18px}
 .yp-wk__btn--ghost{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.yp-wk__cap{flex:1;font:500 13px var(--yp-mono);letter-spacing:.04em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.yp-wk__cap{flex:1;font:500 13px/1.45 var(--yp-mono);letter-spacing:.04em;min-width:0}
 .yp-wk__nav{display:flex;gap:10px;margin-top:14px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px;scroll-snap-type:x proximity}
 .yp-wk__nav::-webkit-scrollbar{display:none}
 .yp-wk__nav button{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:0;border-radius:16px;background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1px var(--yp-line);scroll-snap-align:start;transition:background .3s,color .3s,transform .4s var(--yp-ease)}
@@ -1389,7 +1390,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
 .yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
 @media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
-@media (max-width:900px){.yp-wk__head{grid-template-columns:1fr}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
 </style>
 <section class="yp yp-wk" id="walk">
   <div class="yp-wrap">
@@ -1446,7 +1447,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     chum:{kick:"Этно · " + V, title:"Чум и смотровая площадка", src:"img/video/walk-chum", short:"Чум", sub:V + " · 25 с",
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
-          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["25–30 гостей","Панорамное окно","Дровяная печь"]},
+          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
     banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
           cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
@@ -1668,8 +1669,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
-@media (max-width:900px){.yp-booking__in{grid-template-columns:1fr}.yp-foot__grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.yp-foot__grid{grid-template-columns:1fr}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr)}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
 </style>
 <section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
   <div class="yp-booking__glow" aria-hidden="true"></div><div class="yp-booking__stars" aria-hidden="true"></div>
@@ -1683,6 +1684,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
         <a href="https://t.me/yamalpark" target="_blank" rel="noopener">@yamalpark<span>Telegram</span></a>
         <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">vk.com/yamalpark<span>ВКонтакте</span></a>
+        <a href="#" target="_blank" rel="noopener" data-yp-max hidden>Ямал Парк<span>канал в Max</span></a>
       </div>
     </div>
     <div id="yp-booking-widget" data-yp-reveal>
@@ -1697,6 +1699,10 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
           <h3>Купольный домик, «Волк» или «Медведь»</h3>
           <p>Онлайн-бронирование с мгновенным подтверждением. Выберите даты заезда и выезда.</p>
           <!-- TravelLine: форма поиска (код с текущего yamalpark.ru) -->
+          <script>
+          /* канал в Max: строка в контактах появляется, когда задан YP.MAX_URL (00-head) */
+          (function(){ var a = document.querySelector("[data-yp-max]"); if(a && window.YP && YP.MAX_URL){ a.href = YP.MAX_URL; a.hidden = false; } })();
+          </script>
           <script type="text/javascript">
           (function(w){
             var q = [["setContext", "TL-INT-yamalpark-ru_2024-08-22", window.YP && YP.lang !== "ru" ? "en" : "ru"], ["embed", "search-form", {container:"tl-search-form"}]];
@@ -1736,7 +1742,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         </div>
         <div class="yp-bk__pane" id="yp-bk-event" role="tabpanel" hidden>
           <h3>Свадьба, юбилей, корпоратив</h3>
-          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» на 25–30, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
+          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» до 20 гостей, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
           <ul class="yp-bk__list">
             <li><div><b>Банкетный зал под куполом</b><small>весь день 12:00–23:00</small></div><span>от 50 000 ₽</span></li>
             <li><div><b>Шатёр «Сияние севера»</b><small>панорамное окно, дровяная печь</small></div><span>от 10 000 ₽</span></li>

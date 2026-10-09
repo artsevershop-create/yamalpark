@@ -28,7 +28,7 @@
 <style>
 /* Ночь (первый экран, бронь, подвал) + светлые секции между ними. Цвета логотипа — акценты, сияние — градиент заголовков */
 :root{
-  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24;
+  --yp-blue:#6274B6; --yp-green:#3FAB3C; --yp-red:#E31E24; --yp-green-d:#2E8C2C; /* зелёный фон под белым текстом — темнее, чтобы читалось */
   --yp-bg:#F3F4F1; --yp-paper:#FFFFFF; --yp-mist:#E6E6E6; --yp-ink:#1E2423; --yp-muted:#646B69; --yp-line:rgba(30,36,35,.12);
   --yp-night:#060A10; --yp-night2:#0B131D; --yp-nightline:rgba(234,241,244,.12); --yp-snow:#EAF1F4; --yp-snowmuted:#8FA2AF;
   --yp-aurora:#5CFFC0; --yp-violet:#9AA8FF;
@@ -68,7 +68,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-btn:hover::before{transform:none}
 .yp-btn--aurora{background:var(--yp-aurora);color:#03140D}
 .yp-btn--aurora::before{background:#fff}
-.yp-btn--green{background:var(--yp-green)}
+.yp-btn--green{background:var(--yp-green-d)}
 .yp-btn--green::before{background:var(--yp-ink)}
 .yp-btn--red{background:var(--yp-red)}
 .yp-btn--red::before{background:var(--yp-ink)}
@@ -119,7 +119,7 @@ html.lenis,html.lenis body{height:auto}
 .yp-faq__a{overflow:hidden}
 .yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
 .yp-faq__a p{margin:0 0 8px}
-@media (max-width:900px){.yp-faq__in{grid-template-columns:1fr}.yp-faq__a>div{padding-right:0}}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
 /* ---------- Переход между страницами: шторка из трёх полос цветов логотипа ---------- */
 .yp-curtain{position:fixed;inset:0;z-index:10050;pointer-events:none;display:grid;grid-template-columns:repeat(3,1fr)}
 .yp-curtain i{display:block;transform-origin:50% 0;transform:scaleY(0)}
@@ -388,6 +388,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var YP = window.YP = window.YP || {};
   YP.phone = "+7 900 399-10-33"; YP.tel = "+79003991033";
+  YP.MAX_URL = "";                                     /* ссылка на канал Ямал Парка в мессенджере Max, например https://max.ru/… — строка в контактах появится сама */
   YP.tz = "Asia/Yekaterinburg"; YP.coords = {lat:66.568, lon:66.860};            /* комплекс: 12-й км дороги Салехард — Горнокнязевск */
   YP.reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   YP.fine = window.matchMedia && matchMedia("(hover:hover) and (pointer:fine)").matches;
@@ -1193,7 +1194,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-zone--plain .yp-zone__cmds span::before,.yp-zone--plain .yp-zone__cmds span::after{content:none}
 .yp-ch__cta{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
 @media (max-width:900px){
-  .yp-bb__grid{grid-template-columns:1fr}
+  .yp-bb__grid{grid-template-columns:minmax(0,1fr)}
   .yp-bb__stick{display:none}
   .yp-ch{min-height:0;padding-block:36px}
   .yp-ch__ph{display:block}
@@ -1310,7 +1311,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__units button{font-size:13.5px;padding:10px 14px;display:flex;align-items:center;gap:8px}
 .yp-free__units button i{width:7px;height:7px;border-radius:50%;background:#5D6461;flex:0 0 auto;transition:background .3s}
 .yp-free__units button i.ok{background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
-.yp-free__units button[aria-selected="true"]{background:var(--yp-green);color:#fff}
+.yp-free__units button[aria-selected="true"]{background:var(--yp-green-d);color:#fff}
 .yp-free__groups button:hover,.yp-free__units button:hover{transform:translateY(-1px)}
 .yp-free__days{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
 .yp-free__day{position:relative;border:0;border-radius:14px;padding:10px 6px 9px;text-align:center;cursor:pointer;font:500 12px/1.2 var(--yp-mono);background:rgba(255,255,255,.08);color:#E6ECEA;transition:transform .2s,background .2s,box-shadow .2s;min-height:74px}
@@ -1318,9 +1319,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__day small{display:block;font-size:11px;color:var(--yp-aurora);white-space:nowrap}
 .yp-free__day.we{background:rgba(227,30,36,.18)}
 .yp-free__day:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
-.yp-free__day.busy{background:rgba(255,255,255,.03);color:#5D6461;cursor:not-allowed;transform:none}
-.yp-free__day.busy small{color:#5D6461}
-.yp-free__day.sel{background:var(--yp-green);color:#fff;box-shadow:0 0 0 2px #fff inset}
+.yp-free__day.busy{background:rgba(255,255,255,.04);color:#98A19D;cursor:not-allowed;transform:none}
+.yp-free__day.busy small{color:#98A19D}
+.yp-free__day.sel{background:var(--yp-green-d);color:#fff;box-shadow:0 0 0 2px #fff inset}
 .yp-free__day.sel small{color:#fff}
 .yp-free__day.sk{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12),rgba(255,255,255,.05));background-size:200% 100%;animation:yp-free-sk 1.2s linear infinite;cursor:default}
 @keyframes yp-free-sk{to{background-position:-200% 0}}
@@ -1341,7 +1342,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__note i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--yp-aurora);margin-right:6px;animation:yp-free-pulse 1.6s ease-in-out infinite}
 @keyframes yp-free-pulse{50%{opacity:.25}}
 .yp-free__err{grid-column:1/-1;padding:14px 16px;border-radius:14px;background:rgba(255,178,122,.12);color:#FFD9BD;font-size:14px}
-@media (max-width:1000px){.yp-free__box{grid-template-columns:1fr}}
+@media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 @media (max-width:560px){.yp-free__days{grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}.yp-free__day b{font-size:17px}}
 </style>
@@ -1461,45 +1462,45 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Бани · 03 · Постер «Тепло настоящего Севера» (img/p/bani-poster.jpg — загрузить в Tilda).
      Постер наклоняется за курсором, по нему проходит блик, вокруг поднимается пар. -->
 <style>
-.yp-bp{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(80px,9vw,140px);background:#140b06;color:#F6EEE6}
-.yp-bp::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 30% 50%,rgba(255,150,70,.22),transparent 70%),radial-gradient(40% 60% at 85% 30%,rgba(255,110,60,.12),transparent 70%)}
-.yp-bp__steam{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none;opacity:.7}
-.yp-bp__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(36px,6vw,100px);align-items:center}
-.yp-bp__frame{position:relative;perspective:1200px;max-width:520px;width:100%;justify-self:center}
-.yp-bp__poster{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:2/3;box-shadow:0 60px 100px -40px rgba(0,0,0,.85),0 0 0 1px rgba(255,220,190,.12);transform-style:preserve-3d;will-change:transform}
-.yp-bp__poster img{width:100%;height:100%;object-fit:cover}
-.yp-bp__glare{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,240,220,.28) 48%,transparent 62%);mix-blend-mode:screen;transform:translateX(-120%)}
-.yp-bp .yp-eyebrow{color:#F3B98C}
-.yp-bp h2{margin:18px 0 0;font-weight:300;font-size:clamp(36px,5vw,76px);line-height:1;letter-spacing:-.03em}
-.yp-bp h2 b{font-weight:400;background:linear-gradient(90deg,#FFB27A,#FF6A3D 60%,var(--yp-red));-webkit-background-clip:text;background-clip:text;color:transparent}
-.yp-bp__lead{margin:22px 0 0;font-size:clamp(16px,1.25vw,19px);color:#D9C6B6;max-width:46ch}
-.yp-bp__list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:10px}
-.yp-bp__list li{display:flex;gap:12px;align-items:baseline;font-size:16px}
-.yp-bp__list li::before{content:"";flex:0 0 auto;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid #FF8A4C;transform:translateY(-1px)}
-.yp-bp__cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
-.yp-bp .yp-btn--ghost{box-shadow:inset 0 0 0 1px rgba(255,220,190,.3);color:#F6EEE6}
-@media (max-width:900px){.yp-bp__grid{grid-template-columns:1fr}.yp-bp__frame{max-width:380px}}
+.yp-bpo{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(80px,9vw,140px);background:#140b06;color:#F6EEE6}
+.yp-bpo::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 30% 50%,rgba(255,150,70,.22),transparent 70%),radial-gradient(40% 60% at 85% 30%,rgba(255,110,60,.12),transparent 70%)}
+.yp-bpo__steam{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none;opacity:.7}
+.yp-bpo__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(36px,6vw,100px);align-items:center}
+.yp-bpo__frame{position:relative;perspective:1200px;max-width:520px;width:100%;justify-self:center}
+.yp-bpo__poster{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:2/3;box-shadow:0 60px 100px -40px rgba(0,0,0,.85),0 0 0 1px rgba(255,220,190,.12);transform-style:preserve-3d;will-change:transform}
+.yp-bpo__poster img{width:100%;height:100%;object-fit:cover}
+.yp-bpo__glare{position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,240,220,.28) 48%,transparent 62%);mix-blend-mode:screen;transform:translateX(-120%)}
+.yp-bpo .yp-eyebrow{color:#F3B98C}
+.yp-bpo h2{margin:18px 0 0;font-weight:300;font-size:clamp(36px,5vw,76px);line-height:1;letter-spacing:-.03em}
+.yp-bpo h2 b{font-weight:400;background:linear-gradient(90deg,#FFB27A,#FF6A3D 60%,var(--yp-red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.yp-bpo__lead{margin:22px 0 0;font-size:clamp(16px,1.25vw,19px);color:#D9C6B6;max-width:46ch}
+.yp-bpo__list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:10px}
+.yp-bpo__list li{display:flex;gap:12px;align-items:baseline;font-size:16px}
+.yp-bpo__list li::before{content:"";flex:0 0 auto;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid #FF8A4C;transform:translateY(-1px)}
+.yp-bpo__cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+.yp-bpo .yp-btn--ghost{box-shadow:inset 0 0 0 1px rgba(255,220,190,.3);color:#F6EEE6}
+@media (max-width:900px){.yp-bpo__grid{grid-template-columns:minmax(0,1fr)}.yp-bpo__frame{max-width:380px}}
 </style>
-<section class="yp yp-bp" id="poster" data-yp-theme="dark">
-  <canvas class="yp-bp__steam" aria-hidden="true"></canvas>
-  <div class="yp-wrap yp-bp__grid">
-    <div class="yp-bp__frame" data-yp-cursor="Тепло">
-      <div class="yp-bp__poster" data-yp-bpp>
+<section class="yp yp-bpo" id="poster" data-yp-theme="dark">
+  <canvas class="yp-bpo__steam" aria-hidden="true"></canvas>
+  <div class="yp-wrap yp-bpo__grid">
+    <div class="yp-bpo__frame" data-yp-cursor="Тепло">
+      <div class="yp-bpo__poster" data-yp-bpp>
         <img src="img/p/bani-poster.jpg" alt="Постер «Тепло настоящего Севера»: гостья в парной Ямальских бань у окна с видом на заснеженную тайгу" loading="lazy">
-        <i class="yp-bp__glare" aria-hidden="true"></i>
+        <i class="yp-bpo__glare" aria-hidden="true"></i>
       </div>
     </div>
     <div>
       <span class="yp-eyebrow"><i style="--c:#FF8A4C"></i>Банный комплекс Ямал Парк</span>
       <h2 data-yp-split>Тепло <b>настоящего Севера</b></h2>
-      <p class="yp-bp__lead">За окном парной — заснеженная тайга, внутри — жар до 100 °C, пар по команде и тишина. Гармония во всём, что важно.</p>
-      <ul class="yp-bp__list">
+      <p class="yp-bpo__lead">За окном парной — заснеженная тайга, внутри — жар до 100 °C, пар по команде и тишина. Гармония во всём, что важно.</p>
+      <ul class="yp-bpo__list">
         <li>Три бани: «Морошка», «Брусника» и «Черника»</li>
         <li>Парная, хаммам и фито-сауна</li>
         <li>Комнаты отдыха с кухней и тёплыми полами</li>
         <li>Шапки и полотенца «Ямальские бани»</li>
       </ul>
-      <div class="yp-bp__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать баню</button><a class="yp-btn yp-btn--ghost" href="#price">Цены</a></div>
+      <div class="yp-bpo__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать баню</button><a class="yp-btn yp-btn--ghost" href="#price">Цены</a></div>
     </div>
   </div>
 </section>
@@ -1507,7 +1508,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var sec = document.getElementById("poster"); if(!sec) return;
   var YP = window.YP || {}, G = window.gsap;
-  var poster = sec.querySelector("[data-yp-bpp]"), glare = sec.querySelector(".yp-bp__glare");
+  var poster = sec.querySelector("[data-yp-bpp]"), glare = sec.querySelector(".yp-bpo__glare");
   if(!G || YP.reduced) return;
   /* появление: постер встаёт из наклона, блик пробегает */
   G.fromTo(poster, {rotateX:18, rotateY:-14, y:80, opacity:0}, {rotateX:0, rotateY:0, y:0, opacity:1, duration:1.4, ease:"power3.out",
@@ -1515,14 +1516,14 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   /* наклон за курсором */
   if(YP.fine){
     var rx = G.quickTo(poster, "rotateX", {duration:.6, ease:"power3"}), ry = G.quickTo(poster, "rotateY", {duration:.6, ease:"power3"});
-    sec.querySelector(".yp-bp__frame").addEventListener("pointermove", function(e){
+    sec.querySelector(".yp-bpo__frame").addEventListener("pointermove", function(e){
       var r = poster.getBoundingClientRect(), nx = (e.clientX - r.left)/r.width - .5, ny = (e.clientY - r.top)/r.height - .5;
       ry(nx*12); rx(-ny*12); G.set(glare, {xPercent:nx*160});
     });
-    sec.querySelector(".yp-bp__frame").addEventListener("pointerleave", function(){ rx(0); ry(0); G.to(glare, {xPercent:-120, duration:.6}); });
+    sec.querySelector(".yp-bpo__frame").addEventListener("pointerleave", function(){ rx(0); ry(0); G.to(glare, {xPercent:-120, duration:.6}); });
   }
   /* пар поднимается снизу */
-  var cv = sec.querySelector(".yp-bp__steam"), c = cv.getContext("2d"), P = [], W = 0, H = 0, vis = false;
+  var cv = sec.querySelector(".yp-bpo__steam"), c = cv.getContext("2d"), P = [], W = 0, H = 0, vis = false;
   function size(){ var d = Math.min(1.5, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W*d; cv.height = H*d; c.setTransform(d,0,0,d,0,0); }
   function puff(init){ return {x:Math.random()*W, y:init ? Math.random()*H : H + 80, r:60 + Math.random()*120, vy:-(.3 + Math.random()*.6), w:Math.random()*6.28, a:.05 + Math.random()*.08}; }
   (function loop(){
@@ -1610,7 +1611,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-ban__price{display:grid;gap:14px;justify-items:start}
 .yp-ban__price strong{font-weight:300;font-size:clamp(30px,2.8vw,44px);line-height:1;letter-spacing:-.03em}
 .yp-ban__price small{display:block;margin-top:6px;font-size:14px;color:var(--yp-muted);letter-spacing:0}
-@media (max-width:900px){.yp-bs{grid-template-columns:1fr}.yp-bs__photo{min-height:400px}.yp-ban__foot{grid-template-columns:1fr}}
+@media (max-width:900px){.yp-bs{grid-template-columns:minmax(0,1fr)}.yp-bs__photo{min-height:400px}.yp-ban__foot{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.yp-ring,.yp-eq i,.yp-bs__said::after,.yp-bs__photo.is-music>img{animation:none}}
 </style>
 <section class="yp yp-ban" id="banya">
@@ -1946,7 +1947,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__btn:hover{transform:scale(1.08)}
 .yp-wk__btn svg{width:18px;height:18px}
 .yp-wk__btn--ghost{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.yp-wk__cap{flex:1;font:500 13px var(--yp-mono);letter-spacing:.04em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.yp-wk__cap{flex:1;font:500 13px/1.45 var(--yp-mono);letter-spacing:.04em;min-width:0}
 .yp-wk__nav{display:flex;gap:10px;margin-top:14px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px;scroll-snap-type:x proximity}
 .yp-wk__nav::-webkit-scrollbar{display:none}
 .yp-wk__nav button{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:0;border-radius:16px;background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1px var(--yp-line);scroll-snap-align:start;transition:background .3s,color .3s,transform .4s var(--yp-ease)}
@@ -1972,7 +1973,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
 .yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
 @media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
-@media (max-width:900px){.yp-wk__head{grid-template-columns:1fr}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:4/5;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
 </style>
 <section class="yp yp-wk" id="walk">
   <div class="yp-wrap">
@@ -2029,7 +2030,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     chum:{kick:"Этно · " + V, title:"Чум и смотровая площадка", src:"img/video/walk-chum", short:"Чум", sub:V + " · 25 с",
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
-          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["25–30 гостей","Панорамное окно","Дровяная печь"]},
+          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
     banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
           cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
@@ -2203,7 +2204,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-rv__frame iframe{z-index:1}
 .yp-rv__q{position:absolute;right:-10px;top:-50px;font:300 clamp(160px,18vw,260px)/1 var(--yp-fd);color:var(--yp-green);opacity:.12;pointer-events:none;z-index:2}
 .yp-rv__link{display:inline-block;margin-top:12px;font-size:13px;color:var(--yp-muted)}
-@media (max-width:980px){.yp-rv__grid{grid-template-columns:1fr}.yp-rv__frame{height:640px}}
+@media (max-width:980px){.yp-rv__grid{grid-template-columns:minmax(0,1fr)}.yp-rv__frame{height:640px}}
 </style>
 <section class="yp yp-rv" id="reviews">
   <div class="yp-wrap yp-rv__grid">
@@ -2292,7 +2293,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-faq__a{overflow:hidden}
 .yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
 .yp-faq__a p{margin:0 0 8px}
-@media (max-width:900px){.yp-faq__in{grid-template-columns:1fr}.yp-faq__a>div{padding-right:0}}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
 </style>
 <section class="yp yp-faq" id="faq">
   <div class="yp-wrap yp-faq__in">
@@ -2380,8 +2381,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
-@media (max-width:900px){.yp-booking__in{grid-template-columns:1fr}.yp-foot__grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.yp-foot__grid{grid-template-columns:1fr}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr)}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
 </style>
 <section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
   <div class="yp-booking__glow" aria-hidden="true"></div><div class="yp-booking__stars" aria-hidden="true"></div>
@@ -2395,6 +2396,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
         <a href="https://t.me/yamalpark" target="_blank" rel="noopener">@yamalpark<span>Telegram</span></a>
         <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">vk.com/yamalpark<span>ВКонтакте</span></a>
+        <a href="#" target="_blank" rel="noopener" data-yp-max hidden>Ямал Парк<span>канал в Max</span></a>
       </div>
     </div>
     <div id="yp-booking-widget" data-yp-reveal>
@@ -2409,6 +2411,10 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
           <h3>Купольный домик, «Волк» или «Медведь»</h3>
           <p>Онлайн-бронирование с мгновенным подтверждением. Выберите даты заезда и выезда.</p>
           <!-- TravelLine: форма поиска (код с текущего yamalpark.ru) -->
+          <script>
+          /* канал в Max: строка в контактах появляется, когда задан YP.MAX_URL (00-head) */
+          (function(){ var a = document.querySelector("[data-yp-max]"); if(a && window.YP && YP.MAX_URL){ a.href = YP.MAX_URL; a.hidden = false; } })();
+          </script>
           <script type="text/javascript">
           (function(w){
             var q = [["setContext", "TL-INT-yamalpark-ru_2024-08-22", window.YP && YP.lang !== "ru" ? "en" : "ru"], ["embed", "search-form", {container:"tl-search-form"}]];
@@ -2448,7 +2454,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         </div>
         <div class="yp-bk__pane" id="yp-bk-event" role="tabpanel" hidden>
           <h3>Свадьба, юбилей, корпоратив</h3>
-          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» на 25–30, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
+          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» до 20 гостей, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
           <ul class="yp-bk__list">
             <li><div><b>Банкетный зал под куполом</b><small>весь день 12:00–23:00</small></div><span>от 50 000 ₽</span></li>
             <li><div><b>Шатёр «Сияние севера»</b><small>панорамное окно, дровяная печь</small></div><span>от 10 000 ₽</span></li>
