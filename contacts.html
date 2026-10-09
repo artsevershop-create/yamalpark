@@ -1887,6 +1887,22 @@ window.YP_MAP = [
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
 @media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+/* ---------- Светлая карточка брони (как форма TravelLine) на ночном фоне ---------- */
+.yp-bk{background:#fff;color:var(--yp-ink);border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 40px 90px -40px rgba(0,0,0,.75)}
+.yp-bk__tabs{background:var(--yp-bg)}
+.yp-bk__tabs button{color:var(--yp-muted)}
+.yp-bk__tabs button[aria-selected="true"]{color:#fff}
+.yp-bk__pill{background:var(--yp-ink)}
+.yp-bk__pane>p,.yp-bk__note,.yp-bk__list small{color:var(--yp-muted)}
+.yp-tl{background:transparent;padding:0}
+.yp-bk__list li{background:var(--yp-bg);border-color:transparent}
+.yp-bk__list li:hover{border-color:color-mix(in srgb,var(--yp-green) 45%,transparent);background:#fff}
+.yp-bk__list span{color:var(--yp-green-d)}
+.yp-bk .yp-btn--aurora{background:var(--yp-green-d);color:#fff}
+.yp-bk .yp-btn--aurora::before{background:var(--yp-ink)}
+.yp-bk .yp-btn--ghost{color:var(--yp-ink);box-shadow:inset 0 0 0 1.5px var(--yp-line)}
+.yp-bk .yp-btn--ghost::before{background:var(--yp-ink)}
+.yp-contacts a[hidden]{display:none}
 @media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr)}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
 </style>
 <section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
@@ -2008,8 +2024,9 @@ window.YP_MAP = [
   });
   /* TravelLine: прячем заглушку, когда форма загрузилась; если за 9 секунд не загрузилась — показываем телефон */
   var tl = box.querySelector("[data-yp-tl]"), tlc = document.getElementById("tl-search-form");
-  var tlTimer = setInterval(function(){ if(tlc && tlc.children.length){ tl.classList.add("is-ready"); clearInterval(tlTimer); } }, 300);
-  setTimeout(function(){ if(!tl.classList.contains("is-ready")){ clearInterval(tlTimer); tl.classList.add("is-fail"); } }, 9000);
+  var tlTimer = setInterval(function(){ if(tlc && tlc.children.length){ tl.classList.remove("is-fail"); tl.classList.add("is-ready"); clearInterval(tlTimer); } }, 300);
+  setTimeout(function(){ if(!tl.classList.contains("is-ready")) tl.classList.add("is-fail"); }, 9000);
+  setTimeout(function(){ clearInterval(tlTimer); }, 120000);
   if(window.gsap && window.ScrollTrigger && !YP.reduced){
     gsap.to(".yp-booking__glow", {xPercent:12, yPercent:-8, ease:"none", scrollTrigger:{trigger:"#booking", start:"top bottom", end:"bottom top", scrub:true}});
     gsap.to(".yp-booking__glow", {opacity:.8, duration:4, ease:"sine.inOut", yoyo:true, repeat:-1});
