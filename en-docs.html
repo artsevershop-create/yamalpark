@@ -663,8 +663,12 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var availCache = {};
   /* TravelLine: цена каждой свободной ночи по типам номеров, {дата: {код: цена}} */
   YP.tlNights = function(days){
-    var k = "tl" + days; if(availCache[k]) return availCache[k];
     var start = YP.tzISO(new Date()), dates = []; for(var i = 0; i < days; i++) dates.push(YP.addDays(start, i));
+    return YP.tlNightsRange(dates);
+  };
+  /* TravelLine по списку дат (например, по месяцу): по 10 дат в запросе */
+  YP.tlNightsRange = function(dates){
+    var k = "tl:" + dates[0] + ":" + dates.length; if(availCache[k]) return availCache[k];
     var batches = []; for(var b = 0; b < dates.length; b += 10) batches.push(dates.slice(b, b + 10));
     return availCache[k] = Promise.all(batches.map(function(list){
       var u = "https://ru-ibe.tlintegration.ru/ApiWebDistribution/BookingForm/hotel_availability?language=ru-ru";

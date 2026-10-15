@@ -673,8 +673,12 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var availCache = {};
   /* TravelLine: цена каждой свободной ночи по типам номеров, {дата: {код: цена}} */
   YP.tlNights = function(days){
-    var k = "tl" + days; if(availCache[k]) return availCache[k];
     var start = YP.tzISO(new Date()), dates = []; for(var i = 0; i < days; i++) dates.push(YP.addDays(start, i));
+    return YP.tlNightsRange(dates);
+  };
+  /* TravelLine по списку дат (например, по месяцу): по 10 дат в запросе */
+  YP.tlNightsRange = function(dates){
+    var k = "tl:" + dates[0] + ":" + dates.length; if(availCache[k]) return availCache[k];
     var batches = []; for(var b = 0; b < dates.length; b += 10) batches.push(dates.slice(b, b + 10));
     return availCache[k] = Promise.all(batches.map(function(list){
       var u = "https://ru-ibe.tlintegration.ru/ApiWebDistribution/BookingForm/hotel_availability?language=ru-ru";
@@ -2450,13 +2454,17 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-free__days.month{grid-template-columns:repeat(7,minmax(0,1fr));margin-top:6px}
 .yp-free__days.month .yp-free__day{min-width:0;min-height:74px}
 .yp-free__days.month .yp-free__blank{min-height:1px}
+/* в календаре месяца день недели и месяц уже в шапке — в клетке только число и цена */
+.yp-free__days.month .wd,.yp-free__days.month .mo{display:none}
+.yp-free__days.month .yp-free__day{min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.yp-free__day small i{font-style:normal}
 .yp-free__day{position:relative;border:0;border-radius:14px;padding:10px 6px 9px;text-align:center;cursor:pointer;font:500 12px/1.2 var(--yp-mono);background:rgba(255,255,255,.08);color:#E6ECEA;transition:transform .2s,background .2s,box-shadow .2s;min-height:74px}
 .yp-free__day b{display:block;font:400 20px/1.1 var(--yp-fd);margin:3px 0 4px;letter-spacing:-.02em}
 .yp-free__day small{display:block;font-size:11px;color:var(--yp-aurora);white-space:nowrap}
 .yp-free__day:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
 .yp-free__day{background:rgba(255,255,255,.09);color:#E6ECEA}
-.yp-free__day.busy{background:rgba(227,30,36,.28);color:#FFE5E5;cursor:not-allowed;transform:none}
-.yp-free__day.busy small{color:#FF9C9C}
+.yp-free__day.busy{background:rgba(227,30,36,.45);box-shadow:inset 0 0 0 1px rgba(255,120,120,.35);color:#FFE5E5;cursor:not-allowed;transform:none}
+.yp-free__day.busy small{color:#FFC2C2;font-weight:600}
 .yp-free__day.sel{background:rgba(255,255,255,.16);color:#fff;box-shadow:0 0 0 2px #fff inset}
 .yp-free__day.sel small{color:#fff}
 .yp-free__day.sk{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12),rgba(255,255,255,.05));background-size:200% 100%;animation:yp-free-sk 1.2s linear infinite;cursor:default}
@@ -2482,7 +2490,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 /* На телефоне календарь остаётся сеткой из семи дней в строке. */
-@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:9px}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -2549,19 +2557,20 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   function selUnit(id){
     cur.u = id; cur.date = null; var u = U[id], g = groups[cur.g], my = ++cur.req;
     uEl.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(b.getAttribute("data-u") === id)); });
-    lenEl.hidden = !u.hourly; tEl.innerHTML = ""; monthEl.hidden = !u.hourly; weekEl.hidden = !u.hourly;
+    lenEl.hidden = !u.hourly; tEl.innerHTML = ""; monthEl.hidden = false; weekEl.hidden = false;
     nameEl.textContent = u.name; infoEl.textContent = "Загружаем расписание…"; sumEl.innerHTML = "—";
     dEl.innerHTML = new Array(Math.min(g.days, 14) + 1).join('<span class="yp-free__day sk"></span>');
-    (u.hourly ? loadMonth(id, cur.year, cur.month, cur.long) : load(id, g.days, false)).then(function(list){
+    loadMonth(id, cur.year, cur.month, cur.long).then(function(list){
       if(my !== cur.req) return;
-      if(u.hourly){
+      {
         var firstOfMonth = new Date(Date.UTC(cur.year, cur.month, 1)), offset = (firstOfMonth.getUTCDay()+6)%7;
         if(cur.year === nowParts[0] && cur.month === nowParts[1]-1) offset += nowParts[2]-1;
         monthLabel.textContent = new Intl.DateTimeFormat(YP.loc || "ru-RU", {month:"long", year:"numeric", timeZone:"UTC"}).format(firstOfMonth);
         monthLabel.textContent = cap(monthLabel.textContent);
         sec.querySelector("[data-yp-prev]").disabled = cur.year === nowParts[0] && cur.month === nowParts[1]-1;
+        sec.querySelector("[data-yp-next]").disabled = (cur.year*12 + cur.month) - (nowParts[0]*12 + nowParts[1]-1) >= MAX_AHEAD;
         dEl.innerHTML = new Array(offset+1).join('<span class="yp-free__blank" aria-hidden="true"></span>') + list.map(function(x){ return dayButton(x, u); }).join("");
-      } else dEl.innerHTML = list.map(function(x){ return dayButton(x, u); }).join("");
+      }
       var first = list.filter(function(x){ return x.free; })[0];
       noteEl.innerHTML = "<i></i>" + (u.tl ? "TravelLine" : "HotBot") + " · " + (YP.dataStamp ? T(YP.dataStamp()) : "");
       if(first){ selDay(first.date); infoEl.textContent = T("Ближайшая свободная дата") + " — " + fmt(first.date, {day:"numeric", month:"long"}) + ". " + T("Свободно " + list.filter(function(x){ return x.free; }).length + " из " + list.length + " дней."); }
@@ -2577,7 +2586,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     cur.date = iso; var u = U[cur.u];
     dEl.querySelectorAll(".sel").forEach(function(b){ b.classList.remove("sel"); });
     var btn = dEl.querySelector('[data-d="' + iso + '"]'); if(btn) btn.classList.add("sel");
-    (u.hourly ? loadMonth(cur.u, cur.year, cur.month, cur.long) : load(cur.u, groups[cur.g].days, false)).then(function(list){
+    loadMonth(cur.u, cur.year, cur.month, cur.long).then(function(list){
       var x = list.filter(function(d){ return d.date === iso; })[0]; if(!x) return;
       var day = cap(fmt(iso, {weekday:"long", day:"numeric", month:"long"}));
       if(u.tl){ sumEl.innerHTML = rub(x.price) + "<small>" + T("за ночь") + "</small>"; tEl.innerHTML = "<p>" + day + ": " + T(cur.u === "dome" ? "заезд с 14:00, выезд до 12:00." : "заезд с 15:00, выезд до 13:00.") + "</p>"; return; }
@@ -2597,11 +2606,12 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     var gi = -1; groups.forEach(function(g, i){ if(g.units.indexOf(id) >= 0) gi = i; }); if(gi < 0) return;
     go(); if(cur.g !== gi) selGroup(gi); selUnit(id);
   });
+  var MAX_AHEAD = 11;   /* листаем на год вперёд */
   function changeMonth(step){ cur.month += step; if(cur.month < 0){ cur.month = 11; cur.year--; } if(cur.month > 11){ cur.month = 0; cur.year++; } selUnit(cur.u); }
   function dayButton(x,u){
     var lab = fmt(x.date, {weekday:"short"}), num = fmt(x.date, {day:"numeric"}), mon = fmt(x.date, {month:"short"});
-    var sub = !x.free ? T("занято") : u.hourly ? T(x.slots.length + " " + plural(x.slots.length)) : rub(x.price);
-    return '<button type="button" class="yp-free__day' + (x.free ? "" : " busy") + '"' + (x.free ? ' data-d="' + x.date + '"' : " disabled") + ' aria-label="' + T(U[cur.u].name) + ", " + fmt(x.date, {day:"numeric", month:"long"}) + ", " + T(x.free ? "свободно" : "занято") + '">' + lab + "<b>" + num + "</b>" + mon + "<small>" + sub + "</small></button>";
+    var sub = !x.free ? T("занято") : u.hourly ? T(x.slots.length + " " + plural(x.slots.length)) : String(rub(x.price)).replace(/s*₽$/, "<i> ₽</i>");
+    return '<button type="button" class="yp-free__day' + (x.free ? "" : " busy") + '"' + (x.free ? ' data-d="' + x.date + '"' : " disabled") + ' aria-label="' + T(U[cur.u].name) + ", " + fmt(x.date, {day:"numeric", month:"long"}) + ", " + T(x.free ? "свободно" : "занято") + '"><span class="wd">' + lab + "</span><b>" + num + "</b><span class=\"mo\">" + mon + "</span><small>" + sub + "</small></button>";
   }
   function loadMonth(id, year, month, long){
     var unit = U[id], key = "month:" + id + ":" + (long ? "4:" : "3:") + year + "-" + (month+1);
@@ -2609,8 +2619,15 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     var first = new Date(Date.UTC(year, month, 1)), last = new Date(Date.UTC(year, month+1, 0));
     var start = [year, String(month+1).padStart(2,"0"), "01"].join("-"), end = YP.isoDate ? YP.isoDate(last) : last.toISOString().slice(0,10);
     if(start < today) start = today;
+    if(unit.tl){
+      var dates = []; for(var dd = start; dd <= end; dd = YP.addDays(dd, 1)) dates.push(dd);
+      var reqTl = dates.length ? YP.tlNightsRange(dates).then(function(m){ return dates.map(function(d){ var p = m[d] && m[d][unit.tl]; return {date:d, free:p != null, price:p != null ? Math.round(p) : null, slots:[]}; }); }) : Promise.resolve([]);
+      data[key] = reqTl.catch(function(e){ delete data[key]; throw e; }); return data[key];
+    }
     var req = fetch("https://api.hotbot.ai/v1/shop/products/" + (long && unit.hb4 ? unit.hb4 : unit.hb) + "/availableSlots?lang=ru&property=yamalpark", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({from:new Date(start+"T00:00:00+05:00").toISOString(), to:new Date(end+"T23:59:59+05:00").toISOString(), quantity:1, resource:null, categoryId:unit.cat})}).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){
-      var by = {}; (j.slots || []).forEach(function(s){ (by[YP.tzISO(new Date(s.from))] = by[YP.tzISO(new Date(s.from))] || []).push({from:new Date(s.from), to:new Date(s.to), price:Math.round((s.price||0)/100)}); });
+      var by = {}; (j.slots || []).forEach(function(s){
+        if(unit.res){ var ids = []; (s.resourceGroups || []).forEach(function(g){ g.forEach(function(x){ ids.push(x.id); }); }); if(ids.indexOf(unit.res) < 0) return; }
+        (by[YP.tzISO(new Date(s.from))] = by[YP.tzISO(new Date(s.from))] || []).push({from:new Date(s.from), to:new Date(s.to), price:Math.round((s.price||0)/100)}); });
       var out = [], daysInMonth = last.getUTCDate();
       for(var d=1; d<=daysInMonth; d++){ var iso = [year,String(month+1).padStart(2,"0"),String(d).padStart(2,"0")].join("-"); if(iso < today) continue; var slots = by[iso] || []; out.push({date:iso, free:slots.length>0, slots:slots, price:slots.length ? Math.min.apply(null,slots.map(function(s){return s.price;})) : null}); }
       return out;
