@@ -721,7 +721,12 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   };
   YP.bookUnit = function(id, iso){
     var u = YP.UNITS[id]; if(!u) return;
-    if(u.tl){ document.dispatchEvent(new CustomEvent("yp:stay-date", {detail:{unit:id, date:iso}})); YP.openBooking({type:"stay"}); return; }
+    /* проживание: страница открывается с датой в адресе — форма TravelLine заполняется сама, подбор номеров запускается автоматически (10-booking-footer) */
+    if(u.tl){
+      if(!iso){ YP.openBooking({type:"stay"}); return; }
+      var url = new URL(location.href); url.searchParams.set("date", iso); url.searchParams.set("nights", "1"); url.searchParams.set("adults", "2"); url.searchParams.set("yp_book", "1"); url.hash = "booking";
+      location.href = url.toString(); return;
+    }
     window.open(YP.HB_SHOP + u.cat + "/product/" + (u.hb), "_blank", "noopener");
   };
   YP.isoDate = function(d){ return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); };
@@ -2622,6 +2627,19 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     var o = e.detail || {}; show(o.type === "event" ? "event" : (YP.isHourly && YP.isHourly(o.type)) ? "hour" : "stay");
     if(window.gsap && !YP.reduced) gsap.fromTo(box.firstElementChild, {scale:.97}, {scale:1, duration:.8, ease:"elastic.out(1,.5)", delay:.9});
   });
+  /* Бронь в один клик: пришли из календаря свободных дат (?date=…&yp_book=1) — открываем вкладку проживания и сами нажимаем «Выбрать» в форме TravelLine */
+  (function(){
+    var qs = new URLSearchParams(location.search); if(!qs.get("yp_book") || !qs.get("date")) return;
+    var clean = new URL(location.href); clean.searchParams.delete("yp_book"); history.replaceState(null, "", clean.toString());
+    show("stay"); setTimeout(function(){ YP.scrollTo ? YP.scrollTo("#booking") : document.getElementById("booking").scrollIntoView(); }, 600);
+    var t0 = Date.now(), iv = setInterval(function(){
+      var c = document.getElementById("tl-search-form"), docs = [], btn = null;
+      (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
+      docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      else if(Date.now() - t0 > 25000) clearInterval(iv);
+    }, 300);
+  })();
   /* TravelLine: прячем заглушку, когда форма загрузилась; если за 9 секунд не загрузилась — показываем телефон */
   var tl = box.querySelector("[data-yp-tl]"), tlc = document.getElementById("tl-search-form");
   var tlTimer = setInterval(function(){ if(tlc && tlc.children.length){ tl.classList.remove("is-fail"); tl.classList.add("is-ready"); clearInterval(tlTimer); } }, 300);
