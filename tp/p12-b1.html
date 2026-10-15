@@ -1,0 +1,562 @@
+<!-- Новый год · 01 · Первый экран: купол зимой, снегопад (YP.pageHero) -->
+<section class="yp yp-dark yp-ph" id="top" data-yp-theme="dark" aria-label="Новый год в Ямал Парке" style="--c:#9AA8FF;--hl:linear-gradient(90deg,#5CFFC0,#9AA8FF 60%,#F2D29B)">
+  <div class="yp-ph__pin">
+    <img class="yp-ph__bg" src="https://artsevershop-create.github.io/yamalpark/img/p/dome-aurora-2.webp" alt="Купольный домик зимой под северным сиянием" fetchpriority="high" style="object-position:50% 50%">
+    <div class="yp-ph__shade"></div>
+    <canvas class="yp-ph__fx" aria-hidden="true"></canvas>
+    <div class="yp-wrap yp-ph__in">
+      <div class="yp-ph__crumbs"><a href="/">Ямал Парк</a><span>/</span><i></i><span>Новый год</span></div>
+      <h1 class="yp-ph__title"><span>Новый год</span><span class="hl">под сиянием</span></h1>
+      <div class="yp-ph__row">
+        <div>
+          <p class="yp-ph__lead" data-yp-in>Купол в заснеженной тайге, баня после мороза и праздник для компании — в 16 минутах от Салехарда. Свободные даты — прямо из системы бронирования.</p>
+          <div class="yp-ph__chips" data-yp-in><span>Купол — 13 000 ₽ за ночь</span><span>Корпоративы в декабре</span><span>Бани до 23:00</span></div>
+        </div>
+        <div class="yp-ph__cta" data-yp-in><a class="yp-btn yp-btn--aurora" href="#free">Свободные даты</a><a class="yp-btn yp-btn--ghost" href="#ny-offers">Что предложить</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>YP.pageHero(document.getElementById("top"), {fx:"snow", dark:.3});</script>
+
+<!-- Новый год · 02 · Что предложить: проживание, корпоратив, баня, сертификат. Цены — праздничные тарифы TravelLine/HotBot. -->
+<style>
+.yp-ny{padding-block:clamp(56px,8vw,120px);background:var(--yp-paper)}
+.yp-ny__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:clamp(30px,4vw,52px)}
+.yp-nyc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);border-radius:28px;overflow:hidden;background:var(--yp-bg);box-shadow:0 1px 0 var(--yp-line);min-height:300px}
+.yp-nyc__ph{position:relative;overflow:hidden}
+.yp-nyc__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--yp-ease)}
+.yp-nyc:hover .yp-nyc__ph img{transform:scale(1.05)}
+.yp-nyc__b{padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;gap:10px}
+.yp-nyc__b small{font:500 12px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--c,var(--yp-blue))}
+.yp-nyc__b h3{margin:0;font-weight:300;font-size:clamp(24px,2.2vw,30px);line-height:1.08;letter-spacing:-.03em}
+.yp-nyc__b p{margin:0;font-size:15px;color:var(--yp-muted)}
+.yp-nyc__b ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:14.5px}
+.yp-nyc__b li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--yp-line);padding-bottom:6px}
+.yp-nyc__b li b{font:500 13.5px var(--yp-mono);white-space:nowrap}
+.yp-nyc__b .yp-btn{margin-top:auto;align-self:flex-start}
+@media (max-width:1100px){.yp-ny__grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){.yp-nyc{grid-template-columns:minmax(0,1fr)}.yp-nyc__ph{height:220px}}
+</style>
+<section class="yp yp-ny" id="ny-offers">
+  <div class="yp-wrap">
+    <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Декабрь — январь</span>
+    <h2 class="yp-h2" data-yp-split>Как встретить <b>Новый год</b></h2>
+    <div class="yp-ny__grid" data-yp-ny>
+      <article class="yp-nyc" style="--c:var(--yp-blue)"><div class="yp-nyc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/p/dome-terrace-winter.webp" alt="Купольный домик зимой" loading="lazy"></div><div class="yp-nyc__b"><small>Проживание</small><h3>Ночь в куполе или доме</h3><p>Новогодние ночи разбирают первыми — свободные даты смотрите в календаре ниже.</p><ul><li><span>Купольный домик</span><b>13 000 ₽</b></li><li><span>Дома «Волк» и «Медведь»</span><b>15 000 ₽</b></li></ul><a class="yp-btn yp-btn--green" href="#free">Свободные даты</a></div></article>
+      <article class="yp-nyc" style="--c:#C9922E"><div class="yp-nyc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/new/banquet-dome.webp" alt="Банкетный зал под куполом" loading="lazy"></div><div class="yp-nyc__b"><small>Корпоратив</small><h3>Праздник для компании</h3><p>Банкетный зал под куполом, шатёр «Сияние севера», гриль- и гостевые дома, чум — от 15 до 150 гостей.</p><ul><li><span>Банкетный зал</span><b>от 50 000 ₽</b></li><li><span>Шатёр «Сияние севера»</span><b>от 10 000 ₽</b></li><li><span>Гриль-дома, чум</span><b>от 6 000 ₽</b></li></ul><a class="yp-btn yp-btn--ghost" href="/events">Все площадки</a></div></article>
+      <article class="yp-nyc" style="--c:var(--yp-red)"><div class="yp-nyc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/p/brusnika-parnaya.webp" alt="Парная бани «Брусника»" loading="lazy"></div><div class="yp-nyc__b"><small>Умные бани</small><h3>Баня после мороза</h3><p>Парная до 100 °C, хаммам и «Алиса, включи вьюгу». В праздники — по тарифу выходных.</p><ul><li><span>«Морошка», «Брусника»</span><b>5 000 ₽/ч</b></li><li><span>«Черника»</span><b>4 000 ₽/ч</b></li></ul><a class="yp-btn yp-btn--ghost" href="/bani">О банях</a></div></article>
+      <article class="yp-nyc" style="--c:#C9922E"><div class="yp-nyc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/p/dome-aurora-v.webp" alt="Сияние над куполом" loading="lazy"></div><div class="yp-nyc__b"><small>Подарок</small><h3>Сертификат под ёлку</h3><p>Ночь в куполе, баня, вечер в чуме или любая сумма — получатель сам выберет дату.</p><ul><li><span>Ночь под сиянием</span><b>от 9 000 ₽</b></li><li><span>Купол + баня</span><b>от 16 500 ₽</b></li></ul><a class="yp-btn yp-btn--ghost" href="/gift">Сертификаты</a></div></article>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var g = document.querySelector("[data-yp-ny]"); if(!g || !window.gsap || !window.ScrollTrigger || (window.YP && YP.reduced)) return;
+  gsap.from(g.children, {y:50, opacity:0, duration:1, ease:"power3.out", stagger:.08, scrollTrigger:{trigger:g, start:"top 82%"}});
+})();
+</script>
+
+<!-- 18 · Свободные даты и время по каждому дому — живые данные TravelLine (глэмпинг) и HotBot (бани, гриль- и гостевые дома, чум, шатёр, зал).
+     Набор домов зависит от страницы: главная — все, /glamping — дома, /bani — бани, /grill — гриль- и гостевые дома, /etno — чум, /events — площадки. -->
+<style>
+.yp-free{padding-block:clamp(56px,8vw,120px)}
+.yp-free__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.yp-free__box{margin-top:clamp(26px,3.5vw,44px);border-radius:30px;background:var(--yp-ink);color:#fff;padding:clamp(16px,2.2vw,30px);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(16px,2.2vw,30px);position:relative;overflow:hidden}
+.yp-free__box::before{content:"";position:absolute;inset:-40% -20% auto auto;width:60%;height:120%;background:radial-gradient(closest-side,rgba(92,255,192,.12),transparent);pointer-events:none}
+.yp-free__groups{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.yp-free__groups button,.yp-free__units button,.yp-free__len button{border:0;cursor:pointer;font:500 14px/1 var(--yp-f);padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.08);color:#DCE3E0;transition:background .25s,color .25s,transform .2s}
+.yp-free__groups button[aria-selected="true"]{background:#fff;color:var(--yp-ink)}
+.yp-free__units{display:flex;gap:6px;flex-wrap:wrap}
+.yp-free__units button{font-size:13.5px;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.yp-free__units button i{width:7px;height:7px;border-radius:50%;background:#5D6461;flex:0 0 auto;transition:background .3s}
+.yp-free__units button i.ok{background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
+.yp-free__units button[aria-selected="true"]{background:var(--yp-green-d);color:#fff}
+.yp-free__groups button:hover,.yp-free__units button:hover{transform:translateY(-1px)}
+.yp-free__days{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
+.yp-free__month{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;color:#E6ECEA;font-size:15px}
+.yp-free__month button{width:36px;height:36px;border:1px solid rgba(255,255,255,.14);border-radius:50%;color:#E6ECEA;background:rgba(255,255,255,.06);cursor:pointer;font-size:20px;line-height:1;transition:background .2s,opacity .2s}
+.yp-free__month button:hover:not(:disabled){background:rgba(255,255,255,.16)}
+.yp-free__month button:disabled{opacity:.3;cursor:default}
+.yp-free__week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:12px;color:#98A19D;text-align:center;font:500 11px/1 var(--yp-mono)}
+.yp-free__week span{padding:4px 0}
+.yp-free__days.month{grid-template-columns:repeat(7,minmax(0,1fr));margin-top:6px}
+.yp-free__days.month .yp-free__day{min-width:0;min-height:74px}
+.yp-free__days.month .yp-free__blank{min-height:1px}
+/* в календаре месяца день недели и месяц уже в шапке — в клетке только число и цена */
+.yp-free__days.month .wd,.yp-free__days.month .mo{display:none}
+.yp-free__days.month .yp-free__day{min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.yp-free__day small i{font-style:normal}
+.yp-free__day{position:relative;border:0;border-radius:14px;padding:10px 6px 9px;text-align:center;cursor:pointer;font:500 12px/1.2 var(--yp-mono);background:rgba(255,255,255,.08);color:#E6ECEA;transition:transform .2s,background .2s,box-shadow .2s;min-height:74px}
+.yp-free__day b{display:block;font:400 20px/1.1 var(--yp-fd);margin:3px 0 4px;letter-spacing:-.02em}
+.yp-free__day small{display:block;font-size:11px;color:var(--yp-aurora);white-space:nowrap}
+.yp-free__day:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
+.yp-free__day{background:rgba(255,255,255,.09);color:#E6ECEA}
+.yp-free__day.busy{background:rgba(227,30,36,.45);box-shadow:inset 0 0 0 1px rgba(255,120,120,.35);color:#FFE5E5;cursor:not-allowed;transform:none}
+.yp-free__day.busy small{color:#FFC2C2;font-weight:600}
+.yp-free__day.sel{background:rgba(255,255,255,.16);color:#fff;box-shadow:0 0 0 2px #fff inset}
+.yp-free__day.sel small{color:#fff}
+.yp-free__day.sk{background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12),rgba(255,255,255,.05));background-size:200% 100%;animation:yp-free-sk 1.2s linear infinite;cursor:default}
+@keyframes yp-free-sk{to{background-position:-200% 0}}
+.yp-free__times{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;min-height:20px}
+.yp-free__times button{border:0;cursor:pointer;border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.1);color:#E6ECEA;font:500 13px/1.2 var(--yp-mono);transition:background .2s,transform .2s}
+.yp-free__times button:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
+.yp-free__times button small{display:block;font-size:11px;color:#AAB2AF;margin-top:2px}
+.yp-free__times p{margin:0;color:#9AA3A0;font-size:14px}
+.yp-free__len{display:flex;gap:6px;margin-top:16px}
+.yp-free [hidden]{display:none!important}
+.yp-free__len button{font-size:12.5px;padding:8px 13px}
+.yp-free__len button[aria-pressed="true"]{background:rgba(92,255,192,.2);color:#fff}
+.yp-free__side{border-radius:22px;background:rgba(255,255,255,.06);padding:22px;display:flex;flex-direction:column;gap:12px;position:relative}
+.yp-free__side h3{margin:0;font-weight:300;font-size:22px;line-height:1.2}
+.yp-free__side p{margin:0;color:#C2C9C6;font-size:14.5px}
+.yp-free__sum{font:300 40px/1 var(--yp-fd);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.yp-free__sum small{font:500 13px var(--yp-f);letter-spacing:0;color:#9AA3A0;margin-left:6px}
+.yp-free__note{margin-top:auto;font-size:12.5px!important;color:#8C9592!important}
+.yp-free__note i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--yp-aurora);margin-right:6px;animation:yp-free-pulse 1.6s ease-in-out infinite}
+@keyframes yp-free-pulse{50%{opacity:.25}}
+.yp-free__err{grid-column:1/-1;padding:14px 16px;border-radius:14px;background:rgba(255,178,122,.12);color:#FFD9BD;font-size:14px}
+@media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
+@media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
+/* На телефоне календарь остаётся сеткой из семи дней в строке. */
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+</style>
+<section class="yp yp-free" id="free">
+  <div class="yp-wrap">
+    <div class="yp-free__top">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Онлайн-расписание</span><h2 class="yp-h2" data-yp-split>Свободные даты <b>и время</b></h2></div>
+      <p class="yp-lead" style="max-width:44ch">Расписание берём прямо из систем бронирования. Выберите дом, день и время — откроем запись.</p>
+    </div>
+    <div class="yp-free__box" data-yp-reveal>
+      <div>
+        <div class="yp-free__groups" role="tablist" aria-label="Что бронируем" data-yp-fgroups></div>
+        <div class="yp-free__units" role="tablist" aria-label="Дом" data-yp-funits></div>
+        <div class="yp-free__len" data-yp-flen hidden><button type="button" aria-pressed="true" data-len="3">3 часа</button><button type="button" aria-pressed="false" data-len="4">4 часа</button></div>
+        <div class="yp-free__month" data-yp-fmonth hidden><button type="button" data-yp-prev aria-label="Предыдущий месяц">‹</button><strong data-yp-month-label></strong><button type="button" data-yp-next aria-label="Следующий месяц">›</button></div>
+        <div class="yp-free__week" data-yp-fweek hidden aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+        <div class="yp-free__days month" data-yp-fdays aria-live="polite"></div>
+        <div class="yp-free__times" data-yp-ftimes></div>
+      </div>
+      <aside class="yp-free__side" aria-live="polite">
+        <h3 data-yp-fname>—</h3>
+        <p data-yp-finfo>Загружаем расписание…</p>
+        <div class="yp-free__sum" data-yp-fsum>—</div>
+        <button class="yp-btn yp-btn--green" type="button" data-yp-fbook>Забронировать</button>
+        <p class="yp-free__note" data-yp-fnote><i></i>Данные систем бронирования TravelLine и HotBot</p>
+      </aside>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
+  var YP = window.YP || {}, U = YP.UNITS || {};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
+  var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
+  var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
+  var gEl = sec.querySelector("[data-yp-fgroups]"), uEl = sec.querySelector("[data-yp-funits]"), dEl = sec.querySelector("[data-yp-fdays]"), tEl = sec.querySelector("[data-yp-ftimes]"), lenEl = sec.querySelector("[data-yp-flen]"), monthEl = sec.querySelector("[data-yp-fmonth]"), monthLabel = sec.querySelector("[data-yp-month-label]"), weekEl = sec.querySelector("[data-yp-fweek]");
+  var nameEl = sec.querySelector("[data-yp-fname]"), infoEl = sec.querySelector("[data-yp-finfo]"), sumEl = sec.querySelector("[data-yp-fsum]"), bookBtn = sec.querySelector("[data-yp-fbook]"), noteEl = sec.querySelector("[data-yp-fnote]");
+  var today = YP.tzISO ? YP.tzISO(new Date()) : new Date().toISOString().slice(0,10), nowParts = today.split("-").map(Number);
+  var cur = {g:0, u:null, long:false, date:null, req:0, year:nowParts[0], month:nowParts[1]-1};
+  if(/new-year/.test(p) && cur.month < 11) cur.month = 11;   /* на новогодней странице календарь сразу на декабре */
+  var T = function(x){ return YP.t ? YP.t(x) : x; }, cap = function(x){ return x.charAt(0).toUpperCase() + x.slice(1); };
+  var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : n + " ₽"; };
+  var fmt = function(iso, o){ return new Intl.DateTimeFormat(YP.loc || "ru-RU", Object.assign({timeZone:"UTC"}, o)).format(new Date(iso + "T12:00:00Z")); };
+  var wd = function(iso){ var w = new Date(iso + "T12:00:00Z").getUTCDay(); return w === 5 || w === 6; };
+  if(groups.length < 2) gEl.hidden = true;
+  gEl.innerHTML = groups.map(function(g, i){ return '<button type="button" role="tab" aria-selected="' + (i === 0) + '" data-g="' + i + '">' + g.name + "</button>"; }).join("");
+  gEl.addEventListener("click", function(e){ var b = e.target.closest("[data-g]"); if(b) selGroup(+b.getAttribute("data-g")); });
+  uEl.addEventListener("click", function(e){ var b = e.target.closest("[data-u]"); if(b) selUnit(b.getAttribute("data-u")); });
+  lenEl.addEventListener("click", function(e){ var b = e.target.closest("[data-len]"); if(!b) return; cur.long = b.getAttribute("data-len") === "4";
+    lenEl.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); }); selUnit(cur.u); });
+  dEl.addEventListener("click", function(e){ var b = e.target.closest("[data-d]"); if(b && !b.disabled) selDay(b.getAttribute("data-d")); });
+  sec.querySelector("[data-yp-prev]").addEventListener("click", function(){ changeMonth(-1); });
+  sec.querySelector("[data-yp-next]").addEventListener("click", function(){ changeMonth(1); });
+  tEl.addEventListener("click", function(e){ var b = e.target.closest("[data-t]"); if(b) YP.bookUnit(cur.u, cur.date); });
+  bookBtn.addEventListener("click", function(){ YP.bookUnit(cur.u, cur.date); });
+  var data = {};
+  function selGroup(i){
+    cur.g = i; gEl.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(+b.getAttribute("data-g") === i)); });
+    var g = groups[i];
+    uEl.innerHTML = g.units.map(function(id){ return '<button type="button" role="tab" aria-selected="false" data-u="' + id + '"><i></i>' + U[id].name + "</button>"; }).join("");
+    g.units.forEach(function(id){ load(id, g.days, false).then(function(list){ var n = list.filter(function(x){ return x.free; }).length; var dot = uEl.querySelector('[data-u="' + id + '"] i'); if(dot) dot.classList.toggle("ok", n > 0); }, function(){}); });
+    selUnit(g.units[0]);
+  }
+  function load(id, days, long){ var k = id + (long ? "4" : ""); return data[k] || (data[k] = YP.freeDays(id, days, long).catch(function(e){ delete data[k]; throw e; })); }
+  function selUnit(id){
+    cur.u = id; cur.date = null; var u = U[id], g = groups[cur.g], my = ++cur.req;
+    uEl.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(b.getAttribute("data-u") === id)); });
+    lenEl.hidden = !u.hourly; tEl.innerHTML = ""; monthEl.hidden = false; weekEl.hidden = false;
+    nameEl.textContent = u.name; infoEl.textContent = "Загружаем расписание…"; sumEl.innerHTML = "—";
+    dEl.innerHTML = new Array(Math.min(g.days, 14) + 1).join('<span class="yp-free__day sk"></span>');
+    loadMonth(id, cur.year, cur.month, cur.long).then(function(list){
+      if(my !== cur.req) return;
+      {
+        var firstOfMonth = new Date(Date.UTC(cur.year, cur.month, 1)), offset = (firstOfMonth.getUTCDay()+6)%7;
+        if(cur.year === nowParts[0] && cur.month === nowParts[1]-1) offset += nowParts[2]-1;
+        monthLabel.textContent = new Intl.DateTimeFormat(YP.loc || "ru-RU", {month:"long", year:"numeric", timeZone:"UTC"}).format(firstOfMonth);
+        monthLabel.textContent = cap(monthLabel.textContent);
+        sec.querySelector("[data-yp-prev]").disabled = cur.year === nowParts[0] && cur.month === nowParts[1]-1;
+        sec.querySelector("[data-yp-next]").disabled = (cur.year*12 + cur.month) - (nowParts[0]*12 + nowParts[1]-1) >= MAX_AHEAD;
+        dEl.innerHTML = new Array(offset+1).join('<span class="yp-free__blank" aria-hidden="true"></span>') + list.map(function(x){ return dayButton(x, u); }).join("");
+      }
+      var first = list.filter(function(x){ return x.free; })[0];
+      noteEl.innerHTML = "<i></i>" + (u.tl ? "TravelLine" : "HotBot") + " · " + (YP.dataStamp ? T(YP.dataStamp()) : "");
+      if(first){ selDay(first.date); infoEl.textContent = T("Ближайшая свободная дата") + " — " + fmt(first.date, {day:"numeric", month:"long"}) + ". " + T("Свободно " + list.filter(function(x){ return x.free; }).length + " из " + list.length + " дней."); }
+      else { infoEl.textContent = T("В этом месяце свободных дат нет. Выберите другой месяц или позвоните администратору."); sumEl.innerHTML = "—"; }
+    }, function(){
+      if(my !== cur.req) return;
+      dEl.innerHTML = '<div class="yp-free__err">Не удалось получить расписание. Откройте онлайн-запись или позвоните администратору: ' + (YP.phone || "") + "</div>";
+      infoEl.textContent = "Расписание временно недоступно."; sumEl.innerHTML = "—";
+    });
+  }
+  function plural(n){ var a = n % 10, b = n % 100; return a === 1 && b !== 11 ? "сеанс" : a >= 2 && a <= 4 && (b < 12 || b > 14) ? "сеанса" : "сеансов"; }
+  function selDay(iso){
+    cur.date = iso; var u = U[cur.u];
+    dEl.querySelectorAll(".sel").forEach(function(b){ b.classList.remove("sel"); });
+    var btn = dEl.querySelector('[data-d="' + iso + '"]'); if(btn) btn.classList.add("sel");
+    loadMonth(cur.u, cur.year, cur.month, cur.long).then(function(list){
+      var x = list.filter(function(d){ return d.date === iso; })[0]; if(!x) return;
+      var day = cap(fmt(iso, {weekday:"long", day:"numeric", month:"long"}));
+      if(u.tl){ sumEl.innerHTML = rub(x.price) + "<small>" + T("за ночь") + "</small>"; tEl.innerHTML = "<p>" + day + ": " + T(cur.u === "dome" ? "заезд с 14:00, выезд до 12:00." : "заезд с 15:00, выезд до 13:00.") + "</p>"; return; }
+      var t0 = YP.tzTime(x.slots[0].from), t1 = YP.tzTime(x.slots[x.slots.length - 1].to);
+      if(u.hourly){
+        sumEl.innerHTML = rub(x.price) + "<small>" + T("за " + (cur.long ? 4 : 3) + " часа") + "</small>";
+        tEl.innerHTML = x.slots.map(function(s){ return '<button type="button" data-t="' + s.from.toISOString() + '">' + YP.tzTime(s.from) + "–" + YP.tzTime(s.to) + "<small>" + rub(s.price) + "</small></button>"; }).join("");
+      } else {
+        sumEl.innerHTML = rub(x.price) + "<small>" + T("за день") + "</small>";
+        tEl.innerHTML = "<p>" + day + ": " + T(x.slots.length > 1 ? "свободно с " + t0 + " до " + t1 + "." : "свободно " + t0 + "–" + t1 + ".") + "</p>";
+      }
+    });
+  }
+  /* кнопки «Даты и цены» у карточек домов (data-yp-pick="g1" …) открывают расписание этого дома */
+  document.addEventListener("click", function(e){
+    var b = e.target.closest && e.target.closest("[data-yp-pick]"); if(!b) return; var id = b.getAttribute("data-yp-pick");
+    var gi = -1; groups.forEach(function(g, i){ if(g.units.indexOf(id) >= 0) gi = i; }); if(gi < 0) return;
+    go(); if(cur.g !== gi) selGroup(gi); selUnit(id);
+  });
+  var MAX_AHEAD = 11;   /* листаем на год вперёд */
+  function changeMonth(step){ cur.month += step; if(cur.month < 0){ cur.month = 11; cur.year--; } if(cur.month > 11){ cur.month = 0; cur.year++; } selUnit(cur.u); }
+  function dayButton(x,u){
+    var lab = fmt(x.date, {weekday:"short"}), num = fmt(x.date, {day:"numeric"}), mon = fmt(x.date, {month:"short"});
+    var sub = !x.free ? T("занято") : u.hourly ? T(x.slots.length + " " + plural(x.slots.length)) : String(rub(x.price)).replace(/s*₽$/, "<i> ₽</i>");
+    return '<button type="button" class="yp-free__day' + (x.free ? "" : " busy") + '"' + (x.free ? ' data-d="' + x.date + '"' : " disabled") + ' aria-label="' + T(U[cur.u].name) + ", " + fmt(x.date, {day:"numeric", month:"long"}) + ", " + T(x.free ? "свободно" : "занято") + '"><span class="wd">' + lab + "</span><b>" + num + "</b><span class=\"mo\">" + mon + "</span><small>" + sub + "</small></button>";
+  }
+  function loadMonth(id, year, month, long){
+    var unit = U[id], key = "month:" + id + ":" + (long ? "4:" : "3:") + year + "-" + (month+1);
+    if(data[key]) return data[key];
+    var first = new Date(Date.UTC(year, month, 1)), last = new Date(Date.UTC(year, month+1, 0));
+    var start = [year, String(month+1).padStart(2,"0"), "01"].join("-"), end = YP.isoDate ? YP.isoDate(last) : last.toISOString().slice(0,10);
+    if(start < today) start = today;
+    if(unit.tl){
+      var dates = []; for(var dd = start; dd <= end; dd = YP.addDays(dd, 1)) dates.push(dd);
+      var reqTl = dates.length ? YP.tlNightsRange(dates).then(function(m){ return dates.map(function(d){ var p = m[d] && m[d][unit.tl]; return {date:d, free:p != null, price:p != null ? Math.round(p) : null, slots:[]}; }); }) : Promise.resolve([]);
+      data[key] = reqTl.catch(function(e){ delete data[key]; throw e; }); return data[key];
+    }
+    var req = fetch("https://api.hotbot.ai/v1/shop/products/" + (long && unit.hb4 ? unit.hb4 : unit.hb) + "/availableSlots?lang=ru&property=yamalpark", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({from:new Date(start+"T00:00:00+05:00").toISOString(), to:new Date(end+"T23:59:59+05:00").toISOString(), quantity:1, resource:null, categoryId:unit.cat})}).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){
+      var by = {}; (j.slots || []).forEach(function(s){
+        if(unit.res){ var ids = []; (s.resourceGroups || []).forEach(function(g){ g.forEach(function(x){ ids.push(x.id); }); }); if(ids.indexOf(unit.res) < 0) return; }
+        (by[YP.tzISO(new Date(s.from))] = by[YP.tzISO(new Date(s.from))] || []).push({from:new Date(s.from), to:new Date(s.to), price:Math.round((s.price||0)/100)}); });
+      var out = [], daysInMonth = last.getUTCDate();
+      for(var d=1; d<=daysInMonth; d++){ var iso = [year,String(month+1).padStart(2,"0"),String(d).padStart(2,"0")].join("-"); if(iso < today) continue; var slots = by[iso] || []; out.push({date:iso, free:slots.length>0, slots:slots, price:slots.length ? Math.min.apply(null,slots.map(function(s){return s.price;})) : null}); }
+      return out;
+    });
+    data[key] = req.catch(function(e){ delete data[key]; throw e; }); return data[key];
+  }
+  /* грузим, когда блок рядом с экраном */
+  var started = false, go = function(){ if(started) return; started = true; selGroup(0); };
+  if(window.IntersectionObserver) new IntersectionObserver(function(e, o){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, {rootMargin:"600px"}).observe(sec); else go();
+})();
+</script>
+
+<!-- 20 · «Соберите свой отдых»: калькулятор пакета (проживание + баня + вечер в чуме или гриль-доме), итог по тарифам TravelLine/HotBot.
+     Подписи — в разметке (переводятся словарём), строки итога собираются из этих подписей; цены — в data-атрибутах. -->
+<style>
+.yp-pkg{padding-block:clamp(56px,8vw,120px)}
+.yp-pkg__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.yp-pkg__box{margin-top:clamp(26px,3.5vw,44px);display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(16px,2.2vw,30px);align-items:start}
+.yp-pkg__steps{display:grid;gap:14px}
+.yp-pkg__step{border-radius:26px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:clamp(18px,2vw,26px)}
+.yp-pkg__step h3{margin:0 0 14px;display:flex;align-items:center;gap:12px;font:500 19px/1.2 var(--yp-f)}
+.yp-pkg__step h3 i{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--yp-mono);color:#fff;background:var(--c,var(--yp-ink));font-style:normal}
+.yp-pkg__opts{display:flex;flex-wrap:wrap;gap:8px}
+.yp-pkg__opts button{border:0;cursor:pointer;border-radius:16px;padding:12px 16px;background:var(--yp-bg);color:var(--yp-ink);font:500 15px/1.2 var(--yp-f);text-align:left;transition:background .25s,color .25s,transform .2s,box-shadow .25s}
+.yp-pkg__opts button small{display:block;margin-top:4px;font:500 12px var(--yp-mono);color:var(--yp-muted)}
+.yp-pkg__opts button:hover{transform:translateY(-1px)}
+.yp-pkg__opts button[aria-pressed="true"]{background:var(--yp-ink);color:#fff}
+.yp-pkg__opts button[aria-pressed="true"] small{color:#AFC0BA}
+.yp-pkg__sub{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.yp-pkg__sub span{font:500 12px var(--yp-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--yp-muted);margin-right:4px}
+.yp-pkg__sub button{border:0;cursor:pointer;border-radius:999px;padding:9px 14px;background:var(--yp-bg);color:var(--yp-ink);font:500 13.5px var(--yp-f);transition:background .2s,color .2s}
+.yp-pkg__sub button[aria-pressed="true"]{background:var(--yp-green-d);color:#fff}
+.yp-pkg__sub[hidden]{display:none}
+.yp-pkg__when{display:flex;gap:8px;flex-wrap:wrap}
+.yp-pkg__sum{position:sticky;top:96px;border-radius:28px;background:var(--yp-ink);color:#fff;padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:14px;overflow:hidden;isolation:isolate}
+.yp-pkg__sum::before{content:"";position:absolute;inset:-30% -30% auto auto;width:80%;height:80%;background:radial-gradient(closest-side,rgba(92,255,192,.16),transparent);z-index:-1}
+.yp-pkg__sum h3{margin:0;font-weight:300;font-size:24px;letter-spacing:-.02em}
+.yp-pkg__lines{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.yp-pkg__lines li{display:flex;justify-content:space-between;gap:14px;font-size:14.5px;color:#D6DEDB}
+.yp-pkg__lines li b{font:500 14px var(--yp-mono);color:#fff;white-space:nowrap}
+.yp-pkg__lines li.empty{color:#8C9592}
+.yp-pkg__total{border-top:1px solid rgba(255,255,255,.12);padding-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.yp-pkg__total span{font-size:14px;color:#AFC0BA}
+.yp-pkg__total b{font:300 40px/1 var(--yp-fd);letter-spacing:-.04em}
+.yp-pkg__note{margin:0;font-size:12.5px;color:#8C9592}
+.yp-pkg__btns{display:grid;gap:8px}
+.yp-pkg__btns .yp-btn{width:100%;justify-content:center}
+.yp-pkg__btns .yp-btn--ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.yp-pkg__btns [hidden]{display:none}
+@media (max-width:1000px){.yp-pkg__box{grid-template-columns:minmax(0,1fr)}.yp-pkg__sum{position:relative;top:0}}
+@media (max-width:600px){.yp-pkg__opts button{flex:1 1 calc(50% - 8px);padding:11px 12px;font-size:14px}}
+</style>
+<section class="yp yp-pkg" id="package">
+  <div class="yp-wrap">
+    <div class="yp-pkg__top">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Пакет на выходные</span><h2 class="yp-h2" data-yp-split>Соберите <b>свой отдых</b></h2></div>
+      <p class="yp-lead" style="max-width:44ch">Домик, баня и вечер в чуме или гриль-доме — посчитаем сразу по тарифам систем бронирования.</p>
+    </div>
+    <div class="yp-pkg__box" data-yp-pkg>
+      <div class="yp-pkg__steps">
+        <div class="yp-pkg__step" style="--c:var(--yp-ink)">
+          <h3><i>1</i>Когда приезжаете</h3>
+          <div class="yp-pkg__opts yp-pkg__when" data-g="when">
+            <button type="button" aria-pressed="true" data-v="wd">Будни<small>вс–чт</small></button>
+            <button type="button" aria-pressed="false" data-v="we">Выходные<small>пт–сб и праздники</small></button>
+          </div>
+        </div>
+        <div class="yp-pkg__step" style="--c:var(--yp-blue)">
+          <h3><i>2</i>Проживание</h3>
+          <div class="yp-pkg__opts" data-g="stay">
+            <button type="button" aria-pressed="false" data-v="none" data-wd="0" data-we="0">Без проживания<small>только на день</small></button>
+            <button type="button" aria-pressed="true" data-v="dome" data-wd="9000" data-we="13000">Купольный домик<small>30 м² · 2–4 гостя</small></button>
+            <button type="button" aria-pressed="false" data-v="volk" data-wd="8000" data-we="12000">Дом «Волк»<small>50 м² · 2–4 гостя</small></button>
+            <button type="button" aria-pressed="false" data-v="medved" data-wd="8000" data-we="12000">Дом «Медведь»<small>50 м² · 2–4 гостя</small></button>
+          </div>
+          <div class="yp-pkg__sub" data-sub="nights"><span>Ночей</span><button type="button" aria-pressed="true" data-n="1">1</button><button type="button" aria-pressed="false" data-n="2">2</button><button type="button" aria-pressed="false" data-n="3">3</button></div>
+        </div>
+        <div class="yp-pkg__step" style="--c:var(--yp-red)">
+          <h3><i>3</i>Баня</h3>
+          <div class="yp-pkg__opts" data-g="banya">
+            <button type="button" aria-pressed="false" data-v="none">Без бани</button>
+            <button type="button" aria-pressed="true" data-v="moroshka" data-top="5000">«Морошка»<small>парная + фито-сауна</small></button>
+            <button type="button" aria-pressed="false" data-v="brusnika" data-top="5000">«Брусника»<small>парная + хаммам</small></button>
+            <button type="button" aria-pressed="false" data-v="chernika" data-top="4000">«Черника»<small>на дровах</small></button>
+          </div>
+          <div class="yp-pkg__sub" data-sub="hours"><span>Часов</span><button type="button" aria-pressed="true" data-n="3">3</button><button type="button" aria-pressed="false" data-n="4">4</button><button type="button" aria-pressed="false" data-n="5">5</button></div>
+          <div class="yp-pkg__sub" data-sub="btime"><span>Время</span><button type="button" aria-pressed="false" data-t="day" data-p="2500">Пн–Ср до 14:00</button><button type="button" aria-pressed="true" data-t="eve" data-p="3500">Пн–Ср после 14:00</button><button type="button" aria-pressed="false" data-t="top">Чт–Вс</button></div>
+        </div>
+        <div class="yp-pkg__step" style="--c:var(--yp-green)">
+          <h3><i>4</i>Вечер для компании</h3>
+          <div class="yp-pkg__opts" data-g="eve">
+            <button type="button" aria-pressed="true" data-v="none">Не нужно</button>
+            <button type="button" aria-pressed="false" data-v="chum" data-wd="12000" data-we="15000">Чум на террасе<small>до 20 гостей · костёр и казан</small></button>
+            <button type="button" aria-pressed="false" data-v="g1" data-wd="6000" data-we="8000">Гриль-дом №1<small>15–20 гостей · 12:00–22:00</small></button>
+            <button type="button" aria-pressed="false" data-v="g23" data-wd="8000" data-we="10000">Гриль-дом №2 или №3<small>15–20 гостей · 12:00–22:00</small></button>
+          </div>
+        </div>
+      </div>
+      <aside class="yp-pkg__sum" aria-live="polite">
+        <h3>Ваш отдых</h3>
+        <ul class="yp-pkg__lines" data-yp-pkg-lines></ul>
+        <div class="yp-pkg__total"><span>Итого</span><b data-yp-pkg-total>—</b></div>
+        <p class="yp-pkg__note">Ориентировочно, по тарифам TravelLine и HotBot. Точная цена — при бронировании; в праздники действуют тарифы выходных.</p>
+        <div class="yp-pkg__btns">
+          <button class="yp-btn yp-btn--green" type="button" data-yp-pkg-stay>Забронировать домик</button>
+          <button class="yp-btn yp-btn--aurora" type="button" data-yp-pkg-shop>Записаться в баню, чум или гриль-дом</button>
+          <a class="yp-btn yp-btn--ghost" href="tel:+79003991033">Обсудить пакет: +7 900 399-10-33</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var box = document.querySelector("[data-yp-pkg]"); if(!box || box.getAttribute("data-yp-done")) return; box.setAttribute("data-yp-done", "1");
+  var YP = window.YP || {}, linesEl = box.querySelector("[data-yp-pkg-lines]"), totalEl = box.querySelector("[data-yp-pkg-total]");
+  var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"; };
+  var pick = function(g){ return box.querySelector('[data-g="' + g + '"] [aria-pressed="true"]'); };
+  var subPick = function(s){ return box.querySelector('[data-sub="' + s + '"] [aria-pressed="true"]'); };
+  var label = function(b){ return b ? (b.childNodes[0].textContent || "").trim() : ""; };
+  function press(group, btn){ group.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", String(x === btn)); }); }
+  box.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b || !box.contains(b)) return;
+    var g = b.closest("[data-g],[data-sub]"); if(!g) return; press(g, b); calc();
+  });
+  function calc(){
+    var we = pick("when").getAttribute("data-v") === "we", key = we ? "data-we" : "data-wd", rows = [], total = 0;
+    var stay = pick("stay"), banya = pick("banya"), eve = pick("eve");
+    /* выходные: у бани сразу тариф чт–вс */
+    var bt = box.querySelector('[data-sub="btime"]');
+    if(we){ press(bt, bt.querySelector('[data-t="top"]')); }
+    box.querySelector('[data-sub="nights"]').hidden = stay.getAttribute("data-v") === "none";
+    box.querySelector('[data-sub="hours"]').hidden = box.querySelector('[data-sub="btime"]').hidden = banya.getAttribute("data-v") === "none";
+    if(stay.getAttribute("data-v") !== "none"){
+      var n = +subPick("nights").getAttribute("data-n"), ps = +stay.getAttribute(key) * n; total += ps;
+      rows.push([label(stay) + " × " + n, ps]);
+    }
+    if(banya.getAttribute("data-v") !== "none"){
+      var h = +subPick("hours").getAttribute("data-n"), t = subPick("btime"), per = t.getAttribute("data-t") === "top" ? +banya.getAttribute("data-top") : +t.getAttribute("data-p"), pb = per * h; total += pb;
+      rows.push([label(banya) + " · " + h + " " + ({en:"h", zh:"小时"}[YP.lang] || "ч") + " × " + rub(per), pb]);
+    }
+    if(eve.getAttribute("data-v") !== "none"){ var pe = +eve.getAttribute(key); total += pe; rows.push([label(eve), pe]); }
+    linesEl.innerHTML = rows.length ? rows.map(function(r){ return "<li><span>" + r[0] + "</span><b>" + rub(r[1]) + "</b></li>"; }).join("") : '<li class="empty">' + label(box.querySelector('[data-g="eve"] [data-v="none"]')) + "</li>";
+    totalEl.textContent = total ? rub(total) : "—";
+    box.querySelector("[data-yp-pkg-stay]").hidden = stay.getAttribute("data-v") === "none";
+    box.querySelector("[data-yp-pkg-shop]").hidden = banya.getAttribute("data-v") === "none" && eve.getAttribute("data-v") === "none";
+    if(YP.goal) YP.goal("package_calc");
+  }
+  box.querySelector("[data-yp-pkg-stay]").addEventListener("click", function(){ YP.openBooking ? YP.openBooking({type:"stay"}) : (location.hash = "booking"); });
+  box.querySelector("[data-yp-pkg-shop]").addEventListener("click", function(){ if(!(YP.openShop && YP.openShop())) window.open(YP.HOTBOT_PAGE || "https://shop.hotbot.ai/yamalpark/", "_blank", "noopener"); });
+  calc();
+  if(window.gsap && window.ScrollTrigger && !YP.reduced) gsap.from(box.querySelectorAll(".yp-pkg__step,.yp-pkg__sum"), {y:40, opacity:0, duration:.9, ease:"power3.out", stagger:.08, scrollTrigger:{trigger:box, start:"top 82%"}});
+})();
+</script>
+
+<!-- 11 · Прогноз северного сияния на 3 ночи (живые данные: Kp-прогноз NOAA SWPC + облачность и темнота Open-Meteo).
+     Используется на главной (после «Сегодня») и на странице «Глэмпинг». Яркость сияния на фоне = прогноз на эту ночь. -->
+<style>
+.yp-af{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
+.yp-af__bg{position:absolute;inset:-4%;width:108%;height:108%;z-index:-1;mix-blend-mode:screen;opacity:.85;pointer-events:none}
+.yp-af__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-af__head .yp-lead{margin:0}
+.yp-af__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(36px,4vw,56px)}
+.yp-night{position:relative;border-radius:24px;padding:22px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;gap:6px;min-width:0}
+.yp-night.is-best{border-color:rgba(92,255,192,.55);box-shadow:0 0 0 1px rgba(92,255,192,.25),0 30px 60px -30px rgba(92,255,192,.35)}
+.yp-night__top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.yp-night__day{font:400 18px var(--yp-fd);letter-spacing:-.01em}
+.yp-night__date{font:500 12px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-night__lvl{display:flex;align-items:center;gap:10px;margin-top:10px;font:300 clamp(30px,2.8vw,44px)/1 var(--yp-fd);letter-spacing:-.03em}
+.yp-night__lvl i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c);flex:0 0 auto}
+.yp-night__best{margin:6px 0 0;font-size:14px;color:#C3D0D8;min-height:2.9em}
+.yp-chart{position:relative;height:130px;margin-top:12px;display:grid;grid-template-columns:repeat(13,1fr);gap:3px;align-items:end;padding-right:56px}
+.yp-chart__ref{position:absolute;left:0;right:56px;border-top:1px dashed rgba(234,241,244,.18);pointer-events:none}
+.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
+.yp-bar{position:relative;height:100%;display:flex;align-items:flex-end;cursor:default}
+.yp-bar b,.yp-bar s{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 1px 1px;transform-origin:50% 100%}
+.yp-bar s{background:rgba(234,241,244,.12);text-decoration:none}
+.yp-bar b{background:linear-gradient(0deg,#3FD07F,#5CFFC0 50%,#9AA8FF)}
+.yp-bar.is-light b,.yp-bar.is-light s{background:repeating-linear-gradient(45deg,rgba(234,241,244,.10) 0 3px,transparent 3px 6px);height:100%!important}
+.yp-bar:hover b{filter:brightness(1.3)}
+.yp-bar.is-peak::after{content:"";position:absolute;left:50%;top:-12px;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--yp-aurora)}
+.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-chart__x span{text-align:center;white-space:nowrap}
+.yp-night__tip{margin:10px 0 0;font:500 12px var(--yp-mono);color:#D7E2E8;min-height:1.4em}
+.yp-night .yp-btn{margin-top:12px;align-self:flex-start;padding:12px 18px;font-size:14px}
+.yp-af__foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--yp-snowmuted)}
+.yp-af__legend{display:flex;gap:18px;flex-wrap:wrap}
+.yp-af__legend span{display:inline-flex;align-items:center;gap:8px}
+.yp-af__legend i{width:14px;height:10px;border-radius:2px}
+.yp-af__msg{grid-column:1/-1;border-radius:24px;padding:26px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);color:#C3D0D8}
+@media (max-width:1000px){.yp-af__head{grid-template-columns:minmax(0,1fr)}.yp-af__grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-dark yp-af" id="forecast" data-yp-theme="dark">
+  <canvas class="yp-af__bg" aria-hidden="true"></canvas>
+  <div class="yp-wrap">
+    <div class="yp-af__head">
+      <div><span class="yp-eyebrow"><i style="--c:var(--yp-aurora)"></i>Прогноз северного сияния</span><h2 class="yp-h2" data-yp-split>Будет ли <b>сияние</b> в ближайшие ночи</h2></div>
+      <p class="yp-lead">Считаем по прогнозу геомагнитной активности (Kp-индекс) и облачности над Салехардом. Чем выше столбик, тем больше шанс. Обновляется при каждом открытии страницы.</p>
+    </div>
+    <div class="yp-af__grid" data-yp-af-grid aria-live="polite">
+      <div class="yp-af__msg" data-yp-af-msg>Загружаем прогноз…</div>
+    </div>
+    <div class="yp-af__foot">
+      <div class="yp-af__legend">
+        <span><i style="background:linear-gradient(90deg,#3FD07F,#9AA8FF)"></i>шанс с учётом облаков</span>
+        <span><i style="background:rgba(234,241,244,.2)"></i>шанс при ясном небе</span>
+        <span><i style="background:repeating-linear-gradient(45deg,rgba(234,241,244,.25) 0 3px,transparent 3px 6px)"></i>светло</span>
+      </div>
+      <span><b data-yp-afst></b> · <a href="/severnoe-siyanie" style="color:inherit">Как и когда смотреть сияние →</a> · Данные: NOAA SWPC (Kp на 3 дня), Open-Meteo (облачность). Прогноз вероятностный.</span>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("forecast"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  var grid = sec.querySelector("[data-yp-af-grid]");
+  var A = {rev:1, inten:.35, mx:.5, my:.5, tmx:.5, tmy:.5};
+  YP.makeAurora && YP.makeAurora(sec.querySelector(".yp-af__bg"), A, sec);
+  var COLORS = ["#7C8A96", "#9AA8FF", "#5CFFC0", "#7CF08A"];
+  var REFS = [[.55,"высокий"],[.3,"средний"],[.12,"низкий"]];
+  function fmtKp(v){ return v == null ? "—" : v.toFixed(1).replace(".", ","); }
+  function render(data){
+    if(!data || !data.nights.length){ grid.innerHTML = '<div class="yp-af__msg">Прогноз временно недоступен. Сияние у нас видно с сентября по апрель в ясные ночи, лучше всего с 22:00 до 02:00.</div>'; return; }
+    var bestN = data.nights.reduce(function(a,n,i){ return n.best.score > data.nights[a].best.score ? i : a; }, 0);
+    A.inten = [.25, .45, .75, 1][data.nights[0].level];
+    grid.innerHTML = "";
+    data.nights.forEach(function(n, ni){
+      var card = document.createElement("article");
+      card.className = "yp-night" + (ni === bestN && n.best.score >= .12 ? " is-best" : "");
+      var bestTxt = n.polarDay ? "Белые ночи: небо слишком светлое, сияния не видно."
+        : n.noKp ? "Прогноз Kp на эту ночь ещё не опубликован."
+        : n.best.score > 0 ? "Лучшее время " + n.best.time + " · Kp " + fmtKp(n.best.kp) + " · облачность " + n.best.cloud + "%"
+        : "Сплошная облачность или слабая активность.";
+      /* 13 часовых слотов 18:00 … 06:00 */
+      var slots = []; for(var h=18; h<=30; h++) slots.push(String(h%24).padStart(2,"0") + ":00");
+      var byTime = {}; n.hours.forEach(function(x){ byTime[x.time] = x; });
+      var bars = slots.map(function(t){
+        var x = byTime[t];
+        if(!x) return '<div class="yp-bar" aria-hidden="true"></div>';
+        var pot = x.kp != null && x.dark ? YP.kpPotential(x.kp) : 0;
+        var tip = t + " · " + (x.dark ? "Kp " + fmtKp(x.kp) + ", облачность " + x.cloud + "%, шанс " + YP.chanceLevel(x.score).text.toLowerCase() : "светло");
+        return '<div class="yp-bar' + (x.dark ? "" : " is-light") + (x === n.best && n.best.score > 0 ? " is-peak" : "") + '" data-tip="' + tip + '" title="' + tip + '">' +
+               '<s style="height:' + Math.round(pot*100) + '%"></s><b style="height:' + Math.round(x.score*100) + '%"></b></div>';
+      }).join("");
+      var refs = REFS.map(function(r){ return '<div class="yp-chart__ref" style="bottom:' + (r[0]*100) + '%"><span>' + r[1] + "</span></div>"; }).join("");
+      var xl = slots.map(function(t, i){ return "<span>" + (i % 3 === 0 ? t.slice(0,2) : "") + "</span>"; }).join("");
+      card.innerHTML =
+        '<div class="yp-night__top"><span class="yp-night__day">' + n.label + '</span><span class="yp-night__date">' + n.dateText + "</span></div>" +
+        '<div class="yp-night__lvl" style="--c:' + COLORS[n.level] + '"><i></i>' + (n.polarDay ? "Белые ночи" : n.text) + "</div>" +
+        '<p class="yp-night__best">' + bestTxt + "</p>" +
+        '<div class="yp-chart" role="img" aria-label="Шанс сияния по часам, ' + n.label + '">' + refs + bars + "</div>" +
+        '<div class="yp-chart__x" aria-hidden="true">' + xl + "</div>" +
+        '<p class="yp-night__tip" data-tip-out>Наведите на столбик, чтобы увидеть час</p>' +
+        (n.level >= 1 ? '<button class="yp-btn yp-btn--aurora" type="button">Забронировать на эту ночь</button>' : "");
+      var out = card.querySelector("[data-tip-out]");
+      card.querySelectorAll(".yp-bar[data-tip]").forEach(function(b){
+        b.addEventListener("pointerenter", function(){ out.textContent = b.getAttribute("data-tip"); });
+      });
+      var btn = card.querySelector(".yp-btn");
+      if(btn) btn.addEventListener("click", function(){ YP.openBooking && YP.openBooking({type:"glamping", date:n.date}); });
+      grid.appendChild(card);
+    });
+    if(G && window.ScrollTrigger && !YP.reduced){
+      G.from(grid.children, {y:50, opacity:0, duration:1, ease:"power3.out", stagger:.12, scrollTrigger:{trigger:grid, start:"top 85%"}});
+      G.from(grid.querySelectorAll(".yp-bar b, .yp-bar s"), {scaleY:0, duration:.9, ease:"power3.out", stagger:{each:.012, from:"start"}, scrollTrigger:{trigger:grid, start:"top 80%"}});
+      ScrollTrigger.refresh();
+    }
+  }
+  if(YP.forecast) YP.forecast.then(render); else render(null);
+})();
+window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.querySelector("[data-yp-afst]"); if(el && YP.dataStamp) el.textContent = YP.dataStamp(); });
+</script>
+
+<!-- Новый год · 03 · SEO-текст и вопросы (видимый текст для поисковиков; вопросы попадают в FAQPage) -->
+<style>
+.yp-seo{padding-block:clamp(56px,8vw,120px)}
+.yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
+.yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
+.yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
+.yp-seo__faq{display:grid;gap:10px}
+.yp-seo__faq details{border-radius:18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:2px 20px}
+.yp-seo__faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center;padding:16px 0;font:600 16px/1.35 var(--yp-f)}
+.yp-seo__faq summary::-webkit-details-marker{display:none}
+.yp-seo__faq summary i{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--yp-bg);position:relative}
+.yp-seo__faq summary i::before,.yp-seo__faq summary i::after{content:"";position:absolute;left:7px;right:7px;top:12px;height:2px;background:var(--yp-ink);transition:transform .4s var(--yp-ease)}
+.yp-seo__faq summary i::after{transform:rotate(90deg)}
+.yp-seo__faq details[open] summary i::after{transform:none}
+.yp-seo__faq details>div{padding:0 0 16px;color:var(--yp-muted);font-size:15px}
+@media (max-width:900px){.yp-seo__grid{grid-template-columns:1fr}}
+</style>
+<section class="yp yp-seo" id="about">
+  <div class="yp-wrap">
+    <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Новый год под Салехардом</span>
+    <h2 class="yp-h2" data-yp-split>Где встретить <b>Новый год в Салехарде</b></h2>
+    <div class="yp-seo__grid">
+      <div class="yp-seo__txt" data-yp-reveal><p>Ямал Парк — загородный комплекс на Полярном круге, в <b>16 минутах от Салехарда</b>. На новогодние праздники можно снять <b>купольный домик</b> с панорамным окном или дом с террасой «Волк» или «Медведь», провести <b>корпоратив</b> в банкетном зале под куполом или шатре «Сияние севера», отпраздновать в гриль-доме или обогретом чуме.</p><p>После прогулки по заснеженной тайге — <b>умные бани</b> с Алисой: парная до 100 °C, хаммам, дождь и туман по голосовой команде. В ясные зимние ночи над комплексом бывает <b>северное сияние</b> — прогноз на три ночи есть на сайте.</p></div>
+      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Есть ли свободные домики на Новый год?<i></i></summary><div>Смотрите календарь на этой странице — он берёт свободные даты прямо из системы бронирования TravelLine. Если нужной даты нет, позвоните администратору: +7 900 399-10-33.</div></details><details><summary>Сколько стоит ночь в праздники?<i></i></summary><div>В праздничные дни действует тариф выходных: купольный домик — 13 000 ₽ за ночь, дома «Волк» и «Медведь» — 15 000 ₽.</div></details><details><summary>Можно ли провести новогодний корпоратив?<i></i></summary><div>Да: банкетный зал под куполом на 100–150 гостей, шатёр «Сияние севера» до 20 гостей, гриль- и гостевые дома на 15–25 гостей и чум. Даты и меню обсудите с администратором.</div></details><details><summary>Работают ли бани в праздники?<i></i></summary><div>Да, бани работают с 10:00 до 23:00, запись онлайн по времени. В праздники — тариф четверга–воскресенья.</div></details></div>
+    </div>
+  </div>
+</section>
+

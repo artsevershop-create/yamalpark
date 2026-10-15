@@ -1,0 +1,210 @@
+<!-- 10 · Бронирование «ночью» (сияние и звёзды) + подвал.
+     Бронирование как на текущем yamalpark.ru: проживание — модуль TravelLine (TL-INT-yamalpark-ru_2024-08-22, форма поиска в #tl-search-form),
+     бани, гриль-дома, чум и праздники — магазин HotBot (подключается в 00-head.html, YP.openShop). -->
+<style>
+.yp-booking{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
+.yp-booking__glow{position:absolute;inset:-20% -10% auto;height:90%;z-index:-1;pointer-events:none;filter:blur(60px);opacity:.55;
+  background:radial-gradient(40% 50% at 25% 55%,rgba(92,255,192,.55),transparent 70%),radial-gradient(35% 45% at 70% 35%,rgba(130,110,255,.45),transparent 70%)}
+.yp-booking__stars{position:absolute;inset:0;z-index:-1;opacity:.6;background:
+  radial-gradient(1px 1px at 10% 20%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 30% 70%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 55% 15%,#fff 50%,transparent 51%),
+  radial-gradient(1px 1px at 80% 60%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 92% 25%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 45% 85%,#fff 50%,transparent 51%)}
+.yp-booking__in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,80px);align-items:start}
+.yp-contacts{display:grid;margin-top:34px;border-top:1px solid var(--yp-nightline)}
+.yp-contacts a{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--yp-nightline);text-decoration:none;font-size:16px;transition:padding .3s,color .3s}
+.yp-contacts a:hover{padding-left:10px;color:var(--yp-aurora)}
+.yp-contacts span{font:500 12px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--yp-snowmuted);align-self:center}
+.yp-bk{background:rgba(17,27,38,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--yp-nightline);border-radius:28px;padding:clamp(16px,2.4vw,28px);position:relative;overflow:hidden}
+.yp-bk__tabs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;border-radius:16px;background:rgba(0,0,0,.3);margin-bottom:clamp(16px,2vw,24px)}
+.yp-bk__tabs button{position:relative;z-index:1;border:0;background:transparent;color:var(--yp-snowmuted);font:600 14px/1.2 var(--yp-f);padding:12px 8px;border-radius:12px;cursor:pointer;transition:color .3s}
+.yp-bk__tabs button[aria-selected="true"]{color:#03140D}
+.yp-bk__pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 12px)/3);border-radius:12px;background:var(--yp-aurora);transition:transform .55s var(--yp-ease)}
+.yp-bk__pane[hidden]{display:none}
+.yp-bk__pane h3{margin:0;font-weight:300;font-size:clamp(20px,1.8vw,26px);letter-spacing:-.01em}
+.yp-bk__pane>p{margin:8px 0 0;color:var(--yp-snowmuted);font-size:15px}
+.yp-tl{margin-top:18px;min-height:120px;border-radius:18px;background:#fff;color:var(--yp-ink);padding:10px;position:relative}
+.yp-tl__sk{display:grid;gap:10px;padding:8px}
+.yp-tl__sk i{display:block;height:44px;border-radius:10px;background:linear-gradient(90deg,#eef1f0 0%,#f8faf9 50%,#eef1f0 100%);background-size:200% 100%;animation:ypSk 1.3s linear infinite}
+@keyframes ypSk{to{background-position:-200% 0}}
+.yp-tl.is-ready .yp-tl__sk,.yp-tl.is-fail .yp-tl__sk{display:none}
+.yp-tl__fail{display:none;padding:12px 10px;font-size:15px;color:var(--yp-muted)}
+.yp-tl.is-fail .yp-tl__fail{display:block}
+.yp-tl__fail a{color:var(--yp-blue);font-weight:600}
+.yp-bk__list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.yp-bk__list li{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--yp-nightline);transition:border-color .3s,background .3s,transform .4s var(--yp-ease)}
+.yp-bk__list li:hover{border-color:rgba(92,255,192,.45);background:rgba(92,255,192,.06);transform:translateX(4px)}
+.yp-bk__list b{font-weight:600}
+.yp-bk__list span{font:500 13px var(--yp-mono);color:var(--yp-aurora);white-space:nowrap}
+.yp-bk__list small{display:block;color:var(--yp-snowmuted);font-size:13px;margin-top:2px}
+.yp-bk__row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.yp-bk__row .yp-btn{flex:1 1 auto;min-height:54px}
+.yp-bk__note{margin:14px 0 0;font-size:13px;color:var(--yp-snowmuted)}
+.yp-foot{padding-block:56px 40px;border-top:1px solid var(--yp-nightline)}
+.yp-foot__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.yp-foot h4{margin:0 0 14px;font:500 11px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--yp-snowmuted)}
+.yp-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.yp-foot ul a{text-decoration:none;opacity:.85;transition:opacity .2s,color .2s}
+.yp-foot ul a:hover{opacity:1;color:var(--yp-aurora)}
+.yp-foot__name{font:400 15px/1 var(--yp-fd);letter-spacing:.22em;text-transform:uppercase}
+.yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
+.yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
+.yp-foot__copy a{color:var(--yp-snowmuted)}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+/* ---------- Светлая карточка брони (как форма TravelLine) на ночном фоне ---------- */
+.yp-bk{background:#fff;color:var(--yp-ink);border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 40px 90px -40px rgba(0,0,0,.75)}
+.yp-bk__tabs{background:var(--yp-bg)}
+.yp-bk__tabs button{color:var(--yp-muted)}
+.yp-bk__tabs button[aria-selected="true"]{color:#fff}
+.yp-bk__pill{background:var(--yp-ink)}
+.yp-bk__pane>p,.yp-bk__note,.yp-bk__list small{color:var(--yp-muted)}
+.yp-tl{background:transparent;padding:0}
+.yp-bk__list li{background:var(--yp-bg);border-color:transparent}
+.yp-bk__list li:hover{border-color:color-mix(in srgb,var(--yp-green) 45%,transparent);background:#fff}
+.yp-bk__list span{color:var(--yp-green-d)}
+.yp-bk .yp-btn--aurora{background:var(--yp-green-d);color:#fff}
+.yp-bk .yp-btn--aurora::before{background:var(--yp-ink)}
+.yp-bk .yp-btn--ghost{color:var(--yp-ink);box-shadow:inset 0 0 0 1.5px var(--yp-line)}
+.yp-bk .yp-btn--ghost::before{background:var(--yp-ink)}
+.yp-contacts a[hidden]{display:none}
+@media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 16px}.yp-foot__grid>:first-child,.yp-foot__grid>:last-child{grid-column:1/-1}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
+</style>
+<section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
+  <div class="yp-booking__glow" aria-hidden="true"></div><div class="yp-booking__stars" aria-hidden="true"></div>
+  <div class="yp-wrap yp-booking__in">
+    <div>
+      <span class="yp-eyebrow"><i style="--c:var(--yp-aurora)"></i>Бронирование</span>
+      <h2 class="yp-h2" data-yp-split>Выберите даты, <b>остальное подготовим</b></h2>
+      <p class="yp-lead">Проживание бронируется онлайн с мгновенным подтверждением. Бани, гриль-дома и чум — онлайн-запись по времени. На вопросы ответит администратор.</p>
+      <div class="yp-contacts">
+        <a href="tel:+79003991033">+7 900 399-10-33<span>администратор</span></a>
+        <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
+        <a href="https://t.me/yamalpark" target="_blank" rel="noopener">@yamalpark<span>Telegram</span></a>
+        <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">vk.com/yamalpark<span>ВКонтакте</span></a>
+        <a href="#" target="_blank" rel="noopener" data-yp-max hidden>Ямал Парк<span>канал в Max</span></a>
+      </div>
+    </div>
+    <div id="yp-booking-widget" data-yp-reveal>
+      <div class="yp-bk">
+        <div class="yp-bk__tabs" role="tablist" aria-label="Что бронируем">
+          <span class="yp-bk__pill" aria-hidden="true"></span>
+          <button type="button" role="tab" aria-selected="true" aria-controls="yp-bk-stay" data-tab="stay">Проживание</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="yp-bk-hour" data-tab="hour">Бани и гриль</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="yp-bk-event" data-tab="event">Праздник</button>
+        </div>
+        <div class="yp-bk__pane" id="yp-bk-stay" role="tabpanel">
+          <h3>Купольный домик, «Волк» или «Медведь»</h3>
+          <p>Онлайн-бронирование с мгновенным подтверждением. Выберите даты заезда и выезда.</p>
+          <!-- TravelLine: форма поиска (код с текущего yamalpark.ru) -->
+          <script>
+          /* канал в Max: строка в контактах появляется, когда задан YP.MAX_URL (00-head) */
+          (function(){ var a = document.querySelector("[data-yp-max]"); if(a && window.YP && YP.MAX_URL){ a.href = YP.MAX_URL; a.hidden = false; } })();
+          </script>
+          <script type="text/javascript">
+          (function(w){
+            var q = [["setContext", "TL-INT-yamalpark-ru_2024-08-22", window.YP && YP.lang !== "ru" ? "en" : "ru"], ["embed", "search-form", {container:"tl-search-form"}]];
+            var h = ["ru-ibe.tlintegration.ru", "ibe.tlintegration.ru", "ibe.tlintegration.com"];
+            var t = w.travelline = (w.travelline || {}), ti = t.integration = (t.integration || {});
+            ti.__cq = ti.__cq ? ti.__cq.concat(q) : q;
+            if(!ti.__loader){
+              ti.__loader = true;
+              var d = w.document, c = d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0];
+              function e(s, f){ return function(){ w.TL || (c.removeChild(s), f()); }; }
+              (function l(h){
+                if(0 === h.length) return; var s = d.createElement("script");
+                s.type = "text/javascript"; s.async = !0; s.src = "https://" + h[0] + "/integration/loader.js";
+                s.onerror = s.onload = e(s, function(){ l(h.slice(1, h.length)); }); c.appendChild(s);
+              })(h);
+            }
+          })(window);
+          </script>
+          <div class="yp-tl" data-yp-tl>
+            <div id="tl-search-form" data-yp-notr></div>
+            <div class="yp-tl__sk" aria-hidden="true"><i></i><i></i><i style="width:60%"></i></div>
+            <p class="yp-tl__fail">Модуль бронирования TravelLine работает на сайте yamalpark.ru. Если форма не загрузилась, позвоните администратору: <a href="tel:+79003991033">+7 900 399-10-33</a>.</p>
+          </div>
+        </div>
+        <div class="yp-bk__pane" id="yp-bk-hour" role="tabpanel" hidden>
+          <h3>Почасовая и дневная аренда</h3>
+          <p>Выберите баню, гриль-дом или чум и свободное время — запись онлайн через HotBot.</p>
+          <ul class="yp-bk__list">
+            <li><div><b>Бани «Морошка», «Брусника», «Черника»</b><small>минимум 3 часа, до 8–10 гостей</small></div><span>от 2 500 ₽/ч</span></li>
+            <li><div><b>Гриль-дома и гостевые дома</b><small>весь день 12:00–22:00, 15–25 гостей</small></div><span>от 6 000 ₽</span></li>
+            <li><div><b>Чум и смотровая площадка</b><small>до 15–20 гостей</small></div><span>от 12 000 ₽</span></li>
+          </ul>
+          <div class="yp-bk__row">
+            <button class="yp-btn yp-btn--aurora" type="button" data-yp-shop>Выбрать время онлайн</button>
+            <a class="yp-btn yp-btn--ghost" href="https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde" target="_blank" rel="noopener">Обратный звонок</a>
+          </div>
+        </div>
+        <div class="yp-bk__pane" id="yp-bk-event" role="tabpanel" hidden>
+          <h3>Свадьба, юбилей, корпоратив</h3>
+          <p>Банкетный зал на 100–150 гостей, шатёр «Сияние севера» до 20 гостей, гостевые и гриль-дома. Подберём площадку и меню под ваш праздник.</p>
+          <ul class="yp-bk__list">
+            <li><div><b>Банкетный зал под куполом</b><small>весь день 12:00–23:00</small></div><span>от 50 000 ₽</span></li>
+            <li><div><b>Шатёр «Сияние севера»</b><small>панорамное окно, дровяная печь</small></div><span>от 10 000 ₽</span></li>
+          </ul>
+          <div class="yp-bk__row">
+            <a class="yp-btn yp-btn--aurora" href="https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde" target="_blank" rel="noopener">Заказать обратный звонок</a>
+            <a class="yp-btn yp-btn--ghost" href="tel:+79003991033">+7 900 399-10-33</a>
+          </div>
+        </div>
+        <p class="yp-bk__note">Отмена за 7 дней и раньше — возврат 100%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="yp yp-dark yp-foot" data-yp-theme="dark">
+  <div class="yp-wrap">
+    <div class="yp-foot__grid">
+      <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
+      <div><h4>Отдых</h4><ul><li><a href="/glamping">Глэмпинг</a></li><li><a href="/bani">Умные бани</a></li><li><a href="/grill">Гриль-дома</a></li><li><a href="/etno">Этно-комплекс</a></li><li><a href="/zoo">Мини-зоопарк</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="/new-year">Новый год</a></li><li><a href="/gift">Подарочные сертификаты</a></li><li><a href="/events">Мероприятия</a></li><li><a href="/severnoe-siyanie">Северное сияние: прогноз</a></li><li><a href="/contacts#map">Карта комплекса</a></li><li><a href="/contacts">Как добраться</a></li><li><a href="/docs">Документы</a></li></ul></div>
+      <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
+    </div>
+    <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
+  </div>
+</footer>
+<script>
+(function(){
+  var YP = window.YP || {};
+  var y = document.querySelector("[data-yp-year]"); if(y) y.textContent = new Date().getFullYear();
+  var box = document.getElementById("yp-booking-widget"); if(!box) return;
+  var tabs = [].slice.call(box.querySelectorAll("[role=tab]")), pill = box.querySelector(".yp-bk__pill");
+  function show(key){
+    tabs.forEach(function(t, i){
+      var on = t.getAttribute("data-tab") === key; t.setAttribute("aria-selected", String(on));
+      var pane = document.getElementById(t.getAttribute("aria-controls"));
+      if(on){ pill.style.transform = "translateX(calc(" + (i*100) + "% + " + (i*2) + "px))";
+        if(pane.hidden){ pane.hidden = false; if(window.gsap && !YP.reduced) gsap.fromTo(pane.children, {opacity:0, y:16}, {opacity:1, y:0, duration:.5, ease:"power3.out", stagger:.05, clearProps:"all"}); } }
+      else pane.hidden = true;
+    });
+  }
+  tabs.forEach(function(t){ t.addEventListener("click", function(){ show(t.getAttribute("data-tab")); }); });
+  box.addEventListener("click", function(e){ if(e.target.closest("[data-yp-shop]") && !(YP.openShop && YP.openShop())) window.open(YP.HOTBOT_PAGE, "_blank", "noopener"); });
+  document.addEventListener("yp:booking", function(e){
+    var o = e.detail || {}; show(o.type === "event" ? "event" : (YP.isHourly && YP.isHourly(o.type)) ? "hour" : "stay");
+    if(window.gsap && !YP.reduced) gsap.fromTo(box.firstElementChild, {scale:.97}, {scale:1, duration:.8, ease:"elastic.out(1,.5)", delay:.9});
+  });
+  /* Бронь в один клик: пришли из календаря свободных дат (?date=…&yp_book=1) — открываем вкладку проживания и сами нажимаем «Выбрать» в форме TravelLine */
+  (function(){
+    var qs = new URLSearchParams(location.search); if(!qs.get("yp_book") || !qs.get("date")) return;
+    var clean = new URL(location.href); clean.searchParams.delete("yp_book"); history.replaceState(null, "", clean.toString());
+    show("stay"); setTimeout(function(){ YP.scrollTo ? YP.scrollTo("#booking") : document.getElementById("booking").scrollIntoView(); }, 600);
+    var t0 = Date.now(), iv = setInterval(function(){
+      var c = document.getElementById("tl-search-form"), docs = [], btn = null;
+      (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
+      docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
+      else if(Date.now() - t0 > 25000) clearInterval(iv);
+    }, 300);
+  })();
+  /* TravelLine: прячем заглушку, когда форма загрузилась; если за 9 секунд не загрузилась — показываем телефон */
+  var tl = box.querySelector("[data-yp-tl]"), tlc = document.getElementById("tl-search-form");
+  var tlTimer = setInterval(function(){ if(tlc && tlc.children.length){ tl.classList.remove("is-fail"); tl.classList.add("is-ready"); clearInterval(tlTimer); } }, 300);
+  setTimeout(function(){ if(!tl.classList.contains("is-ready")) tl.classList.add("is-fail"); }, 9000);
+  setTimeout(function(){ clearInterval(tlTimer); }, 120000);
+  if(window.gsap && window.ScrollTrigger && !YP.reduced){
+    gsap.to(".yp-booking__glow", {xPercent:12, yPercent:-8, ease:"none", scrollTrigger:{trigger:"#booking", start:"top bottom", end:"bottom top", scrub:true}});
+    gsap.to(".yp-booking__glow", {opacity:.8, duration:4, ease:"sine.inOut", yoyo:true, repeat:-1});
+  }
+})();
+</script>

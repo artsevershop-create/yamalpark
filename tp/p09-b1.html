@@ -1,0 +1,793 @@
+<!-- Контакты · 01 · Первый экран: видео въездной арки «Ямал Парк», идёт снег (YP.pageHero) -->
+<section class="yp yp-dark yp-ph" id="top" data-yp-theme="dark" aria-label="Как добраться" style="--c:var(--yp-blue)">
+  <div class="yp-ph__pin">
+    <video class="yp-ph__bg" src="https://artsevershop-create.github.io/yamalpark/img/video/arch.mp4" poster="https://artsevershop-create.github.io/yamalpark/img/new/arch.webp" autoplay muted loop playsinline aria-label="Видео: въездная арка «Ямал Парк» с оленями"></video>
+    <div class="yp-ph__shade"></div>
+    <canvas class="yp-ph__fx" aria-hidden="true"></canvas>
+    <div class="yp-wrap yp-ph__in">
+      <div class="yp-ph__crumbs"><a href="/">Ямал Парк</a><span>/</span><i></i><span>Контакты</span></div>
+      <h1 class="yp-ph__title"><span>16 минут</span><span class="hl">от Салехарда</span></h1>
+      <div class="yp-ph__row">
+        <div>
+          <p class="yp-ph__lead" data-yp-in>12-й км дороги Салехард — Горнокнязевск. Ищите арку с оленями и надписью «Ямал Парк».</p>
+          <div class="yp-ph__chips" data-yp-in><span>Круглый год</span><span>Парковка на 50 машин</span><span>+7 900 399-10-33</span></div>
+        </div>
+        <div class="yp-ph__cta" data-yp-in><a class="yp-btn yp-btn--aurora" href="https://yandex.ru/maps/?mode=routes&amp;rtext=~66.568040%2C66.860055&amp;rtt=auto" target="_blank" rel="noopener">Построить маршрут</a><a class="yp-btn yp-btn--ghost" href="#map">Карта комплекса</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>YP.pageHero(document.getElementById("top"), {fx:"snow", dark:.35});</script>
+
+<!-- Контакты · 02 · Как добраться и связаться: адрес, координаты (копируются), телефоны, соцсети -->
+<style>
+.yp-rt{padding-block:clamp(56px,10vw,150px) clamp(50px,6vw,90px)}
+.yp-rt__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);margin-top:clamp(36px,4vw,56px);align-items:stretch}
+.yp-rt__steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.yp-rt__steps li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--yp-line)}
+.yp-rt__steps li::before{content:counter(s);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--yp-ink);color:#fff;font:500 15px var(--yp-mono)}
+.yp-rt__steps b{display:block;font-weight:600;margin-bottom:4px}
+.yp-rt__steps span{color:var(--yp-muted)}
+.yp-rt__card{border-radius:30px;overflow:hidden;background:var(--yp-paper);display:grid;grid-template-rows:auto 1fr;box-shadow:0 1px 0 var(--yp-line)}
+.yp-rt__card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.yp-rt__c{padding:24px;display:grid;gap:0}
+.yp-rt__c a,.yp-rt__c div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--yp-line);text-decoration:none;font-size:16px}
+.yp-rt__c span{font:500 12px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--yp-muted);align-self:center}
+.yp-copy{border:0;background:var(--yp-bg);border-radius:999px;padding:8px 14px;font:500 13px var(--yp-mono);cursor:pointer;transition:background .3s}
+.yp-copy.is-ok{background:var(--yp-green);color:#fff}
+@media (max-width:900px){.yp-rt__grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-sheet yp-rt" id="route">
+  <div class="yp-wrap">
+    <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Как добраться</span>
+    <h2 class="yp-h2" data-yp-split>Дорога <b>занимает 16 минут</b></h2>
+    <div class="yp-rt__grid">
+      <div data-yp-reveal>
+        <ol class="yp-rt__steps">
+          <li><div><b>Выезжайте из Салехарда в сторону Горнокнязевска</b><span>Дорога Салехард — Горнокнязевск, от центра города около 16 минут на машине.</span></div></li>
+          <li><div><b>Через 12 км — арка «Ямал Парк» с оленями</b><span>Въезд справа по ходу движения, сразу за аркой — администрация и стоянка.</span></div></li>
+          <li><div><b>Оставьте машину на парковке</b><span>Парковка на 50 машин, есть стоянки у бань и у домов с террасой.</span></div></li>
+          <li><div><b>Загляните в администрацию</b><span>Администратор подскажет дорогу к вашему домику. Или найдите его на карте ниже.</span></div></li>
+        </ol>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><a class="yp-btn yp-btn--green" href="https://yandex.ru/maps/?mode=routes&amp;rtext=~66.568040%2C66.860055&amp;rtt=auto" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a><button class="yp-copy" type="button" data-yp-copy="66.568040, 66.860055">66.568040, 66.860055 · копировать</button></div>
+      </div>
+      <div class="yp-rt__card" data-yp-reveal=".1">
+        <img src="https://artsevershop-create.github.io/yamalpark/img/p/admin-night2.webp" alt="Здание администрации с логотипом «Ямал Парк» зимней ночью" loading="lazy">
+        <div class="yp-rt__c">
+          <a href="tel:+79003991033">+7 900 399-10-33<span>администратор</span></a>
+          <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
+          <a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru<span>почта</span></a>
+          <a href="https://t.me/yamalpark" target="_blank" rel="noopener">@yamalpark<span>Telegram</span></a>
+          <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">vk.com/yamalpark<span>ВКонтакте</span></a>
+          <div>ЯНАО, Приуральский район<span>адрес</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  document.querySelectorAll("[data-yp-copy]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var v = b.getAttribute("data-yp-copy"), old = b.textContent;
+      function ok(){ b.classList.add("is-ok"); b.textContent = "Скопировано"; setTimeout(function(){ b.classList.remove("is-ok"); b.textContent = old; }, 1600); }
+      if(navigator.clipboard) navigator.clipboard.writeText(v).then(ok, function(){ b.textContent = v; });
+      else b.textContent = v;
+    });
+  });
+})();
+</script>
+
+<!-- Контакты · 05 · Анимированная схема проезда: из центра Салехарда по дороге на Горнокнязевск до арки «Ямал Парк» (12-й км, ~16 минут).
+     Схема, не в масштабе. Машинка едет по дороге, счётчик показывает километры и минуты, по пути загораются шаги маршрута. -->
+<style>
+.yp-dr{padding-block:clamp(56px,8vw,120px);background:var(--yp-bg)}
+.yp-dr__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.yp-dr__box{margin-top:clamp(26px,3.5vw,44px);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(16px,2.4vw,30px);align-items:stretch}
+.yp-dr__map{position:relative;border-radius:30px;overflow:hidden;background:#E9EEE8;box-shadow:0 1px 0 var(--yp-line),0 30px 60px -40px rgba(20,30,25,.35)}
+.yp-dr__map svg{display:block;width:100%;height:auto}
+.yp-dr__hud{position:absolute;left:16px;top:16px;display:flex;gap:8px}
+.yp-dr__hud span{display:grid;padding:9px 14px;border-radius:16px;background:rgba(255,255,255,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 18px rgba(20,30,25,.12)}
+.yp-dr__hud b{font:400 26px/1 var(--yp-fd);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.yp-dr__hud small{font:500 10.5px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-muted);margin-top:3px}
+.yp-dr__note{position:absolute;right:16px;bottom:12px;font:500 10.5px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:#7C8A84}
+.yp-dr__replay{position:absolute;right:14px;top:14px;border:0;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--yp-ink);color:#fff;font:500 13px var(--yp-f)}
+.yp-dr__replay svg{width:14px;height:14px}
+.yp-dr__steps{list-style:none;margin:0;padding:clamp(18px,2.4vw,28px);border-radius:30px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);display:grid;gap:4px;align-content:start;counter-reset:s}
+.yp-dr__steps li{position:relative;padding:12px 12px 12px 52px;border-radius:16px;transition:background .5s,opacity .5s;opacity:.45}
+.yp-dr__steps li::before{counter-increment:s;content:counter(s);position:absolute;left:10px;top:12px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--yp-mono);background:var(--yp-bg);color:var(--yp-muted);transition:background .5s,color .5s}
+.yp-dr__steps li b{display:block;font-weight:600;font-size:15.5px}
+.yp-dr__steps li span{display:block;margin-top:3px;color:var(--yp-muted);font-size:14px}
+.yp-dr__steps li.is-on{opacity:1;background:var(--yp-bg)}
+.yp-dr__steps li.is-on::before{background:var(--yp-green-d,#2E8C2C);color:#fff}
+.yp-dr__steps .yp-btn{margin-top:10px;justify-self:start}
+/* карта */
+.yp-dr .road{fill:none;stroke:#fff;stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
+.yp-dr .road-edge{fill:none;stroke:#C9D3CC;stroke-width:20;stroke-linecap:round;stroke-linejoin:round}
+.yp-dr .road-mid{fill:none;stroke:#D4DCD6;stroke-width:1.6;stroke-dasharray:8 10}
+.yp-dr .trail{fill:none;stroke:var(--yp-green);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.yp-dr .side{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round}
+.yp-dr .river{fill:#BFD7E6}
+.yp-dr .city rect{fill:#D3DAD5}
+.yp-dr .city rect.a{fill:#C6CEC8}
+.yp-dr .tree{fill:#B9C9BC}
+.yp-dr .lbl{font:600 15px var(--yp-f);fill:var(--yp-ink)}
+.yp-dr .lbl-s{font:500 11px var(--yp-mono);letter-spacing:.08em;fill:#7C8A84;text-transform:uppercase}
+.yp-dr .km text{font:600 11px var(--yp-mono);fill:#5E6B65}
+.yp-dr .km circle{fill:#fff;stroke:#C9D3CC;stroke-width:1.5}
+.yp-dr .pop{opacity:0;transform-box:fill-box;transform-origin:50% 100%;transform:scale(.6);transition:opacity .6s,transform .7s var(--yp-ease)}
+.yp-dr .pop.is-on{opacity:1;transform:none}
+.yp-dr .pulse{fill:var(--yp-green);opacity:.25;transform-box:fill-box;transform-origin:50% 50%;animation:ypDrPulse 1.8s ease-out infinite}
+@keyframes ypDrPulse{from{transform:scale(.4);opacity:.45}to{transform:scale(2.2);opacity:0}}
+@media (max-width:900px){.yp-dr__box{grid-template-columns:minmax(0,1fr)}.yp-dr__hud b{font-size:20px}.yp-dr .lbl{font-size:30px}.yp-dr .lbl-s{font-size:19px}.yp-dr .km text{font-size:17px}.yp-dr .km circle{r:19}.yp-dr__note{display:none}}
+@media (prefers-reduced-motion:reduce){.yp-dr .pulse{animation:none}}
+</style>
+<section class="yp yp-dr" id="drive">
+  <div class="yp-wrap">
+    <div class="yp-dr__top">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Схема проезда</span><h2 class="yp-h2" data-yp-split>Из Салехарда <b>за 16 минут</b></h2></div>
+      <p class="yp-lead" style="max-width:42ch">Одна дорога без поворотов: из центра города на Горнокнязевск, на 12-м километре — арка с оленями.</p>
+    </div>
+    <div class="yp-dr__box" data-yp-reveal>
+      <div class="yp-dr__map">
+        <svg viewBox="0 0 1000 600" role="img" aria-label="Схема проезда из Салехарда в Ямал Парк по дороге на Горнокнязевск" data-yp-drsvg>
+          <!-- река Полуй и тайга -->
+          <path class="river" d="M-20,470 C90,450 140,520 260,560 S420,640 520,620 L520,640 L-20,640Z"/>
+          <g class="trees" data-yp-drtrees></g>
+          <!-- город -->
+          <g class="city">
+            <rect x="70" y="330" width="46" height="34" rx="6"/><rect class="a" x="124" y="318" width="38" height="46" rx="6"/><rect x="170" y="336" width="52" height="28" rx="6"/>
+            <rect class="a" x="62" y="374" width="54" height="40" rx="6"/><rect x="124" y="374" width="44" height="30" rx="6"/><rect class="a" x="176" y="374" width="40" height="44" rx="6"/>
+            <rect x="86" y="424" width="40" height="28" rx="6"/><rect class="a" x="134" y="414" width="52" height="34" rx="6"/><rect x="226" y="350" width="34" height="40" rx="6"/>
+          </g>
+          <!-- аэропорт -->
+          <g class="pop" data-yp-drpop="0">
+            <path class="side" d="M150,330 C160,280 190,230 230,196"/>
+            <rect x="200" y="150" width="150" height="16" rx="8" fill="#D3DAD5" transform="rotate(-18 275 158)"/>
+            <path d="M262 140l14 6 16-6 4 4-12 10 2 14-5 3-7-12-12 4-2-5z" fill="#5E6B65"/>
+            <text class="lbl-s" x="300" y="128">Аэропорт</text>
+          </g>
+          <!-- дорога: центр Салехарда → Горнокнязевск -->
+          <path class="road-edge" d="M150,392 C240,392 300,372 380,352 S540,300 640,282 S790,258 846,252 S940,236 1020,214"/>
+          <path class="road" data-yp-drroad d="M150,392 C240,392 300,372 380,352 S540,300 640,282 S790,258 846,252"/>
+          <path class="road" d="M846,252 S940,236 1020,214"/>
+          <path class="road-mid" d="M150,392 C240,392 300,372 380,352 S540,300 640,282 S790,258 846,252 S940,236 1020,214"/>
+          <path class="trail" data-yp-drtrail d="M150,392 C240,392 300,372 380,352 S540,300 640,282 S790,258 846,252"/>
+          <!-- километры -->
+          <g class="km" data-yp-drkm></g>
+          <!-- подписи -->
+          <text class="lbl" x="66" y="306">Салехард</text>
+          <text class="lbl-s" x="66" y="478">центр города</text>
+          <text class="lbl-s" x="988" y="188" text-anchor="end">Горнокнязевск →</text>
+          <!-- арка и парк -->
+          <g class="pop" data-yp-drpop="2">
+            <path d="M826 252v-34a20 20 0 0 1 40 0v34" fill="none" stroke="#5E6B65" stroke-width="5" stroke-linecap="round"/>
+            <path d="M820 214h52" stroke="#5E6B65" stroke-width="4" stroke-linecap="round"/>
+            <path d="M832 206l-6-10m4 0l4-6M860 206l6-10m-4 0l-4-6" stroke="#5E6B65" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <g class="pop" data-yp-drpop="3">
+            <circle class="pulse" cx="862" cy="312" r="26"/>
+            <path d="M846 252 C850 272 856 290 862 300" class="side" style="stroke-width:6"/>
+            <g transform="translate(832 300)"><polygon points="0,26 15,0 30,26" fill="#6274B6"/><polygon points="26,6 56,6 41,32" fill="#3FAB3C"/><polygon points="52,26 67,0 82,26" fill="#E31E24"/></g>
+            <text class="lbl" x="800" y="362">Ямал Парк</text>
+            <text class="lbl-s" x="800" y="382">12-й км · парковка</text>
+          </g>
+          <!-- машинка -->
+          <g data-yp-drcar><g transform="translate(-14 -8)"><rect width="28" height="16" rx="5" fill="#E31E24"/><rect x="15" y="3" width="8" height="10" rx="2" fill="#fff" opacity=".85"/><circle cx="7" cy="16" r="3" fill="#1E2423"/><circle cx="21" cy="16" r="3" fill="#1E2423"/></g></g>
+        </svg>
+        <div class="yp-dr__hud" aria-live="polite"><span><b data-yp-drkmv>0</b><small>км</small></span><span><b data-yp-drmin>0</b><small>минут</small></span></div>
+        <button class="yp-dr__replay" type="button" data-yp-drgo><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>Поехали</button>
+        <span class="yp-dr__note">схема · не в масштабе</span>
+      </div>
+      <ol class="yp-dr__steps" data-yp-drsteps>
+        <li><b>Центр Салехарда</b><span>Выезжайте на дорогу в сторону Горнокнязевска.</span></li>
+        <li><b>Дорога на Горнокнязевск</b><span>Прямо по трассе мимо аэропорта, без поворотов.</span></li>
+        <li><b>12-й км — арка с оленями</b><span>Въезд справа, над ним надпись «Ямал Парк».</span></li>
+        <li><b>Парковка и администрация</b><span>Парковка на 50 машин, администратор подскажет дорогу к домику.</span></li>
+        <a class="yp-btn yp-btn--green" href="https://yandex.ru/maps/?mode=routes&amp;rtext=~66.568040%2C66.860055&amp;rtt=auto" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a>
+      </ol>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("drive"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
+  var q = function(s){ return sec.querySelector(s); }, NS = "http://www.w3.org/2000/svg";
+  var road = q("[data-yp-drroad]"), trail = q("[data-yp-drtrail]"), car = q("[data-yp-drcar]"), L = road.getTotalLength();
+  var kmV = q("[data-yp-drkmv]"), minV = q("[data-yp-drmin]"), steps = [].slice.call(sec.querySelectorAll("[data-yp-drsteps] li")), pops = [].slice.call(sec.querySelectorAll("[data-yp-drpop]"));
+  /* ёлочки вокруг дороги */
+  var trees = q("[data-yp-drtrees]"), seed = 5, rnd = function(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }, d = "";
+  for(var i = 0; i < 90; i++){ var x = 300 + rnd()*700, y = 60 + rnd()*500; var p = road.getPointAtLength(Math.min(L, Math.max(0, (x - 150)/700*L))); if(Math.abs(y - p.y) < 40 || (x > 780 && x < 900 && y > 190 && y < 400)) continue; var h = 10 + rnd()*12; d += "M" + x.toFixed(0) + "," + y.toFixed(0) + "l" + (h*.4).toFixed(1) + "," + h.toFixed(1) + "h-" + (h*.8).toFixed(1) + "z"; }
+  var tp = document.createElementNS(NS, "path"); tp.setAttribute("class", "tree"); tp.setAttribute("d", d); trees.appendChild(tp);
+  /* отметки километров: 0, 4, 8, 12 */
+  var km = q("[data-yp-drkm]");
+  [0, 4, 8].forEach(function(k){ var pt = road.getPointAtLength(L*k/12); var g = document.createElementNS(NS, "g");
+    g.innerHTML = '<circle cx="' + pt.x + '" cy="' + (pt.y - 26) + '" r="13"/><text x="' + pt.x + '" y="' + (pt.y - 22) + '" text-anchor="middle">' + k + "</text>"; km.appendChild(g); });
+  trail.style.strokeDasharray = L; trail.style.strokeDashoffset = L;
+  function place(t){
+    var len = L*t, pt = road.getPointAtLength(len), pt2 = road.getPointAtLength(Math.min(L, len + 2)), a = Math.atan2(pt2.y - pt.y, pt2.x - pt.x)*180/Math.PI;
+    car.setAttribute("transform", "translate(" + pt.x.toFixed(1) + " " + (pt.y - 2).toFixed(1) + ") rotate(" + a.toFixed(1) + ")");
+    trail.style.strokeDashoffset = (L - len).toFixed(1);
+    kmV.textContent = Math.round(12*t); minV.textContent = Math.round(16*t);
+    var st = t < .02 ? 0 : t < .85 ? 1 : t < .99 ? 2 : 3;
+    steps.forEach(function(li, i){ li.classList.toggle("is-on", i <= st); });
+    pops.forEach(function(g){ var k = +g.getAttribute("data-yp-drpop"); g.classList.toggle("is-on", (k === 0 && t > .15) || (k === 2 && t > .8) || (k === 3 && t > .97)); });
+  }
+  var raf = 0, start = 0, DUR = 6500;
+  function ease(x){ return x < .5 ? 2*x*x : 1 - Math.pow(-2*x + 2, 2)/2; }
+  function frame(now){ if(!start) start = now; var t = Math.min(1, (now - start)/DUR); place(ease(t)); if(t < 1) raf = requestAnimationFrame(frame); }
+  function go(){ cancelAnimationFrame(raf); start = 0; if(window.YP && YP.reduced){ place(1); return; } raf = requestAnimationFrame(frame); }
+  place(0);
+  q("[data-yp-drgo]").addEventListener("click", go);
+  if(window.IntersectionObserver) new IntersectionObserver(function(e, o){ if(e[0].isIntersecting){ o.disconnect(); setTimeout(go, 400); } }, {threshold:.45}).observe(q(".yp-dr__map")); else place(1);
+})();
+</script>
+
+<!-- 17 · Погода и сияние: сейчас в Ямал Парке + 4 дня (Open-Meteo) и шанс северного сияния каждую ночь (NOAA Kp × облачность, YP.forecast).
+     Данные живые; если запросы недоступны — снимок на момент сборки (tilda/00-snapshot.html), с подписью «Данные на …». -->
+<style>
+.yp-wx{padding-block:clamp(56px,8vw,120px)}
+.yp-wx__head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.yp-wx__head .yp-lead{margin:0}
+.yp-wx__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(12px,1.4vw,18px);margin-top:clamp(26px,3vw,40px)}
+.yp-wx__now{position:relative;overflow:hidden;border-radius:28px;padding:clamp(22px,2.4vw,32px);color:#fff;background:linear-gradient(160deg,#1E3D5C,#0B1726);min-height:320px;display:flex;flex-direction:column;isolation:isolate}
+.yp-wx__now::after{content:"";position:absolute;inset:auto -20% -40% -20%;height:70%;z-index:-1;background:radial-gradient(50% 60% at 50% 100%,rgba(92,255,192,.28),transparent 70%)}
+.yp-wx__now small{font:500 12px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:#9FB6C8}
+.yp-wx__t{display:flex;align-items:flex-start;gap:12px;margin-top:14px}
+.yp-wx__t b{font:300 clamp(64px,7vw,104px)/.9 var(--yp-fd);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.yp-wx__t svg{width:64px;height:64px;flex:0 0 auto;margin-top:6px}
+.yp-wx__cond{margin-top:10px;font-size:18px}
+.yp-wx__meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:auto;padding-top:22px;font-size:14px;color:#C8D6E0}
+.yp-wx__meta span{display:block;font:500 11px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:#8EA6B8;margin-bottom:3px}
+.yp-wx__days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)}
+.yp-wd{position:relative;border-radius:24px;padding:20px 18px 18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);display:flex;flex-direction:column;gap:10px;transition:transform .45s var(--yp-ease),box-shadow .45s}
+.yp-wd:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(20,30,25,.35)}
+.yp-wd__d{font:600 15px var(--yp-f)}
+.yp-wd__d small{display:block;font:500 12px var(--yp-mono);letter-spacing:.04em;color:var(--yp-muted);margin-top:2px;font-weight:500}
+.yp-wd svg{width:52px;height:52px}
+.yp-wd__tt{display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.yp-wd__tt b{font:300 34px/1 var(--yp-fd);letter-spacing:-.04em}
+.yp-wd__tt span{color:var(--yp-muted);font-size:16px}
+.yp-wd__m{font-size:13px;color:var(--yp-muted);display:grid;gap:2px}
+.yp-wd__au{margin-top:auto;display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:14px;background:#0B1520;color:#fff;font-size:13px}
+.yp-wd__au i{flex:0 0 auto;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.yp-wd__au b{font-weight:600}
+.yp-wx__note{margin-top:14px;font-size:13px;color:var(--yp-muted)}
+.yp-wx__note a{color:inherit}
+/* анимация значков */
+.yp-ic .sun{transform-origin:32px 32px;animation:ypSpin 18s linear infinite}
+.yp-ic .cl{animation:ypDrift 5s ease-in-out infinite alternate}
+.yp-ic .dr{animation:ypDrop 1.2s linear infinite}
+.yp-ic .dr:nth-child(2n){animation-delay:-.6s}
+@keyframes ypSpin{to{transform:rotate(360deg)}}
+@keyframes ypDrift{to{transform:translateX(4px)}}
+@keyframes ypDrop{0%{transform:translateY(-4px);opacity:0}30%{opacity:1}100%{transform:translateY(8px);opacity:0}}
+@media (max-width:1000px){.yp-wx__grid{grid-template-columns:minmax(0,1fr)}.yp-wx__days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.yp-ic *{animation:none!important}}
+</style>
+<section class="yp yp-wx" id="weather">
+  <div class="yp-wrap">
+    <div class="yp-wx__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Погода и сияние</span><h2 class="yp-h2" data-yp-split>Что ждёт <b>в Ямал Парке</b></h2></div>
+      <p class="yp-lead">Погода на 4 дня и шанс увидеть северное сияние каждую ночь. Сияние видно с сентября по апрель в ясные тёмные ночи.</p>
+    </div>
+    <div class="yp-wx__grid">
+      <article class="yp-wx__now" data-yp-reveal>
+        <small>Сейчас · Ямал Парк, 12-й км</small>
+        <div class="yp-wx__t"><b data-yp-wxt>—</b><span data-yp-wxi></span></div>
+        <div class="yp-wx__cond" data-yp-wxc>Загружаем погоду…</div>
+        <div class="yp-wx__meta">
+          <div><span>Ветер</span><b data-yp-wxw>—</b></div>
+          <div><span>Облачность</span><b data-yp-wxcl>—</b></div>
+          <div><span>Восход</span><b data-yp-wxsr>—</b></div>
+          <div><span>Закат</span><b data-yp-wxss>—</b></div>
+        </div>
+      </article>
+      <div class="yp-wx__days" data-yp-wxd></div>
+    </div>
+    <p class="yp-wx__note"><span data-yp-wxst></span> · Погода — Open-Meteo, сияние — индекс Kp NOAA SWPC с учётом облачности над Салехардом. <a href="#forecast">Почасовой прогноз сияния →</a></p>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("weather"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  function q(s){ return sec.querySelector(s); }
+  /* на странице без прогноза сияния ссылка «Почасовой прогноз» ведёт на главную, к прогнозу (проверяем, когда все блоки уже на странице) */
+  function fcLink(){ if(document.getElementById("forecast")) return; var a = sec.querySelector('a[href="#forecast"]'); if(!a) return;
+    var h = YP.langHref ? YP.langHref("/#forecast") : "/#forecast"; a.setAttribute("href", YP.protoHref ? YP.protoHref(h) : h); }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fcLink); else fcLink();
+  var ICON = {
+    sun:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><g class="sun" stroke="#F5B53D"><circle cx="32" cy="32" r="11" fill="#FFD36B"/><path d="M32 8v7M32 49v7M8 32h7M49 32h7M15 15l5 5M44 44l5 5M49 15l-5 5M20 44l-5 5"/></g></svg>',
+    partly:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><g class="sun" stroke="#F5B53D"><circle cx="24" cy="24" r="9" fill="#FFD36B"/><path d="M24 6v5M6 24h5M11 11l4 4M37 11l-4 4"/></g><path class="cl" d="M22 50h26a9 9 0 0 0 0-18 13 13 0 0 0-25 3 8 8 0 0 0-1 15z" fill="#DDE6EE" stroke="#9EB1C1"/></svg>',
+    cloud:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 48h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#D3DCE4" stroke="#8FA3B4"/></svg>',
+    fog:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke="#9AAAB8" stroke-width="3" stroke-linecap="round"><path class="cl" d="M12 24h40M8 34h48M14 44h36"/></svg>',
+    rain:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 38h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#C9D3DC" stroke="#8FA3B4"/><g stroke="#5B8FD6"><path class="dr" d="M24 44l-2 6"/><path class="dr" d="M33 44l-2 6"/><path class="dr" d="M42 44l-2 6"/></g></svg>',
+    snow:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 38h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#DCE5EC" stroke="#8FA3B4"/><g fill="#8FB8E8"><circle class="dr" cx="24" cy="47" r="2.5"/><circle class="dr" cx="33" cy="47" r="2.5"/><circle class="dr" cx="42" cy="47" r="2.5"/></g></svg>',
+    storm:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 36h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#B8C4CF" stroke="#7E91A2"/><path d="M33 38l-6 10h8l-4 10" stroke="#F5B53D"/></svg>'
+  };
+  var AU = ["#7C8B95", "#8FD96B", "#5CFFC0", "#C9A3FF"];
+  var hm = function(s){ return s ? s.slice(11, 16) : "—"; };
+  Promise.all([YP.live || Promise.resolve(null), YP.daily || Promise.resolve(null), YP.forecast || Promise.resolve(null)]).then(function(r){
+    var w = r[0] && r[0].weather, D = r[1], F = r[2];
+    if(w){
+      var cond = YP.wmo(w.code), tEl = q("[data-yp-wxt]");
+      q("[data-yp-wxi]").innerHTML = ICON[cond.i] || ICON.cloud;
+      q("[data-yp-wxc]").textContent = cond.t + (w.isDay ? "" : " · ночь");
+      q("[data-yp-wxw]").textContent = w.wind + " м/с"; q("[data-yp-wxcl]").textContent = w.cloud + "%";
+      if(G && !YP.reduced){ var o = {v:0}; G.to(o, {v:w.temp, duration:1.6, ease:"power3.out", scrollTrigger:{trigger:sec, start:"top 80%", once:true}, onUpdate:function(){ tEl.textContent = YP.fmtTemp(Math.round(o.v)); }}); }
+      else tEl.textContent = YP.fmtTemp(w.temp);
+    } else q("[data-yp-wxc]").textContent = "Нет связи с метеосервисом";
+    if(D && D.time){
+      q("[data-yp-wxsr]").textContent = hm(D.sunrise[0]); q("[data-yp-wxss]").textContent = hm(D.sunset[0]);
+      var nights = {}; (F && F.nights || []).forEach(function(n){ nights[n.date] = n; });
+      q("[data-yp-wxd]").innerHTML = D.time.map(function(d, i){
+        var day = new Date(d + "T12:00:00Z"), c = YP.wmo(D.weather_code[i]), n = nights[d];
+        var name = i === 0 ? "Сегодня" : i === 1 ? "Завтра" : new Intl.DateTimeFormat(YP.loc, {weekday:"long", timeZone:"UTC"}).format(day);
+        var au = n ? (n.polarDay ? "Белые ночи — сияния нет" : "Сияние ночью: <b>" + n.text.toLowerCase() + "</b>" + (n.level >= 1 && n.best && n.best.time ? " · " + n.best.time : "")) : "Сияние: прогноз позже";
+        return '<article class="yp-wd"><div class="yp-wd__d">' + name.charAt(0).toUpperCase() + name.slice(1) + "<small>" + new Intl.DateTimeFormat(YP.loc, {day:"numeric", month:"long", timeZone:"UTC"}).format(day) + "</small></div>" +
+          (ICON[c.i] || ICON.cloud) + '<div class="yp-wd__tt"><b>' + YP.fmtTemp(Math.round(D.temperature_2m_max[i])) + "</b><span>" + YP.fmtTemp(Math.round(D.temperature_2m_min[i])) + "</span></div>" +
+          '<div class="yp-wd__m"><span>' + c.t + "</span><span>Осадки " + (D.precipitation_probability_max[i] != null ? D.precipitation_probability_max[i] + "%" : "—") + " · ветер до " + Math.round(D.wind_speed_10m_max[i]) + " м/с</span></div>" +
+          '<div class="yp-wd__au" style="--c:' + AU[n ? n.level : 0] + '"><i></i><span>' + au + "</span></div></article>";
+      }).join("");
+      if(G && window.ScrollTrigger && !YP.reduced) G.fromTo(sec.querySelectorAll(".yp-wd"), {y:50, opacity:0, rotateX:-20}, {y:0, opacity:1, rotateX:0, duration:.9, ease:"power3.out", stagger:.1, clearProps:"transform,opacity", scrollTrigger:{trigger:sec, start:"top 80%", once:true}});
+    } else q("[data-yp-wxd]").innerHTML = '<p class="yp-wx__note">Прогноз погоды временно недоступен.</p>';
+    q("[data-yp-wxst]").textContent = YP.dataStamp ? YP.dataStamp() : "";
+  });
+})();
+</script>
+
+<!-- 16 · Видео-прогулка по Ямал Парку: короткие ролики по каждому объекту (снято владельцем, 1280×720, без звука).
+     Ролики идут подряд как «истории»: закончился один — начинается следующий. Набор зависит от страницы:
+     главная — все, /glamping — купол и «Волк», /bani — «Брусника», /events — шатёр и парк.
+     Для Tilda загрузите img/video/*.mp4 на свой хостинг или в облако и замените пути (см. README). -->
+<style>
+.yp-wk{padding-block:clamp(56px,9vw,140px);overflow:hidden}
+.yp-wk__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-wk__head .yp-lead{margin:0}
+.yp-wk__stage{position:relative;margin-top:clamp(28px,3vw,40px);border-radius:30px;overflow:hidden;aspect-ratio:16/9;background:#0b1118;box-shadow:0 50px 90px -45px rgba(0,0,0,.8);isolation:isolate}
+.yp-wk__stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .9s,transform 1.4s var(--yp-ease)}
+.yp-wk__stage video.is-on{opacity:1;transform:none}
+.yp-wk__stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,16,.55),transparent 22%,transparent 62%,rgba(6,10,16,.8))}
+.yp-wk__bars{position:absolute;left:22px;right:22px;top:18px;z-index:2;display:flex;gap:6px}
+.yp-wk__bars button{flex:1;height:20px;border:0;padding:8px 0;background-clip:content-box!important;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden;cursor:pointer}
+.yp-wk__bars i{display:block;height:100%;width:0;background:#fff}
+.yp-wk__bars button.is-done i{width:100%}
+.yp-wk__title{position:absolute;left:24px;top:38px;z-index:2;color:#fff;max-width:70%}
+.yp-wk__title small{display:block;font:500 12px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--yp-aurora)}
+.yp-wk__title b{display:block;margin-top:8px;font:300 clamp(22px,2.6vw,40px)/1.05 var(--yp-fd);letter-spacing:-.02em}
+.yp-wk__ui{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:center;gap:14px;padding:18px 22px;color:#fff}
+.yp-wk__btn{flex:0 0 auto;width:50px;height:50px;border-radius:50%;border:0;background:#fff;color:var(--yp-ink);cursor:pointer;display:grid;place-items:center;transition:transform .3s var(--yp-ease)}
+.yp-wk__btn:hover{transform:scale(1.08)}
+.yp-wk__btn svg{width:18px;height:18px}
+.yp-wk__btn--ghost{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.yp-wk__cap{flex:1;font:500 13px/1.45 var(--yp-mono);letter-spacing:.04em;min-width:0}
+.yp-wk__nav{display:flex;gap:10px;margin-top:14px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px;scroll-snap-type:x proximity}
+.yp-wk__nav::-webkit-scrollbar{display:none}
+.yp-wk__nav button{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:0;border-radius:16px;background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1px var(--yp-line);scroll-snap-align:start;transition:background .3s,color .3s,transform .4s var(--yp-ease)}
+.yp-wk__nav button:hover{transform:translateY(-3px)}
+.yp-wk__nav button[aria-selected="true"]{background:var(--yp-ink);color:#fff;box-shadow:none}
+.yp-wk__nav img{width:64px;height:42px;border-radius:11px;object-fit:cover}
+.yp-wk__nav b{display:block;font:600 14px/1.2 var(--yp-f);white-space:nowrap}
+.yp-wk__nav small{display:block;font-size:12px;opacity:.6;white-space:nowrap}
+.yp-wk.is-single .yp-wk__nav,.yp-wk.is-single .yp-wk__bars{display:none}
+.yp-wk__chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.yp-wk__chips span{font-size:14px;padding:8px 12px;border-radius:999px;background:var(--yp-paper);box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-wk__stage video.yp-wk__real{z-index:1;opacity:0;transform:scale(1.05);transition:opacity 1s,transform 1.6s var(--yp-ease)}
+.yp-wk__stage video.yp-wk__real.is-on{opacity:1;transform:none}
+.yp-wk__fx{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.yp-wk__fxp{position:absolute;right:20px;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;align-items:flex-end;gap:10px;max-width:46%}
+.yp-wk__fxp[hidden]{display:none}
+.yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
+.yp-wk__say.is-on{opacity:1;transform:none}
+.yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
+.yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
+.yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
+.yp-wk__fxb svg{width:16px;height:16px;flex:0 0 auto}
+@media (max-width:900px){.yp-wk__fxp{right:12px;top:auto;bottom:84px;transform:none;max-width:70%}.yp-wk__fxb{flex-direction:row;flex-wrap:wrap;justify-content:flex-end}.yp-wk__fxb small{width:100%;text-align:right}.yp-wk__fxb button{padding:8px 10px}}
+@media (max-width:900px){.yp-wk__head{grid-template-columns:minmax(0,1fr)}.yp-wk__stage{aspect-ratio:1/1;border-radius:22px}.yp-wk__title{max-width:88%}.yp-wk__fs{display:none}}
+</style>
+<section class="yp yp-wk" id="walk">
+  <div class="yp-wrap">
+    <div class="yp-wk__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Видео-прогулка</span><h2 class="yp-h2" data-yp-split>Пройдитесь <b>по Ямал Парку</b></h2></div>
+      <p class="yp-lead" data-yp-reveal>Каждый дом, баня и площадка — в коротком ролике. Ролики идут подряд, а в банях можно включить дождь, туман и пар прямо на видео.</p>
+    </div>
+    <div class="yp-wk__stage" data-yp-wks data-yp-cursor="Пауза">
+      <video class="yp-wk__real" data-yp-wkreal muted playsinline loop preload="none" aria-hidden="true"></video>
+      <canvas class="yp-wk__fx" data-yp-wkfx aria-hidden="true"></canvas>
+      <div class="yp-wk__fxp" data-yp-wkfxp hidden><span class="yp-wk__say" data-yp-wksay></span><div class="yp-wk__fxb" data-yp-wkfxb></div></div>
+      <div class="yp-wk__bars" data-yp-wkb></div>
+      <div class="yp-wk__title" aria-live="polite"><small data-yp-wkk></small><b data-yp-wkt></b></div>
+      <div class="yp-wk__ui">
+        <button class="yp-wk__btn" type="button" data-yp-wkp aria-label="Пауза"></button>
+        <span class="yp-wk__cap" data-yp-wkc></span>
+        <button class="yp-wk__btn yp-wk__btn--ghost yp-wk__fs" type="button" data-yp-wkf aria-label="На весь экран"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg></button>
+      </div>
+    </div>
+    <div class="yp-wk__nav" role="tablist" aria-label="Выберите объект" data-yp-wkn></div>
+    <div class="yp-wk__chips" data-yp-wkch></div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("walk"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  /* video — снятые ролики; photo — фото-прогулка из фотографий (медленный наезд и панорама) */
+  var V = "Видео", F = "Фото-прогулка";
+  var ALL = {
+    park:{kick:"Ямал Парк за минуту", title:"Зима в парке", src:"https://artsevershop-create.github.io/yamalpark/img/video/promo", short:"Весь парк", sub:V + " · 1 мин",
+          cap:"Тайга в инее · купол · чум · бани · гости", chips:["Ролик о парке","Зима на Полярном круге","Для всей семьи"]},
+    dome:{kick:"Глэмпинг · " + V, title:"Купольный домик", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-dome", short:"Купольный домик", sub:V + " · 46 с",
+          cap:"Мостик к куполу · спальня · антресоль · столик у окна · кухня · душ · мангал · терраса", chips:["Панорамное окно","Антресоль","Печь","Терраса с креслами"]},
+    volk:{kick:"Глэмпинг · " + V, title:"Дом «Волк»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-volk", short:"Дом «Волк»", sub:V + " · 29 с",
+          cap:"Прихожая · гостиная · кухня · спальня · ванная", chips:["Светлый интерьер","Кухня с кофемашиной","Спальня 160×200","Терраса"]},
+    medved:{kick:"Глэмпинг · " + V, title:"Дом «Медведь»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-medved", short:"Дом «Медведь»", sub:V + " · 35 с",
+          cap:"Прихожая · душ · гостиная · спальня · кухня · люстра-«птицы» · терраса", chips:["Уютный интерьер","Кухня-гостиная","Спальня 160×200","Мангальная зона"]},
+    moroshka:{kick:"Умные бани · " + V, title:"Баня «Морошка»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-moroshka", short:"Баня «Морошка»", sub:V + " · 35 с",
+          cap:"Вход · комната отдыха · душ · парная · туман по полу в фито-сауне", chips:["Парная до 100 °C","Фито-сауна","Алиса"],
+          fx:["rain","steam","fog","wind","fito"], alice:true, real:{fog:"https://artsevershop-create.github.io/yamalpark/img/video/fx-fog-moroshka"}},
+    brusnika:{kick:"Умные бани · " + V, title:"Баня «Брусника»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-brusnika", short:"Баня «Брусника»", sub:V + " · 38 с",
+          cap:"Прихожая · комната отдыха · каменка · панель Алисы · парная · туман по полу", chips:["Комната отдыха","Кухня","Парная","Хаммам"],
+          fx:["rain","steam","fog"], alice:true, real:{fog:"https://artsevershop-create.github.io/yamalpark/img/video/fx-fog-brusnika"}},
+    chernika:{kick:"Умные бани · " + V, title:"Баня «Черника»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-chernika", short:"Баня «Черника»", sub:V + " · 23 с",
+          cap:"Баня снаружи · кухня и комната отдыха · душ · парная с подсветкой", chips:["Печь на дровах","До 8 гостей","Дождь и ветер по кнопкам"],
+          fx:["rain","wind"], alice:false},
+    grill23:{kick:"Гриль-дома · " + V, title:"Гриль-дома №2 и №3", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-grill23", short:"Гриль-дома №2–3", sub:V + " · 12 с",
+          cap:"Терраса с шезлонгами · дом · зал · гриль под вытяжкой · окна в тайгу", chips:["15–20 гостей","12:00–22:00","Гриль под вытяжкой"]},
+    grill1:{kick:"Гриль-дома · " + V, title:"Гриль-дом №1", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-grill1", short:"Гриль-дом №1", sub:V + " · 17 с",
+          cap:"Терраса · дом · зал со столом · гриль под вытяжкой · светильники", chips:["15–20 гостей","Гриль в центре","Лавки вокруг гриля"]},
+    guest:{kick:"Гостевые дома · " + F, title:"Гостевые дома №1 и №2", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-guest", short:"Гостевые дома", sub:F + " · 12 с",
+          cap:"Дом №1 · комната · зал со столом · дом №2 и гриль-зона", chips:["20–25 гостей","Гриль-зона рядом","Стол и 4 лавки"]},
+    chum:{kick:"Этно · " + V, title:"Чум и смотровая площадка", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-chum", short:"Чум", sub:V + " · 25 с",
+          cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
+    tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
+          cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
+    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
+          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
+          cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
+    deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
+          cap:"Общий вольер под лиственницами · косуля и две козы", chips:["Вход бесплатный","Для всей семьи"]},
+    arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
+          cap:"Арка «Ямал Парк» · тайга в инее", chips:["12-й км дороги на Горнокнязевск","Парковка на 50 машин"]}
+  };
+  var p = location.pathname, SET =
+    /glamping/.test(p) ? ["dome","volk","medved"] :
+    /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
+    /grill/.test(p)    ? ["grill23","grill1","guest"] :
+    /etno/.test(p)     ? ["chum"] :
+    /events/.test(p)   ? ["tent","banquet","park"] :
+    /contacts/.test(p) ? ["arch","park"] :
+    /zoo/.test(p)      ? ["lynx","deer"] :
+    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
+  var L = SET.map(function(k){ return ALL[k]; }), cur = 0, playing = !YP.reduced, inView = false;
+  if(L.length === 1) sec.classList.add("is-single");
+  var stage = sec.querySelector("[data-yp-wks]"), bars = sec.querySelector("[data-yp-wkb]"), nav = sec.querySelector("[data-yp-wkn]"), btn = sec.querySelector("[data-yp-wkp]");
+  var PAUSE = '<svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg>',
+      PLAY = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
+  /* видео, полосы «историй» и кнопки объектов */
+  var vids = L.map(function(o, i){
+    var v = document.createElement("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = i === 0 ? "metadata" : "none";
+    v.poster = o.src + ".jpg"; v.src = o.src + ".mp4"; v.setAttribute("aria-label", "Видео: " + o.title);
+    v.loop = L.length === 1; stage.insertBefore(v, bars); return v;
+  });
+  bars.innerHTML = L.map(function(o, i){ return '<button type="button" aria-label="' + o.title + '"><i></i></button>'; }).join("");
+  nav.innerHTML = L.map(function(o, i){ return '<button type="button" role="tab" aria-selected="false" data-i="' + i + '"><img src="' + o.src + '.jpg" alt="" loading="lazy"><span><b>' + o.short + "</b><small>" + o.sub + "</small></span></button>"; }).join("");
+  var barEls = [].slice.call(bars.children), navEls = [].slice.call(nav.children);
+  function sync(){
+    vids.forEach(function(v, i){ if(i === cur && playing && inView) v.play().catch(function(){}); else v.pause(); });
+    btn.innerHTML = playing ? PAUSE : PLAY; btn.setAttribute("aria-label", playing ? "Пауза" : "Смотреть");
+    stage.setAttribute("data-yp-cursor", playing ? "Пауза" : "Смотреть");
+  }
+  /* ---------- эффекты бани поверх видео: дождь, вьюга (пар на каменку), туман, ветер, фито ---------- */
+  var FXI = {
+    rain:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2v4M8 4v4M12 2v4M4 10v4M8 12v2M12 10v4"/></svg>',
+    steam:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14c-2-3 2-4 0-7M8 14c-2-3 2-4 0-7M12 14c-2-3 2-4 0-7"/></svg>',
+    fog:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h12M1 8h14M3 11h10"/></svg>',
+    wind:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h9a2 2 0 1 0-2-2M1 10h12a2 2 0 1 1-2 2"/></svg>',
+    fito:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 14V6M8 9C5 9 3 7 3 4c3 0 5 2 5 5zM8 8c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg>'
+  };
+  var FXN = {rain:"дождь", steam:"вьюгу", fog:"туман", wind:"ветер", fito:"фито"}, FXL = {rain:"Дождь", steam:"Вьюга · пар", fog:"Туман", wind:"Ветер", fito:"Фито"};
+  var fxCv = sec.querySelector("[data-yp-wkfx]"), fctx = fxCv.getContext("2d"), FP = [], FW = 0, FH = 0, fraf = 0, fxOn = null, fxUser = 0, fxDemo = 0;
+  var fxp = sec.querySelector("[data-yp-wkfxp]"), fxb = sec.querySelector("[data-yp-wkfxb]"), say = sec.querySelector("[data-yp-wksay]");
+  function fsize(){ var r = fxCv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); FW = r.width; FH = r.height; fxCv.width = FW*d; fxCv.height = FH*d; fctx.setTransform(d,0,0,d,0,0); }
+  function spawn(k, init){
+    var q = {k:k, a:0, x:Math.random()*FW, y:init ? Math.random()*FH : -20};
+    if(k === "rain"){ q.vx = -1.4; q.vy = 15 + Math.random()*9; q.l = 16 + Math.random()*18; }
+    if(k === "steam"){ q.x = FW*(.2 + Math.random()*.6); q.y = init ? FH*(.3 + Math.random()*.7) : FH + 40; q.vx = (Math.random()-.5)*.9; q.vy = -(1.3 + Math.random()*2); q.r = 40 + Math.random()*60; q.g = .6 + Math.random()*1; q.w = Math.random()*6.28; }
+    if(k === "fog"){ q.y = FH*(.25 + Math.random()*.75); q.vx = (Math.random() < .5 ? -1 : 1)*(.2 + Math.random()*.4); q.vy = 0; q.r = 160 + Math.random()*260; }
+    if(k === "wind"){ q.x = init ? q.x : -200; q.y = Math.random()*FH; q.vx = 18 + Math.random()*14; q.vy = Math.random()*.6 - .3; q.l = 80 + Math.random()*160; }
+    if(k === "fito"){ q.y = init ? q.y : FH + 20; q.vx = 0; q.vy = -(.7 + Math.random()*1.2); q.r = 3 + Math.random()*5; q.w = Math.random()*6.28; q.rot = Math.random()*6.28; q.c = Math.random() < .6 ? "120,200,90" : "200,215,110"; }
+    return q;
+  }
+  var FXC = {rain:220, steam:40, fog:18, wind:46, fito:80};
+  var real = sec.querySelector("[data-yp-wkreal]");
+  function setFx(k){
+    fxOn = k; FP.forEach(function(q){ q.dying = true; });
+    /* если для эффекта есть настоящая съёмка (туман в «Бруснике» и «Морошке») — показываем её поверх ролика */
+    var o = L[cur], src = k && o && o.real && o.real[k];
+    if(src){ if(real.getAttribute("data-src") !== src){ real.setAttribute("data-src", src); real.poster = src + ".jpg"; real.src = src + ".mp4"; }
+      real.currentTime = 0; real.play().catch(function(){}); real.classList.add("is-on"); vids[cur] && vids[cur].pause(); }
+    else if(real.classList.contains("is-on")){ real.classList.remove("is-on"); setTimeout(function(){ if(!real.classList.contains("is-on")) real.pause(); }, 1000); if(playing && inView && vids[cur]) vids[cur].play().catch(function(){}); }
+    if(k && !src && !YP.reduced) for(var i = 0; i < FXC[k]; i++) FP.push(spawn(k, true));
+    if(src && !YP.reduced) for(var j = 0; j < 6; j++) FP.push(spawn("fog", true));
+    fxb.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-fx") === k)); });
+    if(!fraf) fraf = requestAnimationFrame(floop);
+  }
+  function floop(){
+    fraf = 0; if(!FW) fsize(); fctx.clearRect(0, 0, FW, FH);
+    for(var i = FP.length - 1; i >= 0; i--){
+      var q = FP[i]; q.a = q.dying ? q.a - .035 : Math.min(1, q.a + .03);
+      if(q.dying && q.a <= 0){ FP.splice(i, 1); continue; }
+      q.x += q.vx; q.y += q.vy;
+      if(q.k === "rain"){ fctx.strokeStyle = "rgba(205,228,255," + (.5*q.a) + ")"; fctx.lineWidth = 1.3; fctx.beginPath(); fctx.moveTo(q.x, q.y); fctx.lineTo(q.x + q.vx*1.5, q.y + q.l); fctx.stroke(); if(q.y > FH){ q.y = -20; q.x = Math.random()*FW; } }
+      else if(q.k === "steam"){ q.w += .02; q.x += Math.sin(q.w)*.6; q.r += q.g; var fd = Math.max(0, 1 - q.r/320), sg = fctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, q.r); sg.addColorStop(0, "rgba(255,250,245," + (.36*q.a*fd) + ")"); sg.addColorStop(1, "rgba(255,250,245,0)"); fctx.fillStyle = sg; fctx.fillRect(q.x-q.r, q.y-q.r, q.r*2, q.r*2); if(q.r > 320 || q.y < -q.r){ q.x = FW*(.2 + Math.random()*.6); q.y = FH + 40; q.r = 40 + Math.random()*60; } }
+      else if(q.k === "fog"){ var g = fctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, q.r); g.addColorStop(0, "rgba(235,240,245," + (.42*q.a) + ")"); g.addColorStop(1, "rgba(235,240,245,0)"); fctx.fillStyle = g; fctx.fillRect(q.x-q.r, q.y-q.r, q.r*2, q.r*2); if(q.x < -q.r) q.x = FW + q.r; if(q.x > FW + q.r) q.x = -q.r; }
+      else if(q.k === "wind"){ var lg = fctx.createLinearGradient(q.x, q.y, q.x + q.l, q.y); lg.addColorStop(0, "rgba(255,255,255,0)"); lg.addColorStop(1, "rgba(255,255,255," + (.55*q.a) + ")"); fctx.strokeStyle = lg; fctx.lineWidth = 1.3; fctx.beginPath(); fctx.moveTo(q.x, q.y); fctx.quadraticCurveTo(q.x + q.l/2, q.y - 6, q.x + q.l, q.y); fctx.stroke(); if(q.x > FW + 20){ q.x = -q.l - Math.random()*200; q.y = Math.random()*FH; } }
+      else if(q.k === "fito"){ q.w += .03; q.rot += .02; q.x += Math.sin(q.w)*.8; fctx.save(); fctx.translate(q.x, q.y); fctx.rotate(q.rot); fctx.fillStyle = "rgba(" + q.c + "," + (.85*q.a) + ")"; fctx.beginPath(); fctx.ellipse(0, 0, q.r, q.r*.45, 0, 0, 6.28); fctx.fill(); fctx.restore(); if(q.y < -20){ q.y = FH + 20; q.x = Math.random()*FW; } }
+    }
+    if(FP.length && inView) fraf = requestAnimationFrame(floop);
+  }
+  window.addEventListener("resize", function(){ FW = 0; });
+  function speak(k, o){
+    var t = !k ? "" : o.alice ? "«Алиса, включи " + FXN[k] + "»" : "Кнопка «" + FXL[k].toLowerCase() + "»";
+    say.textContent = t; say.classList.toggle("is-on", !!t);
+  }
+  function runFx(k, user){
+    var o = L[cur]; if(!o.fx) return;
+    if(user) fxUser = Date.now();
+    var next = fxOn === k ? null : k; setFx(next); speak(next, o);
+  }
+  function fxPanel(o){
+    clearTimeout(fxDemo); setFx(null); speak(null, o);
+    if(!o.fx){ fxp.hidden = true; return; }
+    fxp.hidden = false;
+    fxb.innerHTML = "<small>" + (o.alice ? "Алиса, включи…" : "Кнопки на панели") + "</small>" + o.fx.map(function(k){ return '<button type="button" aria-pressed="false" data-fx="' + k + '"' + (k === "steam" ? ' title="Вьюга — подача пара на каменку"' : "") + ">" + FXI[k] + FXL[k] + "</button>"; }).join("");
+    /* показ: если никто не нажимал, через 2,5 с включаем первый эффект, потом следующий */
+    if(!YP.reduced){ var n = 0; (function demo(){ fxDemo = setTimeout(function(){ if(L[cur] !== o) return; if(Date.now() - fxUser > 8000 && inView){ runFx(o.fx[n++ % o.fx.length]); } demo(); }, n ? 4500 : 2500); })(); }
+  }
+  fxb.addEventListener("click", function(e){ e.stopPropagation(); var b = e.target.closest("button[data-fx]"); if(b) runFx(b.getAttribute("data-fx"), true); });
+
+  function select(i, user){
+    cur = (i + L.length) % L.length; var o = L[cur];
+    vids.forEach(function(v, k){ v.classList.toggle("is-on", k === cur); if(k === cur && v.preload !== "auto") v.preload = "auto"; });
+    if(vids[cur + 1]) vids[cur + 1].preload = "metadata";
+    barEls.forEach(function(b, k){ b.classList.toggle("is-done", k < cur); if(k >= cur) b.firstChild.style.width = "0"; });
+    navEls.forEach(function(b, k){ b.setAttribute("aria-selected", String(k === cur)); });
+    if(user && navEls[cur]) nav.scrollTo({left:navEls[cur].offsetLeft - 20, behavior:"smooth"});
+    sec.querySelector("[data-yp-wkk]").textContent = o.kick;
+    sec.querySelector("[data-yp-wkt]").textContent = o.title;
+    sec.querySelector("[data-yp-wkc]").textContent = o.cap;
+    sec.querySelector("[data-yp-wkch]").innerHTML = o.chips.map(function(c){ return "<span>" + c + "</span>"; }).join("");
+    if(G && !YP.reduced){
+      G.fromTo(sec.querySelectorAll(".yp-wk__title small,.yp-wk__title b"), {y:24, opacity:0, filter:"blur(8px)"}, {y:0, opacity:1, filter:"blur(0px)", duration:.9, ease:"power3.out", stagger:.08});
+      G.fromTo(sec.querySelectorAll(".yp-wk__chips span"), {y:12, opacity:0}, {y:0, opacity:1, duration:.5, ease:"power3.out", stagger:.05});
+    }
+    fxPanel(o);
+    try{ vids[cur].currentTime = 0; }catch(e){}
+    sync();
+  }
+  vids.forEach(function(v, i){
+    v.addEventListener("timeupdate", function(){ if(i === cur && v.duration && barEls[i]) barEls[i].firstChild.style.width = (v.currentTime / v.duration * 100) + "%"; });
+    v.addEventListener("ended", function(){ if(i === cur && L.length > 1) select(cur + 1); });
+  });
+  nav.addEventListener("click", function(e){ var b = e.target.closest("button[data-i]"); if(b){ playing = true; select(+b.getAttribute("data-i"), true); } });
+  bars.addEventListener("click", function(e){ var b = e.target.closest("button"); if(b){ playing = true; select(barEls.indexOf(b), true); } });
+  btn.addEventListener("click", function(e){ e.stopPropagation(); playing = !playing; sync(); });
+  stage.addEventListener("click", function(e){ if(e.target.closest("button")) return; playing = !playing; sync(); });
+  sec.querySelector("[data-yp-wkf]").addEventListener("click", function(e){
+    e.stopPropagation(); var v = vids[cur];
+    if(v.requestFullscreen) v.requestFullscreen(); else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+  });
+  if(window.IntersectionObserver) new IntersectionObserver(function(e){ inView = e[0].isIntersecting; sync(); }, {threshold:.35}).observe(stage);
+  else inView = true;
+  /* вход блока: видео-окно раскрывается из узкой полосы */
+  if(G && window.ScrollTrigger && !YP.reduced)
+    G.fromTo(stage, {clipPath:"inset(18% 10% 18% 10% round 30px)"}, {clipPath:"inset(0% 0% 0% 0% round 30px)", ease:"none", scrollTrigger:{trigger:stage, start:"top 90%", end:"top 35%", scrub:true}});
+  select(0);
+})();
+</script>
+
+<!-- Контакты · 03 · Интерактивная карта комплекса (схема 2026). Точки — window.YP_MAP (map-points.js встроен ниже).
+     Фильтры по категориям, всплывающая карточка с переходом на страницу, переключатель «Лето / Зима» (зима — стилизация + снег) -->
+<style>
+.yp-map{padding-block:clamp(60px,7vw,110px) clamp(90px,10vw,150px)}
+.yp-map__head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.yp-map__ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-top:clamp(24px,3vw,36px);align-items:center}
+.yp-map__f{border:0;border-radius:999px;padding:10px 16px;font:600 14px var(--yp-f);background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--yp-line);transition:background .3s,color .3s}
+.yp-map__f[aria-pressed="true"]{background:var(--yp-ink);color:#fff;box-shadow:none}
+.yp-map__f i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:0;background:var(--c)}
+.yp-map__season{margin-left:auto;display:inline-flex;gap:2px;padding:4px;border-radius:999px;background:var(--yp-paper);box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-map__season button{border:0;background:transparent;border-radius:999px;padding:8px 14px;font:600 13px var(--yp-f);cursor:pointer;color:var(--yp-muted)}
+.yp-map__season button[aria-pressed="true"]{background:var(--yp-blue);color:#fff}
+.yp-map__stage{position:relative;margin-top:16px;border-radius:30px;overflow:hidden;background:#cfe0c4;box-shadow:0 40px 80px -40px rgba(20,30,25,.45)}
+.yp-map__scroll{overflow:auto;scrollbar-width:thin}
+.yp-map__canvas{position:relative;width:100%;min-width:900px;aspect-ratio:2000/1121}
+.yp-map__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter 1.2s}
+.yp-map.is-winter .yp-map__img{filter:saturate(.15) brightness(1.28) contrast(.92) hue-rotate(170deg)}
+.yp-map__snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 1s}
+.yp-map.is-winter .yp-map__snow{opacity:1}
+.yp-pin{position:absolute;margin:-15px 0 0 -15px;width:30px;height:30px;border-radius:50%;border:2.5px solid #fff;background:var(--c);color:#fff;font:600 12px/1 var(--yp-f);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,.35);transition:transform .35s var(--yp-ease),opacity .35s,box-shadow .3s;padding:0}
+.yp-pin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--c);opacity:0;animation:ypPing 2.4s ease-out infinite}
+.yp-pin:hover,.yp-pin.is-on{transform:scale(1.25);z-index:3}
+.yp-pin.is-dim{opacity:.18;transform:scale(.8)}
+.yp-pin.is-dim::after{animation:none}
+@keyframes ypPing{0%{opacity:.7;transform:scale(.8)}100%{opacity:0;transform:scale(1.8)}}
+.yp-pop{position:absolute;z-index:5;width:280px;border-radius:20px;background:#fff;color:var(--yp-ink);padding:18px 18px 16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);transform-origin:50% 100%;pointer-events:auto}
+.yp-pop[hidden]{display:none}
+.yp-pop h4{margin:0 30px 6px 0;font:600 17px/1.25 var(--yp-f)}
+.yp-pop p{margin:0;color:var(--yp-muted);font-size:14px}
+.yp-pop .tag{display:inline-flex;align-items:center;gap:6px;font:500 11px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--yp-muted);margin-bottom:8px}
+.yp-pop .tag i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.yp-pop .x{position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:50%;border:0;background:var(--yp-bg);cursor:pointer;font-size:16px;line-height:1}
+.yp-pop a{display:inline-flex;margin-top:12px;font-weight:600;font-size:14px;color:var(--yp-blue);text-decoration:none}
+.yp-map__legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 20px;margin-top:22px;padding:0;list-style:none}
+.yp-map__legend li button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:8px 6px;border-radius:10px;font:400 14px var(--yp-f);color:var(--yp-ink);cursor:pointer;transition:background .25s}
+.yp-map__legend li button:hover,.yp-map__legend li button.is-on{background:var(--yp-paper)}
+.yp-map__legend li b{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font:600 11px/24px var(--yp-f);text-align:center}
+.yp-map__legend li.is-dim{opacity:.35}
+.yp-map__note{margin-top:12px;font-size:13px;color:var(--yp-muted)}
+@media (max-width:1000px){.yp-map__legend{grid-template-columns:repeat(2,minmax(0,1fr))}.yp-map__season{margin-left:0}}
+@media (max-width:560px){.yp-map__legend{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.yp-pin::after{animation:none}}
+</style>
+<section class="yp yp-map" id="map">
+  <div class="yp-wrap">
+    <div class="yp-map__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Карта комплекса</span><h2 class="yp-h2" data-yp-split>Найдите <b>свой домик</b></h2></div>
+      <p class="yp-lead" style="margin:0">Нажмите на точку, чтобы узнать, что это, и перейти к бронированию.</p>
+    </div>
+    <div class="yp-map__ctrl" data-yp-mf>
+      <button class="yp-map__f" type="button" aria-pressed="true" data-cat="all">Всё</button>
+      <button class="yp-map__f" type="button" aria-pressed="false" data-cat="stay" style="--c:var(--yp-blue)"><i></i>Проживание и залы</button>
+      <button class="yp-map__f" type="button" aria-pressed="false" data-cat="banya" style="--c:var(--yp-red)"><i></i>Бани</button>
+      <button class="yp-map__f" type="button" aria-pressed="false" data-cat="grill" style="--c:#E07A2E"><i></i>Гриль и гостевые дома</button>
+      <button class="yp-map__f" type="button" aria-pressed="false" data-cat="etno" style="--c:#8A6A3D"><i></i>Этно</button>
+      <button class="yp-map__f" type="button" aria-pressed="false" data-cat="zoo" style="--c:var(--yp-green)"><i></i>Мини-зоопарк</button>
+      <button class="yp-map__f" type="button" aria-pressed="false" data-cat="family" style="--c:#2BA6A0"><i></i>Для детей и прогулок</button>
+      <div class="yp-map__season" role="group" aria-label="Сезон на карте"><button type="button" aria-pressed="true" data-season="summer">Лето</button><button type="button" aria-pressed="false" data-season="winter">Зима</button></div>
+    </div>
+    <div class="yp-map__stage" data-yp-reveal>
+      <div class="yp-map__scroll">
+        <div class="yp-map__canvas" data-yp-mc>
+          <img class="yp-map__img" src="https://artsevershop-create.github.io/yamalpark/img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
+          <canvas class="yp-map__snow" aria-hidden="true"></canvas>
+          <div class="yp-pop" data-yp-pop hidden role="dialog" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+    <ul class="yp-map__legend" data-yp-ml></ul>
+    <p class="yp-map__note">Схема комплекса 2026 года. Дома с террасой на 4–6 человек (№21) строятся в 2026 году.</p>
+  </div>
+</section>
+<script>
+/* Точки интерактивной карты — по схеме Ямал Парка 2026 (координаты в % от картинки map-2026.jpg).
+   n — номер из легенды схемы; cat — фильтр; page — куда ведёт кнопка. */
+window.YP_MAP = [
+  {n:1,  cat:"service", name:"Администрация", pts:[[91.2,15.2]], text:"Ресепшен, вопросы и заказ услуг."},
+  {n:2,  cat:"service", name:"Стоянка для автомобилей", pts:[[94.8,24.2],[53.2,37.6],[20.4,48.6],[9.6,58.8]], text:"Парковка на 50 машин."},
+  {n:3,  cat:"family",  name:"Детская площадка", pts:[[93,32.6]], text:"Безопасная игровая площадка для детей."},
+  {n:4,  cat:"zoo",     name:"Вольер с лисами", pts:[[66.8,21.2],[72.4,19.8]], text:"Лисы и песец."},
+  {n:5,  cat:"zoo",     name:"Вольер", pts:[[64.6,15.8]], text:"Вольер мини-зоопарка.", page:"/zoo"},
+  {n:"р", cat:"zoo",    name:"Вольер с рысями", pts:[[31.2,31.6]], text:"Новый вольер с рысями.", page:"/zoo"},
+  {n:6,  cat:"grill",   name:"Гостевой дом №1", pts:[[91.3,40.4]], text:"20–25 гостей · 8 000 / 12 000 ₽ в день.", page:"/grill"},
+  {n:7,  cat:"grill",   name:"Гостевой дом №2", pts:[[82.8,46.8]], text:"20–25 гостей · 8 000 / 12 000 ₽ в день.", page:"/grill"},
+  {n:8,  cat:"grill",   name:"Летняя беседка", pts:[[69.3,13.2]], text:"Беседка на 4–6 человек."},
+  {n:9,  cat:"grill",   name:"Гриль-дом №1", pts:[[54.6,14.5]], text:"15–20 гостей · 6 000 / 8 000 ₽ в день.", page:"/grill"},
+  {n:10, cat:"grill",   name:"Гриль-дом №2", pts:[[47.9,14.7]], text:"15–20 гостей · 8 000 / 10 000 ₽ в день.", page:"/grill"},
+  {n:11, cat:"grill",   name:"Гриль-дом №3", pts:[[41.3,14.7]], text:"15–20 гостей · 8 000 / 10 000 ₽ в день.", page:"/grill"},
+  {n:12, cat:"etno",    name:"Чум и смотровая площадка", pts:[[65.4,69.6]], text:"Обогретый чум на 15–20 гостей · 12 000 ₽ пн–чт, 15 000 ₽ пт–вс.", page:"/etno"},
+  {n:13, cat:"stay",    name:"Шатёр «Сияние севера»", pts:[[80.6,68.2]], text:"Шатёр до 20 гостей для мероприятий и смотровая площадка.", page:"/events"},
+  {n:14, cat:"stay",    name:"Купольный домик", pts:[[90.4,48.6]], text:"Глэмпинг · от 9 000 ₽ в сутки.", page:"/glamping"},
+  {n:15, cat:"stay",    name:"Дом с террасой «Медведь»", pts:[[8.4,71.6]], text:"Глэмпинг · 50 м² · от 8 000 ₽ в сутки.", page:"/glamping"},
+  {n:16, cat:"stay",    name:"Дом с террасой «Волк»", pts:[[17.4,63.8]], text:"Глэмпинг · 50 м² · от 8 000 ₽ в сутки.", page:"/glamping"},
+  {n:17, cat:"banya",   name:"Баня «Черника»", pts:[[8.2,40.4]], text:"На дровах, до 8 гостей · от 2 500 ₽/час.", page:"/bani"},
+  {n:18, cat:"banya",   name:"Баня «Морошка»", pts:[[14.2,32.2]], text:"Парная и аромасауна с Алисой · до 10 гостей.", page:"/bani"},
+  {n:19, cat:"banya",   name:"Баня «Брусника»", pts:[[25.4,32.2]], text:"Парная с Алисой и хаммам · до 10 гостей.", page:"/bani"},
+  {n:20, cat:"stay",    name:"Банкетный комплекс", pts:[[55.2,30.4]], text:"Зал под куполом на 100–150 гостей.", page:"/events"},
+  {n:21, cat:"stay",    name:"Дома с террасой на 4–6 человек", pts:[[34.2,47.2],[45.4,47.2],[57.6,47.2],[69.2,47.2]], text:"Строительство в 2026 году."},
+  {n:22, cat:"service", name:"Туалет", pts:[[56.2,22.6],[36.2,36.6]], text:""},
+  {n:23, cat:"family",  name:"Парковая зона", pts:[[43,30]], text:"Дорожки, лавочки и деревянные скульптуры."},
+  {n:24, cat:"etno",    name:"Этно-стойбище «Три чума»", pts:[[13.4,20.4]], text:"Постоянное этно-стойбище из трёх больших чумов.", page:"/etno"}
+];
+(function(){
+  var sec = document.getElementById("map"); if(!sec || !window.YP_MAP) return;
+  var YP = window.YP || {}, G = window.gsap;
+  var COL = {stay:"var(--yp-blue)", banya:"var(--yp-red)", grill:"#E07A2E", etno:"#8A6A3D", zoo:"var(--yp-green)", family:"#2BA6A0", service:"#6B7280"};
+  var CATN = {stay:"Проживание и залы", banya:"Бани", grill:"Гриль и гостевые дома", etno:"Этно", zoo:"Мини-зоопарк", family:"Для детей и прогулок", service:"Сервис"};
+  var mc = sec.querySelector("[data-yp-mc]"), pop = sec.querySelector("[data-yp-pop]"), legend = sec.querySelector("[data-yp-ml]"), cat = "all", pins = [];
+  YP_MAP.forEach(function(o, i){
+    o.pts.forEach(function(p){
+      var b = document.createElement("button"); b.type = "button"; b.className = "yp-pin"; b.textContent = o.n;
+      b.style.left = p[0] + "%"; b.style.top = p[1] + "%"; b.style.setProperty("--c", COL[o.cat]);
+      b.setAttribute("aria-label", o.name); b.setAttribute("data-i", i); b.setAttribute("data-cat", o.cat);
+      mc.appendChild(b); pins.push(b);
+    });
+    var li = document.createElement("li"); li.setAttribute("data-cat", o.cat);
+    li.innerHTML = '<button type="button" data-i="' + i + '" style="--c:' + COL[o.cat] + '"><b>' + o.n + "</b>" + o.name + "</button>";
+    legend.appendChild(li);
+  });
+  function open(i, anchor){
+    var o = YP_MAP[i]; anchor = anchor || pins.filter(function(p){ return +p.getAttribute("data-i") === i; })[0];
+    pins.forEach(function(p){ p.classList.toggle("is-on", +p.getAttribute("data-i") === i); });
+    legend.querySelectorAll("button").forEach(function(b){ b.classList.toggle("is-on", +b.getAttribute("data-i") === i); });
+    pop.style.setProperty("--c", COL[o.cat]);
+    pop.innerHTML = '<button class="x" type="button" aria-label="Закрыть">×</button><span class="tag"><i></i>' + CATN[o.cat] + "</span><h4>" + o.n + ". " + o.name + "</h4>" + (o.text ? "<p>" + o.text + "</p>" : "") + (o.page ? '<a href="' + o.page + '">Подробнее →</a>' : "");
+    pop.hidden = false;
+    var x = anchor.offsetLeft + 15, y = anchor.offsetTop + 15, w = mc.clientWidth;
+    var left = Math.max(10, Math.min(x - 140, w - 290)), top = y - pop.offsetHeight - 22;
+    if(top < 10) top = y + 26;
+    pop.style.left = left + "px"; pop.style.top = top + "px";
+    if(G && !YP.reduced) G.fromTo(pop, {opacity:0, y:12, scale:.95}, {opacity:1, y:0, scale:1, duration:.35, ease:"power3.out"});
+    pop.querySelector(".x").addEventListener("click", close);
+  }
+  function close(){ pop.hidden = true; pins.forEach(function(p){ p.classList.remove("is-on"); }); legend.querySelectorAll("button").forEach(function(b){ b.classList.remove("is-on"); }); }
+  mc.addEventListener("click", function(e){ var p = e.target.closest(".yp-pin"); if(p){ open(+p.getAttribute("data-i"), p); } else if(!e.target.closest(".yp-pop")) close(); });
+  legend.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-i]"); if(!b) return; var i = +b.getAttribute("data-i");
+    var pin = pins.filter(function(p){ return +p.getAttribute("data-i") === i; })[0];
+    var sc = sec.querySelector(".yp-map__scroll"); sc.scrollTo({left:Math.max(0, pin.offsetLeft - sc.clientWidth/2), behavior:"smooth"});
+    open(i, pin);
+  });
+  sec.querySelectorAll("[data-cat].yp-map__f").forEach(function(f){
+    f.addEventListener("click", function(){
+      cat = f.getAttribute("data-cat"); close();
+      sec.querySelectorAll(".yp-map__f").forEach(function(x){ x.setAttribute("aria-pressed", String(x === f)); });
+      pins.forEach(function(p){ p.classList.toggle("is-dim", cat !== "all" && p.getAttribute("data-cat") !== cat); });
+      legend.querySelectorAll("li").forEach(function(li){ li.classList.toggle("is-dim", cat !== "all" && li.getAttribute("data-cat") !== cat); });
+    });
+  });
+  /* Лето / Зима: стилизация схемы и снег */
+  var snowCv = sec.querySelector(".yp-map__snow"), sctx = snowCv.getContext("2d"), FL = [], sraf = 0, winter = false;
+  function snow(){
+    sraf = 0; var w = snowCv.clientWidth, h = snowCv.clientHeight, d = Math.min(2, devicePixelRatio || 1);
+    if(snowCv.width !== Math.round(w*d)){ snowCv.width = w*d; snowCv.height = h*d; sctx.setTransform(d,0,0,d,0,0); FL = []; for(var i=0;i<180;i++) FL.push({x:Math.random()*w, y:Math.random()*h, z:Math.random()}); }
+    sctx.clearRect(0,0,w,h);
+    FL.forEach(function(f){ f.y += .4 + f.z*1.2; f.x += Math.sin(f.y*.02 + f.z*6)*.4 - .2; if(f.y > h){ f.y = -4; f.x = Math.random()*w; } sctx.fillStyle = "rgba(255,255,255," + (.5 + f.z*.5) + ")"; sctx.beginPath(); sctx.arc(f.x, f.y, .8 + f.z*1.8, 0, 6.28); sctx.fill(); });
+    if(winter && !YP.reduced) sraf = requestAnimationFrame(snow);
+  }
+  sec.querySelectorAll("[data-season]").forEach(function(b){
+    b.addEventListener("click", function(){
+      winter = b.getAttribute("data-season") === "winter"; sec.classList.toggle("is-winter", winter);
+      sec.querySelectorAll("[data-season]").forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+      if(winter && !sraf) sraf = requestAnimationFrame(snow);
+    });
+  });
+  /* появление точек волной */
+  if(G && window.ScrollTrigger && !YP.reduced)
+    G.fromTo(pins, {scale:0, opacity:0}, {scale:1, opacity:1, duration:.5, ease:"back.out(2.5)", stagger:{each:.03, from:"random"}, clearProps:"transform,opacity", scrollTrigger:{trigger:mc, start:"top 75%", once:true}});
+  if(location.hash === "#map") setTimeout(function(){ YP.scrollTo && YP.scrollTo(sec); }, 600);
+})();
+</script>
+
+<!-- SEO-текст и частые вопросы страницы (видимый текст для поисковиков; вопросы попадают в разметку FAQPage при сборке) -->
+<style>
+.yp-seo{padding-block:clamp(56px,8vw,120px)}
+.yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
+.yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
+.yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
+.yp-seo__faq{display:grid;gap:10px}
+.yp-seo__faq details{border-radius:18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:2px 20px}
+.yp-seo__faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center;padding:16px 0;font:600 16px/1.35 var(--yp-f)}
+.yp-seo__faq summary::-webkit-details-marker{display:none}
+.yp-seo__faq summary i{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--yp-bg);position:relative}
+.yp-seo__faq summary i::before,.yp-seo__faq summary i::after{content:"";position:absolute;left:7px;right:7px;top:12px;height:2px;background:var(--yp-ink);transition:transform .4s var(--yp-ease)}
+.yp-seo__faq summary i::after{transform:rotate(90deg)}
+.yp-seo__faq details[open] summary i::after{transform:none}
+.yp-seo__faq details>div{padding:0 0 16px;color:var(--yp-muted);font-size:15px}
+@media (max-width:900px){.yp-seo__grid{grid-template-columns:1fr}}
+</style>
+<section class="yp yp-seo" id="about">
+  <div class="yp-wrap">
+    <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Как добраться</span>
+    <h2 class="yp-h2" data-yp-split>Как доехать <b>до Ямал Парка</b></h2>
+    <div class="yp-seo__grid">
+      <div class="yp-seo__txt" data-yp-reveal><p>Ямал Парк находится на <b>12-м км автодороги Салехард — Горнокнязевск</b> (Приуральский район, ЯНАО). От центра Салехарда — <b>около 16 минут на машине</b>, у комплекса — <b>парковка на 50 машин</b>.</p><p>Координаты для навигатора: <b>66.568040, 66.860055</b>. Без машины удобно доехать на такси.</p><p>Телефоны: <b>+7 900 399-10-33</b> (администратор), <b>+7 34922 5-21-03</b> (офис), почта yamalpark89@yandex.ru, Telegram и ВКонтакте — @yamalpark. Комплекс работает круглый год.</p></div>
+      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Где находится Ямал Парк?<i></i></summary><div>На 12-м км автодороги Салехард — Горнокнязевск, около 16 минут от центра Салехарда.</div></details><details><summary>Какие координаты для навигатора?<i></i></summary><div>66.568040, 66.860055.</div></details><details><summary>Есть ли парковка?<i></i></summary><div>Да, парковка на 50 машин.</div></details><details><summary>Как добраться без машины?<i></i></summary><div>На такси от Салехарда — около 16 минут.</div></details><details><summary>Работает ли Ямал Парк зимой?<i></i></summary><div>Да, комплекс работает круглый год.</div></details></div>
+    </div>
+  </div>
+</section>
+

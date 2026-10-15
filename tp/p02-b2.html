@@ -1,0 +1,751 @@
+<!-- 12 · «Выберите домик» на схеме комплекса (схема 2026, https://artsevershop-create.github.io/yamalpark/img/new/map-2026.webp — загрузить в Tilda).
+     Точки — только то, что можно забронировать: глэмпинг, бани, гриль- и гостевые дома, чум.
+     Клик по точке: схема плавно приближается к домику, справа — фото, цена, что внутри и кнопка брони (YP.openBooking). -->
+<style>
+.yp-pk{padding-block:clamp(56px,9vw,140px);overflow:hidden}
+.yp-pk__head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.yp-pk__head .yp-lead{margin:0}
+.yp-pk__tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:clamp(24px,3vw,36px)}
+.yp-pk__tabs button{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:11px 16px;font:600 14px var(--yp-f);background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--yp-line);transition:background .3s,color .3s,box-shadow .3s}
+.yp-pk__tabs button i{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid var(--c)}
+.yp-pk__tabs button small{font:500 12px var(--yp-mono);color:var(--yp-muted)}
+.yp-pk__tabs button[aria-pressed="true"]{background:var(--yp-ink);color:#fff;box-shadow:none}
+.yp-pk__tabs button[aria-pressed="true"] small{color:#9AA3A0}
+.yp-pk__grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(14px,2vw,24px);margin-top:16px;align-items:stretch}
+.yp-pk__stage{position:relative;border-radius:30px;overflow:hidden;background:#cfe0c4;box-shadow:0 40px 80px -40px rgba(20,30,25,.45);min-height:100%}
+.yp-pk__view{position:relative;width:100%;aspect-ratio:2000/1121;overflow:hidden}
+.yp-pk__zoom{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
+.yp-pk__zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.yp-pk__dim{position:absolute;inset:0;background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),transparent 0,transparent 9%,rgba(10,18,14,.45) 30%);opacity:0;pointer-events:none;transition:opacity .8s}
+.yp-pk.is-zoom .yp-pk__dim{opacity:1}
+.yp-pk__pin{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:3px solid #fff;background:var(--c);color:#fff;padding:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .4s var(--yp-ease),opacity .4s}
+.yp-pk__pin svg{width:16px;height:16px}
+.yp-pk__pin::before,.yp-pk__pin::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--c);opacity:0;animation:ypPkRing 2.6s ease-out infinite}
+.yp-pk__pin::after{animation-delay:1.3s}
+@keyframes ypPkRing{0%{opacity:.8;transform:scale(.9)}100%{opacity:0;transform:scale(2.2)}}
+.yp-pk__pin:hover{transform:scale(1.18)}
+.yp-pk__pin.is-on{transform:scale(1.3);z-index:3;box-shadow:0 0 0 6px rgba(255,255,255,.45),0 10px 24px rgba(0,0,0,.4)}
+.yp-pk__pin.is-off{opacity:.25;transform:scale(.75);pointer-events:none}
+.yp-pk__pin.is-off::before,.yp-pk__pin.is-off::after{animation:none}
+.yp-pk__tip{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px);white-space:nowrap;font:600 12px/1 var(--yp-f);padding:7px 10px;border-radius:999px;background:#fff;color:var(--yp-ink);box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .25s,transform .3s var(--yp-ease)}
+.yp-pk__pin:hover .yp-pk__tip,.yp-pk__pin:focus-visible .yp-pk__tip{opacity:1;transform:translate(-50%,0)}
+/* у краёв схемы подсказка прижимается внутрь, чтобы не уходить за экран */
+.yp-pk__pin.tip-l .yp-pk__tip{left:auto;right:-4px;transform:translate(0,6px)}
+.yp-pk__pin.tip-r .yp-pk__tip{left:-4px;transform:translate(0,6px)}
+.yp-pk__pin.tip-l:hover .yp-pk__tip,.yp-pk__pin.tip-l:focus-visible .yp-pk__tip,.yp-pk__pin.tip-r:hover .yp-pk__tip,.yp-pk__pin.tip-r:focus-visible .yp-pk__tip{transform:none}
+.yp-pk__ui{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;align-items:end;gap:10px;pointer-events:none}
+.yp-pk__ui>*{pointer-events:auto}
+.yp-pk__all{border:0;border-radius:999px;padding:10px 14px;font:600 13px var(--yp-f);background:rgba(255,255,255,.94);color:var(--yp-ink);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.18);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s var(--yp-ease)}
+.yp-pk.is-zoom .yp-pk__all{opacity:1;transform:none}
+.yp-pk__hint{font:500 11px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 11px;border-radius:999px;background:rgba(10,18,14,.6);color:#fff;backdrop-filter:blur(6px)}
+.yp-pk__card{position:relative;border-radius:30px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);overflow:hidden;display:flex;flex-direction:column}
+.yp-pk__ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(160deg,#2a1208,#130805)}
+.yp-pk__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.yp-pk__ph .big{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#FBEFE6;font:300 clamp(50px,5vw,76px)/1 var(--yp-fd);letter-spacing:-.05em}
+.yp-pk__ph .big small{display:block;font:500 12px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:#E9C9B6;margin-top:8px}
+.yp-pk__wipe{position:absolute;inset:0;z-index:2;background:var(--c,var(--yp-green));transform:scaleX(0);transform-origin:0 50%}
+.yp-pk__num{position:absolute;left:14px;top:14px;z-index:3;font:500 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--yp-ink)}
+.yp-pk__b{padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:12px;flex:1}
+.yp-pk__b h3{margin:0;font-weight:400;font-size:clamp(22px,2vw,30px);line-height:1.1;letter-spacing:-.02em}
+.yp-pk__meta{display:flex;flex-wrap:wrap;gap:6px 16px;font:500 13px var(--yp-mono);color:var(--yp-muted)}
+.yp-pk__price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.yp-pk__price b{font:300 clamp(34px,3.2vw,46px)/1 var(--yp-fd);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.yp-pk__price span{font-size:14px;color:var(--yp-muted)}
+.yp-pk__feat{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.yp-pk__feat li{font-size:13px;padding:6px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-pk__act{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.yp-pk__act .yp-btn{padding:14px 20px;font-size:14px}
+.yp-pk__list{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.yp-pk__list button{border:0;border-radius:12px;padding:9px 12px;font:600 13px var(--yp-f);background:var(--yp-paper);color:var(--yp-ink);cursor:pointer;box-shadow:inset 0 0 0 1px var(--yp-line);transition:background .25s,color .25s,transform .3s var(--yp-ease)}
+.yp-pk__list button:hover{transform:translateY(-2px)}
+.yp-pk__list button.is-on{background:var(--c);color:#fff;box-shadow:none}
+@media (max-width:1000px){.yp-pk__grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.yp-pk__pin{width:28px;height:28px;margin:-14px 0 0 -14px;border-width:2px}.yp-pk__pin svg{width:13px;height:13px}.yp-pk__hint{display:none}.yp-pk__stage{border-radius:22px}}
+@media (prefers-reduced-motion:reduce){.yp-pk__pin::before,.yp-pk__pin::after{animation:none}}
+</style>
+<section class="yp yp-pk" id="pick">
+  <div class="yp-wrap">
+    <div class="yp-pk__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Схема комплекса</span><h2 class="yp-h2" data-yp-split>Выберите <b>свой домик</b></h2></div>
+      <p class="yp-lead">Нажмите на точку на схеме — покажем фото, цену и что внутри. Бронирование в один клик.</p>
+    </div>
+    <div class="yp-pk__tabs" role="group" aria-label="Что выбрать" data-yp-pkt>
+      <button type="button" aria-pressed="true" data-cat="stay" style="--c:var(--yp-blue)"><i></i>Проживание <small>3</small></button>
+      <button type="button" aria-pressed="false" data-cat="banya" style="--c:var(--yp-red)"><i></i>Бани <small>3</small></button>
+      <button type="button" aria-pressed="false" data-cat="grill" style="--c:#E07A2E"><i></i>Гриль и гостевые дома <small>5</small></button>
+      <button type="button" aria-pressed="false" data-cat="etno" style="--c:#8A6A3D"><i></i>Чум и шатёр <small>2</small></button>
+    </div>
+    <div class="yp-pk__grid">
+      <div class="yp-pk__stage" data-yp-img>
+        <div class="yp-pk__view" data-yp-pkv>
+          <div class="yp-pk__zoom" data-yp-pkz>
+            <img src="https://artsevershop-create.github.io/yamalpark/img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
+            <div class="yp-pk__dim" aria-hidden="true"></div>
+          </div>
+          <div class="yp-pk__ui"><span class="yp-pk__hint">Нажмите на точку</span><button class="yp-pk__all" type="button" data-yp-pkall>Вся схема</button></div>
+        </div>
+      </div>
+      <article class="yp-pk__card" aria-live="polite" data-yp-pkc>
+        <div class="yp-pk__ph" data-yp-pkph><span class="yp-pk__num" data-yp-pkn></span><i class="yp-pk__wipe" aria-hidden="true"></i></div>
+        <div class="yp-pk__b">
+          <h3 data-yp-pkt-name></h3>
+          <div class="yp-pk__meta" data-yp-pkm></div>
+          <div class="yp-pk__price"><b data-yp-pkp></b><span data-yp-pku></span></div>
+          <ul class="yp-pk__feat" data-yp-pkf></ul>
+          <div class="yp-pk__act"><button class="yp-btn yp-btn--green" type="button" data-yp-pkbook>Забронировать</button><a class="yp-btn yp-btn--ghost" href="/glamping" data-yp-pkmore>Подробнее</a></div>
+        </div>
+      </article>
+    </div>
+    <div class="yp-pk__list" data-yp-pkl></div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("pick"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap, motion = !!G && !YP.reduced;
+  
+  var COL = {stay:"var(--yp-blue)", banya:"var(--yp-red)", grill:"#E07A2E", etno:"#8A6A3D"};
+  var ICON = {
+    stay:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 20a9 9 0 0 1 18 0z"/></svg>',
+    banya:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 20c-2-3 2-5 0-8M12 20c-2-3 2-5 0-8M16 20c-2-3 2-5 0-8"/></svg>',
+    grill:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 10h16a8 8 0 0 1-16 0zM8 4v3M12 3v4M16 4v3"/></svg>',
+    etno:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 4 21h16zM12 3l-2-2M12 3l2-2M10 21l2-6 2 6"/></svg>'
+  };
+  /* n — номер на схеме 2026, pt — координаты точки в % от картинки; цены — по каталогу сайта */
+  var U = [
+    {id:"dome", cat:"stay", n:14, pt:[90.4,48.6], name:"Купольный домик", img:"https://artsevershop-create.github.io/yamalpark/img/p/dome-aurora-arc.webp", meta:["30 м²","2–4 гостя","заезд 14:00"], price:9000, unit:"₽ / сутки, вс–чт · пт–сб 13 000 ₽", feat:["Панорамные окна","Терраса","Тёплые полы","Сияние с кровати"], type:"glamping", page:"/glamping"},
+    {id:"volk", cat:"stay", n:16, pt:[17.4,63.8], name:"Дом с террасой «Волк»", img:"https://artsevershop-create.github.io/yamalpark/img/p/volk-living.webp", meta:["50 м²","2–4 гостя","заезд 15:00"], price:8000, unit:"₽ / сутки, вс–чт · пт–сб 12 000 ₽", feat:["Светлый интерьер","Паркет ёлочкой","Кухня с кофемашиной","Мангальная зона"], type:"glamping", page:"/glamping"},
+    {id:"medved", cat:"stay", n:15, pt:[8.4,71.6], name:"Дом с террасой «Медведь»", img:"https://artsevershop-create.github.io/yamalpark/img/p/medved-living.webp", meta:["50 м²","2–4 гостя","заезд 15:00"], price:8000, unit:"₽ / сутки, вс–чт · пт–сб 12 000 ₽", feat:["Уютный тёплый интерьер","Кухня-гостиная","Спальня 160×200","Мангальная зона"], type:"glamping", page:"/glamping"},
+    {id:"moroshka", cat:"banya", n:18, pt:[14.2,32.2], name:"Баня «Морошка»", img:"https://artsevershop-create.github.io/yamalpark/img/p/moroshka-steam.webp", meta:["100 м²","до 10 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Парная до 100 °C","Аромасауна","Алиса: дождь, вьюга, музыка"], type:"banya", page:"/bani"},
+    {id:"brusnika", cat:"banya", n:19, pt:[25.4,32.2], name:"Баня «Брусника»", img:"https://artsevershop-create.github.io/yamalpark/img/p/brusnika-parnaya.webp", meta:["100 м²","до 10 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Парная","Хаммам","Алиса: дождь, вьюга, туман"], type:"banya", page:"/bani"},
+    {id:"chernika", cat:"banya", n:17, pt:[8.2,40.4], name:"Баня «Черника»", img:"https://artsevershop-create.github.io/yamalpark/img/p/chernika-parnaya.webp", meta:["64 м²","до 8 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Печь на дровах","Кнопки «дождь» и «ветер»"], type:"banya", page:"/bani"},
+    {id:"g1", cat:"grill", n:9, pt:[54.6,14.5], name:"Гриль-дом №1", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill1-in.webp", meta:["15–20 гостей","12:00–22:00"], price:6000, unit:"₽ / день, вс–чт · пт–сб 8 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Телевизор"], type:"grill", page:"/grill"},
+    {id:"g2", cat:"grill", n:10, pt:[47.9,14.7], name:"Гриль-дом №2", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-a.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
+    {id:"g3", cat:"grill", n:11, pt:[41.3,14.7], name:"Гриль-дом №3", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-c.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
+    {id:"h1", cat:"grill", n:6, pt:[91.3,40.4], name:"Гостевой дом №1", img:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-in.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
+    {id:"h2", cat:"grill", n:7, pt:[82.8,46.8], name:"Гостевой дом №2", img:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
+    {id:"chum", cat:"etno", n:12, pt:[65.4,69.6], name:"Чум и смотровая площадка", img:"https://artsevershop-create.github.io/yamalpark/img/p/chum-in.webp", meta:["15–20 гостей","своя терраса"], price:12000, unit:"₽ пн–чт · пт–вс 15 000 ₽", feat:["Обогретый чум","Костровище","Казан и мангал"], type:"chum", page:"/etno"},
+    {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"https://artsevershop-create.github.io/yamalpark/img/p/tent-aurora-in.webp", meta:["40 м²","до 20 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
+  ];
+  var view = sec.querySelector("[data-yp-pkv]"), zoom = sec.querySelector("[data-yp-pkz]"), dim = zoom.querySelector(".yp-pk__dim");
+  var card = sec.querySelector("[data-yp-pkc]"), ph = sec.querySelector("[data-yp-pkph]"), wipe = ph.querySelector(".yp-pk__wipe");
+  var list = sec.querySelector("[data-yp-pkl]"), cat = "stay", cur = null, shown = 0, pins = {};
+  U.forEach(function(u){
+    var b = document.createElement("button"); b.type = "button"; b.className = "yp-pk__pin"; b.style.left = u.pt[0] + "%"; b.style.top = u.pt[1] + "%";
+    b.style.setProperty("--c", COL[u.cat]); b.setAttribute("aria-label", u.name); b.setAttribute("data-yp-cursor", "Выбрать");
+    b.innerHTML = ICON[u.cat] + '<span class="yp-pk__tip">' + u.name + "</span>";
+    if(u.pt[0] > 70) b.classList.add("tip-l"); else if(u.pt[0] < 30) b.classList.add("tip-r");
+    b.addEventListener("click", function(){ if(u.cat !== cat) setCat(u.cat, true); select(u, true); });
+    zoom.appendChild(b); pins[u.id] = b;
+  });
+  function renderList(){
+    list.innerHTML = U.filter(function(u){ return u.cat === cat; }).map(function(u){ return '<button type="button" data-id="' + u.id + '" style="--c:' + COL[u.cat] + '">' + u.name + "</button>"; }).join("");
+    list.querySelectorAll("button").forEach(function(b){ b.classList.toggle("is-on", cur && b.getAttribute("data-id") === cur.id); });
+  }
+  list.addEventListener("click", function(e){ var b = e.target.closest("button[data-id]"); if(b) select(U.filter(function(u){ return u.id === b.getAttribute("data-id"); })[0], true); });
+  function setCat(c, silent){
+    cat = c;
+    sec.querySelectorAll("[data-yp-pkt] button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-cat") === c)); });
+    U.forEach(function(u){ pins[u.id].classList.toggle("is-off", u.cat !== c); });
+    if(sec.classList.contains("is-zoom")) zoomOut();
+    if(motion) G.fromTo(U.filter(function(u){ return u.cat === c; }).map(function(u){ return pins[u.id]; }), {scale:0}, {scale:1, duration:.55, ease:"back.out(2.4)", stagger:.06, overwrite:true, clearProps:"transform"});
+    renderList();
+    if(!silent) select(U.filter(function(u){ return u.cat === c; })[0], false);
+  }
+  sec.querySelectorAll("[data-yp-pkt] button").forEach(function(b){ b.addEventListener("click", function(){ setCat(b.getAttribute("data-cat")); }); });
+
+  /* приближение схемы к домику: точка уезжает в центр, края схемы не показываются */
+  function zoomTo(u){
+    var W = view.clientWidth, H = view.clientHeight, s = W < 600 ? 2.1 : 1.75;
+    var px = u.pt[0]/100*W, py = u.pt[1]/100*H;
+    var tx = Math.min(0, Math.max(W - s*W, W/2 - s*px)), ty = Math.min(0, Math.max(H - s*H, H/2 - s*py));
+    sec.classList.add("is-zoom"); if(G){ G.killTweensOf(zoom); }
+    dim.style.setProperty("--fx", u.pt[0] + "%"); dim.style.setProperty("--fy", u.pt[1] + "%");
+    if(motion) G.to(zoom, {x:tx, y:ty, scale:s, duration:1.3, ease:"power3.inOut"}); else G ? G.set(zoom, {x:tx, y:ty, scale:s}) : (zoom.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + s + ")");
+    Object.keys(pins).forEach(function(k){ (G ? G.to(pins[k], {scale:1/s*1.15, duration: motion ? 1.3 : 0, ease:"power3.inOut", overwrite:true}) : 0); });
+  }
+  function zoomOut(){
+    sec.classList.remove("is-zoom");
+    if(G){ G.killTweensOf(zoom); G.to(zoom, {x:0, y:0, scale:1, duration: motion ? 1.1 : 0, ease:"power3.inOut"}); G.to(Object.keys(pins).map(function(k){ return pins[k]; }), {scale:1, duration: motion ? 1.1 : 0, ease:"power3.inOut", overwrite:true, clearProps:"transform"}); }
+    else zoom.style.transform = "";
+  }
+  sec.querySelector("[data-yp-pkall]").addEventListener("click", zoomOut);
+
+  function fill(u){
+    ph.style.setProperty("--c", COL[u.cat]);
+    var old = ph.querySelector("img,.big"); if(old) old.remove();
+    var media = u.img ? Object.assign(new Image(), {src:u.img, alt:u.name, loading:"lazy"}) : Object.assign(document.createElement("div"), {className:"big", innerHTML:u.big + "<small>гостей</small>"});
+    ph.insertBefore(media, wipe);
+    sec.querySelector("[data-yp-pkn]").textContent = "№ " + u.n + " на схеме";
+    sec.querySelector("[data-yp-pkt-name]").textContent = u.name;
+    sec.querySelector("[data-yp-pkm]").innerHTML = u.meta.map(function(m){ return "<span>" + m + "</span>"; }).join("");
+    sec.querySelector("[data-yp-pku]").textContent = u.unit;
+    sec.querySelector("[data-yp-pkf]").innerHTML = u.feat.map(function(f){ return "<li>" + f + "</li>"; }).join("");
+    var more = sec.querySelector("[data-yp-pkmore]"); more.setAttribute("href", u.page.replace(/^\/(\w+)$/, (location.pathname.match(/\.html$/) ? "$1.html" : "/$1")));
+    var pEl = sec.querySelector("[data-yp-pkp]"), pre = "от ";
+    if(motion){ var o = {v:shown}; G.to(o, {v:u.price, duration:.9, ease:"power3.out", onUpdate:function(){ pEl.textContent = pre + (Math.round(o.v/100)*100).toLocaleString(YP.loc); }, onComplete:function(){ pEl.textContent = pre + u.price.toLocaleString(YP.loc); }}); }
+    else pEl.textContent = pre + u.price.toLocaleString(YP.loc);
+    shown = u.price;
+    return media;
+  }
+  function select(u, user){
+    if(!u) return; cur = u;
+    Object.keys(pins).forEach(function(k){ pins[k].classList.toggle("is-on", k === u.id); });
+    list.querySelectorAll("button").forEach(function(b){ b.classList.toggle("is-on", b.getAttribute("data-id") === u.id); });
+    if(!motion){ fill(u); if(user) zoomTo(u); return; }
+    var body = card.querySelectorAll(".yp-pk__b>*");
+    G.timeline()
+      .set(wipe, {transformOrigin:"0 50%"})
+      .to(wipe, {scaleX:1, duration:.45, ease:"power3.in"})
+      .to(body, {opacity:0, y:-10, duration:.25, stagger:.02}, 0)
+      .add(function(){ var m = fill(u); G.fromTo(m, {scale:1.18}, {scale:1, duration:1.4, ease:"power3.out"}); })
+      .set(wipe, {transformOrigin:"100% 50%"})
+      .to(wipe, {scaleX:0, duration:.6, ease:"power3.out"})
+      .fromTo(body, {opacity:0, y:18}, {opacity:1, y:0, duration:.55, ease:"power3.out", stagger:.05, clearProps:"transform,opacity"}, "-=.45");
+    if(user) zoomTo(u);
+  }
+  sec.querySelector("[data-yp-pkbook]").addEventListener("click", function(){ if(cur) YP.openBooking({type:cur.type, object:cur.id}); });
+  window.addEventListener("resize", function(){ if(sec.classList.contains("is-zoom") && cur) zoomTo(cur); });
+
+  setCat("stay", true); fill(U[0]); cur = U[0]; renderList();
+  if(motion && window.ScrollTrigger){
+    var all = U.map(function(u){ return pins[u.id]; });
+    G.set(all, {scale:0});
+    ScrollTrigger.create({trigger:view, start:"top 70%", once:true, onEnter:function(){
+      G.to(all, {scale:1, duration:.6, ease:"back.out(2.5)", stagger:{each:.05, from:"random"}, clearProps:"transform"});
+      /* подсказка: через секунду показываем, как работает приближение */
+      setTimeout(function(){ if(!sec.classList.contains("is-zoom") && cur) { select(cur, true); } }, 1600);
+    }});
+  }
+})();
+</script>
+
+<!-- Глэмпинг · 03 · Зима / Лето: переключатель меняет фото круговым раскрытием от кнопки, тексты перелистываются -->
+<style>
+.yp-ss{padding-block:clamp(40px,5vw,80px) clamp(90px,10vw,150px)}
+.yp-ss__box{position:relative;overflow:hidden;border-radius:32px;min-height:min(86vh,760px);display:flex;align-items:flex-end;color:#fff;isolation:isolate}
+.yp-ss__bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center}
+.yp-ss__bg--next{z-index:-1;clip-path:circle(0% at var(--cx,50%) var(--cy,50%))}
+.yp-ss__box::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,10,16,.4),rgba(6,10,16,.12) 30%,rgba(6,10,16,.6) 58%,rgba(6,10,16,.9));pointer-events:none}
+.yp-ss__in{text-shadow:0 1px 14px rgba(0,0,0,.55)}
+@media (max-width:768px){.yp-ss__box::after{background:linear-gradient(180deg,rgba(6,10,16,.45),rgba(6,10,16,.55) 32%,rgba(6,10,16,.78) 60%,rgba(6,10,16,.92))}}
+.yp-ss__in{width:100%;padding:clamp(22px,3.4vw,52px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:30px;align-items:end}
+.yp-ss__tog{position:absolute;top:clamp(18px,2.6vw,34px);left:clamp(18px,2.6vw,34px);display:inline-grid;grid-template-columns:1fr 1fr;padding:5px;border-radius:999px;background:rgba(255,255,255,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.25)}
+.yp-ss__tog button{position:relative;z-index:1;border:0;background:transparent;color:#fff;font:600 15px var(--yp-f);padding:12px 22px;border-radius:999px;cursor:pointer;transition:color .4s}
+.yp-ss__tog button[aria-pressed="true"]{color:var(--yp-ink)}
+.yp-ss__pill{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;background:#fff;transition:transform .5s var(--yp-ease)}
+.yp-ss__tog[data-s="summer"] .yp-ss__pill{transform:translateX(100%)}
+.yp-ss__t{margin:0;font-weight:300;font-size:clamp(36px,4.6vw,72px);line-height:.98;letter-spacing:-.04em}
+.yp-ss__t b{font-weight:400}
+.yp-ss__p{margin:14px 0 0;color:#DCE6EB;max-width:44ch;font-size:clamp(15px,1.2vw,18px)}
+.yp-ss__list{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid rgba(255,255,255,.25)}
+.yp-ss__list li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.25);font-size:15px}
+.yp-ss__list li span{font:500 12px var(--yp-mono);letter-spacing:.06em;text-transform:uppercase;color:#C6D3DA;white-space:nowrap}
+.yp-ss__swap>*{transition:opacity .35s,transform .5s var(--yp-ease)}
+.yp-ss__swap.is-out>*{opacity:0;transform:translateY(16px)}
+@media (max-width:900px){.yp-ss__in{grid-template-columns:minmax(0,1fr)}.yp-ss__box{min-height:640px}}
+</style>
+<section class="yp yp-ss" id="seasons">
+  <div class="yp-wrap">
+    <div class="yp-ss__box" data-yp-ss>
+      <div class="yp-ss__bg" data-yp-bg style="background-image:url(https://static.tildacdn.com/tild6438-6363-4935-a466-373236656639/IMG_20250417_111557_.jpg)"></div>
+      <div class="yp-ss__bg yp-ss__bg--next" data-yp-bgn></div>
+      <div class="yp-ss__tog" data-s="winter" role="group" aria-label="Сезон">
+        <span class="yp-ss__pill" aria-hidden="true"></span>
+        <button type="button" aria-pressed="true" data-yp-s="winter">Зима</button>
+        <button type="button" aria-pressed="false" data-yp-s="summer">Лето</button>
+      </div>
+      <div class="yp-ss__in">
+        <div class="yp-ss__swap" data-yp-sw1><h2 class="yp-ss__t" data-yp-st>Зимой — <b>сияние и тепло</b></h2><p class="yp-ss__p" data-yp-sp>Подсвеченная территория, дымящиеся бани и северное сияние со смотровой площадки. В домиках тёплые полы, комфортно даже в −40 °C.</p></div>
+        <ul class="yp-ss__list yp-ss__swap" data-yp-sw2></ul>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var box = document.querySelector("[data-yp-ss]"); if(!box) return;
+  var YP = window.YP || {}, G = window.gsap;
+  var S = {
+    winter:{img:"https://static.tildacdn.com/tild6438-6363-4935-a466-373236656639/IMG_20250417_111557_.jpg",
+      t:"Зимой — <b>сияние и тепло</b>", p:"Подсвеченная территория, дымящиеся бани и северное сияние со смотровой площадки. В домиках тёплые полы, комфортно даже в −40 °C.",
+      list:[["Северное сияние","сентябрь — апрель"],["Лучшее время","22:00–02:00"],["В домиках","тёплый пол"],["После прогулки","баня с Алисой"]]},
+    summer:{img:"https://artsevershop-create.github.io/yamalpark/img/new/summer-sunset-domes.webp",
+      t:"Летом — <b>белые ночи</b>", p:"Солнце почти не садится, тундра зеленеет, а вечер на террасе можно растянуть до утра. Летом в комплексе проходят фестивали «Лето в Ямал Парке».",
+      list:[["Белые ночи","июнь — июль"],["На террасе","до утра светло"],["Рядом","чумы и мини-зоопарк"],["События","летние фестивали"]]}
+  };
+  var bg = box.querySelector("[data-yp-bg]"), bgn = box.querySelector("[data-yp-bgn]"), tog = box.querySelector(".yp-ss__tog");
+  var sw1 = box.querySelector("[data-yp-sw1]"), sw2 = box.querySelector("[data-yp-sw2]"), cur = "winter", busy = false;
+  function fill(k){ var s = S[k]; box.querySelector("[data-yp-st]").innerHTML = s.t; box.querySelector("[data-yp-sp]").textContent = s.p;
+    sw2.innerHTML = s.list.map(function(r){ return "<li>" + r[0] + "<span>" + r[1] + "</span></li>"; }).join(""); }
+  fill("winter");
+  (new Image()).src = S.summer.img;
+  function go(k, btn){
+    if(k === cur || busy) return; busy = true; cur = k; tog.setAttribute("data-s", k);
+    tog.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-yp-s") === k)); });
+    var br = btn.getBoundingClientRect(), r = box.getBoundingClientRect();
+    box.style.setProperty("--cx", (br.left + br.width/2 - r.left) + "px"); box.style.setProperty("--cy", (br.top + br.height/2 - r.top) + "px");
+    bgn.style.backgroundImage = "url(" + S[k].img + ")";
+    sw1.classList.add("is-out"); sw2.classList.add("is-out");
+    setTimeout(function(){ fill(k); sw1.classList.remove("is-out"); sw2.classList.remove("is-out"); }, 380);
+    function done(){ bg.style.backgroundImage = "url(" + S[k].img + ")"; bgn.style.clipPath = "circle(0% at var(--cx) var(--cy))"; busy = false; }
+    if(G && !YP.reduced){
+      G.fromTo(bgn, {clipPath:"circle(0% at " + box.style.getPropertyValue("--cx") + " " + box.style.getPropertyValue("--cy") + ")"},
+        {clipPath:"circle(150% at " + box.style.getPropertyValue("--cx") + " " + box.style.getPropertyValue("--cy") + ")", duration:1.1, ease:"power3.inOut", onComplete:done});
+      G.fromTo(bgn, {scale:1.15}, {scale:1, duration:1.4, ease:"power3.out"});
+    } else done();
+  }
+  tog.querySelectorAll("button").forEach(function(b){ b.addEventListener("click", function(){ go(b.getAttribute("data-yp-s"), b); }); });
+  if(G && window.ScrollTrigger && !YP.reduced){
+    G.fromTo(box, {clipPath:"inset(8% 6% 8% 6% round 32px)"}, {clipPath:"inset(0% 0% 0% 0% round 32px)", ease:"none", scrollTrigger:{trigger:box, start:"top 90%", end:"top 30%", scrub:true}});
+    G.fromTo(bg, {scale:1.2}, {scale:1, ease:"none", scrollTrigger:{trigger:box, start:"top bottom", end:"bottom top", scrub:true}});
+  }
+})();
+</script>
+
+<!-- 17 · Погода и сияние: сейчас в Ямал Парке + 4 дня (Open-Meteo) и шанс северного сияния каждую ночь (NOAA Kp × облачность, YP.forecast).
+     Данные живые; если запросы недоступны — снимок на момент сборки (tilda/00-snapshot.html), с подписью «Данные на …». -->
+<style>
+.yp-wx{padding-block:clamp(56px,8vw,120px)}
+.yp-wx__head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.yp-wx__head .yp-lead{margin:0}
+.yp-wx__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(12px,1.4vw,18px);margin-top:clamp(26px,3vw,40px)}
+.yp-wx__now{position:relative;overflow:hidden;border-radius:28px;padding:clamp(22px,2.4vw,32px);color:#fff;background:linear-gradient(160deg,#1E3D5C,#0B1726);min-height:320px;display:flex;flex-direction:column;isolation:isolate}
+.yp-wx__now::after{content:"";position:absolute;inset:auto -20% -40% -20%;height:70%;z-index:-1;background:radial-gradient(50% 60% at 50% 100%,rgba(92,255,192,.28),transparent 70%)}
+.yp-wx__now small{font:500 12px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:#9FB6C8}
+.yp-wx__t{display:flex;align-items:flex-start;gap:12px;margin-top:14px}
+.yp-wx__t b{font:300 clamp(64px,7vw,104px)/.9 var(--yp-fd);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.yp-wx__t svg{width:64px;height:64px;flex:0 0 auto;margin-top:6px}
+.yp-wx__cond{margin-top:10px;font-size:18px}
+.yp-wx__meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:auto;padding-top:22px;font-size:14px;color:#C8D6E0}
+.yp-wx__meta span{display:block;font:500 11px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:#8EA6B8;margin-bottom:3px}
+.yp-wx__days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)}
+.yp-wd{position:relative;border-radius:24px;padding:20px 18px 18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);display:flex;flex-direction:column;gap:10px;transition:transform .45s var(--yp-ease),box-shadow .45s}
+.yp-wd:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(20,30,25,.35)}
+.yp-wd__d{font:600 15px var(--yp-f)}
+.yp-wd__d small{display:block;font:500 12px var(--yp-mono);letter-spacing:.04em;color:var(--yp-muted);margin-top:2px;font-weight:500}
+.yp-wd svg{width:52px;height:52px}
+.yp-wd__tt{display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.yp-wd__tt b{font:300 34px/1 var(--yp-fd);letter-spacing:-.04em}
+.yp-wd__tt span{color:var(--yp-muted);font-size:16px}
+.yp-wd__m{font-size:13px;color:var(--yp-muted);display:grid;gap:2px}
+.yp-wd__au{margin-top:auto;display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:14px;background:#0B1520;color:#fff;font-size:13px}
+.yp-wd__au i{flex:0 0 auto;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.yp-wd__au b{font-weight:600}
+.yp-wx__note{margin-top:14px;font-size:13px;color:var(--yp-muted)}
+.yp-wx__note a{color:inherit}
+/* анимация значков */
+.yp-ic .sun{transform-origin:32px 32px;animation:ypSpin 18s linear infinite}
+.yp-ic .cl{animation:ypDrift 5s ease-in-out infinite alternate}
+.yp-ic .dr{animation:ypDrop 1.2s linear infinite}
+.yp-ic .dr:nth-child(2n){animation-delay:-.6s}
+@keyframes ypSpin{to{transform:rotate(360deg)}}
+@keyframes ypDrift{to{transform:translateX(4px)}}
+@keyframes ypDrop{0%{transform:translateY(-4px);opacity:0}30%{opacity:1}100%{transform:translateY(8px);opacity:0}}
+@media (max-width:1000px){.yp-wx__grid{grid-template-columns:minmax(0,1fr)}.yp-wx__days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.yp-ic *{animation:none!important}}
+</style>
+<section class="yp yp-wx" id="weather">
+  <div class="yp-wrap">
+    <div class="yp-wx__head">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Погода и сияние</span><h2 class="yp-h2" data-yp-split>Что ждёт <b>в Ямал Парке</b></h2></div>
+      <p class="yp-lead">Погода на 4 дня и шанс увидеть северное сияние каждую ночь. Сияние видно с сентября по апрель в ясные тёмные ночи.</p>
+    </div>
+    <div class="yp-wx__grid">
+      <article class="yp-wx__now" data-yp-reveal>
+        <small>Сейчас · Ямал Парк, 12-й км</small>
+        <div class="yp-wx__t"><b data-yp-wxt>—</b><span data-yp-wxi></span></div>
+        <div class="yp-wx__cond" data-yp-wxc>Загружаем погоду…</div>
+        <div class="yp-wx__meta">
+          <div><span>Ветер</span><b data-yp-wxw>—</b></div>
+          <div><span>Облачность</span><b data-yp-wxcl>—</b></div>
+          <div><span>Восход</span><b data-yp-wxsr>—</b></div>
+          <div><span>Закат</span><b data-yp-wxss>—</b></div>
+        </div>
+      </article>
+      <div class="yp-wx__days" data-yp-wxd></div>
+    </div>
+    <p class="yp-wx__note"><span data-yp-wxst></span> · Погода — Open-Meteo, сияние — индекс Kp NOAA SWPC с учётом облачности над Салехардом. <a href="#forecast">Почасовой прогноз сияния →</a></p>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("weather"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  function q(s){ return sec.querySelector(s); }
+  /* на странице без прогноза сияния ссылка «Почасовой прогноз» ведёт на главную, к прогнозу (проверяем, когда все блоки уже на странице) */
+  function fcLink(){ if(document.getElementById("forecast")) return; var a = sec.querySelector('a[href="#forecast"]'); if(!a) return;
+    var h = YP.langHref ? YP.langHref("/#forecast") : "/#forecast"; a.setAttribute("href", YP.protoHref ? YP.protoHref(h) : h); }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", fcLink); else fcLink();
+  var ICON = {
+    sun:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><g class="sun" stroke="#F5B53D"><circle cx="32" cy="32" r="11" fill="#FFD36B"/><path d="M32 8v7M32 49v7M8 32h7M49 32h7M15 15l5 5M44 44l5 5M49 15l-5 5M20 44l-5 5"/></g></svg>',
+    partly:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><g class="sun" stroke="#F5B53D"><circle cx="24" cy="24" r="9" fill="#FFD36B"/><path d="M24 6v5M6 24h5M11 11l4 4M37 11l-4 4"/></g><path class="cl" d="M22 50h26a9 9 0 0 0 0-18 13 13 0 0 0-25 3 8 8 0 0 0-1 15z" fill="#DDE6EE" stroke="#9EB1C1"/></svg>',
+    cloud:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 48h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#D3DCE4" stroke="#8FA3B4"/></svg>',
+    fog:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke="#9AAAB8" stroke-width="3" stroke-linecap="round"><path class="cl" d="M12 24h40M8 34h48M14 44h36"/></svg>',
+    rain:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 38h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#C9D3DC" stroke="#8FA3B4"/><g stroke="#5B8FD6"><path class="dr" d="M24 44l-2 6"/><path class="dr" d="M33 44l-2 6"/><path class="dr" d="M42 44l-2 6"/></g></svg>',
+    snow:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 38h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#DCE5EC" stroke="#8FA3B4"/><g fill="#8FB8E8"><circle class="dr" cx="24" cy="47" r="2.5"/><circle class="dr" cx="33" cy="47" r="2.5"/><circle class="dr" cx="42" cy="47" r="2.5"/></g></svg>',
+    storm:'<svg class="yp-ic" viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round"><path class="cl" d="M18 36h28a10 10 0 0 0 0-20 14 14 0 0 0-27 3 9 9 0 0 0-1 17z" fill="#B8C4CF" stroke="#7E91A2"/><path d="M33 38l-6 10h8l-4 10" stroke="#F5B53D"/></svg>'
+  };
+  var AU = ["#7C8B95", "#8FD96B", "#5CFFC0", "#C9A3FF"];
+  var hm = function(s){ return s ? s.slice(11, 16) : "—"; };
+  Promise.all([YP.live || Promise.resolve(null), YP.daily || Promise.resolve(null), YP.forecast || Promise.resolve(null)]).then(function(r){
+    var w = r[0] && r[0].weather, D = r[1], F = r[2];
+    if(w){
+      var cond = YP.wmo(w.code), tEl = q("[data-yp-wxt]");
+      q("[data-yp-wxi]").innerHTML = ICON[cond.i] || ICON.cloud;
+      q("[data-yp-wxc]").textContent = cond.t + (w.isDay ? "" : " · ночь");
+      q("[data-yp-wxw]").textContent = w.wind + " м/с"; q("[data-yp-wxcl]").textContent = w.cloud + "%";
+      if(G && !YP.reduced){ var o = {v:0}; G.to(o, {v:w.temp, duration:1.6, ease:"power3.out", scrollTrigger:{trigger:sec, start:"top 80%", once:true}, onUpdate:function(){ tEl.textContent = YP.fmtTemp(Math.round(o.v)); }}); }
+      else tEl.textContent = YP.fmtTemp(w.temp);
+    } else q("[data-yp-wxc]").textContent = "Нет связи с метеосервисом";
+    if(D && D.time){
+      q("[data-yp-wxsr]").textContent = hm(D.sunrise[0]); q("[data-yp-wxss]").textContent = hm(D.sunset[0]);
+      var nights = {}; (F && F.nights || []).forEach(function(n){ nights[n.date] = n; });
+      q("[data-yp-wxd]").innerHTML = D.time.map(function(d, i){
+        var day = new Date(d + "T12:00:00Z"), c = YP.wmo(D.weather_code[i]), n = nights[d];
+        var name = i === 0 ? "Сегодня" : i === 1 ? "Завтра" : new Intl.DateTimeFormat(YP.loc, {weekday:"long", timeZone:"UTC"}).format(day);
+        var au = n ? (n.polarDay ? "Белые ночи — сияния нет" : "Сияние ночью: <b>" + n.text.toLowerCase() + "</b>" + (n.level >= 1 && n.best && n.best.time ? " · " + n.best.time : "")) : "Сияние: прогноз позже";
+        return '<article class="yp-wd"><div class="yp-wd__d">' + name.charAt(0).toUpperCase() + name.slice(1) + "<small>" + new Intl.DateTimeFormat(YP.loc, {day:"numeric", month:"long", timeZone:"UTC"}).format(day) + "</small></div>" +
+          (ICON[c.i] || ICON.cloud) + '<div class="yp-wd__tt"><b>' + YP.fmtTemp(Math.round(D.temperature_2m_max[i])) + "</b><span>" + YP.fmtTemp(Math.round(D.temperature_2m_min[i])) + "</span></div>" +
+          '<div class="yp-wd__m"><span>' + c.t + "</span><span>Осадки " + (D.precipitation_probability_max[i] != null ? D.precipitation_probability_max[i] + "%" : "—") + " · ветер до " + Math.round(D.wind_speed_10m_max[i]) + " м/с</span></div>" +
+          '<div class="yp-wd__au" style="--c:' + AU[n ? n.level : 0] + '"><i></i><span>' + au + "</span></div></article>";
+      }).join("");
+      if(G && window.ScrollTrigger && !YP.reduced) G.fromTo(sec.querySelectorAll(".yp-wd"), {y:50, opacity:0, rotateX:-20}, {y:0, opacity:1, rotateX:0, duration:.9, ease:"power3.out", stagger:.1, clearProps:"transform,opacity", scrollTrigger:{trigger:sec, start:"top 80%", once:true}});
+    } else q("[data-yp-wxd]").innerHTML = '<p class="yp-wx__note">Прогноз погоды временно недоступен.</p>';
+    q("[data-yp-wxst]").textContent = YP.dataStamp ? YP.dataStamp() : "";
+  });
+})();
+</script>
+
+<!-- 11 · Прогноз северного сияния на 3 ночи (живые данные: Kp-прогноз NOAA SWPC + облачность и темнота Open-Meteo).
+     Используется на главной (после «Сегодня») и на странице «Глэмпинг». Яркость сияния на фоне = прогноз на эту ночь. -->
+<style>
+.yp-af{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
+.yp-af__bg{position:absolute;inset:-4%;width:108%;height:108%;z-index:-1;mix-blend-mode:screen;opacity:.85;pointer-events:none}
+.yp-af__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-af__head .yp-lead{margin:0}
+.yp-af__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(36px,4vw,56px)}
+.yp-night{position:relative;border-radius:24px;padding:22px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;gap:6px;min-width:0}
+.yp-night.is-best{border-color:rgba(92,255,192,.55);box-shadow:0 0 0 1px rgba(92,255,192,.25),0 30px 60px -30px rgba(92,255,192,.35)}
+.yp-night__top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.yp-night__day{font:400 18px var(--yp-fd);letter-spacing:-.01em}
+.yp-night__date{font:500 12px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-night__lvl{display:flex;align-items:center;gap:10px;margin-top:10px;font:300 clamp(30px,2.8vw,44px)/1 var(--yp-fd);letter-spacing:-.03em}
+.yp-night__lvl i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c);flex:0 0 auto}
+.yp-night__best{margin:6px 0 0;font-size:14px;color:#C3D0D8;min-height:2.9em}
+.yp-chart{position:relative;height:130px;margin-top:12px;display:grid;grid-template-columns:repeat(13,1fr);gap:3px;align-items:end;padding-right:56px}
+.yp-chart__ref{position:absolute;left:0;right:56px;border-top:1px dashed rgba(234,241,244,.18);pointer-events:none}
+.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
+.yp-bar{position:relative;height:100%;display:flex;align-items:flex-end;cursor:default}
+.yp-bar b,.yp-bar s{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 1px 1px;transform-origin:50% 100%}
+.yp-bar s{background:rgba(234,241,244,.12);text-decoration:none}
+.yp-bar b{background:linear-gradient(0deg,#3FD07F,#5CFFC0 50%,#9AA8FF)}
+.yp-bar.is-light b,.yp-bar.is-light s{background:repeating-linear-gradient(45deg,rgba(234,241,244,.10) 0 3px,transparent 3px 6px);height:100%!important}
+.yp-bar:hover b{filter:brightness(1.3)}
+.yp-bar.is-peak::after{content:"";position:absolute;left:50%;top:-12px;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--yp-aurora)}
+.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-chart__x span{text-align:center;white-space:nowrap}
+.yp-night__tip{margin:10px 0 0;font:500 12px var(--yp-mono);color:#D7E2E8;min-height:1.4em}
+.yp-night .yp-btn{margin-top:12px;align-self:flex-start;padding:12px 18px;font-size:14px}
+.yp-af__foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--yp-snowmuted)}
+.yp-af__legend{display:flex;gap:18px;flex-wrap:wrap}
+.yp-af__legend span{display:inline-flex;align-items:center;gap:8px}
+.yp-af__legend i{width:14px;height:10px;border-radius:2px}
+.yp-af__msg{grid-column:1/-1;border-radius:24px;padding:26px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);color:#C3D0D8}
+@media (max-width:1000px){.yp-af__head{grid-template-columns:minmax(0,1fr)}.yp-af__grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-dark yp-af" id="forecast" data-yp-theme="dark">
+  <canvas class="yp-af__bg" aria-hidden="true"></canvas>
+  <div class="yp-wrap">
+    <div class="yp-af__head">
+      <div><span class="yp-eyebrow"><i style="--c:var(--yp-aurora)"></i>Прогноз северного сияния</span><h2 class="yp-h2" data-yp-split>Будет ли <b>сияние</b> в ближайшие ночи</h2></div>
+      <p class="yp-lead">Считаем по прогнозу геомагнитной активности (Kp-индекс) и облачности над Салехардом. Чем выше столбик, тем больше шанс. Обновляется при каждом открытии страницы.</p>
+    </div>
+    <div class="yp-af__grid" data-yp-af-grid aria-live="polite">
+      <div class="yp-af__msg" data-yp-af-msg>Загружаем прогноз…</div>
+    </div>
+    <div class="yp-af__foot">
+      <div class="yp-af__legend">
+        <span><i style="background:linear-gradient(90deg,#3FD07F,#9AA8FF)"></i>шанс с учётом облаков</span>
+        <span><i style="background:rgba(234,241,244,.2)"></i>шанс при ясном небе</span>
+        <span><i style="background:repeating-linear-gradient(45deg,rgba(234,241,244,.25) 0 3px,transparent 3px 6px)"></i>светло</span>
+      </div>
+      <span><b data-yp-afst></b> · <a href="/severnoe-siyanie" style="color:inherit">Как и когда смотреть сияние →</a> · Данные: NOAA SWPC (Kp на 3 дня), Open-Meteo (облачность). Прогноз вероятностный.</span>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("forecast"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  var grid = sec.querySelector("[data-yp-af-grid]");
+  var A = {rev:1, inten:.35, mx:.5, my:.5, tmx:.5, tmy:.5};
+  YP.makeAurora && YP.makeAurora(sec.querySelector(".yp-af__bg"), A, sec);
+  var COLORS = ["#7C8A96", "#9AA8FF", "#5CFFC0", "#7CF08A"];
+  var REFS = [[.55,"высокий"],[.3,"средний"],[.12,"низкий"]];
+  function fmtKp(v){ return v == null ? "—" : v.toFixed(1).replace(".", ","); }
+  function render(data){
+    if(!data || !data.nights.length){ grid.innerHTML = '<div class="yp-af__msg">Прогноз временно недоступен. Сияние у нас видно с сентября по апрель в ясные ночи, лучше всего с 22:00 до 02:00.</div>'; return; }
+    var bestN = data.nights.reduce(function(a,n,i){ return n.best.score > data.nights[a].best.score ? i : a; }, 0);
+    A.inten = [.25, .45, .75, 1][data.nights[0].level];
+    grid.innerHTML = "";
+    data.nights.forEach(function(n, ni){
+      var card = document.createElement("article");
+      card.className = "yp-night" + (ni === bestN && n.best.score >= .12 ? " is-best" : "");
+      var bestTxt = n.polarDay ? "Белые ночи: небо слишком светлое, сияния не видно."
+        : n.noKp ? "Прогноз Kp на эту ночь ещё не опубликован."
+        : n.best.score > 0 ? "Лучшее время " + n.best.time + " · Kp " + fmtKp(n.best.kp) + " · облачность " + n.best.cloud + "%"
+        : "Сплошная облачность или слабая активность.";
+      /* 13 часовых слотов 18:00 … 06:00 */
+      var slots = []; for(var h=18; h<=30; h++) slots.push(String(h%24).padStart(2,"0") + ":00");
+      var byTime = {}; n.hours.forEach(function(x){ byTime[x.time] = x; });
+      var bars = slots.map(function(t){
+        var x = byTime[t];
+        if(!x) return '<div class="yp-bar" aria-hidden="true"></div>';
+        var pot = x.kp != null && x.dark ? YP.kpPotential(x.kp) : 0;
+        var tip = t + " · " + (x.dark ? "Kp " + fmtKp(x.kp) + ", облачность " + x.cloud + "%, шанс " + YP.chanceLevel(x.score).text.toLowerCase() : "светло");
+        return '<div class="yp-bar' + (x.dark ? "" : " is-light") + (x === n.best && n.best.score > 0 ? " is-peak" : "") + '" data-tip="' + tip + '" title="' + tip + '">' +
+               '<s style="height:' + Math.round(pot*100) + '%"></s><b style="height:' + Math.round(x.score*100) + '%"></b></div>';
+      }).join("");
+      var refs = REFS.map(function(r){ return '<div class="yp-chart__ref" style="bottom:' + (r[0]*100) + '%"><span>' + r[1] + "</span></div>"; }).join("");
+      var xl = slots.map(function(t, i){ return "<span>" + (i % 3 === 0 ? t.slice(0,2) : "") + "</span>"; }).join("");
+      card.innerHTML =
+        '<div class="yp-night__top"><span class="yp-night__day">' + n.label + '</span><span class="yp-night__date">' + n.dateText + "</span></div>" +
+        '<div class="yp-night__lvl" style="--c:' + COLORS[n.level] + '"><i></i>' + (n.polarDay ? "Белые ночи" : n.text) + "</div>" +
+        '<p class="yp-night__best">' + bestTxt + "</p>" +
+        '<div class="yp-chart" role="img" aria-label="Шанс сияния по часам, ' + n.label + '">' + refs + bars + "</div>" +
+        '<div class="yp-chart__x" aria-hidden="true">' + xl + "</div>" +
+        '<p class="yp-night__tip" data-tip-out>Наведите на столбик, чтобы увидеть час</p>' +
+        (n.level >= 1 ? '<button class="yp-btn yp-btn--aurora" type="button">Забронировать на эту ночь</button>' : "");
+      var out = card.querySelector("[data-tip-out]");
+      card.querySelectorAll(".yp-bar[data-tip]").forEach(function(b){
+        b.addEventListener("pointerenter", function(){ out.textContent = b.getAttribute("data-tip"); });
+      });
+      var btn = card.querySelector(".yp-btn");
+      if(btn) btn.addEventListener("click", function(){ YP.openBooking && YP.openBooking({type:"glamping", date:n.date}); });
+      grid.appendChild(card);
+    });
+    if(G && window.ScrollTrigger && !YP.reduced){
+      G.from(grid.children, {y:50, opacity:0, duration:1, ease:"power3.out", stagger:.12, scrollTrigger:{trigger:grid, start:"top 85%"}});
+      G.from(grid.querySelectorAll(".yp-bar b, .yp-bar s"), {scaleY:0, duration:.9, ease:"power3.out", stagger:{each:.012, from:"start"}, scrollTrigger:{trigger:grid, start:"top 80%"}});
+      ScrollTrigger.refresh();
+    }
+  }
+  if(YP.forecast) YP.forecast.then(render); else render(null);
+})();
+window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.querySelector("[data-yp-afst]"); if(el && YP.dataStamp) el.textContent = YP.dataStamp(); });
+</script>
+
+<!-- 19 · «Прямо сейчас»: инфоборд (#today), погода (#weather) и прогноз сияния (#forecast) в одном блоке с вкладками.
+     Ставится сразу после этих блоков: скрипт переносит их сюда, каждый становится вкладкой (на странице остаются те, что есть). -->
+<style>
+.yp-now{padding-block:clamp(56px,8vw,120px) 0;background:var(--yp-bg)}
+.yp-now__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.yp-now__tabs{display:flex;gap:4px;padding:5px;border-radius:999px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line),0 10px 30px rgba(30,36,35,.06);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.yp-now__tabs::-webkit-scrollbar{display:none}
+.yp-now__tabs button{display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;cursor:pointer;font:500 14.5px var(--yp-f);color:var(--yp-ink);padding:12px 18px;border-radius:999px;white-space:nowrap;transition:background .3s,color .3s}
+.yp-now__tabs button i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.yp-now__tabs button[aria-selected="true"]{background:var(--yp-ink);color:#fff}
+.yp-now__tabs button:hover:not([aria-selected="true"]){background:var(--yp-bg)}
+.yp-now__panes{margin-top:clamp(18px,2.4vw,30px)}
+/* у вкладок свой общий заголовок — заголовки перенесённых блоков прячем, отступы уменьшаем */
+.yp-now__pane>section{padding-top:clamp(28px,3vw,44px)!important}
+.yp-now__pane>section>.yp-wrap>:first-child>div:first-child:has(.yp-h2){display:none}
+.yp-now__pane [data-yp-reveal]{opacity:1!important;transform:none!important}
+.yp-now__pane[hidden]{display:none}
+@media (max-width:768px){.yp-now__tabs button{padding:10px 14px;font-size:13.5px}}
+</style>
+<section class="yp yp-now" id="now">
+  <div class="yp-wrap">
+    <div class="yp-now__top">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Прямо сейчас</span><h2 class="yp-h2" data-yp-split>Погода, сияние <b>и день в парке</b></h2></div>
+      <div class="yp-now__tabs" role="tablist" aria-label="Что показать" data-yp-nowtabs></div>
+    </div>
+  </div>
+  <div class="yp-now__panes" data-yp-nowpanes></div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("now"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
+  var tabs = sec.querySelector("[data-yp-nowtabs]"), panes = sec.querySelector("[data-yp-nowpanes]");
+  var LIST = [["today", "Сегодня в парке", "var(--yp-blue)"], ["weather", "Погода на 4 дня", "var(--yp-green)"], ["forecast", "Прогноз сияния", "var(--yp-aurora)"]];
+  var items = LIST.filter(function(x){ var el = document.getElementById(x[0]); return el && !sec.contains(el); });
+  if(items.length < 2){ sec.hidden = true; return; }
+  items.forEach(function(x, i){
+    var el = document.getElementById(x[0]), pane = document.createElement("div");
+    pane.className = "yp-now__pane"; pane.setAttribute("role", "tabpanel"); pane.setAttribute("data-pane", x[0]); if(i) pane.hidden = true;
+    pane.appendChild(el); panes.appendChild(pane);
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(!i)); b.setAttribute("data-tab", x[0]);
+    b.style.setProperty("--c", x[2]); b.innerHTML = "<i></i>" + x[1]; tabs.appendChild(b);
+  });
+  function select(id){
+    tabs.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(b.getAttribute("data-tab") === id)); });
+    panes.querySelectorAll(".yp-now__pane").forEach(function(p){ p.hidden = p.getAttribute("data-pane") !== id; });
+    document.dispatchEvent(new Event("yp:theme"));
+    if(window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 60);
+  }
+  tabs.addEventListener("click", function(e){ var b = e.target.closest("[data-tab]"); if(b) select(b.getAttribute("data-tab")); });
+  /* ссылки на #forecast, #weather, #today (например, кнопка «Северное сияние» на первом экране) открывают нужную вкладку */
+  function fromHash(h){ var id = (h || "").replace("#", ""); if(items.some(function(x){ return x[0] === id; })) select(id); }
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("a[href*='#']"); if(!a) return;
+    var h = a.getAttribute("href"); fromHash(h.slice(h.indexOf("#")));
+  }, true);
+  fromHash(location.hash); window.addEventListener("hashchange", function(){ fromHash(location.hash); });
+})();
+</script>
+
+<!-- 14 · Отзывы: рейтинг на Яндекс Картах (организация 31555403788) + официальный виджет отзывов Яндекса — живые отзывы гостей.
+     Цифры (5,0 · 137 отзывов · 325 оценок) взяты из виджета Яндекс Карт 7 октября 2026 — обновляйте в RATING ниже или оставьте только виджет. -->
+<style>
+.yp-rv{padding-block:clamp(56px,9vw,140px);overflow:hidden}
+.yp-rv__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,5vw,80px);align-items:start}
+.yp-rv__score{display:flex;align-items:flex-end;gap:18px;margin-top:clamp(26px,3vw,40px)}
+.yp-rv__num{font:300 clamp(96px,11vw,170px)/.8 var(--yp-fd);letter-spacing:-.06em;background:linear-gradient(90deg,var(--yp-green),var(--yp-blue));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.yp-rv__stars{display:flex;gap:4px}
+.yp-rv__stars svg{width:clamp(22px,2.2vw,30px);height:clamp(22px,2.2vw,30px)}
+.yp-rv__stars .bg{fill:var(--yp-mist)}
+.yp-rv__stars .fg{fill:#FFB800;clip-path:inset(0 100% 0 0)}
+.yp-rv__src{margin-top:10px;font:500 13px var(--yp-mono);letter-spacing:.04em;color:var(--yp-muted)}
+.yp-rv__aw{display:grid;gap:10px;margin-top:clamp(28px,3vw,40px)}
+.yp-rv__aw div{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line)}
+.yp-rv__aw svg{flex:0 0 auto;width:34px;height:34px;padding:7px;border-radius:12px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.yp-rv__aw b{display:block;font-weight:600}
+.yp-rv__aw small{color:var(--yp-muted);font-size:13px}
+.yp-rv__act{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.yp-rv__wid{position:relative;perspective:1200px}
+.yp-rv__frame{position:relative;height:min(760px,80vh);border-radius:28px;overflow:hidden;background:var(--yp-paper);box-shadow:0 50px 90px -50px rgba(20,30,25,.55);transform-origin:50% 100%}
+.yp-rv__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yp-rv__ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:var(--yp-muted);font-size:15px;z-index:0}
+.yp-rv__frame.is-fallback{height:auto;min-height:420px}
+.yp-rv__frame.is-fallback .yp-rv__ph{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:420px;padding:40px 32px}
+.yp-rv__frame.is-fallback .yp-rv__ph b{font:400 clamp(22px,2vw,28px)/1.15 var(--yp-fd);color:var(--yp-ink)}
+.yp-rv__q2{font-size:18px;line-height:1.5;color:var(--yp-ink);max-width:36ch;font-style:italic}
+.yp-rv__why{margin-top:6px;font-size:12px;color:var(--yp-muted);max-width:40ch}
+.yp-rv__frame iframe{z-index:1}
+.yp-rv__q{position:absolute;right:-10px;top:-50px;font:300 clamp(160px,18vw,260px)/1 var(--yp-fd);color:var(--yp-green);opacity:.12;pointer-events:none;z-index:2}
+.yp-rv__link{display:inline-block;margin-top:12px;font-size:13px;color:var(--yp-muted)}
+@media (max-width:980px){.yp-rv__grid{grid-template-columns:minmax(0,1fr)}.yp-rv__frame{height:640px}}
+</style>
+<section class="yp yp-rv" id="reviews">
+  <div class="yp-wrap yp-rv__grid">
+    <div>
+      <span class="yp-eyebrow" style="--c:var(--yp-red)"><i></i>Отзывы гостей</span>
+      <h2 class="yp-h2" data-yp-split>Нам ставят <b>пятёрки</b></h2>
+      <div class="yp-rv__score" data-yp-rvs>
+        <div class="yp-rv__num" data-yp-rvn>5,0</div>
+        <div>
+          <div class="yp-rv__stars" aria-hidden="true"></div>
+          <div class="yp-rv__src"><span data-yp-rvr>137</span> отзывов · <span data-yp-rvc>325</span> оценок · Яндекс Карты</div>
+        </div>
+      </div>
+      <div class="yp-rv__aw">
+        <div style="--c:var(--yp-green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg><span><b>Лучший туристический проект ЯНАО 2024</b><small>премия «Бизнес-Успех»</small></span></div>
+        <div style="--c:var(--yp-blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg><span><b>ТОП-100 брендов России</b><small>Ямал Парк в списке брендов страны</small></span></div>
+      </div>
+      <div class="yp-rv__act">
+        <a class="yp-btn" href="https://yandex.ru/maps/org/yamal_park/31555403788/reviews/" target="_blank" rel="noopener">Все отзывы на Яндекс Картах</a>
+        <a class="yp-btn yp-btn--ghost" href="https://yandex.ru/maps/org/yamal_park/31555403788/reviews/?add-review=true" target="_blank" rel="noopener">Оставить отзыв</a>
+      </div>
+    </div>
+    <div class="yp-rv__wid">
+      <span class="yp-rv__q" aria-hidden="true" data-yp-parallax="0.25">“</span>
+      <div class="yp-rv__frame" data-yp-rvf>
+        <p class="yp-rv__ph">Загружаем отзывы с Яндекс Карт…<br>Если они не появились, откройте их по ссылке «Все отзывы на Яндекс Картах».</p>
+        <iframe data-src="https://yandex.ru/maps-reviews-widget/31555403788?comments" title="Отзывы о Ямал Парке на Яндекс Картах" loading="lazy"></iframe>
+      </div>
+      <a class="yp-rv__link" href="https://yandex.ru/maps/org/yamal_park/31555403788/" target="_blank" rel="noopener">Ямал Парк на Яндекс Картах</a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("reviews"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap, motion = !!G && !YP.reduced;
+  var RATING = 5.0, COUNT = 325, REVIEWS = 137;
+  var STAR = '<svg viewBox="0 0 24 24"><path class="bg" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/><path class="fg" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
+  var starsBox = sec.querySelector(".yp-rv__stars"); starsBox.innerHTML = STAR + STAR + STAR + STAR + STAR;
+  var fgs = starsBox.querySelectorAll(".fg"), numEl = sec.querySelector("[data-yp-rvn]"), cntEl = sec.querySelector("[data-yp-rvc]");
+  function fillStars(v){ fgs.forEach(function(f, i){ var p = Math.max(0, Math.min(1, v - i)); f.style.clipPath = "inset(0 " + ((1-p)*100) + "% 0 0)"; }); }
+  var revEl = sec.querySelector("[data-yp-rvr]");
+  numEl.textContent = RATING.toFixed(1).replace(".", ","); cntEl.textContent = COUNT; revEl.textContent = REVIEWS;
+  /* виджет Яндекса грузим, когда блок рядом с экраном */
+  var frame = sec.querySelector("[data-yp-rvf] iframe");
+  var box = sec.querySelector("[data-yp-rvf]"), ph = box.querySelector(".yp-rv__ph");
+  var preview = /claude|anthropic/i.test(location.hostname + " " + document.referrer) || location.origin === "null";
+  function fallback(){
+    frame.remove(); box.classList.add("is-fallback");
+    ph.innerHTML = '<b>Отзывы гостей — на Яндекс Картах</b><span>5,0 · 137 отзывов · 325 оценок</span><span class="yp-rv__q2">«Если честно не ожидал такого шика»</span><small>— Алексей Макаров, 10 мая 2025</small>' +
+      '<a class="yp-btn" href="https://yandex.ru/maps/org/yamal_park/31555403788/reviews/" target="_blank" rel="noopener">Читать все отзывы</a><small class="yp-rv__why">В этом предпросмотре внешние виджеты закрыты. На сайте здесь будет живая лента отзывов Яндекса.</small>';
+  }
+  function load(){ if(preview){ if(!box.classList.contains("is-fallback")) fallback(); return; } if(!frame.src) frame.src = frame.getAttribute("data-src"); }
+  if(window.IntersectionObserver) new IntersectionObserver(function(e, o){ if(e[0].isIntersecting){ load(); o.disconnect(); } }, {rootMargin:"600px"}).observe(sec); else load();
+  window.addEventListener("load", function(){ setTimeout(load, 3000); });
+  if(!motion || !window.ScrollTrigger){ fillStars(RATING); return; }
+  fillStars(0);
+  ScrollTrigger.create({trigger:sec.querySelector("[data-yp-rvs]"), start:"top 80%", once:true, onEnter:function(){
+    var o = {v:0, c:0};
+    G.to(o, {v:RATING, duration:2, ease:"power3.out", onUpdate:function(){ numEl.textContent = o.v.toFixed(1).replace(".", ","); }});
+    G.to(o, {c:COUNT, duration:2.2, ease:"power2.out", onUpdate:function(){ cntEl.textContent = Math.round(o.c); revEl.textContent = Math.round(o.c*REVIEWS/COUNT); }});
+    var s = {v:0}; G.to(s, {v:RATING, duration:1.6, ease:"power2.inOut", delay:.2, onUpdate:function(){ fillStars(s.v); }});
+    G.fromTo(starsBox.children, {scale:.4, rotate:-30}, {scale:1, rotate:0, duration:.8, ease:"back.out(3)", stagger:.12, delay:.2});
+  }});
+  G.fromTo(sec.querySelectorAll(".yp-rv__aw>div"), {x:-40, opacity:0}, {x:0, opacity:1, duration:.9, ease:"power3.out", stagger:.12, clearProps:"transform,opacity", scrollTrigger:{trigger:sec.querySelector(".yp-rv__aw"), start:"top 88%", once:true}});
+  G.fromTo(sec.querySelector("[data-yp-rvf]"), {rotateX:18, y:80, opacity:0}, {rotateX:0, y:0, opacity:1, duration:1.4, ease:"power3.out", clearProps:"transform,opacity", scrollTrigger:{trigger:sec.querySelector(".yp-rv__wid"), start:"top 85%", once:true}});
+})();
+</script>
+
+<!-- Глэмпинг · 05 · Вопросы о проживании (по FAQ текущего сайта). Также ставит «Глэмпинг» по умолчанию в форме брони -->
+<style>
+.yp-faq{padding-block:clamp(56px,10vw,150px)}
+.yp-faq__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px)}
+.yp-faq__side p{color:var(--yp-muted);margin:20px 0 26px;max-width:36ch}
+.yp-faq__list{border-top:1px solid var(--yp-line)}
+.yp-faq details{border-bottom:1px solid var(--yp-line)}
+.yp-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 0;font-weight:500;font-size:clamp(17px,1.4vw,21px);line-height:1.3;transition:color .3s}
+.yp-faq summary:hover{color:var(--yp-blue)}
+.yp-faq summary::-webkit-details-marker{display:none}
+.yp-faq summary i{flex:0 0 auto;position:relative;width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--yp-line);transition:background .35s,transform .45s var(--yp-ease)}
+.yp-faq summary i::before{content:"";position:absolute;left:50%;top:50%;width:0;height:0;margin:-5px 0 0 -6px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid var(--yp-ink);transition:border-color .35s}
+.yp-faq details[open] summary i{background:var(--yp-blue);transform:rotate(180deg)}
+.yp-faq details[open] summary i::before{border-top-color:#fff}
+.yp-faq__a{overflow:hidden}
+.yp-faq__a>div{padding:0 56px 26px 0;color:var(--yp-muted);font-size:16px}
+.yp-faq__a p{margin:0 0 8px}
+@media (max-width:900px){.yp-faq__in{grid-template-columns:minmax(0,1fr)}.yp-faq__a>div{padding-right:0}}
+</style>
+<section class="yp yp-faq" id="faq">
+  <div class="yp-wrap yp-faq__in">
+    <div class="yp-faq__side">
+      <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Вопросы о проживании</span>
+      <h2 class="yp-h2" data-yp-split>Перед <b>заездом</b></h2>
+      <p>Не нашли ответ? Позвоните администратору или напишите в Telegram @yamalpark.</p>
+      <a class="yp-btn yp-btn--ghost" href="tel:+79003991033">+7 900 399-10-33</a>
+    </div>
+    <div class="yp-faq__list">
+      <details open><summary>Во сколько заезд и выезд?<i></i></summary><div class="yp-faq__a"><div><p>Купол: заезд с 14:00, выезд до 12:00 следующего дня.</p><p>«Волк» и «Медведь»: заезд с 15:00, выезд до 13:00.</p><p>Ранний заезд и поздний выезд возможны по договорённости, если объект свободен (доплата по тарифу).</p></div></div></details>
+      <details><summary>Сколько стоит проживание?<i></i></summary><div class="yp-faq__a"><div><p>Купольный домик — 9 000 ₽ за сутки с воскресенья по четверг и 13 000 ₽ в пятницу и субботу. Дома «Волк» и «Медведь» — 8 000 ₽ и 12 000 ₽. Продление в день выезда — 1 000 ₽ в час, если домик свободен.</p></div></div></details>
+      <details><summary>Не холодно ли зимой?<i></i></summary><div class="yp-faq__a"><div><p>Нет. В домиках тёплые полы, комфортно даже в −40 °C. Комплекс работает круглый год.</p></div></div></details>
+      <details><summary>Есть ли Wi-Fi?<i></i></summary><div class="yp-faq__a"><div><p>Да, бесплатный Wi-Fi работает в большинстве домиков, банях и на основной территории. В отдалённых точках сигнал может быть слабее.</p></div></div></details>
+      <details><summary>Можно с детьми?<i></i></summary><div class="yp-faq__a"><div><p>Да. На территории есть детская площадка и мини-зоопарк. Детям до 5 лет проживание обычно бесплатно, уточняйте при бронировании.</p></div></div></details>
+      <details><summary>Какие условия отмены?<i></i></summary><div class="yp-faq__a"><div><p>Отмена за 7 дней и раньше — возврат 100%. Отмена менее чем за 3 дня или неявка — предоплата не возвращается. Полные условия в разделе «Документы».</p></div></div></details>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var YP = window.YP || {};
+  document.addEventListener("DOMContentLoaded", function(){ var t = document.querySelector('#yp-booking-widget [data-tab="stay"]'); if(t) t.click(); });
+  if(!window.gsap || YP.reduced) return;
+  document.querySelectorAll("#faq details").forEach(function(d){
+    var s = d.querySelector("summary"), a = d.querySelector(".yp-faq__a");
+    s.addEventListener("click", function(e){
+      e.preventDefault();
+      if(d.open){ gsap.to(a, {height:0, duration:.45, ease:"power3.inOut", onComplete:function(){ d.open = false; gsap.set(a,{clearProps:"height"}); window.ScrollTrigger && ScrollTrigger.refresh(); }}); }
+      else { d.open = true; gsap.fromTo(a, {height:0}, {height:"auto", duration:.55, ease:"power3.out", onComplete:function(){ gsap.set(a,{clearProps:"height"}); window.ScrollTrigger && ScrollTrigger.refresh(); }});
+             gsap.from(a.querySelectorAll("p"), {y:12, opacity:0, stagger:.06, duration:.5, delay:.1}); }
+    });
+  });
+})();
+</script>
+
