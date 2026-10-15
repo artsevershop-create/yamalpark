@@ -434,6 +434,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
+  YP.YM_ID = 111264194;
+  YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest("a,button"); if(!t) return;
+    var h = t.getAttribute("href") || "", page = location.pathname.replace(/\.html$/, "");
+    if(t.hasAttribute("data-yp-book")) YP.goal("book_open", {type:t.getAttribute("data-yp-book") || "any", page:page});
+    else if(t.hasAttribute("data-yp-fbook") || t.closest("[data-yp-ftimes] [data-t]")) YP.goal("free_book", {page:page});
+    else if(t.closest("[data-yp-fdays]")) YP.goal("free_day");
+    else if(/^tel:/.test(h)) YP.goal("call", {page:page});
+    else if(/max\.ru/.test(h)) YP.goal("max");
+    else if(/t\.me\//.test(h)) YP.goal("telegram");
+    else if(/vk\.(com|ru)\//.test(h)) YP.goal("vk");
+    else if(/hotbot\.ai/.test(h) || t.hasAttribute("data-yp-shop")) YP.goal("hotbot");
+    else if(t.hasAttribute("data-yp-to")) YP.goal("lang_" + t.getAttribute("data-yp-to"));
+    else if(/yandex\.ru\/maps/.test(h)) YP.goal("route");
+  }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
   YP.openShop = function(){
@@ -1020,8 +1037,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-hdr__in">
     <a class="yp-logo" href="index.html" aria-label="Ямал Парк — на главную">
       <svg viewBox="0 0 1496 632" aria-hidden="true"><polygon points="0,476 275,0 550,476" fill="#6274B6"/><polygon points="473,156 1023,156 748,632" fill="#3FAB3C"/><polygon points="946,476 1221,0 1496,476" fill="#E31E24"/></svg>
-      <img class="w-color" src="img/brand/wordmark-color.png" alt="Ямал Парк" width="140" height="17">
-      <img class="w-white" src="img/brand/wordmark-white.png" alt="" width="140" height="17">
+      <img class="w-color" src="img/brand/wordmark-color.webp" alt="Ямал Парк" width="140" height="17">
+      <img class="w-white" src="img/brand/wordmark-white.webp" alt="" width="140" height="17">
     </a>
     <nav class="yp-nav" aria-label="Основное меню">
       <a href="glamping.html" style="--c:var(--yp-blue)">Глэмпинг</a>
@@ -1093,7 +1110,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Зоопарк · 01 · Первый экран: лиса, в воздухе — тёплые пылинки (YP.pageHero) -->
 <section class="yp yp-dark yp-ph" id="top" data-yp-theme="dark" aria-label="Мини-зоопарк" style="--c:var(--yp-green);--hl:linear-gradient(90deg,#9BE88F,#3FAB3C 60%,#2BA6A0)">
   <div class="yp-ph__pin">
-    <img class="yp-ph__bg" src="img/fox.jpg" alt="Чернобурая лиса в мини-зоопарке Ямал Парка" fetchpriority="high" style="object-position:50% 35%">
+    <img class="yp-ph__bg" src="img/fox.webp" alt="Чернобурая лиса в мини-зоопарке Ямал Парка" fetchpriority="high" style="object-position:50% 35%">
     <div class="yp-ph__shade"></div>
     <canvas class="yp-ph__fx" aria-hidden="true"></canvas>
     <div class="yp-wrap yp-ph__in">
@@ -1158,24 +1175,24 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <span class="yp-ac__b"><h4>Кролики</h4><p>Самые спокойные жители мини-зоопарка — их можно рассмотреть совсем близко. Маленьким гостям обычно нравятся больше всех.</p><span class="tag">Фото скоро</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#5B3A22" aria-label="Лисы и песец — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/fox.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Лисы и песец</h3><small>вольеры №4</small></span></span>
+        <span class="yp-ac__f"><img src="img/fox.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Лисы и песец</h3><small>вольеры №4</small></span></span>
         <span class="yp-ac__b"><h4>Лисы и песец</h4><p>Песец — полярная лиса: зимой его мех становится белым, а густая шерсть на лапах помогает не мёрзнуть на снегу.</p><span class="tag">Два вольера у входа</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#6B5A3A" aria-label="Рыси — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-lynx.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Рыси</h3><small>2 рыси · новый вольер</small></span></span>
+        <span class="yp-ac__f"><img src="img/new/zoo-lynx.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Рыси</h3><small>2 рыси · новый вольер</small></span></span>
         <span class="yp-ac__b"><h4>Две рыси</h4><p>Единственная дикая кошка северной тайги. Кисточки на ушах и широкие лапы-«снегоступы» узнаются сразу.</p><span class="tag">Новый вольер</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#4E6B3A" aria-label="Козы — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-goats.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Козы</h3><small>общий вольер с косулей</small></span></span>
+        <span class="yp-ac__f"><img src="img/new/zoo-goats.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Козы</h3><small>общий вольер с косулей</small></span></span>
         <span class="yp-ac__b"><h4>Две козы</h4><p>Самые общительные жители мини-зоопарка — дети обычно начинают знакомство именно с них.</p><span class="tag">Вольер с косулей</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#7A5A3A" aria-label="Косуля — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-roe.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
+        <span class="yp-ac__f"><img src="img/new/zoo-roe.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
         <span class="yp-ac__b"><h4>Косуля</h4><p>Небольшой изящный олень с белым «зеркальцем» сзади. Очень пугливы — подходите тихо.</p><span class="tag">Вольер с козами</span></span>
       </span></button>
     </div>
     <div class="yp-lynx">
-      <div class="yp-lynx__img" data-yp-img><img src="img/new/lynx-enclosure.jpg" alt="Новый вольер для рысей с лестницами, гамаком и каменными укрытиями" loading="lazy"></div>
+      <div class="yp-lynx__img" data-yp-img><img src="img/new/lynx-enclosure.webp" alt="Новый вольер для рысей с лестницами, гамаком и каменными укрытиями" loading="lazy"></div>
       <div data-yp-reveal>
         <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Новое</span>
         <h3>Вольер для рысей</h3>
@@ -1479,11 +1496,11 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Чем ещё заняться</span>
     <h2 class="yp-h2" data-yp-split>Для детей <b>и взрослых</b></h2>
     <div class="yp-fun__grid" data-yp-fun>
-      <article class="yp-fn yp-fn--tall is-photo"><img src="img/new/park-triangles.jpg" alt="Парковая зона с дорожками с высоты" loading="lazy"><h3>Парковая зона</h3><p>Дорожки, лавочки и деревянные скульптуры. Хорошо гулять в любое время года.</p></article>
+      <article class="yp-fn yp-fn--tall is-photo"><img src="img/new/park-triangles.webp" alt="Парковая зона с дорожками с высоты" loading="lazy"><h3>Парковая зона</h3><p>Дорожки, лавочки и деревянные скульптуры. Хорошо гулять в любое время года.</p></article>
       <article class="yp-fn" style="--c:var(--yp-green)"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 38h32M10 38V18l12-10 12 10v20"/><path d="M17 38v-9h10v9"/><circle cx="22" cy="19" r="3"/></svg><h3>Детская площадка</h3><p>Безопасная игровая площадка рядом с администрацией.</p></article>
       <article class="yp-fn" style="--c:var(--yp-red)"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2"><circle cx="22" cy="22" r="14"/><circle cx="22" cy="22" r="7"/><circle cx="22" cy="22" r="1.5" fill="currentColor"/></svg><h3>Пейнтбол</h3><p>Своя площадка для командной игры шариками с краской.</p></article>
       <article class="yp-fn" style="--c:var(--yp-blue)"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 26h20l6-6h6v6l-6 6H6z"/><path d="M38 14l4-4M34 10l2-6"/></svg><h3>Лазертаг</h3><p>Игра лазерными бластерами с датчиками попадания — без краски и синяков.</p></article>
-      <article class="yp-fn yp-fn--wide is-photo"><img src="img/new/sculpture-1.jpg" alt="Деревянные скульптуры в парковой зоне" loading="lazy"><h3>Деревянные скульптуры</h3><p>Резные фигуры в парке у банкетного зала — их любят фотографировать.</p></article>
+      <article class="yp-fn yp-fn--wide is-photo"><img src="img/new/sculpture-1.webp" alt="Деревянные скульптуры в парковой зоне" loading="lazy"><h3>Деревянные скульптуры</h3><p>Резные фигуры в парке у банкетного зала — их любят фотографировать.</p></article>
       <article class="yp-fn" style="--c:#2BA6A0"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="16" width="32" height="16" rx="4"/><circle cx="14" cy="32" r="4"/><circle cx="30" cy="32" r="4"/><path d="M12 16l4-6h12l4 6"/></svg><h3>Парковка</h3><p>На 50 машин — у входа, у бань и у домов.</p></article>
     </div>
   </div>
@@ -1686,7 +1703,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
@@ -1722,7 +1739,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       var c = document.getElementById("tl-search-form"), docs = [], btn = null;
       (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
       docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
-      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
       else if(Date.now() - t0 > 25000) clearInterval(iv);
     }, 300);
   })();

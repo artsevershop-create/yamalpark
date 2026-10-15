@@ -435,6 +435,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
+  YP.YM_ID = 111264194;
+  YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest("a,button"); if(!t) return;
+    var h = t.getAttribute("href") || "", page = location.pathname.replace(/\.html$/, "");
+    if(t.hasAttribute("data-yp-book")) YP.goal("book_open", {type:t.getAttribute("data-yp-book") || "any", page:page});
+    else if(t.hasAttribute("data-yp-fbook") || t.closest("[data-yp-ftimes] [data-t]")) YP.goal("free_book", {page:page});
+    else if(t.closest("[data-yp-fdays]")) YP.goal("free_day");
+    else if(/^tel:/.test(h)) YP.goal("call", {page:page});
+    else if(/max\.ru/.test(h)) YP.goal("max");
+    else if(/t\.me\//.test(h)) YP.goal("telegram");
+    else if(/vk\.(com|ru)\//.test(h)) YP.goal("vk");
+    else if(/hotbot\.ai/.test(h) || t.hasAttribute("data-yp-shop")) YP.goal("hotbot");
+    else if(t.hasAttribute("data-yp-to")) YP.goal("lang_" + t.getAttribute("data-yp-to"));
+    else if(/yandex\.ru\/maps/.test(h)) YP.goal("route");
+  }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
   YP.openShop = function(){
@@ -1021,8 +1038,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-hdr__in">
     <a class="yp-logo" href="index.html" aria-label="Ямал Парк — на главную">
       <svg viewBox="0 0 1496 632" aria-hidden="true"><polygon points="0,476 275,0 550,476" fill="#6274B6"/><polygon points="473,156 1023,156 748,632" fill="#3FAB3C"/><polygon points="946,476 1221,0 1496,476" fill="#E31E24"/></svg>
-      <img class="w-color" src="img/brand/wordmark-color.png" alt="Ямал Парк" width="140" height="17">
-      <img class="w-white" src="img/brand/wordmark-white.png" alt="" width="140" height="17">
+      <img class="w-color" src="img/brand/wordmark-color.webp" alt="Ямал Парк" width="140" height="17">
+      <img class="w-white" src="img/brand/wordmark-white.webp" alt="" width="140" height="17">
     </a>
     <nav class="yp-nav" aria-label="Основное меню">
       <a href="glamping.html" style="--c:var(--yp-blue)">Глэмпинг</a>
@@ -1094,7 +1111,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Мероприятия · 01 · Первый экран: банкетный зал под куполом на закате, плывут золотые блики (YP.pageHero) -->
 <section class="yp yp-dark yp-ph" id="top" data-yp-theme="dark" aria-label="Мероприятия" style="--c:var(--yp-blue);--hl:linear-gradient(90deg,#FFE0A8,#FFB27A 50%,#9AA8FF)">
   <div class="yp-ph__pin">
-    <img class="yp-ph__bg" src="img/new/banquet-dome.jpg" alt="Банкетный зал под куполом на закате" fetchpriority="high">
+    <img class="yp-ph__bg" src="img/new/banquet-dome.webp" alt="Банкетный зал под куполом на закате" fetchpriority="high">
     <div class="yp-ph__shade"></div>
     <canvas class="yp-ph__fx" aria-hidden="true"></canvas>
     <div class="yp-wrap yp-ph__in">
@@ -1157,23 +1174,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     </div>
     <div class="yp-vg" data-yp-vg>
       <article class="yp-vc yp-vc--big" data-min="40" data-max="150">
-        <div class="yp-vc__ph"><img src="img/new/banquet-aerial.jpg" alt="Банкетный зал под куполом с высоты" loading="lazy"><span class="yp-vc__cap">100–150 гостей</span></div>
+        <div class="yp-vc__ph"><img src="img/new/banquet-aerial.webp" alt="Банкетный зал под куполом с высоты" loading="lazy"><span class="yp-vc__cap">100–150 гостей</span></div>
         <div class="yp-vc__b"><h3>Банкетный зал под куполом</h3><p>Просторный зал с панорамным остеклением: гости видят тундру прямо во время праздника. Купольная форма выдерживает северные ветра и снег — как чум.</p><span class="yp-vc__price">50 000 ₽ вс–чт · 70 000 ₽ пт, сб, праздники · 12:00–23:00</span></div>
       </article>
       <article class="yp-vc" data-min="10" data-max="20">
-        <div class="yp-vc__ph"><img src="img/p/tent-aurora-in.jpg" alt="Северное сияние сквозь грани шатра «Сияние севера»" loading="lazy"><span class="yp-vc__cap">до 20 гостей</span></div>
+        <div class="yp-vc__ph"><img src="img/p/tent-aurora-in.webp" alt="Северное сияние сквозь грани шатра «Сияние севера»" loading="lazy"><span class="yp-vc__cap">до 20 гостей</span></div>
         <div class="yp-vc__b"><h3>Шатёр «Сияние севера»</h3><p>Купол 40 м² с панорамным окном и дровяной печью на смотровой площадке.</p><span class="yp-vc__price">10 000 / 15 000 ₽ · после 23:00 — 3 000 ₽/ч</span></div>
       </article>
       <article class="yp-vc" data-min="10" data-max="25">
-        <div class="yp-vc__ph"><img src="img/new/grill-night2.jpg" alt="Деревянный дом в огнях зимним вечером" loading="lazy"><span class="yp-vc__cap">20–25 гостей</span></div>
+        <div class="yp-vc__ph"><img src="img/new/grill-night2.webp" alt="Деревянный дом в огнях зимним вечером" loading="lazy"><span class="yp-vc__cap">20–25 гостей</span></div>
         <div class="yp-vc__b"><h3>Гостевые дома №1 и №2</h3><p>Стол на всю компанию, гриль-зона в отдельном здании рядом.</p><span class="yp-vc__price">8 000 / 12 000 ₽ · 12:00–22:00</span></div>
       </article>
       <article class="yp-vc" data-min="5" data-max="20">
-        <div class="yp-vc__ph"><img src="img/new/grill-hall.jpg" alt="Гриль-дом внутри" loading="lazy"><span class="yp-vc__cap">15–20 гостей</span></div>
+        <div class="yp-vc__ph"><img src="img/new/grill-hall.webp" alt="Гриль-дом внутри" loading="lazy"><span class="yp-vc__cap">15–20 гостей</span></div>
         <div class="yp-vc__b"><h3>Гриль-дома №1–3</h3><p>Гриль под вытяжкой в центре, стол и лавки вокруг.</p><span class="yp-vc__price">от 6 000 ₽ в день · 12:00–22:00</span></div>
       </article>
       <article class="yp-vc" data-min="5" data-max="20">
-        <div class="yp-vc__ph"><img src="img/p/chum-aurora2.jpg" alt="Чум под северным сиянием" loading="lazy"><span class="yp-vc__cap">15–20 гостей</span></div>
+        <div class="yp-vc__ph"><img src="img/p/chum-aurora2.webp" alt="Чум под северным сиянием" loading="lazy"><span class="yp-vc__cap">15–20 гостей</span></div>
         <div class="yp-vc__b"><h3>Чум и смотровая площадка</h3><p>Обогретый чум, костровище и казан — для вечера в северном стиле.</p><span class="yp-vc__price">от 12 000 ₽</span></div>
       </article>
     </div>
@@ -1236,17 +1253,17 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-tn__grid">
     <div>
       <div class="yp-tn__view" data-yp-tnv data-yp-cursor="День / ночь">
-        <img class="d" src="img/p/tent-day.jpg" alt="Шатёр «Сияние севера» на террасе зимним днём" loading="lazy">
-        <img class="n" src="img/p/tent-aurora-in.jpg" alt="Северное сияние сквозь грани шатра «Сияние севера»" loading="lazy">
+        <img class="d" src="img/p/tent-day.webp" alt="Шатёр «Сияние севера» на террасе зимним днём" loading="lazy">
+        <img class="n" src="img/p/tent-aurora-in.webp" alt="Северное сияние сквозь грани шатра «Сияние севера»" loading="lazy">
         <img class="x" alt="" loading="lazy">
         <div class="yp-tn__sw" role="group" aria-label="Время суток"><button type="button" aria-pressed="true" data-t="day">День</button><button type="button" aria-pressed="false" data-t="night">Ночь с сиянием</button></div>
       </div>
       <div class="yp-tn__strip" data-yp-tns>
-        <button type="button" data-src="img/p/tent-inside.jpg" aria-label="Шатёр изнутри: панорамное окно"><img src="img/p/tent-inside.jpg" alt="" loading="lazy"></button>
-        <button type="button" data-src="img/p/tent-inside2.jpg" aria-label="Шатёр изнутри: печь и вход"><img src="img/p/tent-inside2.jpg" alt="" loading="lazy"></button>
-        <button type="button" data-src="img/p/tent-ext.jpg" aria-label="Шатёр снаружи"><img src="img/p/tent-ext.jpg" alt="" loading="lazy"></button>
-        <button type="button" data-src="img/p/tent-frost.jpg" aria-label="Шатёр в инее"><img src="img/p/tent-frost.jpg" alt="" loading="lazy"></button>
-        <button type="button" data-src="img/p/tent-aurora.jpg" aria-label="Сияние над территорией у шатра"><img src="img/p/tent-aurora.jpg" alt="" loading="lazy"></button>
+        <button type="button" data-src="img/p/tent-inside.webp" aria-label="Шатёр изнутри: панорамное окно"><img src="img/p/tent-inside.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="img/p/tent-inside2.webp" aria-label="Шатёр изнутри: печь и вход"><img src="img/p/tent-inside2.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="img/p/tent-ext.webp" aria-label="Шатёр снаружи"><img src="img/p/tent-ext.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="img/p/tent-frost.webp" aria-label="Шатёр в инее"><img src="img/p/tent-frost.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="img/p/tent-aurora.webp" aria-label="Сияние над территорией у шатра"><img src="img/p/tent-aurora.webp" alt="" loading="lazy"></button>
       </div>
     </div>
     <div>
@@ -1388,12 +1405,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var YP = window.YP || {}, U = YP.UNITS || {};
   var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
-  var SET = /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
+  var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
   var gEl = sec.querySelector("[data-yp-fgroups]"), uEl = sec.querySelector("[data-yp-funits]"), dEl = sec.querySelector("[data-yp-fdays]"), tEl = sec.querySelector("[data-yp-ftimes]"), lenEl = sec.querySelector("[data-yp-flen]"), monthEl = sec.querySelector("[data-yp-fmonth]"), monthLabel = sec.querySelector("[data-yp-month-label]"), weekEl = sec.querySelector("[data-yp-fweek]");
   var nameEl = sec.querySelector("[data-yp-fname]"), infoEl = sec.querySelector("[data-yp-finfo]"), sumEl = sec.querySelector("[data-yp-fsum]"), bookBtn = sec.querySelector("[data-yp-fbook]"), noteEl = sec.querySelector("[data-yp-fnote]");
   var today = YP.tzISO ? YP.tzISO(new Date()) : new Date().toISOString().slice(0,10), nowParts = today.split("-").map(Number);
   var cur = {g:0, u:null, long:false, date:null, req:0, year:nowParts[0], month:nowParts[1]-1};
+  if(/new-year/.test(p) && cur.month < 11) cur.month = 11;   /* на новогодней странице календарь сразу на декабре */
   var T = function(x){ return YP.t ? YP.t(x) : x; }, cap = function(x){ return x.charAt(0).toUpperCase() + x.slice(1); };
   var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : n + " ₽"; };
   var fmt = function(iso, o){ return new Intl.DateTimeFormat(YP.loc || "ru-RU", Object.assign({timeZone:"UTC"}, o)).format(new Date(iso + "T12:00:00Z")); };
@@ -1789,7 +1807,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   </div>
   <div class="yp-wrap">
     <div class="yp-fest">
-      <div class="yp-fest__img" data-yp-img><img src="img/new/fest-stage-top-1.jpg" alt="Летний фестиваль в Ямал Парке: сцена и гости, вид сверху" loading="lazy"></div>
+      <div class="yp-fest__img" data-yp-img><img src="img/new/fest-stage-top-1.webp" alt="Летний фестиваль в Ямал Парке: сцена и гости, вид сверху" loading="lazy"></div>
       <div data-yp-reveal>
         <span class="yp-eyebrow" style="--c:var(--yp-red)"><i></i>Было · 12 июня 2026</span>
         <h3>«Лето в Ямал Парке»</h3>
@@ -2010,7 +2028,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
@@ -2046,7 +2064,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       var c = document.getElementById("tl-search-form"), docs = [], btn = null;
       (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
       docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
-      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
       else if(Date.now() - t0 > 25000) clearInterval(iv);
     }, 300);
   })();

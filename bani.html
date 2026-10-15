@@ -435,6 +435,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
+  YP.YM_ID = 111264194;
+  YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest("a,button"); if(!t) return;
+    var h = t.getAttribute("href") || "", page = location.pathname.replace(/\.html$/, "");
+    if(t.hasAttribute("data-yp-book")) YP.goal("book_open", {type:t.getAttribute("data-yp-book") || "any", page:page});
+    else if(t.hasAttribute("data-yp-fbook") || t.closest("[data-yp-ftimes] [data-t]")) YP.goal("free_book", {page:page});
+    else if(t.closest("[data-yp-fdays]")) YP.goal("free_day");
+    else if(/^tel:/.test(h)) YP.goal("call", {page:page});
+    else if(/max\.ru/.test(h)) YP.goal("max");
+    else if(/t\.me\//.test(h)) YP.goal("telegram");
+    else if(/vk\.(com|ru)\//.test(h)) YP.goal("vk");
+    else if(/hotbot\.ai/.test(h) || t.hasAttribute("data-yp-shop")) YP.goal("hotbot");
+    else if(t.hasAttribute("data-yp-to")) YP.goal("lang_" + t.getAttribute("data-yp-to"));
+    else if(/yandex\.ru\/maps/.test(h)) YP.goal("route");
+  }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
   YP.openShop = function(){
@@ -1021,8 +1038,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-hdr__in">
     <a class="yp-logo" href="index.html" aria-label="Ямал Парк — на главную">
       <svg viewBox="0 0 1496 632" aria-hidden="true"><polygon points="0,476 275,0 550,476" fill="#6274B6"/><polygon points="473,156 1023,156 748,632" fill="#3FAB3C"/><polygon points="946,476 1221,0 1496,476" fill="#E31E24"/></svg>
-      <img class="w-color" src="img/brand/wordmark-color.png" alt="Ямал Парк" width="140" height="17">
-      <img class="w-white" src="img/brand/wordmark-white.png" alt="" width="140" height="17">
+      <img class="w-color" src="img/brand/wordmark-color.webp" alt="Ямал Парк" width="140" height="17">
+      <img class="w-white" src="img/brand/wordmark-white.webp" alt="" width="140" height="17">
     </a>
     <nav class="yp-nav" aria-label="Основное меню">
       <a href="glamping.html" style="--c:var(--yp-blue)">Глэмпинг</a>
@@ -1120,7 +1137,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 </style>
 <section class="yp yp-dark yp-bh" id="top" data-yp-theme="dark" aria-label="Ямальские бани">
   <div class="yp-bh__pin">
-    <div class="yp-bh__img" style="background-image:url(img/p/moroshka-steam2.jpg)"><video class="yp-bh__vid" src="img/video/fx-fog-brusnika.mp4" poster="img/video/fx-fog-brusnika.jpg" muted playsinline loop autoplay preload="auto" aria-hidden="true"></video></div>
+    <div class="yp-bh__img" style="background-image:url(img/p/moroshka-steam2.webp)"><video class="yp-bh__vid" src="img/video/fx-fog-brusnika.mp4" poster="img/video/fx-fog-brusnika.webp" muted playsinline loop autoplay preload="auto" aria-hidden="true"></video></div>
     <div class="yp-bh__shade"></div>
     <div class="yp-bh__glow" aria-hidden="true"></div>
     <canvas class="yp-bh__fx" aria-hidden="true"></canvas>
@@ -1262,42 +1279,42 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     </div>
     <div class="yp-bb__grid">
       <div class="yp-bb__stick" aria-hidden="true">
-        <figure class="yp-bb__ph is-on" style="margin:0"><img src="img/p/moroshka-steam.jpg" alt=""><figcaption>«Морошка»</figcaption></figure>
-        <figure class="yp-bb__ph" style="margin:0"><img src="img/p/brusnika-parnaya.jpg" alt=""><figcaption>«Брусника»</figcaption></figure>
-        <figure class="yp-bb__ph" style="margin:0"><img src="img/p/chernika-parnaya.jpg" alt=""><figcaption>«Черника»</figcaption></figure>
+        <figure class="yp-bb__ph is-on" style="margin:0"><img src="img/p/moroshka-steam.webp" alt=""><figcaption>«Морошка»</figcaption></figure>
+        <figure class="yp-bb__ph" style="margin:0"><img src="img/p/brusnika-parnaya.webp" alt=""><figcaption>«Брусника»</figcaption></figure>
+        <figure class="yp-bb__ph" style="margin:0"><img src="img/p/chernika-parnaya.webp" alt=""><figcaption>«Черника»</figcaption></figure>
         <div class="yp-bb__wipe"></div>
         <div class="yp-bb__dots"><i class="is-on"></i><i></i><i></i></div>
       </div>
       <div class="yp-bb__chapters">
         <article class="yp-ch" data-i="0">
-          <div class="yp-ch__ph"><img src="img/p/moroshka-steam.jpg" alt="Пар в парной бани «Морошка»" loading="lazy"></div>
+          <div class="yp-ch__ph"><img src="img/p/moroshka-steam.webp" alt="Пар в парной бани «Морошка»" loading="lazy"></div>
           <span class="yp-ch__cap"><i></i>100 м² · 8–10 гостей · Алиса</span>
           <h3>«Морошка»</h3>
           <p class="yp-ch__sub">Парная до 100 °C и аромасауна (фито-сауна).</p>
           <p>Электропечи SANGENS: можно выбрать сухую финскую сауну или влажную русскую парную. В комнате отдыха большой стол, холодильник, посудомоечная машина, телевизор и Wi-Fi.</p>
           <div class="yp-zone"><h4>Парная <span>скажите Алисе</span></h4><div class="yp-zone__cmds"><span>включи дождь</span><span title="подача пара на каменку">включи вьюгу</span><span>включи музыку</span><span>включи свет</span></div></div>
           <div class="yp-zone"><h4>Фито-сауна <span>скажите Алисе</span></h4><div class="yp-zone__cmds"><span>включи фито</span><span>включи туман</span><span>включи музыку</span><span>включи вьюгу</span><span>включи ветер</span><span>включи свет</span></div></div>
-          <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/moroshka-steam.jpg" data-alt="Пар в парной «Морошки»" aria-label="Пар в парной «Морошки»"><img src="img/p/moroshka-steam.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-parnaya.jpg" data-alt="Парная «Морошки» с подсветкой" aria-label="Парная «Морошки» с подсветкой"><img src="img/p/moroshka-parnaya.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-stove.jpg" data-alt="Каменка в «Морошке»" aria-label="Каменка в «Морошке»"><img src="img/p/moroshka-stove.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-lounge.jpg" data-alt="Комната отдыха «Морошки»" aria-label="Комната отдыха «Морошки»"><img src="img/p/moroshka-lounge.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-panel.jpg" data-alt="Панель «Алиса, включи…» в фито-сауне" aria-label="Панель «Алиса, включи…» в фито-сауне"><img src="img/p/moroshka-panel.jpg" alt="" loading="lazy"></button></div>
+          <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/moroshka-steam.webp" data-alt="Пар в парной «Морошки»" aria-label="Пар в парной «Морошки»"><img src="img/p/moroshka-steam.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-parnaya.webp" data-alt="Парная «Морошки» с подсветкой" aria-label="Парная «Морошки» с подсветкой"><img src="img/p/moroshka-parnaya.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-stove.webp" data-alt="Каменка в «Морошке»" aria-label="Каменка в «Морошке»"><img src="img/p/moroshka-stove.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-lounge.webp" data-alt="Комната отдыха «Морошки»" aria-label="Комната отдыха «Морошки»"><img src="img/p/moroshka-lounge.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-panel.webp" data-alt="Панель «Алиса, включи…» в фито-сауне" aria-label="Панель «Алиса, включи…» в фито-сауне"><img src="img/p/moroshka-panel.webp" alt="" loading="lazy"></button></div>
           <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать «Морошку»</button></div>
         </article>
         <article class="yp-ch" data-i="1">
-          <div class="yp-ch__ph"><img src="img/p/brusnika-parnaya.jpg" alt="Парная бани «Брусника»" loading="lazy"></div>
+          <div class="yp-ch__ph"><img src="img/p/brusnika-parnaya.webp" alt="Парная бани «Брусника»" loading="lazy"></div>
           <span class="yp-ch__cap"><i></i>100 м² · до 10 гостей · Алиса</span>
           <h3>«Брусника»</h3>
           <p class="yp-ch__sub">Парная до 100 °C и хаммам.</p>
           <p>Единственная парная, где Алиса включает и дождь, и вьюгу, и туман. Для тех, кто приезжает за впечатлениями.</p>
           <div class="yp-zone"><h4>Парная <span>скажите Алисе</span></h4><div class="yp-zone__cmds"><span>включи дождь</span><span>включи вьюгу</span><span>включи туман</span><span>включи музыку</span><span>включи свет</span></div></div>
-          <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/brusnika-parnaya.jpg" data-alt="Парная «Брусники» с окном" aria-label="Парная «Брусники» с окном"><img src="img/p/brusnika-parnaya.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-hammam.jpg" data-alt="Хаммам в «Бруснике»" aria-label="Хаммам в «Бруснике»"><img src="img/p/brusnika-hammam.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-lounge.jpg" data-alt="Комната отдыха «Брусники»" aria-label="Комната отдыха «Брусники»"><img src="img/p/brusnika-lounge.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-showers.jpg" data-alt="Душевые в «Бруснике»" aria-label="Душевые в «Бруснике»"><img src="img/p/brusnika-showers.jpg" alt="" loading="lazy"></button></div>
+          <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/brusnika-parnaya.webp" data-alt="Парная «Брусники» с окном" aria-label="Парная «Брусники» с окном"><img src="img/p/brusnika-parnaya.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-hammam.webp" data-alt="Хаммам в «Бруснике»" aria-label="Хаммам в «Бруснике»"><img src="img/p/brusnika-hammam.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-lounge.webp" data-alt="Комната отдыха «Брусники»" aria-label="Комната отдыха «Брусники»"><img src="img/p/brusnika-lounge.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-showers.webp" data-alt="Душевые в «Бруснике»" aria-label="Душевые в «Бруснике»"><img src="img/p/brusnika-showers.webp" alt="" loading="lazy"></button></div>
           <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать «Бруснику»</button></div>
         </article>
         <article class="yp-ch" data-i="2">
-          <div class="yp-ch__ph"><img src="img/p/chernika-parnaya.jpg" alt="Парная бани «Черника»" loading="lazy"></div>
+          <div class="yp-ch__ph"><img src="img/p/chernika-parnaya.webp" alt="Парная бани «Черника»" loading="lazy"></div>
           <span class="yp-ch__cap"><i></i>64 м² · до 8 гостей · на дровах</span>
           <h3>«Черника»</h3>
           <p class="yp-ch__sub">Баня на дровах с дождём и ветром по кнопкам.</p>
           <p>Дровяная печь и живой жар. «Дождь» распыляет воду для влажности, «ветер» включает вентиляцию. Алисы здесь нет — всё управляется кнопками на панели.</p>
           <div class="yp-zone"><h4>Парная <span>кнопки на панели</span></h4><div class="yp-zone__cmds"><span>включи дождь</span><span>включи ветер</span></div></div>
-          <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/chernika-parnaya.jpg" data-alt="Парная «Черники»" aria-label="Парная «Черники»"><img src="img/p/chernika-parnaya.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-stones.jpg" data-alt="Камни в печи «Черники»" aria-label="Камни в печи «Черники»"><img src="img/p/chernika-stones.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-lounge.jpg" data-alt="Комната отдыха «Черники»" aria-label="Комната отдыха «Черники»"><img src="img/p/chernika-lounge.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-panel.jpg" data-alt="Кнопки «дождь» и «ветер» в «Чернике»" aria-label="Кнопки «дождь» и «ветер» в «Чернике»"><img src="img/p/chernika-panel.jpg" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-dusk.jpg" data-alt="Баня «Черника» в сумерках" aria-label="Баня «Черника» в сумерках"><img src="img/p/chernika-dusk.jpg" alt="" loading="lazy"></button></div>
+          <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/chernika-parnaya.webp" data-alt="Парная «Черники»" aria-label="Парная «Черники»"><img src="img/p/chernika-parnaya.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-stones.webp" data-alt="Камни в печи «Черники»" aria-label="Камни в печи «Черники»"><img src="img/p/chernika-stones.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-lounge.webp" data-alt="Комната отдыха «Черники»" aria-label="Комната отдыха «Черники»"><img src="img/p/chernika-lounge.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-panel.webp" data-alt="Кнопки «дождь» и «ветер» в «Чернике»" aria-label="Кнопки «дождь» и «ветер» в «Чернике»"><img src="img/p/chernika-panel.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-dusk.webp" data-alt="Баня «Черника» в сумерках" aria-label="Баня «Черника» в сумерках"><img src="img/p/chernika-dusk.webp" alt="" loading="lazy"></button></div>
           <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать «Чернику»</button></div>
         </article>
       </div>
@@ -1446,12 +1463,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var YP = window.YP || {}, U = YP.UNITS || {};
   var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
-  var SET = /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
+  var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
   var gEl = sec.querySelector("[data-yp-fgroups]"), uEl = sec.querySelector("[data-yp-funits]"), dEl = sec.querySelector("[data-yp-fdays]"), tEl = sec.querySelector("[data-yp-ftimes]"), lenEl = sec.querySelector("[data-yp-flen]"), monthEl = sec.querySelector("[data-yp-fmonth]"), monthLabel = sec.querySelector("[data-yp-month-label]"), weekEl = sec.querySelector("[data-yp-fweek]");
   var nameEl = sec.querySelector("[data-yp-fname]"), infoEl = sec.querySelector("[data-yp-finfo]"), sumEl = sec.querySelector("[data-yp-fsum]"), bookBtn = sec.querySelector("[data-yp-fbook]"), noteEl = sec.querySelector("[data-yp-fnote]");
   var today = YP.tzISO ? YP.tzISO(new Date()) : new Date().toISOString().slice(0,10), nowParts = today.split("-").map(Number);
   var cur = {g:0, u:null, long:false, date:null, req:0, year:nowParts[0], month:nowParts[1]-1};
+  if(/new-year/.test(p) && cur.month < 11) cur.month = 11;   /* на новогодней странице календарь сразу на декабре */
   var T = function(x){ return YP.t ? YP.t(x) : x; }, cap = function(x){ return x.charAt(0).toUpperCase() + x.slice(1); };
   var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : n + " ₽"; };
   var fmt = function(iso, o){ return new Intl.DateTimeFormat(YP.loc || "ru-RU", Object.assign({timeZone:"UTC"}, o)).format(new Date(iso + "T12:00:00Z")); };
@@ -1564,7 +1582,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 
 </div>
 <div class="r t-rec">
-<!-- Бани · 03 · Постер «Тепло настоящего Севера» (img/p/bani-poster.jpg — загрузить в Tilda).
+<!-- Бани · 03 · Постер «Тепло настоящего Севера» (img/p/bani-poster.webp — загрузить в Tilda).
      Постер наклоняется за курсором, по нему проходит блик, вокруг поднимается пар. -->
 <style>
 .yp-bpo{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,9vw,140px);background:#140b06;color:#F6EEE6}
@@ -1591,7 +1609,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-bpo__grid">
     <div class="yp-bpo__frame" data-yp-cursor="Тепло">
       <div class="yp-bpo__poster" data-yp-bpp>
-        <img src="img/p/bani-poster.jpg" alt="Постер «Тепло настоящего Севера»: гостья в парной Ямальских бань у окна с видом на заснеженную тайгу" loading="lazy">
+        <img src="img/p/bani-poster.webp" alt="Постер «Тепло настоящего Севера»: гостья в парной Ямальских бань у окна с видом на заснеженную тайгу" loading="lazy">
         <i class="yp-bpo__glare" aria-hidden="true"></i>
       </div>
     </div>
@@ -1730,7 +1748,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-ban__dev">
         <div class="yp-bs">
           <div class="yp-bs__photo" data-yp-photo>
-            <img data-yp-bimg src="img/banya-steam.jpg" alt="Парная бани «Морошка»" loading="lazy">
+            <img data-yp-bimg src="img/banya-steam.webp" alt="Парная бани «Морошка»" loading="lazy">
             <canvas class="yp-bs__fx" data-yp-fx aria-hidden="true"></canvas>
             <div class="yp-bs__glow" aria-hidden="true"></div>
             <div class="yp-bs__top"><span class="yp-pill"><i></i><span data-yp-bstatus>Парная готова</span></span><span class="yp-pill" data-yp-bzone>Морошка · парная</span></div>
@@ -1797,13 +1815,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   /* Зоны и их команды (Алиса или кнопки). Температура и влажность — пример, позже можно брать с датчиков. */
   var ROOMS = [
     {bath:"Морошка", zone:"парная", desc:"Жаркая парная до 100 °C, баня 100 м² на 8–10 гостей.", temp:90, hum:15,
-     img:"img/p/moroshka-steam.jpg", cmds:["rain","steam","music","light"]},
+     img:"img/p/moroshka-steam.webp", cmds:["rain","steam","music","light"]},
     {bath:"Морошка", zone:"фито-сауна", desc:"Аромасауна: мягкий жар и травяной пар. Хорошо после парной.", temp:60, hum:35,
-     img:"img/banya-blue.jpg", cmds:["fito","fog","music","steam","wind","light"]},
+     img:"img/banya-blue.webp", cmds:["fito","fog","music","steam","wind","light"]},
     {bath:"Брусника", zone:"парная", desc:"Парная до 100 °C с дождём, туманом и паром на каменку. В бане есть хаммам.", temp:90, hum:20,
-     img:"img/p/brusnika-parnaya.jpg", cmds:["rain","steam","fog","music","light"]},
+     img:"img/p/brusnika-parnaya.webp", cmds:["rain","steam","fog","music","light"]},
     {bath:"Черника", zone:"парная", buttons:true, desc:"Баня на дровах, до 8 гостей. «Дождь» распыляет воду, «ветер» включает вентиляцию.", temp:85, hum:20,
-     img:"img/p/chernika-panel.jpg", cmds:["rain","wind"]}
+     img:"img/p/chernika-panel.webp", cmds:["rain","wind"]}
   ];
   var photo = q("[data-yp-photo]"), img = q("[data-yp-bimg]"), cmdsEl = q("[data-yp-cmds]"), said = q("[data-yp-said]"), voice = q("[data-yp-voice]"), eq = q("[data-yp-eq]");
   var room = 0, fx = null, music = false, light = false, target = 85, shown = 85, hum = 15, inView = false, lastUser = 0, typing = null;
@@ -2600,7 +2618,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
@@ -2636,7 +2654,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       var c = document.getElementById("tl-search-form"), docs = [], btn = null;
       (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
       docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
-      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
       else if(Date.now() - t0 > 25000) clearInterval(iv);
     }, 300);
   })();

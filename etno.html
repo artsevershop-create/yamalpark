@@ -435,6 +435,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
+  YP.YM_ID = 111264194;
+  YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest("a,button"); if(!t) return;
+    var h = t.getAttribute("href") || "", page = location.pathname.replace(/\.html$/, "");
+    if(t.hasAttribute("data-yp-book")) YP.goal("book_open", {type:t.getAttribute("data-yp-book") || "any", page:page});
+    else if(t.hasAttribute("data-yp-fbook") || t.closest("[data-yp-ftimes] [data-t]")) YP.goal("free_book", {page:page});
+    else if(t.closest("[data-yp-fdays]")) YP.goal("free_day");
+    else if(/^tel:/.test(h)) YP.goal("call", {page:page});
+    else if(/max\.ru/.test(h)) YP.goal("max");
+    else if(/t\.me\//.test(h)) YP.goal("telegram");
+    else if(/vk\.(com|ru)\//.test(h)) YP.goal("vk");
+    else if(/hotbot\.ai/.test(h) || t.hasAttribute("data-yp-shop")) YP.goal("hotbot");
+    else if(t.hasAttribute("data-yp-to")) YP.goal("lang_" + t.getAttribute("data-yp-to"));
+    else if(/yandex\.ru\/maps/.test(h)) YP.goal("route");
+  }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
   YP.openShop = function(){
@@ -1021,8 +1038,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-hdr__in">
     <a class="yp-logo" href="index.html" aria-label="Ямал Парк — на главную">
       <svg viewBox="0 0 1496 632" aria-hidden="true"><polygon points="0,476 275,0 550,476" fill="#6274B6"/><polygon points="473,156 1023,156 748,632" fill="#3FAB3C"/><polygon points="946,476 1221,0 1496,476" fill="#E31E24"/></svg>
-      <img class="w-color" src="img/brand/wordmark-color.png" alt="Ямал Парк" width="140" height="17">
-      <img class="w-white" src="img/brand/wordmark-white.png" alt="" width="140" height="17">
+      <img class="w-color" src="img/brand/wordmark-color.webp" alt="Ямал Парк" width="140" height="17">
+      <img class="w-white" src="img/brand/wordmark-white.webp" alt="" width="140" height="17">
     </a>
     <nav class="yp-nav" aria-label="Основное меню">
       <a href="glamping.html" style="--c:var(--yp-blue)">Глэмпинг</a>
@@ -1094,7 +1111,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Этно · 01 · Первый экран: чумы на закате, золотые пылинки (YP.pageHero) -->
 <section class="yp yp-dark yp-ph" id="top" data-yp-theme="dark" aria-label="Этно-комплекс" style="--c:#C89B6D;--hl:linear-gradient(90deg,#F2D29B,#C89B6D 55%,#E31E24)">
   <div class="yp-ph__pin">
-    <img class="yp-ph__bg" src="img/p/chum-winter2.jpg" alt="Чум на террасе в инее" fetchpriority="high" style="object-position:50% 45%">
+    <img class="yp-ph__bg" src="img/p/chum-winter2.webp" alt="Чум на террасе в инее" fetchpriority="high" style="object-position:50% 45%">
     <div class="yp-ph__shade"></div>
     <canvas class="yp-ph__fx" aria-hidden="true"></canvas>
     <div class="yp-wrap yp-ph__in">
@@ -1161,13 +1178,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <div class="yp-chm__buy"><div class="yp-chm__price">12 000 ₽<small>пн–чт · пт–вс 15 000 ₽</small></div><button class="yp-btn yp-btn--red" type="button" data-yp-book="chum">Забронировать</button><a class="yp-btn yp-btn--ghost" href="#forecast">Прогноз сияния</a></div>
       </div>
       <div class="yp-chm__pics" data-yp-chpics>
-        <figure class="p1"><img src="img/p/chum-in.jpg" alt="Внутри чума: печь, стол и национальные ткани" loading="lazy"></figure>
-        <figure class="p2"><img src="img/p/chum-aurora.jpg" alt="Северное сияние над чумом" loading="lazy"></figure>
-        <figure class="p3"><img src="img/p/chum-terrace.jpg" alt="Терраса чума с костровищем зимой" loading="lazy"></figure>
+        <figure class="p1"><img src="img/p/chum-in.webp" alt="Внутри чума: печь, стол и национальные ткани" loading="lazy"></figure>
+        <figure class="p2"><img src="img/p/chum-aurora.webp" alt="Северное сияние над чумом" loading="lazy"></figure>
+        <figure class="p3"><img src="img/p/chum-terrace.webp" alt="Терраса чума с костровищем зимой" loading="lazy"></figure>
       </div>
     </div>
     <div class="yp-three" data-yp-reveal>
-      <div class="yp-three__bg"><img src="img/new/chums-camp.jpg" alt="Три чума этно-стойбища летом" loading="lazy"><img src="img/new/chums-top.jpg" alt="Этно-стойбище из трёх чумов с высоты" loading="lazy"></div>
+      <div class="yp-three__bg"><img src="img/new/chums-camp.webp" alt="Три чума этно-стойбища летом" loading="lazy"><img src="img/new/chums-top.webp" alt="Этно-стойбище из трёх чумов с высоты" loading="lazy"></div>
       <span class="yp-three__badge">Постоянное стойбище</span>
       <div class="yp-three__in">
         <span class="yp-eyebrow"><i style="--c:#F2D29B"></i>Этно-стойбище</span>
@@ -1290,12 +1307,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var YP = window.YP || {}, U = YP.UNITS || {};
   var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
-  var SET = /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
+  var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
   var gEl = sec.querySelector("[data-yp-fgroups]"), uEl = sec.querySelector("[data-yp-funits]"), dEl = sec.querySelector("[data-yp-fdays]"), tEl = sec.querySelector("[data-yp-ftimes]"), lenEl = sec.querySelector("[data-yp-flen]"), monthEl = sec.querySelector("[data-yp-fmonth]"), monthLabel = sec.querySelector("[data-yp-month-label]"), weekEl = sec.querySelector("[data-yp-fweek]");
   var nameEl = sec.querySelector("[data-yp-fname]"), infoEl = sec.querySelector("[data-yp-finfo]"), sumEl = sec.querySelector("[data-yp-fsum]"), bookBtn = sec.querySelector("[data-yp-fbook]"), noteEl = sec.querySelector("[data-yp-fnote]");
   var today = YP.tzISO ? YP.tzISO(new Date()) : new Date().toISOString().slice(0,10), nowParts = today.split("-").map(Number);
   var cur = {g:0, u:null, long:false, date:null, req:0, year:nowParts[0], month:nowParts[1]-1};
+  if(/new-year/.test(p) && cur.month < 11) cur.month = 11;   /* на новогодней странице календарь сразу на декабре */
   var T = function(x){ return YP.t ? YP.t(x) : x; }, cap = function(x){ return x.charAt(0).toUpperCase() + x.slice(1); };
   var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : n + " ₽"; };
   var fmt = function(iso, o){ return new Intl.DateTimeFormat(YP.loc || "ru-RU", Object.assign({timeZone:"UTC"}, o)).format(new Date(iso + "T12:00:00Z")); };
@@ -1801,9 +1819,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 </style>
 <section class="yp yp-dark yp-sc" id="sculptures" data-yp-theme="dark">
   <div class="yp-sc__pin">
-    <div class="yp-sc__img"><img src="img/new/sculpture-1.jpg" alt="Деревянные скульптуры в парковой зоне на закате" decoding="async"></div>
-    <div class="yp-sc__img"><img src="img/new/sculpture-2.jpg" alt="Резные деревянные фигуры крупным планом" decoding="async"></div>
-    <div class="yp-sc__img"><img src="img/new/sculpture-3.jpg" alt="Силуэты скульптур и банкетный зал под куполом" decoding="async"></div>
+    <div class="yp-sc__img"><img src="img/new/sculpture-1.webp" alt="Деревянные скульптуры в парковой зоне на закате" decoding="async"></div>
+    <div class="yp-sc__img"><img src="img/new/sculpture-2.webp" alt="Резные деревянные фигуры крупным планом" decoding="async"></div>
+    <div class="yp-sc__img"><img src="img/new/sculpture-3.webp" alt="Силуэты скульптур и банкетный зал под куполом" decoding="async"></div>
     <div class="yp-wrap yp-sc__txt">
       <span class="yp-eyebrow"><i style="--c:#F2D29B"></i>Парковая зона</span>
       <div class="yp-sc__lines">
@@ -2146,7 +2164,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
@@ -2182,7 +2200,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
       var c = document.getElementById("tl-search-form"), docs = [], btn = null;
       (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
       docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
-      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
       else if(Date.now() - t0 > 25000) clearInterval(iv);
     }, 300);
   })();

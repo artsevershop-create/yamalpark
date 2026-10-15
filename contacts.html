@@ -434,6 +434,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
+  YP.YM_ID = 111264194;
+  YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest("a,button"); if(!t) return;
+    var h = t.getAttribute("href") || "", page = location.pathname.replace(/\.html$/, "");
+    if(t.hasAttribute("data-yp-book")) YP.goal("book_open", {type:t.getAttribute("data-yp-book") || "any", page:page});
+    else if(t.hasAttribute("data-yp-fbook") || t.closest("[data-yp-ftimes] [data-t]")) YP.goal("free_book", {page:page});
+    else if(t.closest("[data-yp-fdays]")) YP.goal("free_day");
+    else if(/^tel:/.test(h)) YP.goal("call", {page:page});
+    else if(/max\.ru/.test(h)) YP.goal("max");
+    else if(/t\.me\//.test(h)) YP.goal("telegram");
+    else if(/vk\.(com|ru)\//.test(h)) YP.goal("vk");
+    else if(/hotbot\.ai/.test(h) || t.hasAttribute("data-yp-shop")) YP.goal("hotbot");
+    else if(t.hasAttribute("data-yp-to")) YP.goal("lang_" + t.getAttribute("data-yp-to"));
+    else if(/yandex\.ru\/maps/.test(h)) YP.goal("route");
+  }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
   YP.openShop = function(){
@@ -1020,8 +1037,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-hdr__in">
     <a class="yp-logo" href="index.html" aria-label="Ямал Парк — на главную">
       <svg viewBox="0 0 1496 632" aria-hidden="true"><polygon points="0,476 275,0 550,476" fill="#6274B6"/><polygon points="473,156 1023,156 748,632" fill="#3FAB3C"/><polygon points="946,476 1221,0 1496,476" fill="#E31E24"/></svg>
-      <img class="w-color" src="img/brand/wordmark-color.png" alt="Ямал Парк" width="140" height="17">
-      <img class="w-white" src="img/brand/wordmark-white.png" alt="" width="140" height="17">
+      <img class="w-color" src="img/brand/wordmark-color.webp" alt="Ямал Парк" width="140" height="17">
+      <img class="w-white" src="img/brand/wordmark-white.webp" alt="" width="140" height="17">
     </a>
     <nav class="yp-nav" aria-label="Основное меню">
       <a href="glamping.html" style="--c:var(--yp-blue)">Глэмпинг</a>
@@ -1093,7 +1110,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 <!-- Контакты · 01 · Первый экран: видео въездной арки «Ямал Парк», идёт снег (YP.pageHero) -->
 <section class="yp yp-dark yp-ph" id="top" data-yp-theme="dark" aria-label="Как добраться" style="--c:var(--yp-blue)">
   <div class="yp-ph__pin">
-    <video class="yp-ph__bg" src="img/video/arch.mp4" poster="img/new/arch.jpg" autoplay muted loop playsinline aria-label="Видео: въездная арка «Ямал Парк» с оленями"></video>
+    <video class="yp-ph__bg" src="img/video/arch.mp4" poster="img/new/arch.webp" autoplay muted loop playsinline aria-label="Видео: въездная арка «Ямал Парк» с оленями"></video>
     <div class="yp-ph__shade"></div>
     <canvas class="yp-ph__fx" aria-hidden="true"></canvas>
     <div class="yp-wrap yp-ph__in">
@@ -1146,7 +1163,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><a class="yp-btn yp-btn--green" href="https://yandex.ru/maps/?mode=routes&amp;rtext=~66.568040%2C66.860055&amp;rtt=auto" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a><button class="yp-copy" type="button" data-yp-copy="66.568040, 66.860055">66.568040, 66.860055 · копировать</button></div>
       </div>
       <div class="yp-rt__card" data-yp-reveal=".1">
-        <img src="img/p/admin-night2.jpg" alt="Здание администрации с логотипом «Ямал Парк» зимней ночью" loading="lazy">
+        <img src="img/p/admin-night2.webp" alt="Здание администрации с логотипом «Ямал Парк» зимней ночью" loading="lazy">
         <div class="yp-rt__c">
           <a href="tel:+79003991033">+7 900 399-10-33<span>администратор</span></a>
           <a href="tel:+73492252103">+7 34922 5-21-03<span>офис</span></a>
@@ -1755,7 +1772,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <div class="yp-map__stage" data-yp-reveal>
       <div class="yp-map__scroll">
         <div class="yp-map__canvas" data-yp-mc>
-          <img class="yp-map__img" src="img/new/map-2026.jpg" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
+          <img class="yp-map__img" src="img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
           <canvas class="yp-map__snow" aria-hidden="true"></canvas>
           <div class="yp-pop" data-yp-pop hidden role="dialog" aria-live="polite"></div>
         </div>
@@ -2056,7 +2073,7 @@ window.YP_MAP = [
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
@@ -2092,7 +2109,7 @@ window.YP_MAP = [
       var c = document.getElementById("tl-search-form"), docs = [], btn = null;
       (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
       docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
-      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
       else if(Date.now() - t0 > 25000) clearInterval(iv);
     }, 300);
   })();

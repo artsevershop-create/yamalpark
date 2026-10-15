@@ -434,6 +434,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
+  YP.YM_ID = 111264194;
+  YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest("a,button"); if(!t) return;
+    var h = t.getAttribute("href") || "", page = location.pathname.replace(/\.html$/, "");
+    if(t.hasAttribute("data-yp-book")) YP.goal("book_open", {type:t.getAttribute("data-yp-book") || "any", page:page});
+    else if(t.hasAttribute("data-yp-fbook") || t.closest("[data-yp-ftimes] [data-t]")) YP.goal("free_book", {page:page});
+    else if(t.closest("[data-yp-fdays]")) YP.goal("free_day");
+    else if(/^tel:/.test(h)) YP.goal("call", {page:page});
+    else if(/max\.ru/.test(h)) YP.goal("max");
+    else if(/t\.me\//.test(h)) YP.goal("telegram");
+    else if(/vk\.(com|ru)\//.test(h)) YP.goal("vk");
+    else if(/hotbot\.ai/.test(h) || t.hasAttribute("data-yp-shop")) YP.goal("hotbot");
+    else if(t.hasAttribute("data-yp-to")) YP.goal("lang_" + t.getAttribute("data-yp-to"));
+    else if(/yandex\.ru\/maps/.test(h)) YP.goal("route");
+  }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
   YP.openShop = function(){
@@ -1020,8 +1037,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   <div class="yp-wrap yp-hdr__in">
     <a class="yp-logo" href="index.html" aria-label="Ямал Парк — на главную">
       <svg viewBox="0 0 1496 632" aria-hidden="true"><polygon points="0,476 275,0 550,476" fill="#6274B6"/><polygon points="473,156 1023,156 748,632" fill="#3FAB3C"/><polygon points="946,476 1221,0 1496,476" fill="#E31E24"/></svg>
-      <img class="w-color" src="img/brand/wordmark-color.png" alt="Ямал Парк" width="140" height="17">
-      <img class="w-white" src="img/brand/wordmark-white.png" alt="" width="140" height="17">
+      <img class="w-color" src="img/brand/wordmark-color.webp" alt="Ямал Парк" width="140" height="17">
+      <img class="w-white" src="img/brand/wordmark-white.webp" alt="" width="140" height="17">
     </a>
     <nav class="yp-nav" aria-label="Основное меню">
       <a href="glamping.html" style="--c:var(--yp-blue)">Глэмпинг</a>
@@ -1823,9 +1840,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-fact" style="--c:var(--yp-red)"><i></i><b><span data-yp-count="3">3</span></b><span>бани: «Морошка», «Брусника», «Черника»</span></div>
     </div>
     <div class="yp-facts__ph" data-yp-reveal>
-      <figure><img src="img/new/summer-aerial-1.jpg" alt="Ямал Парк с высоты летом: тайга до горизонта" loading="lazy"><figcaption>Ямал Парк сверху · лето</figcaption></figure>
-      <figure><img src="img/new/summer-sunset-domes.jpg" alt="Закат над тайгой и купольными домиками" loading="lazy"><figcaption>Закат над куполами</figcaption></figure>
-      <figure><img src="img/new/summer-aerial-2.jpg" alt="Территория комплекса летним вечером" loading="lazy"><figcaption>Летний вечер</figcaption></figure>
+      <figure><img src="img/new/summer-aerial-1.webp" alt="Ямал Парк с высоты летом: тайга до горизонта" loading="lazy"><figcaption>Ямал Парк сверху · лето</figcaption></figure>
+      <figure><img src="img/new/summer-sunset-domes.webp" alt="Закат над тайгой и купольными домиками" loading="lazy"><figcaption>Закат над куполами</figcaption></figure>
+      <figure><img src="img/new/summer-aerial-2.webp" alt="Территория комплекса летним вечером" loading="lazy"><figcaption>Летний вечер</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1899,27 +1916,27 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <div class="yp-prod__track">
       <div class="yp-pcard yp-pcard--intro"><div class="tris" aria-hidden="true"><i style="--c:var(--yp-blue)"></i><i style="--c:var(--yp-green)"></i><i style="--c:var(--yp-red)"></i></div><strong>5</strong><p>Проживание, бани, гриль-домики, этно-комплекс и животные. Всё на одной территории, в пешей доступности.</p></div>
       <a class="yp-pcard" href="glamping.html" style="--c:var(--yp-blue)">
-        <img src="img/p/dome-aurora-arc.jpg" alt="Северное сияние над купольным домиком" loading="lazy">
+        <img src="img/p/dome-aurora-arc.webp" alt="Северное сияние над купольным домиком" loading="lazy">
         <span class="yp-pcard__tag"><i></i>от 8 000 ₽ / сутки</span>
         <h3>Глэмпинг</h3><p>Купол 30 м² под небом и два разных дома с террасой — светлый «Волк» и уютный «Медведь» по 50 м².</p><span class="yp-pcard__more">Выбрать дом <span>→</span></span>
       </a>
       <a class="yp-pcard" href="bani.html" style="--c:var(--yp-red)">
-        <img src="img/p/moroshka-steam.jpg" alt="Пар в парной бани «Морошка»" loading="lazy">
+        <img src="img/p/moroshka-steam.webp" alt="Пар в парной бани «Морошка»" loading="lazy">
         <span class="yp-pcard__tag"><i></i>от 2 500 ₽ / час</span>
         <h3>Умные бани</h3><p>«Морошка», «Брусника» и «Черника» на 6–10 гостей. Дождь, туман и пар на каменку по команде Алисе.</p><span class="yp-pcard__more">Всё о банях <span>→</span></span>
       </a>
       <a class="yp-pcard" href="grill.html" style="--c:var(--yp-red)">
-        <img src="img/p/grill-aurora-a.jpg" alt="Северное сияние над гриль-домом и заиндевелым мостиком" loading="lazy">
+        <img src="img/p/grill-aurora-a.webp" alt="Северное сияние над гриль-домом и заиндевелым мостиком" loading="lazy">
         <span class="yp-pcard__tag"><i></i>от 6 000 ₽ / день</span>
         <h3>Гриль-дома</h3><p>Три гриль-дома и два гостевых дома на 15–25 гостей. Аренда на весь день, с 12:00 до 22:00.</p><span class="yp-pcard__more">Свободные дни <span>→</span></span>
       </a>
       <a class="yp-pcard" href="etno.html" style="--c:var(--yp-green)">
-        <img src="img/p/chum-aurora.jpg" alt="Северное сияние над чумом" loading="lazy">
+        <img src="img/p/chum-aurora.webp" alt="Северное сияние над чумом" loading="lazy">
         <span class="yp-pcard__tag"><i></i>чум до 20 гостей</span>
         <h3>Этно-комплекс</h3><p>Обогретый оленеводческий чум, костровище и казан. «Ямал» по-ненецки значит «край земли».</p><span class="yp-pcard__more">Про этно-комплекс <span>→</span></span>
       </a>
       <a class="yp-pcard" href="zoo.html" style="--c:var(--yp-green)">
-        <img src="img/fox.jpg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
+        <img src="img/fox.webp" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
         <span class="yp-pcard__tag"><i></i>бесплатно</span>
         <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в мини-зоопарке <span>→</span></span>
       </a>
@@ -2209,7 +2226,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 
 </div>
 <div class="r t-rec">
-<!-- 12 · «Выберите домик» на схеме комплекса (схема 2026, img/new/map-2026.jpg — загрузить в Tilda).
+<!-- 12 · «Выберите домик» на схеме комплекса (схема 2026, img/new/map-2026.webp — загрузить в Tilda).
      Точки — только то, что можно забронировать: глэмпинг, бани, гриль- и гостевые дома, чум.
      Клик по точке: схема плавно приближается к домику, справа — фото, цена, что внутри и кнопка брони (YP.openBooking). -->
 <style>
@@ -2290,7 +2307,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-pk__stage" data-yp-img>
         <div class="yp-pk__view" data-yp-pkv>
           <div class="yp-pk__zoom" data-yp-pkz>
-            <img src="img/new/map-2026.jpg" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
+            <img src="img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
             <div class="yp-pk__dim" aria-hidden="true"></div>
           </div>
           <div class="yp-pk__ui"><span class="yp-pk__hint">Нажмите на точку</span><button class="yp-pk__all" type="button" data-yp-pkall>Вся схема</button></div>
@@ -2324,19 +2341,19 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   };
   /* n — номер на схеме 2026, pt — координаты точки в % от картинки; цены — по каталогу сайта */
   var U = [
-    {id:"dome", cat:"stay", n:14, pt:[90.4,48.6], name:"Купольный домик", img:"img/p/dome-aurora-arc.jpg", meta:["30 м²","2–4 гостя","заезд 14:00"], price:9000, unit:"₽ / сутки, вс–чт · пт–сб 13 000 ₽", feat:["Панорамные окна","Терраса","Тёплые полы","Сияние с кровати"], type:"glamping", page:"/glamping"},
-    {id:"volk", cat:"stay", n:16, pt:[17.4,63.8], name:"Дом с террасой «Волк»", img:"img/p/volk-living.jpg", meta:["50 м²","2–4 гостя","заезд 15:00"], price:8000, unit:"₽ / сутки, вс–чт · пт–сб 12 000 ₽", feat:["Светлый интерьер","Паркет ёлочкой","Кухня с кофемашиной","Мангальная зона"], type:"glamping", page:"/glamping"},
-    {id:"medved", cat:"stay", n:15, pt:[8.4,71.6], name:"Дом с террасой «Медведь»", img:"img/p/medved-living.jpg", meta:["50 м²","2–4 гостя","заезд 15:00"], price:8000, unit:"₽ / сутки, вс–чт · пт–сб 12 000 ₽", feat:["Уютный тёплый интерьер","Кухня-гостиная","Спальня 160×200","Мангальная зона"], type:"glamping", page:"/glamping"},
-    {id:"moroshka", cat:"banya", n:18, pt:[14.2,32.2], name:"Баня «Морошка»", img:"img/p/moroshka-steam.jpg", meta:["100 м²","до 10 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Парная до 100 °C","Аромасауна","Алиса: дождь, вьюга, музыка"], type:"banya", page:"/bani"},
-    {id:"brusnika", cat:"banya", n:19, pt:[25.4,32.2], name:"Баня «Брусника»", img:"img/p/brusnika-parnaya.jpg", meta:["100 м²","до 10 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Парная","Хаммам","Алиса: дождь, вьюга, туман"], type:"banya", page:"/bani"},
-    {id:"chernika", cat:"banya", n:17, pt:[8.2,40.4], name:"Баня «Черника»", img:"img/p/chernika-parnaya.jpg", meta:["64 м²","до 8 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Печь на дровах","Кнопки «дождь» и «ветер»"], type:"banya", page:"/bani"},
-    {id:"g1", cat:"grill", n:9, pt:[54.6,14.5], name:"Гриль-дом №1", img:"img/p/grill1-in.jpg", meta:["15–20 гостей","12:00–22:00"], price:6000, unit:"₽ / день, вс–чт · пт–сб 8 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Телевизор"], type:"grill", page:"/grill"},
-    {id:"g2", cat:"grill", n:10, pt:[47.9,14.7], name:"Гриль-дом №2", img:"img/p/grill-in-a.jpg", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
-    {id:"g3", cat:"grill", n:11, pt:[41.3,14.7], name:"Гриль-дом №3", img:"img/p/grill-in-c.jpg", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
-    {id:"h1", cat:"grill", n:6, pt:[91.3,40.4], name:"Гостевой дом №1", img:"img/p/guest1-in.jpg", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
-    {id:"h2", cat:"grill", n:7, pt:[82.8,46.8], name:"Гостевой дом №2", img:"img/p/guest2-ext.jpg", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
-    {id:"chum", cat:"etno", n:12, pt:[65.4,69.6], name:"Чум и смотровая площадка", img:"img/p/chum-in.jpg", meta:["15–20 гостей","своя терраса"], price:12000, unit:"₽ пн–чт · пт–вс 15 000 ₽", feat:["Обогретый чум","Костровище","Казан и мангал"], type:"chum", page:"/etno"},
-    {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"img/p/tent-aurora-in.jpg", meta:["40 м²","до 20 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
+    {id:"dome", cat:"stay", n:14, pt:[90.4,48.6], name:"Купольный домик", img:"img/p/dome-aurora-arc.webp", meta:["30 м²","2–4 гостя","заезд 14:00"], price:9000, unit:"₽ / сутки, вс–чт · пт–сб 13 000 ₽", feat:["Панорамные окна","Терраса","Тёплые полы","Сияние с кровати"], type:"glamping", page:"/glamping"},
+    {id:"volk", cat:"stay", n:16, pt:[17.4,63.8], name:"Дом с террасой «Волк»", img:"img/p/volk-living.webp", meta:["50 м²","2–4 гостя","заезд 15:00"], price:8000, unit:"₽ / сутки, вс–чт · пт–сб 12 000 ₽", feat:["Светлый интерьер","Паркет ёлочкой","Кухня с кофемашиной","Мангальная зона"], type:"glamping", page:"/glamping"},
+    {id:"medved", cat:"stay", n:15, pt:[8.4,71.6], name:"Дом с террасой «Медведь»", img:"img/p/medved-living.webp", meta:["50 м²","2–4 гостя","заезд 15:00"], price:8000, unit:"₽ / сутки, вс–чт · пт–сб 12 000 ₽", feat:["Уютный тёплый интерьер","Кухня-гостиная","Спальня 160×200","Мангальная зона"], type:"glamping", page:"/glamping"},
+    {id:"moroshka", cat:"banya", n:18, pt:[14.2,32.2], name:"Баня «Морошка»", img:"img/p/moroshka-steam.webp", meta:["100 м²","до 10 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Парная до 100 °C","Аромасауна","Алиса: дождь, вьюга, музыка"], type:"banya", page:"/bani"},
+    {id:"brusnika", cat:"banya", n:19, pt:[25.4,32.2], name:"Баня «Брусника»", img:"img/p/brusnika-parnaya.webp", meta:["100 м²","до 10 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Парная","Хаммам","Алиса: дождь, вьюга, туман"], type:"banya", page:"/bani"},
+    {id:"chernika", cat:"banya", n:17, pt:[8.2,40.4], name:"Баня «Черника»", img:"img/p/chernika-parnaya.webp", meta:["64 м²","до 8 гостей","от 3 часов"], price:2500, unit:"₽ / час, утро пн–ср", feat:["Печь на дровах","Кнопки «дождь» и «ветер»"], type:"banya", page:"/bani"},
+    {id:"g1", cat:"grill", n:9, pt:[54.6,14.5], name:"Гриль-дом №1", img:"img/p/grill1-in.webp", meta:["15–20 гостей","12:00–22:00"], price:6000, unit:"₽ / день, вс–чт · пт–сб 8 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Телевизор"], type:"grill", page:"/grill"},
+    {id:"g2", cat:"grill", n:10, pt:[47.9,14.7], name:"Гриль-дом №2", img:"img/p/grill-in-a.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
+    {id:"g3", cat:"grill", n:11, pt:[41.3,14.7], name:"Гриль-дом №3", img:"img/p/grill-in-c.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
+    {id:"h1", cat:"grill", n:6, pt:[91.3,40.4], name:"Гостевой дом №1", img:"img/p/guest1-in.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
+    {id:"h2", cat:"grill", n:7, pt:[82.8,46.8], name:"Гостевой дом №2", img:"img/p/guest2-ext.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
+    {id:"chum", cat:"etno", n:12, pt:[65.4,69.6], name:"Чум и смотровая площадка", img:"img/p/chum-in.webp", meta:["15–20 гостей","своя терраса"], price:12000, unit:"₽ пн–чт · пт–вс 15 000 ₽", feat:["Обогретый чум","Костровище","Казан и мангал"], type:"chum", page:"/etno"},
+    {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"img/p/tent-aurora-in.webp", meta:["40 м²","до 20 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
   ];
   var view = sec.querySelector("[data-yp-pkv]"), zoom = sec.querySelector("[data-yp-pkz]"), dim = zoom.querySelector(".yp-pk__dim");
   var card = sec.querySelector("[data-yp-pkc]"), ph = sec.querySelector("[data-yp-pkph]"), wipe = ph.querySelector(".yp-pk__wipe");
@@ -2529,12 +2546,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var YP = window.YP || {}, U = YP.UNITS || {};
   var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
-  var SET = /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
+  var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
   var gEl = sec.querySelector("[data-yp-fgroups]"), uEl = sec.querySelector("[data-yp-funits]"), dEl = sec.querySelector("[data-yp-fdays]"), tEl = sec.querySelector("[data-yp-ftimes]"), lenEl = sec.querySelector("[data-yp-flen]"), monthEl = sec.querySelector("[data-yp-fmonth]"), monthLabel = sec.querySelector("[data-yp-month-label]"), weekEl = sec.querySelector("[data-yp-fweek]");
   var nameEl = sec.querySelector("[data-yp-fname]"), infoEl = sec.querySelector("[data-yp-finfo]"), sumEl = sec.querySelector("[data-yp-fsum]"), bookBtn = sec.querySelector("[data-yp-fbook]"), noteEl = sec.querySelector("[data-yp-fnote]");
   var today = YP.tzISO ? YP.tzISO(new Date()) : new Date().toISOString().slice(0,10), nowParts = today.split("-").map(Number);
   var cur = {g:0, u:null, long:false, date:null, req:0, year:nowParts[0], month:nowParts[1]-1};
+  if(/new-year/.test(p) && cur.month < 11) cur.month = 11;   /* на новогодней странице календарь сразу на декабре */
   var T = function(x){ return YP.t ? YP.t(x) : x; }, cap = function(x){ return x.charAt(0).toUpperCase() + x.slice(1); };
   var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : n + " ₽"; };
   var fmt = function(iso, o){ return new Intl.DateTimeFormat(YP.loc || "ru-RU", Object.assign({timeZone:"UTC"}, o)).format(new Date(iso + "T12:00:00Z")); };
@@ -2642,6 +2660,183 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   /* грузим, когда блок рядом с экраном */
   var started = false, go = function(){ if(started) return; started = true; selGroup(0); };
   if(window.IntersectionObserver) new IntersectionObserver(function(e, o){ if(e[0].isIntersecting){ o.disconnect(); go(); } }, {rootMargin:"600px"}).observe(sec); else go();
+})();
+</script>
+
+</div>
+<div class="r t-rec">
+<!-- 20 · «Соберите свой отдых»: калькулятор пакета (проживание + баня + вечер в чуме или гриль-доме), итог по тарифам TravelLine/HotBot.
+     Подписи — в разметке (переводятся словарём), строки итога собираются из этих подписей; цены — в data-атрибутах. -->
+<style>
+.yp-pkg{padding-block:clamp(56px,8vw,120px)}
+.yp-pkg__top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.yp-pkg__box{margin-top:clamp(26px,3.5vw,44px);display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(16px,2.2vw,30px);align-items:start}
+.yp-pkg__steps{display:grid;gap:14px}
+.yp-pkg__step{border-radius:26px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:clamp(18px,2vw,26px)}
+.yp-pkg__step h3{margin:0 0 14px;display:flex;align-items:center;gap:12px;font:500 19px/1.2 var(--yp-f)}
+.yp-pkg__step h3 i{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--yp-mono);color:#fff;background:var(--c,var(--yp-ink));font-style:normal}
+.yp-pkg__opts{display:flex;flex-wrap:wrap;gap:8px}
+.yp-pkg__opts button{border:0;cursor:pointer;border-radius:16px;padding:12px 16px;background:var(--yp-bg);color:var(--yp-ink);font:500 15px/1.2 var(--yp-f);text-align:left;transition:background .25s,color .25s,transform .2s,box-shadow .25s}
+.yp-pkg__opts button small{display:block;margin-top:4px;font:500 12px var(--yp-mono);color:var(--yp-muted)}
+.yp-pkg__opts button:hover{transform:translateY(-1px)}
+.yp-pkg__opts button[aria-pressed="true"]{background:var(--yp-ink);color:#fff}
+.yp-pkg__opts button[aria-pressed="true"] small{color:#AFC0BA}
+.yp-pkg__sub{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.yp-pkg__sub span{font:500 12px var(--yp-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--yp-muted);margin-right:4px}
+.yp-pkg__sub button{border:0;cursor:pointer;border-radius:999px;padding:9px 14px;background:var(--yp-bg);color:var(--yp-ink);font:500 13.5px var(--yp-f);transition:background .2s,color .2s}
+.yp-pkg__sub button[aria-pressed="true"]{background:var(--yp-green-d);color:#fff}
+.yp-pkg__sub[hidden]{display:none}
+.yp-pkg__when{display:flex;gap:8px;flex-wrap:wrap}
+.yp-pkg__sum{position:sticky;top:96px;border-radius:28px;background:var(--yp-ink);color:#fff;padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:14px;overflow:hidden;isolation:isolate}
+.yp-pkg__sum::before{content:"";position:absolute;inset:-30% -30% auto auto;width:80%;height:80%;background:radial-gradient(closest-side,rgba(92,255,192,.16),transparent);z-index:-1}
+.yp-pkg__sum h3{margin:0;font-weight:300;font-size:24px;letter-spacing:-.02em}
+.yp-pkg__lines{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.yp-pkg__lines li{display:flex;justify-content:space-between;gap:14px;font-size:14.5px;color:#D6DEDB}
+.yp-pkg__lines li b{font:500 14px var(--yp-mono);color:#fff;white-space:nowrap}
+.yp-pkg__lines li.empty{color:#8C9592}
+.yp-pkg__total{border-top:1px solid rgba(255,255,255,.12);padding-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.yp-pkg__total span{font-size:14px;color:#AFC0BA}
+.yp-pkg__total b{font:300 40px/1 var(--yp-fd);letter-spacing:-.04em}
+.yp-pkg__note{margin:0;font-size:12.5px;color:#8C9592}
+.yp-pkg__btns{display:grid;gap:8px}
+.yp-pkg__btns .yp-btn{width:100%;justify-content:center}
+.yp-pkg__btns .yp-btn--ghost{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.yp-pkg__btns [hidden]{display:none}
+@media (max-width:1000px){.yp-pkg__box{grid-template-columns:minmax(0,1fr)}.yp-pkg__sum{position:relative;top:0}}
+@media (max-width:600px){.yp-pkg__opts button{flex:1 1 calc(50% - 8px);padding:11px 12px;font-size:14px}}
+</style>
+<section class="yp yp-pkg" id="package">
+  <div class="yp-wrap">
+    <div class="yp-pkg__top">
+      <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Пакет на выходные</span><h2 class="yp-h2" data-yp-split>Соберите <b>свой отдых</b></h2></div>
+      <p class="yp-lead" style="max-width:44ch">Домик, баня и вечер в чуме или гриль-доме — посчитаем сразу по тарифам систем бронирования.</p>
+    </div>
+    <div class="yp-pkg__box" data-yp-pkg>
+      <div class="yp-pkg__steps">
+        <div class="yp-pkg__step" style="--c:var(--yp-ink)">
+          <h3><i>1</i>Когда приезжаете</h3>
+          <div class="yp-pkg__opts yp-pkg__when" data-g="when">
+            <button type="button" aria-pressed="true" data-v="wd">Будни<small>вс–чт</small></button>
+            <button type="button" aria-pressed="false" data-v="we">Выходные<small>пт–сб и праздники</small></button>
+          </div>
+        </div>
+        <div class="yp-pkg__step" style="--c:var(--yp-blue)">
+          <h3><i>2</i>Проживание</h3>
+          <div class="yp-pkg__opts" data-g="stay">
+            <button type="button" aria-pressed="false" data-v="none" data-wd="0" data-we="0">Без проживания<small>только на день</small></button>
+            <button type="button" aria-pressed="true" data-v="dome" data-wd="9000" data-we="13000">Купольный домик<small>30 м² · 2–4 гостя</small></button>
+            <button type="button" aria-pressed="false" data-v="volk" data-wd="8000" data-we="12000">Дом «Волк»<small>50 м² · 2–4 гостя</small></button>
+            <button type="button" aria-pressed="false" data-v="medved" data-wd="8000" data-we="12000">Дом «Медведь»<small>50 м² · 2–4 гостя</small></button>
+          </div>
+          <div class="yp-pkg__sub" data-sub="nights"><span>Ночей</span><button type="button" aria-pressed="true" data-n="1">1</button><button type="button" aria-pressed="false" data-n="2">2</button><button type="button" aria-pressed="false" data-n="3">3</button></div>
+        </div>
+        <div class="yp-pkg__step" style="--c:var(--yp-red)">
+          <h3><i>3</i>Баня</h3>
+          <div class="yp-pkg__opts" data-g="banya">
+            <button type="button" aria-pressed="false" data-v="none">Без бани</button>
+            <button type="button" aria-pressed="true" data-v="moroshka" data-top="5000">«Морошка»<small>парная + фито-сауна</small></button>
+            <button type="button" aria-pressed="false" data-v="brusnika" data-top="5000">«Брусника»<small>парная + хаммам</small></button>
+            <button type="button" aria-pressed="false" data-v="chernika" data-top="4000">«Черника»<small>на дровах</small></button>
+          </div>
+          <div class="yp-pkg__sub" data-sub="hours"><span>Часов</span><button type="button" aria-pressed="true" data-n="3">3</button><button type="button" aria-pressed="false" data-n="4">4</button><button type="button" aria-pressed="false" data-n="5">5</button></div>
+          <div class="yp-pkg__sub" data-sub="btime"><span>Время</span><button type="button" aria-pressed="false" data-t="day" data-p="2500">Пн–Ср до 14:00</button><button type="button" aria-pressed="true" data-t="eve" data-p="3500">Пн–Ср после 14:00</button><button type="button" aria-pressed="false" data-t="top">Чт–Вс</button></div>
+        </div>
+        <div class="yp-pkg__step" style="--c:var(--yp-green)">
+          <h3><i>4</i>Вечер для компании</h3>
+          <div class="yp-pkg__opts" data-g="eve">
+            <button type="button" aria-pressed="true" data-v="none">Не нужно</button>
+            <button type="button" aria-pressed="false" data-v="chum" data-wd="12000" data-we="15000">Чум на террасе<small>до 20 гостей · костёр и казан</small></button>
+            <button type="button" aria-pressed="false" data-v="g1" data-wd="6000" data-we="8000">Гриль-дом №1<small>15–20 гостей · 12:00–22:00</small></button>
+            <button type="button" aria-pressed="false" data-v="g23" data-wd="8000" data-we="10000">Гриль-дом №2 или №3<small>15–20 гостей · 12:00–22:00</small></button>
+          </div>
+        </div>
+      </div>
+      <aside class="yp-pkg__sum" aria-live="polite">
+        <h3>Ваш отдых</h3>
+        <ul class="yp-pkg__lines" data-yp-pkg-lines></ul>
+        <div class="yp-pkg__total"><span>Итого</span><b data-yp-pkg-total>—</b></div>
+        <p class="yp-pkg__note">Ориентировочно, по тарифам TravelLine и HotBot. Точная цена — при бронировании; в праздники действуют тарифы выходных.</p>
+        <div class="yp-pkg__btns">
+          <button class="yp-btn yp-btn--green" type="button" data-yp-pkg-stay>Забронировать домик</button>
+          <button class="yp-btn yp-btn--aurora" type="button" data-yp-pkg-shop>Записаться в баню, чум или гриль-дом</button>
+          <a class="yp-btn yp-btn--ghost" href="tel:+79003991033">Обсудить пакет: +7 900 399-10-33</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var box = document.querySelector("[data-yp-pkg]"); if(!box || box.getAttribute("data-yp-done")) return; box.setAttribute("data-yp-done", "1");
+  var YP = window.YP || {}, linesEl = box.querySelector("[data-yp-pkg-lines]"), totalEl = box.querySelector("[data-yp-pkg-total]");
+  var rub = function(n){ return YP.fmtRub ? YP.fmtRub(n) : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"; };
+  var pick = function(g){ return box.querySelector('[data-g="' + g + '"] [aria-pressed="true"]'); };
+  var subPick = function(s){ return box.querySelector('[data-sub="' + s + '"] [aria-pressed="true"]'); };
+  var label = function(b){ return b ? (b.childNodes[0].textContent || "").trim() : ""; };
+  function press(group, btn){ group.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", String(x === btn)); }); }
+  box.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b || !box.contains(b)) return;
+    var g = b.closest("[data-g],[data-sub]"); if(!g) return; press(g, b); calc();
+  });
+  function calc(){
+    var we = pick("when").getAttribute("data-v") === "we", key = we ? "data-we" : "data-wd", rows = [], total = 0;
+    var stay = pick("stay"), banya = pick("banya"), eve = pick("eve");
+    /* выходные: у бани сразу тариф чт–вс */
+    var bt = box.querySelector('[data-sub="btime"]');
+    if(we){ press(bt, bt.querySelector('[data-t="top"]')); }
+    box.querySelector('[data-sub="nights"]').hidden = stay.getAttribute("data-v") === "none";
+    box.querySelector('[data-sub="hours"]').hidden = box.querySelector('[data-sub="btime"]').hidden = banya.getAttribute("data-v") === "none";
+    if(stay.getAttribute("data-v") !== "none"){
+      var n = +subPick("nights").getAttribute("data-n"), ps = +stay.getAttribute(key) * n; total += ps;
+      rows.push([label(stay) + " × " + n, ps]);
+    }
+    if(banya.getAttribute("data-v") !== "none"){
+      var h = +subPick("hours").getAttribute("data-n"), t = subPick("btime"), per = t.getAttribute("data-t") === "top" ? +banya.getAttribute("data-top") : +t.getAttribute("data-p"), pb = per * h; total += pb;
+      rows.push([label(banya) + " · " + h + " " + ({en:"h", zh:"小时"}[YP.lang] || "ч") + " × " + rub(per), pb]);
+    }
+    if(eve.getAttribute("data-v") !== "none"){ var pe = +eve.getAttribute(key); total += pe; rows.push([label(eve), pe]); }
+    linesEl.innerHTML = rows.length ? rows.map(function(r){ return "<li><span>" + r[0] + "</span><b>" + rub(r[1]) + "</b></li>"; }).join("") : '<li class="empty">' + label(box.querySelector('[data-g="eve"] [data-v="none"]')) + "</li>";
+    totalEl.textContent = total ? rub(total) : "—";
+    box.querySelector("[data-yp-pkg-stay]").hidden = stay.getAttribute("data-v") === "none";
+    box.querySelector("[data-yp-pkg-shop]").hidden = banya.getAttribute("data-v") === "none" && eve.getAttribute("data-v") === "none";
+    if(YP.goal) YP.goal("package_calc");
+  }
+  box.querySelector("[data-yp-pkg-stay]").addEventListener("click", function(){ YP.openBooking ? YP.openBooking({type:"stay"}) : (location.hash = "booking"); });
+  box.querySelector("[data-yp-pkg-shop]").addEventListener("click", function(){ if(!(YP.openShop && YP.openShop())) window.open(YP.HOTBOT_PAGE || "https://shop.hotbot.ai/yamalpark/", "_blank", "noopener"); });
+  calc();
+  if(window.gsap && window.ScrollTrigger && !YP.reduced) gsap.from(box.querySelectorAll(".yp-pkg__step,.yp-pkg__sum"), {y:40, opacity:0, duration:.9, ease:"power3.out", stagger:.08, scrollTrigger:{trigger:box, start:"top 82%"}});
+})();
+</script>
+
+</div>
+<div class="r t-rec">
+<!-- 21 · Анонсы на главной: Новый год и подарочные сертификаты -->
+<style>
+.yp-promo{padding-block:clamp(40px,5vw,72px)}
+.yp-promo__grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
+.yp-pr{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:360px;border-radius:30px;overflow:hidden;padding:clamp(22px,2.6vw,36px);color:#fff;text-decoration:none;isolation:isolate}
+.yp-pr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--yp-ease)}
+.yp-pr:hover img{transform:scale(1.05)}
+.yp-pr::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,10,16,.1),rgba(6,10,16,.35) 45%,rgba(6,10,16,.9))}
+.yp-pr small{font:500 12px var(--yp-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.yp-pr b{display:block;font:300 clamp(30px,3.2vw,48px)/1 var(--yp-fd);letter-spacing:-.04em}
+.yp-pr span{max-width:46ch;font-size:15.5px;color:#DCE5E2}
+.yp-pr i{position:absolute;top:22px;right:22px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);font-style:normal;font-size:22px;transition:transform .4s var(--yp-ease),background .3s}
+.yp-pr:hover i{transform:rotate(-45deg);background:var(--c);color:var(--yp-ink)}
+@media (max-width:860px){.yp-promo__grid{grid-template-columns:minmax(0,1fr)}.yp-pr{min-height:300px}}
+</style>
+<section class="yp yp-promo" id="promo" aria-label="Новый год и подарки">
+  <div class="yp-wrap">
+    <div class="yp-promo__grid" data-yp-promo>
+      <a class="yp-pr" href="new-year.html" style="--c:#9AA8FF"><img src="img/p/dome-aurora-2.webp" alt="Купольный домик зимой под сиянием" loading="lazy"><i>→</i><small>Декабрь — январь</small><b>Новый год на Полярном круге</b><span>Свободные домики на праздники, корпоративы и бани — смотрите даты онлайн.</span></a>
+      <a class="yp-pr" href="gift.html" style="--c:#F2D29B"><img src="img/p/dome-window.webp" alt="Кровать у панорамного окна купола" loading="lazy"><i>→</i><small>Подарок-впечатление</small><b>Подарочные сертификаты</b><span>Ночь в куполе, баня или вечер в чуме — от 6 000 ₽.</span></a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var g = document.querySelector("[data-yp-promo]"); if(!g || !window.gsap || !window.ScrollTrigger || (window.YP && YP.reduced)) return;
+  gsap.from(g.children, {y:50, opacity:0, duration:1, ease:"power3.out", stagger:.1, scrollTrigger:{trigger:g, start:"top 85%"}});
 })();
 </script>
 
@@ -2779,7 +2974,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-ban__dev">
         <div class="yp-bs">
           <div class="yp-bs__photo" data-yp-photo>
-            <img data-yp-bimg src="img/banya-steam.jpg" alt="Парная бани «Морошка»" loading="lazy">
+            <img data-yp-bimg src="img/banya-steam.webp" alt="Парная бани «Морошка»" loading="lazy">
             <canvas class="yp-bs__fx" data-yp-fx aria-hidden="true"></canvas>
             <div class="yp-bs__glow" aria-hidden="true"></div>
             <div class="yp-bs__top"><span class="yp-pill"><i></i><span data-yp-bstatus>Парная готова</span></span><span class="yp-pill" data-yp-bzone>Морошка · парная</span></div>
@@ -2846,13 +3041,13 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   /* Зоны и их команды (Алиса или кнопки). Температура и влажность — пример, позже можно брать с датчиков. */
   var ROOMS = [
     {bath:"Морошка", zone:"парная", desc:"Жаркая парная до 100 °C, баня 100 м² на 8–10 гостей.", temp:90, hum:15,
-     img:"img/p/moroshka-steam.jpg", cmds:["rain","steam","music","light"]},
+     img:"img/p/moroshka-steam.webp", cmds:["rain","steam","music","light"]},
     {bath:"Морошка", zone:"фито-сауна", desc:"Аромасауна: мягкий жар и травяной пар. Хорошо после парной.", temp:60, hum:35,
-     img:"img/banya-blue.jpg", cmds:["fito","fog","music","steam","wind","light"]},
+     img:"img/banya-blue.webp", cmds:["fito","fog","music","steam","wind","light"]},
     {bath:"Брусника", zone:"парная", desc:"Парная до 100 °C с дождём, туманом и паром на каменку. В бане есть хаммам.", temp:90, hum:20,
-     img:"img/p/brusnika-parnaya.jpg", cmds:["rain","steam","fog","music","light"]},
+     img:"img/p/brusnika-parnaya.webp", cmds:["rain","steam","fog","music","light"]},
     {bath:"Черника", zone:"парная", buttons:true, desc:"Баня на дровах, до 8 гостей. «Дождь» распыляет воду, «ветер» включает вентиляцию.", temp:85, hum:20,
-     img:"img/p/chernika-panel.jpg", cmds:["rain","wind"]}
+     img:"img/p/chernika-panel.webp", cmds:["rain","wind"]}
   ];
   var photo = q("[data-yp-photo]"), img = q("[data-yp-bimg]"), cmdsEl = q("[data-yp-cmds]"), said = q("[data-yp-said]"), voice = q("[data-yp-voice]"), eq = q("[data-yp-eq]");
   var room = 0, fx = null, music = false, light = false, target = 85, shown = 85, hum = 15, inView = false, lastUser = 0, typing = null;
@@ -3029,9 +3224,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     </div>
   </div>
   <div class="yp-gc" data-yp-gc aria-roledescription="карусель" aria-label="Дома глэмпинга">
-    <figure class="yp-gc__slide" data-i="0"><img src="img/p/dome-aurora-arc.jpg" alt="Северное сияние над купольным домиком" loading="lazy"><figcaption>Купольный домик · под сиянием</figcaption><span class="yp-gc__wipe"></span></figure>
-    <figure class="yp-gc__slide" data-i="1"><img src="img/p/volk-living.jpg" alt="Светлая гостиная дома «Волк»" loading="lazy"><figcaption>«Волк» · 50 м²</figcaption><span class="yp-gc__wipe"></span></figure>
-    <figure class="yp-gc__slide" data-i="2"><img src="img/p/medved-living.jpg" alt="Гостиная дома «Медведь» с бежевым диваном" loading="lazy"><figcaption>«Медведь» · 50 м²</figcaption><span class="yp-gc__wipe"></span></figure>
+    <figure class="yp-gc__slide" data-i="0"><img src="img/p/dome-aurora-arc.webp" alt="Северное сияние над купольным домиком" loading="lazy"><figcaption>Купольный домик · под сиянием</figcaption><span class="yp-gc__wipe"></span></figure>
+    <figure class="yp-gc__slide" data-i="1"><img src="img/p/volk-living.webp" alt="Светлая гостиная дома «Волк»" loading="lazy"><figcaption>«Волк» · 50 м²</figcaption><span class="yp-gc__wipe"></span></figure>
+    <figure class="yp-gc__slide" data-i="2"><img src="img/p/medved-living.webp" alt="Гостиная дома «Медведь» с бежевым диваном" loading="lazy"><figcaption>«Медведь» · 50 м²</figcaption><span class="yp-gc__wipe"></span></figure>
   </div>
   <div class="yp-wrap">
     <div class="yp-gc__info">
@@ -3174,56 +3369,56 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   var CATS = [["all","Все"],["aurora","Сияние"],["winter","Зима"],["summer","Лето и осень"],["glamp","Глэмпинг"],["banya","Бани"],["grill","Гриль-дома"],["etno","Чум и мини-зоопарк"]];
   /* s: t — высокая плитка, w — широкая */
   var P = [
-    {src:"img/p/dome-aurora-arc.jpg", c:"aurora glamp winter", s:"w", cap:"Сияние над купольным домиком"},
-    {src:"img/p/grill-aurora-a.jpg", c:"aurora grill winter", s:"", cap:"Сияние над гриль-домом"},
-    {src:"img/p/chum-aurora.jpg", c:"aurora etno winter", s:"t", cap:"Сияние над чумом"},
-    {src:"img/p/moroshka-steam.jpg", c:"banya", s:"", cap:"Пар в «Морошке»"},
-    {src:"img/p/volk-living.jpg", c:"glamp", s:"", cap:"Гостиная дома «Волк»"},
-    {src:"img/p/dome-drone-autumn.jpg", c:"glamp summer", s:"w", cap:"Купол в осенней тайге"},
-    {src:"img/p/grill-frost-path.jpg", c:"winter grill", s:"t", cap:"Мостик в огнях и инее"},
-    {src:"img/p/brusnika-parnaya.jpg", c:"banya", s:"", cap:"Парная «Брусники»"},
-    {src:"img/p/medved-living.jpg", c:"glamp", s:"", cap:"Гостиная дома «Медведь»"},
-    {src:"img/p/tent-aurora-in.jpg", c:"aurora", s:"w", cap:"Сияние сквозь шатёр «Сияние севера»"},
-    {src:"img/p/chum-in.jpg", c:"etno", s:"", cap:"Внутри чума"},
-    {src:"img/p/dome-window.jpg", c:"glamp", s:"", cap:"Кровать у панорамного окна"},
-    {src:"img/p/grill-aurora-d.jpg", c:"aurora grill winter", s:"t", cap:"Сияние над мостиком"},
-    {src:"img/p/chernika-parnaya.jpg", c:"banya", s:"", cap:"Парная «Черники»"},
-    {src:"img/p/admin-night2.jpg", c:"winter", s:"w", cap:"Администрация ночью"},
-    {src:"img/p/volk-bed.jpg", c:"glamp", s:"", cap:"Спальня «Волка»"},
-    {src:"img/p/medved-bed.jpg", c:"glamp", s:"", cap:"Спальня «Медведя»"},
-    {src:"img/p/chum-terrace.jpg", c:"etno winter", s:"w", cap:"Терраса чума с костровищем"},
-    {src:"img/p/grill-in-a.jpg", c:"grill", s:"", cap:"Гриль-дом внутри"},
-    {src:"img/p/moroshka-panel.jpg", c:"banya", s:"t", cap:"«Алиса, включи…»"},
-    {src:"img/p/dome-aurora-2.jpg", c:"aurora glamp winter", s:"w", cap:"Купол под сиянием"},
-    {src:"img/p/bani-dusk.jpg", c:"banya winter", s:"", cap:"Бани в сумерках"},
-    {src:"img/p/tent-frost.jpg", c:"winter", s:"", cap:"Шатёр в инее"},
-    {src:"img/p/chum-table.jpg", c:"etno", s:"", cap:"Стол в чуме"},
-    {src:"img/p/dome-forest-autumn.jpg", c:"summer", s:"w", cap:"Осенняя тайга вокруг парка"},
-    {src:"img/new/summer-sunset.jpg", c:"summer", s:"w", cap:"Белая ночь над тайгой"},
-    {src:"img/new/fest-flags.jpg", c:"summer", s:"", cap:"Летний фестиваль на поляне"},
-    {src:"img/new/summer-aerial-3.jpg", c:"summer", s:"", cap:"Ямал Парк сверху летом"},
-    {src:"img/new/fest-aerial-1.jpg", c:"summer", s:"w", cap:"Фестиваль с высоты"},
-    {src:"img/new/fest-stage.jpg", c:"summer", s:"", cap:"Сцена у вышки"},
-    {src:"img/new/fest-tower.jpg", c:"summer", s:"t", cap:"Смотровая вышка и шатёр"},
-    {src:"img/new/fest-stage-top-2.jpg", c:"summer", s:"", cap:"Танцпол под флажками"},
-    {src:"img/new/fest-aerial-2.jpg", c:"summer", s:"w", cap:"Праздник в тайге"},
-    {src:"img/p/grill-terrace-night.jpg", c:"grill winter", s:"", cap:"Терраса гриль-дома ночью"},
-    {src:"img/p/medved-dusk.jpg", c:"glamp winter", s:"", cap:"«Медведь» вечером"},
-    {src:"img/p/frost-cat.jpg", c:"winter", s:"t", cap:"Иней на заборе"},
-    {src:"img/p/brusnika-hammam.jpg", c:"banya", s:"", cap:"Хаммам в «Бруснике»"},
-    {src:"img/p/dome-loft.jpg", c:"glamp", s:"", cap:"Антресоль в куполе"},
-    {src:"img/p/aurora-bridge.jpg", c:"aurora winter", s:"w", cap:"Сияние над мостиком к куполу"},
-    {src:"img/p/chum-stove.jpg", c:"etno", s:"", cap:"Печь в чуме"},
-    {src:"img/p/volk-ext.jpg", c:"glamp winter", s:"", cap:"Дом «Волк» зимой"},
-    {src:"img/p/grill-wreath.jpg", c:"grill winter", s:"", cap:"Венок на двери"},
-    {src:"img/fox.jpg", c:"etno", s:"", cap:"Чернобурая лиса в мини-зоопарке"},
-    {src:"img/new/lynx-enclosure.jpg", c:"etno", s:"", cap:"Вольер с рысями"},
-    {src:"img/new/aerial-park.jpg", c:"summer", s:"w", cap:"Ямал Парк с высоты летом"},
-    {src:"img/p/fest-crowd.jpg", c:"summer", s:"", cap:"Фестиваль «Лето в Ямал Парке»"},
-    {src:"img/p/fest-dj.jpg", c:"summer", s:"", cap:"Диджей на фестивале"},
-    {src:"img/new/sculpture-1.jpg", c:"summer etno", s:"w", cap:"Деревянные скульптуры в парке"},
-    {src:"img/p/tent-day.jpg", c:"winter", s:"t", cap:"Шатёр «Сияние севера» днём"},
-    {src:"img/p/chernika-lounge.jpg", c:"banya", s:"", cap:"Комната отдыха «Черники»"}
+    {src:"img/p/dome-aurora-arc.webp", c:"aurora glamp winter", s:"w", cap:"Сияние над купольным домиком"},
+    {src:"img/p/grill-aurora-a.webp", c:"aurora grill winter", s:"", cap:"Сияние над гриль-домом"},
+    {src:"img/p/chum-aurora.webp", c:"aurora etno winter", s:"t", cap:"Сияние над чумом"},
+    {src:"img/p/moroshka-steam.webp", c:"banya", s:"", cap:"Пар в «Морошке»"},
+    {src:"img/p/volk-living.webp", c:"glamp", s:"", cap:"Гостиная дома «Волк»"},
+    {src:"img/p/dome-drone-autumn.webp", c:"glamp summer", s:"w", cap:"Купол в осенней тайге"},
+    {src:"img/p/grill-frost-path.webp", c:"winter grill", s:"t", cap:"Мостик в огнях и инее"},
+    {src:"img/p/brusnika-parnaya.webp", c:"banya", s:"", cap:"Парная «Брусники»"},
+    {src:"img/p/medved-living.webp", c:"glamp", s:"", cap:"Гостиная дома «Медведь»"},
+    {src:"img/p/tent-aurora-in.webp", c:"aurora", s:"w", cap:"Сияние сквозь шатёр «Сияние севера»"},
+    {src:"img/p/chum-in.webp", c:"etno", s:"", cap:"Внутри чума"},
+    {src:"img/p/dome-window.webp", c:"glamp", s:"", cap:"Кровать у панорамного окна"},
+    {src:"img/p/grill-aurora-d.webp", c:"aurora grill winter", s:"t", cap:"Сияние над мостиком"},
+    {src:"img/p/chernika-parnaya.webp", c:"banya", s:"", cap:"Парная «Черники»"},
+    {src:"img/p/admin-night2.webp", c:"winter", s:"w", cap:"Администрация ночью"},
+    {src:"img/p/volk-bed.webp", c:"glamp", s:"", cap:"Спальня «Волка»"},
+    {src:"img/p/medved-bed.webp", c:"glamp", s:"", cap:"Спальня «Медведя»"},
+    {src:"img/p/chum-terrace.webp", c:"etno winter", s:"w", cap:"Терраса чума с костровищем"},
+    {src:"img/p/grill-in-a.webp", c:"grill", s:"", cap:"Гриль-дом внутри"},
+    {src:"img/p/moroshka-panel.webp", c:"banya", s:"t", cap:"«Алиса, включи…»"},
+    {src:"img/p/dome-aurora-2.webp", c:"aurora glamp winter", s:"w", cap:"Купол под сиянием"},
+    {src:"img/p/bani-dusk.webp", c:"banya winter", s:"", cap:"Бани в сумерках"},
+    {src:"img/p/tent-frost.webp", c:"winter", s:"", cap:"Шатёр в инее"},
+    {src:"img/p/chum-table.webp", c:"etno", s:"", cap:"Стол в чуме"},
+    {src:"img/p/dome-forest-autumn.webp", c:"summer", s:"w", cap:"Осенняя тайга вокруг парка"},
+    {src:"img/new/summer-sunset.webp", c:"summer", s:"w", cap:"Белая ночь над тайгой"},
+    {src:"img/new/fest-flags.webp", c:"summer", s:"", cap:"Летний фестиваль на поляне"},
+    {src:"img/new/summer-aerial-3.webp", c:"summer", s:"", cap:"Ямал Парк сверху летом"},
+    {src:"img/new/fest-aerial-1.webp", c:"summer", s:"w", cap:"Фестиваль с высоты"},
+    {src:"img/new/fest-stage.webp", c:"summer", s:"", cap:"Сцена у вышки"},
+    {src:"img/new/fest-tower.webp", c:"summer", s:"t", cap:"Смотровая вышка и шатёр"},
+    {src:"img/new/fest-stage-top-2.webp", c:"summer", s:"", cap:"Танцпол под флажками"},
+    {src:"img/new/fest-aerial-2.webp", c:"summer", s:"w", cap:"Праздник в тайге"},
+    {src:"img/p/grill-terrace-night.webp", c:"grill winter", s:"", cap:"Терраса гриль-дома ночью"},
+    {src:"img/p/medved-dusk.webp", c:"glamp winter", s:"", cap:"«Медведь» вечером"},
+    {src:"img/p/frost-cat.webp", c:"winter", s:"t", cap:"Иней на заборе"},
+    {src:"img/p/brusnika-hammam.webp", c:"banya", s:"", cap:"Хаммам в «Бруснике»"},
+    {src:"img/p/dome-loft.webp", c:"glamp", s:"", cap:"Антресоль в куполе"},
+    {src:"img/p/aurora-bridge.webp", c:"aurora winter", s:"w", cap:"Сияние над мостиком к куполу"},
+    {src:"img/p/chum-stove.webp", c:"etno", s:"", cap:"Печь в чуме"},
+    {src:"img/p/volk-ext.webp", c:"glamp winter", s:"", cap:"Дом «Волк» зимой"},
+    {src:"img/p/grill-wreath.webp", c:"grill winter", s:"", cap:"Венок на двери"},
+    {src:"img/fox.webp", c:"etno", s:"", cap:"Чернобурая лиса в мини-зоопарке"},
+    {src:"img/new/lynx-enclosure.webp", c:"etno", s:"", cap:"Вольер с рысями"},
+    {src:"img/new/aerial-park.webp", c:"summer", s:"w", cap:"Ямал Парк с высоты летом"},
+    {src:"img/p/fest-crowd.webp", c:"summer", s:"", cap:"Фестиваль «Лето в Ямал Парке»"},
+    {src:"img/p/fest-dj.webp", c:"summer", s:"", cap:"Диджей на фестивале"},
+    {src:"img/new/sculpture-1.webp", c:"summer etno", s:"w", cap:"Деревянные скульптуры в парке"},
+    {src:"img/p/tent-day.webp", c:"winter", s:"t", cap:"Шатёр «Сияние севера» днём"},
+    {src:"img/p/chernika-lounge.webp", c:"banya", s:"", cap:"Комната отдыха «Черники»"}
   ];
   var STEP = window.matchMedia("(max-width:900px)").matches ? 10 : 16, limit = STEP, cat = "all";
   var grid = sec.querySelector("[data-yp-galg]"), fbox = sec.querySelector("[data-yp-galf]"), more = sec.querySelector("[data-yp-galmore]");
@@ -3422,7 +3617,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-events__cta{display:flex;gap:12px;flex-wrap:wrap}
 </style>
 <section class="yp yp-events" id="events">
-  <div class="yp-events__bg" data-yp-evbg><img src="img/new/banquet-dome.jpg" alt="Банкетный зал под куполом на закате" loading="lazy"></div>
+  <div class="yp-events__bg" data-yp-evbg><img src="img/new/banquet-dome.webp" alt="Банкетный зал под куполом на закате" loading="lazy"></div>
   <div class="yp-wrap" style="width:100%">
     <div class="yp-events__card" data-yp-evcard>
       <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Мероприятия</span>
@@ -3577,7 +3772,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <p class="yp-tile__s yp-tile__end" data-yp-t-tip>В домиках тёплые полы, комфортно даже в −40 °C.</p>
       </article>
       <article class="yp-tile yp-t-aurora is-photo" data-yp-tile>
-        <img src="img/dome-aurora.jpg" alt="Купол глэмпинга и северное сияние" loading="lazy">
+        <img src="img/dome-aurora.webp" alt="Купол глэмпинга и северное сияние" loading="lazy">
         <span class="yp-tile__k" style="--c:#7CF08A"><i></i>Сияние этой ночью</span>
         <div class="yp-tile__end">
           <div class="yp-tile__big" data-yp-t-au>—</div>
@@ -3595,7 +3790,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <a class="yp-btn yp-btn--red yp-tile__end" href="grill.html" style="align-self:flex-start;margin-top:auto">Все гриль-дома</a>
       </article>
       <article class="yp-tile is-photo" data-yp-tile>
-        <img src="img/fox.jpg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
+        <img src="img/fox.webp" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
         <span class="yp-tile__k" style="--c:var(--yp-green)"><i></i>Мини-зоопарк</span>
         <div class="yp-tile__end">
           <h3 class="yp-tile__t"><span class="yp-live" data-yp-t-zlive><i></i><span data-yp-t-zoo>Рыси, лисы, кролики, козы и косуля</span></span></h3>
@@ -3613,7 +3808,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <p class="yp-tile__s yp-tile__end">Ранний заезд и поздний выезд по договорённости.</p>
       </article>
       <article class="yp-tile yp-t-map is-photo" data-yp-tile>
-        <img src="img/map-winter.jpg" alt="Схема комплекса Ямал Парк зимой" loading="lazy">
+        <img src="img/map-winter.webp" alt="Схема комплекса Ямал Парк зимой" loading="lazy">
         <span class="yp-tile__k" style="--c:var(--yp-green)"><i></i>Карта комплекса</span>
         <div class="yp-tile__end"><h3 class="yp-tile__t"><b>22 объекта</b> на одной территории</h3><a class="yp-tile__link" href="contacts.html#map">Открыть карту →</a></div>
       </article>
@@ -4163,7 +4358,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
@@ -4199,7 +4394,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
       var c = document.getElementById("tl-search-form"), docs = [], btn = null;
       (function walk(root){ root.querySelectorAll("iframe").forEach(function(f){ try{ var d = f.contentDocument; if(d){ docs.push(d); walk(d); } }catch(e){} }); })(c || document.createElement("div"));
       docs.forEach(function(d){ btn = btn || [].slice.call(d.querySelectorAll("button,input[type=submit],[role=button]")).filter(function(x){ return /Выбрать|Найти|Забронировать|Choose|Search|Select|Book/i.test(x.textContent || x.value || ""); })[0]; });
-      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); }, 400); }
+      if(btn){ clearInterval(iv); setTimeout(function(){ btn.click(); YP.goal && YP.goal("tl_search_auto", {date:qs.get("date")}); }, 400); }
       else if(Date.now() - t0 > 25000) clearInterval(iv);
     }, 300);
   })();
