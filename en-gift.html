@@ -120,6 +120,11 @@ html.lenis,html.lenis body{height:auto}
 .yp-curtain i:nth-child(1){background:var(--yp-blue)}.yp-curtain i:nth-child(2){background:var(--yp-green)}.yp-curtain i:nth-child(3){background:var(--yp-red)}
 .yp-curtain b{position:absolute;inset:0;display:grid;place-items:center;font:400 clamp(18px,2vw,26px)/1 var(--yp-fd);letter-spacing:.3em;text-transform:uppercase;color:#fff;opacity:0}
 /* ---------- Курсор с подписью (только мышь) ---------- */
+/* Курсор — маленькая ёлочка (на ссылках — со звездой) */
+html,html *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'%3E%3Cpath d='M12 1.5 18 9.5h-3l6 8h-5l7 8H1l7-8H3l6-8H6z' fill='%233FAB3C' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3Crect x='10.3' y='25.4' width='3.4' height='2.6' rx='.6' fill='%238A5A2B'/%3E%3C/svg%3E") 12 2,auto!important}
+a,a *,button,button *,summary,select,label,[role=button],[data-yp-book],[data-yp-cursor],.yp-btn,.yp-btn *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'%3E%3Cpath d='M12 3.5 18 10.5h-3l6 8h-5l7 7.5H1l7-7.5H3l6-8H6z' fill='%233FAB3C' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3Crect x='10.3' y='25.4' width='3.4' height='2.6' rx='.6' fill='%238A5A2B'/%3E%3Ccircle cx='12' cy='2.6' r='2.3' fill='%23F2D29B' stroke='%23fff' stroke-width='.8'/%3E%3C/svg%3E") 12 2,pointer!important}
+input[type=text],input[type=tel],input[type=email],input[type=search],textarea{cursor:text!important}
+.yp-cur__ring{opacity:0}.yp-cur.is-label .yp-cur__ring{opacity:1}.yp-cur__dot{display:none}
 .yp-cur{position:fixed;left:0;top:0;z-index:10040;pointer-events:none;width:0;height:0}
 .yp-cur__dot{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--yp-aurora);mix-blend-mode:difference}
 .yp-cur__ring{position:absolute;left:-20px;top:-20px;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(160,170,170,.7);display:grid;place-items:center;transition:width .35s var(--yp-ease),height .35s var(--yp-ease),left .35s var(--yp-ease),top .35s var(--yp-ease),background .35s,border-color .35s}
