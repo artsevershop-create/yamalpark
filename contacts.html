@@ -155,7 +155,16 @@ input[type=text],input[type=tel],input[type=email],input[type=search],textarea{c
 .yp-top circle{fill:none;stroke-width:2.5}
 .yp-top .bg{stroke:rgba(255,255,255,.18)}
 .yp-top .pr{stroke:var(--yp-aurora);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:144.5;stroke-dashoffset:144.5}
-@media (max-width:768px){.yp-top{width:46px;height:46px}}
+@media (max-width:768px){.yp-top{display:none!important}}
+/* Мобильная доводка: крупнее мелкий текст, нормальные зоны нажатия, кнопки не под плавающими виджетами */
+@media (max-width:640px){
+.yp-wx__meta span,.yp-chart__ref span,.yp-house__fan figcaption,.yp-map__legend b,.yp-ac__f small,.yp-ac__b .tag,.yp-bs__tabs small,.yp-pick__ticks span,.yp-facts__ph figcaption,.yp-zone span,.yp-dr__hud small,.yp-dh__type,.yp-three__badge,.yp-pk__num,.yp-house__hint,.yp-free__times small,.yp-bs__cmdh,.yp-ah__now small,.yp-wrap dt,.yp-docs__card dt,.yp-house dt{font-size:12px!important}
+.yp-free__days.month .yp-free__day small{font-size:10px;line-height:1.1;white-space:normal;word-break:normal}
+.yp-ph__crumbs a,.yp-gh__crumbs a,.yp-bh__crumbs a{display:inline-block;padding-block:10px}
+.yp-ph__cta{flex-direction:column;align-items:stretch;width:calc(100% - 66px)}
+.yp-ph__cta .yp-btn{justify-content:center}
+.yp-wx__note a,.yp-af__foot a,.yp-rv__link,.yp-docs__card a,.yp-map__season button,.yp-wk__fxb button,.yp-copy{min-height:40px;display:inline-flex;align-items:center}
+}
 @media print{.yp-top{display:none}}
 /* ---------- Языки: пока перевод не готов, страница скрыта (не дольше 4 с) ---------- */
 html.yp-tr-wait body{opacity:0!important}
@@ -1986,6 +1995,7 @@ window.YP_MAP = [
 .yp-bk .yp-btn--ghost{color:var(--yp-ink);box-shadow:inset 0 0 0 1.5px var(--yp-line)}
 .yp-bk .yp-btn--ghost::before{background:var(--yp-ink)}
 .yp-contacts a[hidden]{display:none}
+@media (max-width:700px){.yp-foot h4{font-size:12px}.yp-foot ul{gap:0}.yp-foot ul a{display:block;padding-block:10px}.yp-foot__copy a{display:inline-block;padding-block:8px}}
 @media (max-width:520px){.yp-foot__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 16px}.yp-foot__grid>:first-child,.yp-foot__grid>:last-child{grid-column:1/-1}.yp-bk__tabs button{font-size:13px;padding:11px 4px}}
 </style>
 <section class="yp yp-dark yp-booking" id="booking" data-yp-theme="dark">
