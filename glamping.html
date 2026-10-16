@@ -105,6 +105,8 @@ html.lenis,html.lenis body{height:auto}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
 /* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
+.hotbot-widget-buttons-wrap-chat,.hotbot-widget-buttons-wrap-shop{transition:opacity .35s,transform .35s}
+@media (max-width:768px){html.yp-scrolling .hotbot-widget-buttons-wrap-chat,html.yp-scrolling .hotbot-widget-buttons-wrap-shop{opacity:.3}}
 @media (max-width:768px){.hotbot-widget-buttons-wrap-chat,.hotbot-widget-buttons-wrap-shop{right:12px!important;transform:scale(.72);transform-origin:100% 100%}.hotbot-widget-buttons-wrap-chat{bottom:12px!important}.hotbot-widget-buttons-wrap-shop{bottom:66px!important}}
 /* общий лист, наезжающий на первый экран */
 .yp-sheet{border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
@@ -900,6 +902,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     document.documentElement.addEventListener("mouseleave", function(){ c.classList.add("is-hidden"); });
     document.addEventListener("pointerdown", function(){ gsap.fromTo(ring, {scale:1}, {scale:.82, duration:.15, yoyo:true, repeat:1}); });
   }
+  /* на телефоне виджеты HotBot бледнеют, пока страницу листают, и не закрывают текст */
+  (function(){ var t; window.addEventListener("scroll", function(){ if(innerWidth > 768) return; var h = document.documentElement; h.classList.add("yp-scrolling"); clearTimeout(t); t = setTimeout(function(){ h.classList.remove("yp-scrolling"); }, 700); }, {passive:true}); })();
   function init(){
     var hasG = window.gsap && window.ScrollTrigger;
     if(hasG){ gsap.registerPlugin(ScrollTrigger); ScrollTrigger.config({ignoreMobileResize:true}); }
@@ -1661,7 +1665,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
         <h3>Ваш отдых</h3>
         <ul class="yp-pkg__lines" data-yp-pkg-lines></ul>
         <div class="yp-pkg__total"><span>Итого</span><b data-yp-pkg-total>—</b></div>
-        <p class="yp-pkg__note">Ориентировочно, по тарифам TravelLine и HotBot. Точная цена — при бронировании; в праздники действуют тарифы выходных.</p>
+        <p class="yp-pkg__note">Ориентировочно, по тарифам TravelLine и HotBot. Точная цена — при бронировании. С 15 декабря по 10 января действуют новогодние цены — смотрите на странице «Новый год».</p>
         <div class="yp-pkg__btns">
           <button class="yp-btn yp-btn--green" type="button" data-yp-pkg-stay>Забронировать домик</button>
           <button class="yp-btn yp-btn--aurora" type="button" data-yp-pkg-shop>Записаться в баню, чум или гриль-дом</button>
