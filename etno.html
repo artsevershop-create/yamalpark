@@ -670,7 +670,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     {id:"g2", name:"Гриль-дом №2", short:"Гриль №2", guests:"15–20", wd:8000, we:10000, feat:["Гриль-установка","Лавки и столешница вокруг гриля","Телевизор","Микроволновка","Умывальник","Шкаф"]},
     {id:"g3", name:"Гриль-дом №3", short:"Гриль №3", guests:"15–20", wd:8000, we:10000, feat:["Гриль-установка","Лавки и столешница вокруг гриля","Телевизор","Микроволновка","Умывальник","Шкаф"]},
     {id:"h1", name:"Гостевой дом №1", short:"Гостевой №1", guests:"20–25", wd:8000, we:12000, feat:["Гриль-зона в отдельном здании рядом","Стол и 4 лавки","Телевизор","Микроволновка","Холодильник","Умывальник, шкаф"]},
-    {id:"h2", name:"Гостевой дом №2", short:"Гостевой №2", guests:"20–25", wd:8000, we:12000, feat:["Гриль-зона в отдельном здании рядом","Стол и 4 лавки","Телевизор","Микроволновка","Холодильник","Умывальник, шкаф"]}
+    {id:"h2", name:"Гостевой дом №2", short:"Гостевой №2", guests:"20–25", wd:8000, we:12000, feat:["Гриль-зона в отдельном здании рядом","Стол и 4 лавки","Телевизор","Микроволновка","Холодильник","Умывальник, шкаф"]},
+    {id:"b1", name:"Летняя беседка", short:"Беседка", guests:"до 15", wd:6000, we:6000, feat:["Одноразовая посуда","Розжиг","Решётка"]}
   ];
   YP.isWeekendRate = function(d){ var w = d.getDay(); return w === 5 || w === 6; };      /* пятница и суббота — тариф выходного дня */
   YP.fmtRub = function(n){ return n.toLocaleString(YP.loc).replace(/ /g," ") + " ₽"; };
@@ -696,6 +697,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     g3:      {name:"Гриль-дом №3",    group:"day", cat:"at-home", hb:"66d839f8884559001edf5582"},
     h1:      {name:"Гостевой дом №1", group:"day", cat:"at-home", hb:"670386589209f3001e9b1748", res:"66d82f1f884559001edf4933"},
     h2:      {name:"Гостевой дом №2", group:"day", cat:"at-home", hb:"670386589209f3001e9b1748", res:"66d83141884559001edf4c5e"},
+    b1:      {name:"Летняя беседка",  group:"day", cat:"at-home", hb:"66d83447884559001edf4fb2"},
     chum:    {name:"Чум на террасе",  group:"fest", cat:"at-home", hb:"6ac5e30e93714c44cd6cf783"},
     tent:    {name:"Шатёр «Сияние севера»", group:"fest", cat:"at-home", hb:"6800b971aa3e1d17e7fc6ff5"},
     hall:    {name:"Банкетный зал",   group:"fest", cat:"at-home", hb:"6a4ba66a524b79aaa65737d3"}
@@ -1323,7 +1325,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 (function(){
   var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
   var YP = window.YP || {}, U = YP.UNITS || {};
-  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2","b1"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
   var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
@@ -2173,7 +2175,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
             <a class="yp-btn yp-btn--ghost" href="tel:+79003991033">+7 900 399-10-33</a>
           </div>
         </div>
-        <p class="yp-bk__note">Отмена за 7 дней и раньше — возврат 100%.</p>
+        <p class="yp-bk__note">Отмена менее чем за 3 дня или неявка — предоплата не возвращается.</p>
       </div>
     </div>
   </div>
@@ -2183,7 +2185,7 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
     <div class="yp-foot__grid">
       <div><span class="yp-foot__name">Ямал Парк</span><p class="yp-foot__addr">ЯНАО, Приуральский район, 12-й км дороги Салехард — Горнокнязевск. 16 минут от центра Салехарда.</p></div>
       <div><h4>Отдых</h4><ul><li><a href="glamping.html">Глэмпинг</a></li><li><a href="bani.html">Умные бани</a></li><li><a href="grill.html">Гриль-дома</a></li><li><a href="etno.html">Этно-комплекс</a></li><li><a href="zoo.html">Мини-зоопарк</a></li></ul></div>
-      <div><h4>Гостям</h4><ul><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
+      <div><h4>Гостям</h4><ul><li><a href="/faq">Частые вопросы</a></li><li><a href="new-year.html">Новый год</a></li><li><a href="gift.html">Подарочные сертификаты</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="severnoe-siyanie.html">Северное сияние: прогноз</a></li><li><a href="contacts.html#map">Карта комплекса</a></li><li><a href="contacts.html">Как добраться</a></li><li><a href="docs.html">Документы</a></li></ul></div>
       <div><h4>Связь</h4><ul><li><a href="tel:+79003991033">+7 900 399-10-33</a></li><li><a href="tel:+73492252103">+7 34922 5-21-03</a></li><li><a href="mailto:yamalpark89@yandex.ru">yamalpark89@yandex.ru</a></li><li><a href="https://t.me/yamalpark" target="_blank" rel="noopener">Telegram</a> · <a href="https://vk.com/yamalpark" target="_blank" rel="noopener">VK</a></li></ul></div>
     </div>
     <div class="yp-foot__copy"><span>© <span data-yp-year>2026</span> АО «Ямалгосснаб». Загородный комплекс «Ямал Парк»</span><a href="https://disk.yandex.ru/i/UjMRvKEG8yRuEQ" target="_blank" rel="noopener">Политика обработки персональных данных</a></div>
