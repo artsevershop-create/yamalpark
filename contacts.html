@@ -104,6 +104,8 @@ html.lenis,html.lenis body{height:auto}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* плашка «Визуализация» на рендерах и схемах (это не фото) */
+.yp-viz{position:absolute;left:14px;top:14px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.9);color:#14181d;font:600 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;pointer-events:none;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
 /* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
 /* страховка от горизонтальной прокрутки на телефоне: ничего не выступает за край экрана */
 @media (max-width:768px){#allrecords,.t-records{overflow-x:clip}}
@@ -1848,6 +1850,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-map.is-winter .yp-map__snow{opacity:1}
 .yp-pin{position:absolute;margin:-15px 0 0 -15px;width:30px;height:30px;border-radius:50%;border:2.5px solid #fff;background:var(--c);color:#fff;font:600 12px/1 var(--yp-f);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,.35);transition:transform .35s var(--yp-ease),opacity .35s,box-shadow .3s;padding:0}
 .yp-pin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--c);opacity:0;animation:ypPing 2.4s ease-out infinite}
+.yp-maptag{position:absolute;transform:translate(22px,-50%);padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--yp-ink);font:600 12px/1.1 var(--yp-f);white-space:nowrap;box-shadow:0 6px 18px -8px rgba(0,0,0,.45);pointer-events:none;z-index:2}
+.yp-maptag i{font-style:normal;color:#8A6A3D}
+@media (max-width:560px){.yp-maptag{font-size:10.5px;padding:4px 8px;transform:translate(16px,-50%)}}
 .yp-pin:hover,.yp-pin.is-on{transform:scale(1.25);z-index:3}
 .yp-pin.is-dim{opacity:.18;transform:scale(.8)}
 .yp-pin.is-dim::after{animation:none}
@@ -1887,6 +1892,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <div class="yp-map__season" role="group" aria-label="Сезон на карте"><button type="button" aria-pressed="true" data-season="summer">Лето</button><button type="button" aria-pressed="false" data-season="winter">Зима</button></div>
     </div>
     <div class="yp-map__stage" data-yp-reveal>
+        <span class="yp-viz" aria-hidden="true">Визуализация</span>
       <div class="yp-map__scroll">
         <div class="yp-map__canvas" data-yp-mc>
           <img class="yp-map__img" src="img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
@@ -1927,7 +1933,7 @@ window.YP_MAP = [
   {n:21, cat:"stay",    name:"Дома с террасой на 4–6 человек", pts:[[34.2,47.2],[45.4,47.2],[57.6,47.2],[69.2,47.2]], text:"Строительство в 2026 году."},
   {n:22, cat:"service", name:"Туалет", pts:[[56.2,22.6],[36.2,36.6]], text:""},
   {n:23, cat:"family",  name:"Парковая зона", pts:[[43,30]], text:"Дорожки, лавочки и деревянные скульптуры."},
-  {n:24, cat:"etno",    name:"Этно-стойбище «Три чума»", pts:[[13.4,20.4]], text:"Постоянное этно-стойбище из трёх больших чумов.", page:"/etno"}
+  {n:24, cat:"etno",    name:"Этно-комплекс", pts:[[13.4,20.4]], text:"Первые чумы уже стоят. В планах — стойбище, площадка с оленями и экотропа.", page:"/etno#plan", tag:"Этно-комплекс <i>· в планах</i>"}
 ];
 (function(){
   var sec = document.getElementById("map"); if(!sec || !window.YP_MAP) return;
@@ -1941,6 +1947,7 @@ window.YP_MAP = [
       b.style.left = p[0] + "%"; b.style.top = p[1] + "%"; b.style.setProperty("--c", COL[o.cat]);
       b.setAttribute("aria-label", o.name); b.setAttribute("data-i", i); b.setAttribute("data-cat", o.cat);
       mc.appendChild(b); pins.push(b);
+      if(o.tag){ var tg = document.createElement("span"); tg.className = "yp-maptag"; tg.innerHTML = o.tag; tg.style.left = p[0] + "%"; tg.style.top = p[1] + "%"; mc.appendChild(tg); }
     });
     var li = document.createElement("li"); li.setAttribute("data-cat", o.cat);
     li.innerHTML = '<button type="button" data-i="' + i + '" style="--c:' + COL[o.cat] + '"><b>' + o.n + "</b>" + o.name + "</button>";

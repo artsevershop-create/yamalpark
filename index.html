@@ -104,6 +104,8 @@ html.lenis,html.lenis body{height:auto}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* плашка «Визуализация» на рендерах и схемах (это не фото) */
+.yp-viz{position:absolute;left:14px;top:14px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.9);color:#14181d;font:600 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;pointer-events:none;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
 /* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
 /* страховка от горизонтальной прокрутки на телефоне: ничего не выступает за край экрана */
 @media (max-width:768px){#allrecords,.t-records{overflow-x:clip}}
@@ -2423,6 +2425,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     </div>
     <div class="yp-pk__grid">
       <div class="yp-pk__stage" data-yp-img>
+        <span class="yp-viz" aria-hidden="true">Визуализация</span>
         <div class="yp-pk__view" data-yp-pkv>
           <div class="yp-pk__zoom" data-yp-pkz>
             <img src="img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">

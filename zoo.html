@@ -104,6 +104,8 @@ html.lenis,html.lenis body{height:auto}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* плашка «Визуализация» на рендерах и схемах (это не фото) */
+.yp-viz{position:absolute;left:14px;top:14px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.9);color:#14181d;font:600 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;pointer-events:none;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
 /* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
 /* страховка от горизонтальной прокрутки на телефоне: ничего не выступает за край экрана */
 @media (max-width:768px){#allrecords,.t-records{overflow-x:clip}}
@@ -1253,7 +1255,9 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-ac__f img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .yp-ac__f::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.65));z-index:0}
 .yp-ac__f>*{position:relative;z-index:1}
-.yp-ac__num{font:300 clamp(64px,6vw,96px)/.9 var(--yp-fd);letter-spacing:-.05em}
+.yp-ac__num{position:absolute!important;left:0;right:0;top:0;bottom:30%;display:grid;place-items:center;font:400 clamp(64px,6.4vw,104px)/1 var(--yp-fd);pointer-events:none;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));transition:transform .5s var(--yp-ease)}
+.yp-ac:hover .yp-ac__num{transform:scale(1.08) rotate(-4deg)}
+.yp-ac__f>span:last-child{margin-top:auto}
 .yp-ac__f h3{margin:0;font-weight:400;font-size:clamp(20px,1.7vw,26px)}
 .yp-ac__f small{display:block;margin-top:4px;font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
 .yp-ac__b{background:var(--yp-paper);transform:rotateY(180deg);gap:10px;box-shadow:inset 0 0 0 1px var(--yp-line)}
@@ -1280,23 +1284,23 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     </div>
     <div class="yp-an__grid" data-yp-an>
       <button class="yp-ac" type="button" style="--bg:#6E5A4A" aria-label="Кролики — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-rabbits.jpg" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Кролики</h3><small>любимцы детей</small></span></span>
+        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">🐇</span><span><h3>Кролики</h3><small>любимцы детей</small></span></span>
         <span class="yp-ac__b"><h4>Кролики</h4><p>Самые спокойные жители мини-зоопарка — их можно рассмотреть совсем близко. Маленьким гостям обычно нравятся больше всех.</p><span class="tag">Можно рассмотреть близко</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#5B3A22" aria-label="Лисы и песец — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/fox.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Лисы и песец</h3><small>вольеры №4</small></span></span>
+        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">🦊</span><span><h3>Лисы и песец</h3><small>вольеры №4</small></span></span>
         <span class="yp-ac__b"><h4>Лисы и песец</h4><p>Песец — полярная лиса: зимой его мех становится белым, а густая шерсть на лапах помогает не мёрзнуть на снегу.</p><span class="tag">Два вольера у входа</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#6B5A3A" aria-label="Рыси — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-lynx.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Рыси</h3><small>2 рыси · новый вольер</small></span></span>
+        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">🐈</span><span><h3>Рыси</h3><small>2 рыси · новый вольер</small></span></span>
         <span class="yp-ac__b"><h4>Две рыси</h4><p>Единственная дикая кошка северной тайги. Кисточки на ушах и широкие лапы-«снегоступы» узнаются сразу.</p><span class="tag">Новый вольер</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#4E6B3A" aria-label="Козы — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-goats.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Козы</h3><small>общий вольер с косулей</small></span></span>
+        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">🐐</span><span><h3>Козы</h3><small>общий вольер с косулей</small></span></span>
         <span class="yp-ac__b"><h4>Две козы</h4><p>Самые общительные жители мини-зоопарка — дети обычно начинают знакомство именно с них.</p><span class="tag">Вольер с косулей</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#7A5A3A" aria-label="Косуля — подробнее"><span class="yp-ac__in">
-        <span class="yp-ac__f"><img src="img/new/zoo-roe.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
+        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">🦌</span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
         <span class="yp-ac__b"><h4>Косуля</h4><p>Небольшой изящный олень с белым «зеркальцем» сзади. Очень пугливы — подходите тихо.</p><span class="tag">Вольер с козами</span></span>
       </span></button>
       <button class="yp-ac" type="button" style="--bg:#4A5058" aria-label="Еноты — подробнее"><span class="yp-ac__in">

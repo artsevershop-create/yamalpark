@@ -1,3 +1,122 @@
+<!-- 11 · Прогноз северного сияния на 3 ночи (живые данные: Kp-прогноз NOAA SWPC + облачность и темнота Open-Meteo).
+     Используется на главной (после «Сегодня») и на странице «Глэмпинг». Яркость сияния на фоне = прогноз на эту ночь. -->
+<style>
+.yp-af{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
+.yp-af__bg{position:absolute;inset:-4%;width:108%;height:108%;z-index:-1;mix-blend-mode:screen;opacity:.85;pointer-events:none}
+.yp-af__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-af__head .yp-lead{margin:0}
+.yp-af__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(36px,4vw,56px)}
+.yp-night{position:relative;border-radius:24px;padding:22px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;gap:6px;min-width:0}
+.yp-night.is-best{border-color:rgba(92,255,192,.55);box-shadow:0 0 0 1px rgba(92,255,192,.25),0 30px 60px -30px rgba(92,255,192,.35)}
+.yp-night__top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.yp-night__day{font:400 18px var(--yp-fd);letter-spacing:-.01em}
+.yp-night__date{font:500 12px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-night__lvl{display:flex;align-items:center;gap:10px;margin-top:10px;font:300 clamp(30px,2.8vw,44px)/1 var(--yp-fd);letter-spacing:-.03em}
+.yp-night__lvl i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c);flex:0 0 auto}
+.yp-night__best{margin:6px 0 0;font-size:14px;color:#C3D0D8;min-height:2.9em}
+.yp-chart{position:relative;height:130px;margin-top:12px;display:grid;grid-template-columns:repeat(13,1fr);gap:3px;align-items:end;padding-right:56px}
+.yp-chart__ref{position:absolute;left:0;right:56px;border-top:1px dashed rgba(234,241,244,.18);pointer-events:none}
+.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
+.yp-bar{position:relative;height:100%;display:flex;align-items:flex-end;cursor:default}
+.yp-bar b,.yp-bar s{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 1px 1px;transform-origin:50% 100%}
+.yp-bar s{background:rgba(234,241,244,.12);text-decoration:none}
+.yp-bar b{background:linear-gradient(0deg,#3FD07F,#5CFFC0 50%,#9AA8FF)}
+.yp-bar.is-light b,.yp-bar.is-light s{background:repeating-linear-gradient(45deg,rgba(234,241,244,.10) 0 3px,transparent 3px 6px);height:100%!important}
+.yp-bar:hover b{filter:brightness(1.3)}
+.yp-bar.is-peak::after{content:"";position:absolute;left:50%;top:-12px;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--yp-aurora)}
+.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-chart__x span{text-align:center;white-space:nowrap}
+.yp-night__tip{margin:10px 0 0;font:500 12px var(--yp-mono);color:#D7E2E8;min-height:1.4em}
+.yp-night .yp-btn{margin-top:12px;align-self:flex-start;padding:12px 18px;font-size:14px}
+.yp-af__foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--yp-snowmuted)}
+.yp-af__legend{display:flex;gap:18px;flex-wrap:wrap}
+.yp-af__legend span{display:inline-flex;align-items:center;gap:8px}
+.yp-af__legend i{width:14px;height:10px;border-radius:2px}
+.yp-af__msg{grid-column:1/-1;border-radius:24px;padding:26px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);color:#C3D0D8}
+@media (max-width:1000px){.yp-af__head{grid-template-columns:minmax(0,1fr)}.yp-af__grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-dark yp-af" id="forecast" data-yp-theme="dark">
+  <canvas class="yp-af__bg" aria-hidden="true"></canvas>
+  <div class="yp-wrap">
+    <div class="yp-af__head">
+      <div><span class="yp-eyebrow"><i style="--c:var(--yp-aurora)"></i>Прогноз северного сияния</span><h2 class="yp-h2" data-yp-split>Будет ли <b>сияние</b> в ближайшие ночи</h2></div>
+      <p class="yp-lead">Считаем по прогнозу геомагнитной активности (Kp-индекс) и облачности над Салехардом. Чем выше столбик, тем больше шанс. Обновляется при каждом открытии страницы.</p>
+    </div>
+    <div class="yp-af__grid" data-yp-af-grid aria-live="polite">
+      <div class="yp-af__msg" data-yp-af-msg>Загружаем прогноз…</div>
+    </div>
+    <div class="yp-af__foot">
+      <div class="yp-af__legend">
+        <span><i style="background:linear-gradient(90deg,#3FD07F,#9AA8FF)"></i>шанс с учётом облаков</span>
+        <span><i style="background:rgba(234,241,244,.2)"></i>шанс при ясном небе</span>
+        <span><i style="background:repeating-linear-gradient(45deg,rgba(234,241,244,.25) 0 3px,transparent 3px 6px)"></i>светло</span>
+      </div>
+      <span><b data-yp-afst></b> · <a href="/severnoe-siyanie" style="color:inherit">Как и когда смотреть сияние →</a> · Данные: NOAA SWPC (Kp на 3 дня), Open-Meteo (облачность). Прогноз вероятностный.</span>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("forecast"); if(!sec) return;
+  var YP = window.YP || {}, G = window.gsap;
+  var grid = sec.querySelector("[data-yp-af-grid]");
+  var A = {rev:1, inten:.35, mx:.5, my:.5, tmx:.5, tmy:.5};
+  YP.makeAurora && YP.makeAurora(sec.querySelector(".yp-af__bg"), A, sec);
+  var COLORS = ["#7C8A96", "#9AA8FF", "#5CFFC0", "#7CF08A"];
+  var REFS = [[.55,"высокий"],[.3,"средний"],[.12,"низкий"]];
+  function fmtKp(v){ return v == null ? "—" : v.toFixed(1).replace(".", ","); }
+  function render(data){
+    if(!data || !data.nights.length){ grid.innerHTML = '<div class="yp-af__msg">Прогноз временно недоступен. Сияние у нас видно с сентября по апрель в ясные ночи, лучше всего с 22:00 до 02:00.</div>'; return; }
+    var bestN = data.nights.reduce(function(a,n,i){ return n.best.score > data.nights[a].best.score ? i : a; }, 0);
+    A.inten = [.25, .45, .75, 1][data.nights[0].level];
+    grid.innerHTML = "";
+    data.nights.forEach(function(n, ni){
+      var card = document.createElement("article");
+      card.className = "yp-night" + (ni === bestN && n.best.score >= .12 ? " is-best" : "");
+      var bestTxt = n.polarDay ? "Белые ночи: небо слишком светлое, сияния не видно."
+        : n.noKp ? "Прогноз Kp на эту ночь ещё не опубликован."
+        : n.best.score > 0 ? "Лучшее время " + n.best.time + " · Kp " + fmtKp(n.best.kp) + " · облачность " + n.best.cloud + "%"
+        : "Сплошная облачность или слабая активность.";
+      /* 13 часовых слотов 18:00 … 06:00 */
+      var slots = []; for(var h=18; h<=30; h++) slots.push(String(h%24).padStart(2,"0") + ":00");
+      var byTime = {}; n.hours.forEach(function(x){ byTime[x.time] = x; });
+      var bars = slots.map(function(t){
+        var x = byTime[t];
+        if(!x) return '<div class="yp-bar" aria-hidden="true"></div>';
+        var pot = x.kp != null && x.dark ? YP.kpPotential(x.kp) : 0;
+        var tip = t + " · " + (x.dark ? "Kp " + fmtKp(x.kp) + ", облачность " + x.cloud + "%, шанс " + YP.chanceLevel(x.score).text.toLowerCase() : "светло");
+        return '<div class="yp-bar' + (x.dark ? "" : " is-light") + (x === n.best && n.best.score > 0 ? " is-peak" : "") + '" data-tip="' + tip + '" title="' + tip + '">' +
+               '<s style="height:' + Math.round(pot*100) + '%"></s><b style="height:' + Math.round(x.score*100) + '%"></b></div>';
+      }).join("");
+      var refs = REFS.map(function(r){ return '<div class="yp-chart__ref" style="bottom:' + (r[0]*100) + '%"><span>' + r[1] + "</span></div>"; }).join("");
+      var xl = slots.map(function(t, i){ return "<span>" + (i % 3 === 0 ? t.slice(0,2) : "") + "</span>"; }).join("");
+      card.innerHTML =
+        '<div class="yp-night__top"><span class="yp-night__day">' + n.label + '</span><span class="yp-night__date">' + n.dateText + "</span></div>" +
+        '<div class="yp-night__lvl" style="--c:' + COLORS[n.level] + '"><i></i>' + (n.polarDay ? "Белые ночи" : n.text) + "</div>" +
+        '<p class="yp-night__best">' + bestTxt + "</p>" +
+        '<div class="yp-chart" role="img" aria-label="Шанс сияния по часам, ' + n.label + '">' + refs + bars + "</div>" +
+        '<div class="yp-chart__x" aria-hidden="true">' + xl + "</div>" +
+        '<p class="yp-night__tip" data-tip-out>Наведите на столбик, чтобы увидеть час</p>' +
+        (n.level >= 1 ? '<button class="yp-btn yp-btn--aurora" type="button">Забронировать на эту ночь</button>' : "");
+      var out = card.querySelector("[data-tip-out]");
+      card.querySelectorAll(".yp-bar[data-tip]").forEach(function(b){
+        b.addEventListener("pointerenter", function(){ out.textContent = b.getAttribute("data-tip"); });
+      });
+      var btn = card.querySelector(".yp-btn");
+      if(btn) btn.addEventListener("click", function(){ YP.openBooking && YP.openBooking({type:"glamping", date:n.date}); });
+      grid.appendChild(card);
+    });
+    if(G && window.ScrollTrigger && !YP.reduced){
+      G.from(grid.children, {y:50, opacity:0, duration:1, ease:"power3.out", stagger:.12, scrollTrigger:{trigger:grid, start:"top 85%"}});
+      G.from(grid.querySelectorAll(".yp-bar b, .yp-bar s"), {scaleY:0, duration:.9, ease:"power3.out", stagger:{each:.012, from:"start"}, scrollTrigger:{trigger:grid, start:"top 80%"}});
+      ScrollTrigger.refresh();
+    }
+  }
+  if(YP.forecast) YP.forecast.then(render); else render(null);
+})();
+window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.querySelector("[data-yp-afst]"); if(el && YP.dataStamp) el.textContent = YP.dataStamp(); });
+</script>
+
 <!-- SEO-текст и частые вопросы страницы (видимый текст для поисковиков; вопросы попадают в разметку FAQPage при сборке) -->
 <style>
 .yp-seo{padding-block:clamp(56px,8vw,120px)}
@@ -18,9 +137,9 @@
 <section class="yp yp-seo" id="about">
   <div class="yp-wrap">
     <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Чум под Салехардом</span>
-    <h2 class="yp-h2" data-yp-split>Аренда чума <b>и этно-стойбище</b></h2>
+    <h2 class="yp-h2" data-yp-split>Аренда чума <b>и Этно-комплекс</b></h2>
     <div class="yp-seo__grid">
-      <div class="yp-seo__txt" data-yp-reveal><p>Чум — традиционное жилище оленеводов Ямала. В Ямал Парке можно <b>арендовать настоящий обогретый чум</b> для компании до 15–20 гостей: со своей террасой, костровищем, казаном и мангальной зоной. Аренда — <b>12 000 ₽</b> с понедельника по четверг и <b>15 000 ₽</b> с пятницы по воскресенье.</p><p>Рядом со смотровой площадкой чума в ясные ночи с сентября по апрель видно <b>северное сияние</b>. Летом здесь светло почти круглые сутки — белые ночи.</p><p>На территории есть и <b>постоянное этно-стойбище «Три чума»</b>, а в парковой зоне стоят деревянные скульптуры. «Ямал» по-ненецки значит «край земли». Ямал Парк — в 12 км от Салехарда, на дороге в Горнокнязевск.</p></div>
+      <div class="yp-seo__txt" data-yp-reveal><p>Чум — традиционное жилище оленеводов Ямала. В Ямал Парке можно <b>арендовать настоящий обогретый чум</b> для компании до 15–20 гостей: со своей террасой, костровищем, казаном и мангальной зоной. Аренда — <b>12 000 ₽</b> с понедельника по четверг и <b>15 000 ₽</b> с пятницы по воскресенье.</p><p>Рядом со смотровой площадкой чума в ясные ночи с сентября по апрель видно <b>северное сияние</b>. Летом здесь светло почти круглые сутки — белые ночи.</p><p>На территории есть и <b>постоянный Этно-комплекс</b>, а в парковой зоне стоят деревянные скульптуры. «Ямал» по-ненецки значит «край земли». Ямал Парк — в 12 км от Салехарда, на дороге в Горнокнязевск.</p></div>
       <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Сколько стоит аренда чума?<i></i></summary><div>12 000 ₽ с понедельника по четверг, 15 000 ₽ с пятницы по воскресенье. В стоимость входят обогретый чум, терраса, костровище, казан и мангальная зона.</div></details><details><summary>На сколько человек рассчитан чум?<i></i></summary><div>До 15–20 гостей.</div></details><details><summary>Можно ли арендовать чум зимой?<i></i></summary><div>Да, чум обогревается и работает круглый год.</div></details><details><summary>Можно ли готовить еду в чуме?<i></i></summary><div>Да: рядом мангальная зона, казан и костровище.</div></details><details><summary>Где находится чум?<i></i></summary><div>В Ямал Парке, на 12-м км дороги Салехард — Горнокнязевск, примерно в 16 минутах от центра Салехарда.</div></details></div>
     </div>
   </div>

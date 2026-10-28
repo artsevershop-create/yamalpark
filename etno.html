@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Аренда чума в Салехарде и этно-стойбище «Три чума» | Ямал Парк</title>
+<title>Аренда чума в Салехарде и Этно-комплекс | Ямал Парк</title>
 <meta name="description" content="Обогретый оленеводческий чум на 15–20 гостей с террасой, костровищем и казаном — от 12 000 ₽. Постоянное этно-стойбище из трёх чумов и деревянные скульптуры. 16 минут от Салехарда.">
 <link rel="canonical" href="https://yamalpark.ru/etno">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Ямал Парк">
-<meta property="og:title" content="Аренда чума в Салехарде и этно-стойбище «Три чума» | Ямал Парк"><meta property="og:description" content="Обогретый оленеводческий чум на 15–20 гостей с террасой, костровищем и казаном — от 12 000 ₽. Постоянное этно-стойбище из трёх чумов и деревянные скульптуры. 16 минут от Салехарда.">
+<meta property="og:title" content="Аренда чума в Салехарде и Этно-комплекс | Ямал Парк"><meta property="og:description" content="Обогретый оленеводческий чум на 15–20 гостей с террасой, костровищем и казаном — от 12 000 ₽. Постоянное этно-стойбище из трёх чумов и деревянные скульптуры. 16 минут от Салехарда.">
 <meta property="og:url" content="https://yamalpark.ru/etno"><meta property="og:image" content="https://yamalpark.ru/img/p/chum-aurora.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2040%22%3E%3Cpath%20d%3D%22M2%2036%2016%206l14%2030z%22%20fill%3D%22%236274B6%22%2F%3E%3Cpath%20d%3D%22M18%206h28L32%2034z%22%20fill%3D%22%233FAB3C%22%2F%3E%3Cpath%20d%3D%22M34%2036%2048%206l14%2030z%22%20fill%3D%22%23E31E24%22%2F%3E%3C%2Fsvg%3E">
@@ -105,6 +105,8 @@ html.lenis,html.lenis body{height:auto}
 @media (max-width:768px){.yp-ph__title{font-size:clamp(34px,11vw,72px)}.yp-ph__title>span{white-space:normal}}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
+/* плашка «Визуализация» на рендерах и схемах (это не фото) */
+.yp-viz{position:absolute;left:14px;top:14px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.9);color:#14181d;font:600 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;pointer-events:none;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
 /* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
 /* страховка от горизонтальной прокрутки на телефоне: ничего не выступает за край экрана */
 @media (max-width:768px){#allrecords,.t-records{overflow-x:clip}}
@@ -1228,7 +1230,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       <h1 class="yp-ph__title"><span>Край</span><span class="hl">земли</span></h1>
       <div class="yp-ph__row">
         <div>
-          <p class="yp-ph__lead" data-yp-in>«Ямал» по-ненецки значит «край земли». Обогретый оленеводческий чум, костровище и казан, смотровая площадка и новый этно-комплекс «Три чума».</p>
+          <p class="yp-ph__lead" data-yp-in>«Ямал» по-ненецки значит «край земли». Обогретый оленеводческий чум, костровище и казан, смотровая площадка и новый Этно-комплекс.</p>
           <div class="yp-ph__chips" data-yp-in><span>Чум до 20 гостей</span><span>от 12 000 ₽</span><span>Смотровая площадка</span></div>
         </div>
         <div class="yp-ph__cta" data-yp-in><button class="yp-btn yp-btn--red" type="button" data-yp-book="chum">Забронировать чум</button><a class="yp-btn yp-btn--ghost" href="#chum">Что внутри</a></div>
@@ -1326,12 +1328,12 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     </div>
     <div class="yp-chi__lb" data-yp-chilb role="dialog" aria-modal="true" aria-label="Фото чума"><img alt=""><button type="button" class="x" aria-label="Закрыть">×</button><button type="button" class="pv" aria-label="Предыдущее">‹</button><button type="button" class="nx" aria-label="Следующее">›</button><div class="cn"></div></div>
     <div class="yp-three" data-yp-reveal>
-      <div class="yp-three__bg"><img src="img/new/chums-camp.webp" alt="Три чума этно-стойбища летом" loading="lazy"><img src="img/new/chums-top.webp" alt="Этно-стойбище из трёх чумов с высоты" loading="lazy"></div>
+      <div class="yp-three__bg"><img src="img/new/chums-camp.webp" alt="Этно-комплекс летом: три чума" loading="lazy"><img src="img/new/chums-top.webp" alt="Этно-комплекс из трёх чумов с высоты" loading="lazy"></div>
       <span class="yp-three__badge">Постоянное стойбище</span>
       <div class="yp-three__in">
-        <span class="yp-eyebrow"><i style="--c:#F2D29B"></i>Этно-стойбище</span>
-        <h3>Этно-комплекс «Три чума»</h3>
-        <p>Три больших оленеводческих чума с нартами — постоянное этно-стойбище на территории Ямал Парка. Летом вокруг зелёная тайга, зимой — снег и северное сияние. Форматы посещения уточняйте у администратора.</p>
+        <span class="yp-eyebrow"><i style="--c:#F2D29B"></i>Три чума и нарты</span>
+        <h3>Этно-комплекс</h3>
+        <p>Три больших оленеводческих чума с нартами — постоянный Этно-комплекс на территории Ямал Парка. Летом вокруг зелёная тайга, зимой — снег и северное сияние. Форматы посещения уточняйте у администратора.</p>
         <a class="yp-btn yp-btn--light" href="contacts.html#map" style="margin-top:22px;background:#fff;color:var(--yp-ink)">Где на карте</a>
       </div>
     </div>
@@ -1362,6 +1364,62 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   lb.querySelector(".x").addEventListener("click", close); lb.querySelector(".pv").addEventListener("click", function(){ show(cur - 1); }); lb.querySelector(".nx").addEventListener("click", function(){ show(cur + 1); });
   lb.addEventListener("click", function(e){ if(e.target === lb) close(); });
   document.addEventListener("keydown", function(e){ if(!lb.classList.contains("is-open")) return; if(e.key === "Escape") close(); if(e.key === "ArrowLeft") show(cur - 1); if(e.key === "ArrowRight") show(cur + 1); });
+})();
+</script>
+
+</div>
+<div class="r t-rec">
+<!-- Этно · 05 · План развития Этно-комплекса: визуализации проекта (от владельца) и видео того, что уже стоит. На схеме комплекса — точка №24 слева вверху -->
+<style>
+.yp-ep{padding-block:clamp(56px,9vw,130px);background:linear-gradient(180deg,var(--yp-bg),#efe7da)}
+.yp-ep__head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-ep__head .yp-lead{margin:0}
+.yp-ep__grid{margin-top:clamp(28px,3.4vw,48px);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.72fr);grid-template-rows:auto auto;gap:14px}
+.yp-ep__ph{position:relative;margin:0;border-radius:26px;overflow:hidden;background:#1d1a16;box-shadow:0 30px 60px -36px rgba(40,25,10,.55)}
+.yp-ep__ph img,.yp-ep__ph video{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--yp-ease)}
+.yp-ep__ph:hover img{transform:scale(1.035)}
+.yp-ep__ph--big{grid-row:span 2;aspect-ratio:1/1}
+.yp-ep__ph--sm{aspect-ratio:4/3}
+.yp-ep__ph--video{grid-row:span 2;aspect-ratio:auto}
+.yp-ep__ph::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(180deg,transparent,rgba(12,9,6,.72));pointer-events:none}
+.yp-ep__ph figcaption{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;color:#fff;font-size:15px;line-height:1.35}
+.yp-ep__ph figcaption b{display:block;font:300 clamp(18px,1.6vw,24px)/1.15 var(--yp-fd);letter-spacing:-.01em;margin-bottom:4px}
+.yp-ep__tag{position:absolute;left:14px;top:14px;z-index:1;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.88);color:var(--yp-ink);font:600 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase}
+.yp-ep__tag--now{background:#3FAB3C;color:#fff}
+.yp-ep__list{margin:clamp(24px,3vw,36px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.yp-ep__list li{padding:16px 18px;border-radius:18px;background:var(--yp-paper);box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-ep__list b{display:block;font-weight:600;margin-bottom:4px}
+.yp-ep__list span{color:var(--yp-muted);font-size:14px}
+.yp-ep__foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;color:var(--yp-muted);font-size:14px}
+@media (max-width:1000px){.yp-ep__head{grid-template-columns:minmax(0,1fr)}.yp-ep__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.yp-ep__ph--big{grid-column:1/-1;grid-row:auto;aspect-ratio:4/3}.yp-ep__ph--video{grid-row:span 2}.yp-ep__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.yp-ep__grid{grid-template-columns:minmax(0,1fr)}.yp-ep__ph--video{grid-row:auto;aspect-ratio:9/14}.yp-ep__list{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-ep" id="plan" aria-label="План развития Этно-комплекса">
+  <div class="yp-wrap">
+    <div class="yp-ep__head">
+      <div><span class="yp-eyebrow" style="--c:#8A6A3D"><i></i>План развития</span><h2 class="yp-h2" data-yp-split>Каким станет <b>Этно-комплекс</b></h2></div>
+      <p class="yp-lead" data-yp-reveal>Первые чумы уже стоят в тундре на краю парка — слева вверху на схеме комплекса. Дальше здесь появится стойбище с костровищами, площадка для встречи с оленями и светящаяся экотропа. Ниже — визуализации проекта.</p>
+    </div>
+    <div class="yp-ep__grid" data-yp-reveal>
+      <figure class="yp-ep__ph yp-ep__ph--big"><img src="img/new/etno-plan-summer.jpg" alt="Визуализация Этно-комплекса летом: чумы, площадка с оленями и нартами, деревянная арка" loading="lazy"><span class="yp-ep__tag">Визуализация</span><figcaption><b>Летом — стойбище и олени</b>Чумы с дымом над костровищами, площадка с нартами и деревянная арка-вход.</figcaption></figure>
+      <figure class="yp-ep__ph yp-ep__ph--sm"><img src="img/new/etno-plan-winter.jpg" alt="Визуализация Этно-комплекса зимним вечером: чумы в огнях и световая галерея" loading="lazy"><span class="yp-ep__tag">Визуализация</span><figcaption><b>Зимой — огни и галерея</b>Чумы в гирляндах и световой коридор к большому чуму-павильону.</figcaption></figure>
+      <figure class="yp-ep__ph yp-ep__ph--video"><video src="img/video/etno-chums-now.mp4" poster="img/video/etno-chums-now.jpg" muted loop playsinline preload="metadata" aria-label="Видео: чумы Этно-комплекса на закате"></video><span class="yp-ep__tag yp-ep__tag--now">Уже сейчас</span><figcaption><b>Чумы на закате</b>Первые чумы уже стоят.</figcaption></figure>
+      <figure class="yp-ep__ph yp-ep__ph--sm"><img src="img/new/etno-plan-trail.jpg" alt="Визуализация входа на экотропу в форме чума с подсветкой" loading="lazy"><span class="yp-ep__tag">Визуализация</span><figcaption><b>Экотропа</b>Вход в форме чума и тропа с рассказами о жизни оленеводов.</figcaption></figure>
+    </div>
+    <ul class="yp-ep__list" data-yp-reveal>
+      <li><b>Стойбище</b><span>Чумы с печами и костровищами, нарты, быт оленеводов</span></li>
+      <li><b>Площадка с оленями</b><span>Деревянный настил, где можно увидеть оленей вблизи</span></li>
+      <li><b>Экотропа</b><span>Светящаяся галерея и тропа с табличками</span></li>
+      <li><b>Чум-павильон</b><span>Большой чум для праздников и экскурсий</span></li>
+    </ul>
+    <div class="yp-ep__foot"><span>Проект в работе: сроки и состав могут меняться. Следите за новостями в наших соцсетях.</span><a class="yp-btn yp-btn--ghost" href="contacts.html#map">Где на схеме</a></div>
+  </div>
+</section>
+<script>
+(function(){
+  var v = document.querySelector("#plan video"); if(!v) return;
+  /* видео играет, только когда на экране */
+  if("IntersectionObserver" in window) new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } else v.pause(); }); }, {threshold:.3}).observe(v);
 })();
 </script>
 
@@ -2161,9 +2219,9 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 <section class="yp yp-seo" id="about">
   <div class="yp-wrap">
     <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Чум под Салехардом</span>
-    <h2 class="yp-h2" data-yp-split>Аренда чума <b>и этно-стойбище</b></h2>
+    <h2 class="yp-h2" data-yp-split>Аренда чума <b>и Этно-комплекс</b></h2>
     <div class="yp-seo__grid">
-      <div class="yp-seo__txt" data-yp-reveal><p>Чум — традиционное жилище оленеводов Ямала. В Ямал Парке можно <b>арендовать настоящий обогретый чум</b> для компании до 15–20 гостей: со своей террасой, костровищем, казаном и мангальной зоной. Аренда — <b>12 000 ₽</b> с понедельника по четверг и <b>15 000 ₽</b> с пятницы по воскресенье.</p><p>Рядом со смотровой площадкой чума в ясные ночи с сентября по апрель видно <b>северное сияние</b>. Летом здесь светло почти круглые сутки — белые ночи.</p><p>На территории есть и <b>постоянное этно-стойбище «Три чума»</b>, а в парковой зоне стоят деревянные скульптуры. «Ямал» по-ненецки значит «край земли». Ямал Парк — в 12 км от Салехарда, на дороге в Горнокнязевск.</p></div>
+      <div class="yp-seo__txt" data-yp-reveal><p>Чум — традиционное жилище оленеводов Ямала. В Ямал Парке можно <b>арендовать настоящий обогретый чум</b> для компании до 15–20 гостей: со своей террасой, костровищем, казаном и мангальной зоной. Аренда — <b>12 000 ₽</b> с понедельника по четверг и <b>15 000 ₽</b> с пятницы по воскресенье.</p><p>Рядом со смотровой площадкой чума в ясные ночи с сентября по апрель видно <b>северное сияние</b>. Летом здесь светло почти круглые сутки — белые ночи.</p><p>На территории есть и <b>постоянный Этно-комплекс</b>, а в парковой зоне стоят деревянные скульптуры. «Ямал» по-ненецки значит «край земли». Ямал Парк — в 12 км от Салехарда, на дороге в Горнокнязевск.</p></div>
       <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Сколько стоит аренда чума?<i></i></summary><div>12 000 ₽ с понедельника по четверг, 15 000 ₽ с пятницы по воскресенье. В стоимость входят обогретый чум, терраса, костровище, казан и мангальная зона.</div></details><details><summary>На сколько человек рассчитан чум?<i></i></summary><div>До 15–20 гостей.</div></details><details><summary>Можно ли арендовать чум зимой?<i></i></summary><div>Да, чум обогревается и работает круглый год.</div></details><details><summary>Можно ли готовить еду в чуме?<i></i></summary><div>Да: рядом мангальная зона, казан и костровище.</div></details><details><summary>Где находится чум?<i></i></summary><div>В Ямал Парке, на 12-м км дороги Салехард — Горнокнязевск, примерно в 16 минутах от центра Салехарда.</div></details></div>
     </div>
   </div>

@@ -9,7 +9,7 @@
       <h1 class="yp-ph__title"><span>Край</span><span class="hl">земли</span></h1>
       <div class="yp-ph__row">
         <div>
-          <p class="yp-ph__lead" data-yp-in>«Ямал» по-ненецки значит «край земли». Обогретый оленеводческий чум, костровище и казан, смотровая площадка и новый этно-комплекс «Три чума».</p>
+          <p class="yp-ph__lead" data-yp-in>«Ямал» по-ненецки значит «край земли». Обогретый оленеводческий чум, костровище и казан, смотровая площадка и новый Этно-комплекс.</p>
           <div class="yp-ph__chips" data-yp-in><span>Чум до 20 гостей</span><span>от 12 000 ₽</span><span>Смотровая площадка</span></div>
         </div>
         <div class="yp-ph__cta" data-yp-in><button class="yp-btn yp-btn--red" type="button" data-yp-book="chum">Забронировать чум</button><a class="yp-btn yp-btn--ghost" href="#chum">Что внутри</a></div>
@@ -105,12 +105,12 @@
     </div>
     <div class="yp-chi__lb" data-yp-chilb role="dialog" aria-modal="true" aria-label="Фото чума"><img alt=""><button type="button" class="x" aria-label="Закрыть">×</button><button type="button" class="pv" aria-label="Предыдущее">‹</button><button type="button" class="nx" aria-label="Следующее">›</button><div class="cn"></div></div>
     <div class="yp-three" data-yp-reveal>
-      <div class="yp-three__bg"><img src="https://artsevershop-create.github.io/yamalpark/img/new/chums-camp.webp" alt="Три чума этно-стойбища летом" loading="lazy"><img src="https://artsevershop-create.github.io/yamalpark/img/new/chums-top.webp" alt="Этно-стойбище из трёх чумов с высоты" loading="lazy"></div>
+      <div class="yp-three__bg"><img src="https://artsevershop-create.github.io/yamalpark/img/new/chums-camp.webp" alt="Этно-комплекс летом: три чума" loading="lazy"><img src="https://artsevershop-create.github.io/yamalpark/img/new/chums-top.webp" alt="Этно-комплекс из трёх чумов с высоты" loading="lazy"></div>
       <span class="yp-three__badge">Постоянное стойбище</span>
       <div class="yp-three__in">
-        <span class="yp-eyebrow"><i style="--c:#F2D29B"></i>Этно-стойбище</span>
-        <h3>Этно-комплекс «Три чума»</h3>
-        <p>Три больших оленеводческих чума с нартами — постоянное этно-стойбище на территории Ямал Парка. Летом вокруг зелёная тайга, зимой — снег и северное сияние. Форматы посещения уточняйте у администратора.</p>
+        <span class="yp-eyebrow"><i style="--c:#F2D29B"></i>Три чума и нарты</span>
+        <h3>Этно-комплекс</h3>
+        <p>Три больших оленеводческих чума с нартами — постоянный Этно-комплекс на территории Ямал Парка. Летом вокруг зелёная тайга, зимой — снег и северное сияние. Форматы посещения уточняйте у администратора.</p>
         <a class="yp-btn yp-btn--light" href="/contacts#map" style="margin-top:22px;background:#fff;color:var(--yp-ink)">Где на карте</a>
       </div>
     </div>
@@ -141,6 +141,60 @@
   lb.querySelector(".x").addEventListener("click", close); lb.querySelector(".pv").addEventListener("click", function(){ show(cur - 1); }); lb.querySelector(".nx").addEventListener("click", function(){ show(cur + 1); });
   lb.addEventListener("click", function(e){ if(e.target === lb) close(); });
   document.addEventListener("keydown", function(e){ if(!lb.classList.contains("is-open")) return; if(e.key === "Escape") close(); if(e.key === "ArrowLeft") show(cur - 1); if(e.key === "ArrowRight") show(cur + 1); });
+})();
+</script>
+
+<!-- Этно · 05 · План развития Этно-комплекса: визуализации проекта (от владельца) и видео того, что уже стоит. На схеме комплекса — точка №24 слева вверху -->
+<style>
+.yp-ep{padding-block:clamp(56px,9vw,130px);background:linear-gradient(180deg,var(--yp-bg),#efe7da)}
+.yp-ep__head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:end}
+.yp-ep__head .yp-lead{margin:0}
+.yp-ep__grid{margin-top:clamp(28px,3.4vw,48px);display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,.72fr);grid-template-rows:auto auto;gap:14px}
+.yp-ep__ph{position:relative;margin:0;border-radius:26px;overflow:hidden;background:#1d1a16;box-shadow:0 30px 60px -36px rgba(40,25,10,.55)}
+.yp-ep__ph img,.yp-ep__ph video{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--yp-ease)}
+.yp-ep__ph:hover img{transform:scale(1.035)}
+.yp-ep__ph--big{grid-row:span 2;aspect-ratio:1/1}
+.yp-ep__ph--sm{aspect-ratio:4/3}
+.yp-ep__ph--video{grid-row:span 2;aspect-ratio:auto}
+.yp-ep__ph::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(180deg,transparent,rgba(12,9,6,.72));pointer-events:none}
+.yp-ep__ph figcaption{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;color:#fff;font-size:15px;line-height:1.35}
+.yp-ep__ph figcaption b{display:block;font:300 clamp(18px,1.6vw,24px)/1.15 var(--yp-fd);letter-spacing:-.01em;margin-bottom:4px}
+.yp-ep__tag{position:absolute;left:14px;top:14px;z-index:1;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.88);color:var(--yp-ink);font:600 11px/1 var(--yp-mono);letter-spacing:.08em;text-transform:uppercase}
+.yp-ep__tag--now{background:#3FAB3C;color:#fff}
+.yp-ep__list{margin:clamp(24px,3vw,36px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.yp-ep__list li{padding:16px 18px;border-radius:18px;background:var(--yp-paper);box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-ep__list b{display:block;font-weight:600;margin-bottom:4px}
+.yp-ep__list span{color:var(--yp-muted);font-size:14px}
+.yp-ep__foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;color:var(--yp-muted);font-size:14px}
+@media (max-width:1000px){.yp-ep__head{grid-template-columns:minmax(0,1fr)}.yp-ep__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.yp-ep__ph--big{grid-column:1/-1;grid-row:auto;aspect-ratio:4/3}.yp-ep__ph--video{grid-row:span 2}.yp-ep__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.yp-ep__grid{grid-template-columns:minmax(0,1fr)}.yp-ep__ph--video{grid-row:auto;aspect-ratio:9/14}.yp-ep__list{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-ep" id="plan" aria-label="План развития Этно-комплекса">
+  <div class="yp-wrap">
+    <div class="yp-ep__head">
+      <div><span class="yp-eyebrow" style="--c:#8A6A3D"><i></i>План развития</span><h2 class="yp-h2" data-yp-split>Каким станет <b>Этно-комплекс</b></h2></div>
+      <p class="yp-lead" data-yp-reveal>Первые чумы уже стоят в тундре на краю парка — слева вверху на схеме комплекса. Дальше здесь появится стойбище с костровищами, площадка для встречи с оленями и светящаяся экотропа. Ниже — визуализации проекта.</p>
+    </div>
+    <div class="yp-ep__grid" data-yp-reveal>
+      <figure class="yp-ep__ph yp-ep__ph--big"><img src="https://artsevershop-create.github.io/yamalpark/img/new/etno-plan-summer.jpg" alt="Визуализация Этно-комплекса летом: чумы, площадка с оленями и нартами, деревянная арка" loading="lazy"><span class="yp-ep__tag">Визуализация</span><figcaption><b>Летом — стойбище и олени</b>Чумы с дымом над костровищами, площадка с нартами и деревянная арка-вход.</figcaption></figure>
+      <figure class="yp-ep__ph yp-ep__ph--sm"><img src="https://artsevershop-create.github.io/yamalpark/img/new/etno-plan-winter.jpg" alt="Визуализация Этно-комплекса зимним вечером: чумы в огнях и световая галерея" loading="lazy"><span class="yp-ep__tag">Визуализация</span><figcaption><b>Зимой — огни и галерея</b>Чумы в гирляндах и световой коридор к большому чуму-павильону.</figcaption></figure>
+      <figure class="yp-ep__ph yp-ep__ph--video"><video src="https://artsevershop-create.github.io/yamalpark/img/video/etno-chums-now.mp4" poster="https://artsevershop-create.github.io/yamalpark/img/video/etno-chums-now.jpg" muted loop playsinline preload="metadata" aria-label="Видео: чумы Этно-комплекса на закате"></video><span class="yp-ep__tag yp-ep__tag--now">Уже сейчас</span><figcaption><b>Чумы на закате</b>Первые чумы уже стоят.</figcaption></figure>
+      <figure class="yp-ep__ph yp-ep__ph--sm"><img src="https://artsevershop-create.github.io/yamalpark/img/new/etno-plan-trail.jpg" alt="Визуализация входа на экотропу в форме чума с подсветкой" loading="lazy"><span class="yp-ep__tag">Визуализация</span><figcaption><b>Экотропа</b>Вход в форме чума и тропа с рассказами о жизни оленеводов.</figcaption></figure>
+    </div>
+    <ul class="yp-ep__list" data-yp-reveal>
+      <li><b>Стойбище</b><span>Чумы с печами и костровищами, нарты, быт оленеводов</span></li>
+      <li><b>Площадка с оленями</b><span>Деревянный настил, где можно увидеть оленей вблизи</span></li>
+      <li><b>Экотропа</b><span>Светящаяся галерея и тропа с табличками</span></li>
+      <li><b>Чум-павильон</b><span>Большой чум для праздников и экскурсий</span></li>
+    </ul>
+    <div class="yp-ep__foot"><span>Проект в работе: сроки и состав могут меняться. Следите за новостями в наших соцсетях.</span><a class="yp-btn yp-btn--ghost" href="/contacts#map">Где на схеме</a></div>
+  </div>
+</section>
+<script>
+(function(){
+  var v = document.querySelector("#plan video"); if(!v) return;
+  /* видео играет, только когда на экране */
+  if("IntersectionObserver" in window) new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } else v.pause(); }); }, {threshold:.3}).observe(v);
 })();
 </script>
 
@@ -787,124 +841,5 @@
     }
   });
 })();
-</script>
-
-<!-- 11 · Прогноз северного сияния на 3 ночи (живые данные: Kp-прогноз NOAA SWPC + облачность и темнота Open-Meteo).
-     Используется на главной (после «Сегодня») и на странице «Глэмпинг». Яркость сияния на фоне = прогноз на эту ночь. -->
-<style>
-.yp-af{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,10vw,150px)}
-.yp-af__bg{position:absolute;inset:-4%;width:108%;height:108%;z-index:-1;mix-blend-mode:screen;opacity:.85;pointer-events:none}
-.yp-af__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
-.yp-af__head .yp-lead{margin:0}
-.yp-af__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(36px,4vw,56px)}
-.yp-night{position:relative;border-radius:24px;padding:22px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;gap:6px;min-width:0}
-.yp-night.is-best{border-color:rgba(92,255,192,.55);box-shadow:0 0 0 1px rgba(92,255,192,.25),0 30px 60px -30px rgba(92,255,192,.35)}
-.yp-night__top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.yp-night__day{font:400 18px var(--yp-fd);letter-spacing:-.01em}
-.yp-night__date{font:500 12px var(--yp-mono);color:var(--yp-snowmuted)}
-.yp-night__lvl{display:flex;align-items:center;gap:10px;margin-top:10px;font:300 clamp(30px,2.8vw,44px)/1 var(--yp-fd);letter-spacing:-.03em}
-.yp-night__lvl i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 14px var(--c);flex:0 0 auto}
-.yp-night__best{margin:6px 0 0;font-size:14px;color:#C3D0D8;min-height:2.9em}
-.yp-chart{position:relative;height:130px;margin-top:12px;display:grid;grid-template-columns:repeat(13,1fr);gap:3px;align-items:end;padding-right:56px}
-.yp-chart__ref{position:absolute;left:0;right:56px;border-top:1px dashed rgba(234,241,244,.18);pointer-events:none}
-.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
-.yp-bar{position:relative;height:100%;display:flex;align-items:flex-end;cursor:default}
-.yp-bar b,.yp-bar s{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 1px 1px;transform-origin:50% 100%}
-.yp-bar s{background:rgba(234,241,244,.12);text-decoration:none}
-.yp-bar b{background:linear-gradient(0deg,#3FD07F,#5CFFC0 50%,#9AA8FF)}
-.yp-bar.is-light b,.yp-bar.is-light s{background:repeating-linear-gradient(45deg,rgba(234,241,244,.10) 0 3px,transparent 3px 6px);height:100%!important}
-.yp-bar:hover b{filter:brightness(1.3)}
-.yp-bar.is-peak::after{content:"";position:absolute;left:50%;top:-12px;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--yp-aurora)}
-.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted)}
-.yp-chart__x span{text-align:center;white-space:nowrap}
-.yp-night__tip{margin:10px 0 0;font:500 12px var(--yp-mono);color:#D7E2E8;min-height:1.4em}
-.yp-night .yp-btn{margin-top:12px;align-self:flex-start;padding:12px 18px;font-size:14px}
-.yp-af__foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--yp-snowmuted)}
-.yp-af__legend{display:flex;gap:18px;flex-wrap:wrap}
-.yp-af__legend span{display:inline-flex;align-items:center;gap:8px}
-.yp-af__legend i{width:14px;height:10px;border-radius:2px}
-.yp-af__msg{grid-column:1/-1;border-radius:24px;padding:26px;background:rgba(14,24,36,.72);border:1px solid var(--yp-nightline);color:#C3D0D8}
-@media (max-width:1000px){.yp-af__head{grid-template-columns:minmax(0,1fr)}.yp-af__grid{grid-template-columns:minmax(0,1fr)}}
-</style>
-<section class="yp yp-dark yp-af" id="forecast" data-yp-theme="dark">
-  <canvas class="yp-af__bg" aria-hidden="true"></canvas>
-  <div class="yp-wrap">
-    <div class="yp-af__head">
-      <div><span class="yp-eyebrow"><i style="--c:var(--yp-aurora)"></i>Прогноз северного сияния</span><h2 class="yp-h2" data-yp-split>Будет ли <b>сияние</b> в ближайшие ночи</h2></div>
-      <p class="yp-lead">Считаем по прогнозу геомагнитной активности (Kp-индекс) и облачности над Салехардом. Чем выше столбик, тем больше шанс. Обновляется при каждом открытии страницы.</p>
-    </div>
-    <div class="yp-af__grid" data-yp-af-grid aria-live="polite">
-      <div class="yp-af__msg" data-yp-af-msg>Загружаем прогноз…</div>
-    </div>
-    <div class="yp-af__foot">
-      <div class="yp-af__legend">
-        <span><i style="background:linear-gradient(90deg,#3FD07F,#9AA8FF)"></i>шанс с учётом облаков</span>
-        <span><i style="background:rgba(234,241,244,.2)"></i>шанс при ясном небе</span>
-        <span><i style="background:repeating-linear-gradient(45deg,rgba(234,241,244,.25) 0 3px,transparent 3px 6px)"></i>светло</span>
-      </div>
-      <span><b data-yp-afst></b> · <a href="/severnoe-siyanie" style="color:inherit">Как и когда смотреть сияние →</a> · Данные: NOAA SWPC (Kp на 3 дня), Open-Meteo (облачность). Прогноз вероятностный.</span>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var sec = document.getElementById("forecast"); if(!sec) return;
-  var YP = window.YP || {}, G = window.gsap;
-  var grid = sec.querySelector("[data-yp-af-grid]");
-  var A = {rev:1, inten:.35, mx:.5, my:.5, tmx:.5, tmy:.5};
-  YP.makeAurora && YP.makeAurora(sec.querySelector(".yp-af__bg"), A, sec);
-  var COLORS = ["#7C8A96", "#9AA8FF", "#5CFFC0", "#7CF08A"];
-  var REFS = [[.55,"высокий"],[.3,"средний"],[.12,"низкий"]];
-  function fmtKp(v){ return v == null ? "—" : v.toFixed(1).replace(".", ","); }
-  function render(data){
-    if(!data || !data.nights.length){ grid.innerHTML = '<div class="yp-af__msg">Прогноз временно недоступен. Сияние у нас видно с сентября по апрель в ясные ночи, лучше всего с 22:00 до 02:00.</div>'; return; }
-    var bestN = data.nights.reduce(function(a,n,i){ return n.best.score > data.nights[a].best.score ? i : a; }, 0);
-    A.inten = [.25, .45, .75, 1][data.nights[0].level];
-    grid.innerHTML = "";
-    data.nights.forEach(function(n, ni){
-      var card = document.createElement("article");
-      card.className = "yp-night" + (ni === bestN && n.best.score >= .12 ? " is-best" : "");
-      var bestTxt = n.polarDay ? "Белые ночи: небо слишком светлое, сияния не видно."
-        : n.noKp ? "Прогноз Kp на эту ночь ещё не опубликован."
-        : n.best.score > 0 ? "Лучшее время " + n.best.time + " · Kp " + fmtKp(n.best.kp) + " · облачность " + n.best.cloud + "%"
-        : "Сплошная облачность или слабая активность.";
-      /* 13 часовых слотов 18:00 … 06:00 */
-      var slots = []; for(var h=18; h<=30; h++) slots.push(String(h%24).padStart(2,"0") + ":00");
-      var byTime = {}; n.hours.forEach(function(x){ byTime[x.time] = x; });
-      var bars = slots.map(function(t){
-        var x = byTime[t];
-        if(!x) return '<div class="yp-bar" aria-hidden="true"></div>';
-        var pot = x.kp != null && x.dark ? YP.kpPotential(x.kp) : 0;
-        var tip = t + " · " + (x.dark ? "Kp " + fmtKp(x.kp) + ", облачность " + x.cloud + "%, шанс " + YP.chanceLevel(x.score).text.toLowerCase() : "светло");
-        return '<div class="yp-bar' + (x.dark ? "" : " is-light") + (x === n.best && n.best.score > 0 ? " is-peak" : "") + '" data-tip="' + tip + '" title="' + tip + '">' +
-               '<s style="height:' + Math.round(pot*100) + '%"></s><b style="height:' + Math.round(x.score*100) + '%"></b></div>';
-      }).join("");
-      var refs = REFS.map(function(r){ return '<div class="yp-chart__ref" style="bottom:' + (r[0]*100) + '%"><span>' + r[1] + "</span></div>"; }).join("");
-      var xl = slots.map(function(t, i){ return "<span>" + (i % 3 === 0 ? t.slice(0,2) : "") + "</span>"; }).join("");
-      card.innerHTML =
-        '<div class="yp-night__top"><span class="yp-night__day">' + n.label + '</span><span class="yp-night__date">' + n.dateText + "</span></div>" +
-        '<div class="yp-night__lvl" style="--c:' + COLORS[n.level] + '"><i></i>' + (n.polarDay ? "Белые ночи" : n.text) + "</div>" +
-        '<p class="yp-night__best">' + bestTxt + "</p>" +
-        '<div class="yp-chart" role="img" aria-label="Шанс сияния по часам, ' + n.label + '">' + refs + bars + "</div>" +
-        '<div class="yp-chart__x" aria-hidden="true">' + xl + "</div>" +
-        '<p class="yp-night__tip" data-tip-out>Наведите на столбик, чтобы увидеть час</p>' +
-        (n.level >= 1 ? '<button class="yp-btn yp-btn--aurora" type="button">Забронировать на эту ночь</button>' : "");
-      var out = card.querySelector("[data-tip-out]");
-      card.querySelectorAll(".yp-bar[data-tip]").forEach(function(b){
-        b.addEventListener("pointerenter", function(){ out.textContent = b.getAttribute("data-tip"); });
-      });
-      var btn = card.querySelector(".yp-btn");
-      if(btn) btn.addEventListener("click", function(){ YP.openBooking && YP.openBooking({type:"glamping", date:n.date}); });
-      grid.appendChild(card);
-    });
-    if(G && window.ScrollTrigger && !YP.reduced){
-      G.from(grid.children, {y:50, opacity:0, duration:1, ease:"power3.out", stagger:.12, scrollTrigger:{trigger:grid, start:"top 85%"}});
-      G.from(grid.querySelectorAll(".yp-bar b, .yp-bar s"), {scaleY:0, duration:.9, ease:"power3.out", stagger:{each:.012, from:"start"}, scrollTrigger:{trigger:grid, start:"top 80%"}});
-      ScrollTrigger.refresh();
-    }
-  }
-  if(YP.forecast) YP.forecast.then(render); else render(null);
-})();
-window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.querySelector("[data-yp-afst]"); if(el && YP.dataStamp) el.textContent = YP.dataStamp(); });
 </script>
 
