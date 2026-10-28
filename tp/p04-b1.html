@@ -36,7 +36,7 @@
 .yp-dh__b{padding:20px 22px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
 .yp-dh__b h3{margin:0;font-weight:400;font-size:24px;letter-spacing:-.02em}
 .yp-dh__meta{display:flex;gap:16px;font:500 13px var(--yp-mono);color:var(--yp-muted)}
-.yp-dh__price{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.yp-dh__price{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 .yp-dh__price div{border-radius:14px;background:var(--yp-bg);padding:12px 14px}
 .yp-dh__price b{display:block;font:300 22px/1 var(--yp-fd);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .yp-dh__price span{font-size:12px;color:var(--yp-muted)}
@@ -46,7 +46,7 @@
 .yp-dh__c--more{background:linear-gradient(160deg,#2a1208,#130805 70%);color:#FBEFE6;justify-content:center;padding:28px;gap:14px}
 .yp-dh__c--more h3{margin:0;font-weight:300;font-size:clamp(26px,2.4vw,34px);line-height:1.1}
 .yp-dh__c--more p{margin:0;color:#EAD4C6}
-@media (max-width:1000px){.yp-gh2__head{grid-template-columns:minmax(0,1fr)}.yp-dh{grid-template-columns:1fr 1fr}}
+@media (max-width:1000px){.yp-gh2__head{grid-template-columns:minmax(0,1fr)}.yp-dh{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media (max-width:640px){.yp-dh{grid-template-columns:minmax(0,1fr)}}
 </style>
 <section class="yp yp-sheet yp-gh2" id="houses">

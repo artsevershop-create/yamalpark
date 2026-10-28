@@ -1323,7 +1323,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-contacts a:hover{padding-left:10px;color:var(--yp-aurora)}
 .yp-contacts span{font:500 12px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--yp-snowmuted);align-self:center}
 .yp-bk{background:rgba(17,27,38,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--yp-nightline);border-radius:28px;padding:clamp(16px,2.4vw,28px);position:relative;overflow:hidden}
-.yp-bk__tabs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;border-radius:16px;background:rgba(0,0,0,.3);margin-bottom:clamp(16px,2vw,24px)}
+.yp-bk__tabs{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;padding:4px;border-radius:16px;background:rgba(0,0,0,.3);margin-bottom:clamp(16px,2vw,24px)}
 .yp-bk__tabs button{position:relative;z-index:1;border:0;background:transparent;color:var(--yp-snowmuted);font:600 14px/1.2 var(--yp-f);padding:12px 8px;border-radius:12px;cursor:pointer;transition:color .3s}
 .yp-bk__tabs button[aria-selected="true"]{color:#03140D}
 .yp-bk__pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 12px)/3);border-radius:12px;background:var(--yp-aurora);transition:transform .55s var(--yp-ease)}
@@ -1348,7 +1348,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-bk__row .yp-btn{flex:1 1 auto;min-height:54px}
 .yp-bk__note{margin:14px 0 0;font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot{padding-block:56px 40px;border-top:1px solid var(--yp-nightline)}
-.yp-foot__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.yp-foot__grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
 .yp-foot h4{margin:0 0 14px;font:500 11px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--yp-snowmuted)}
 .yp-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
 .yp-foot ul a{text-decoration:none;opacity:.85;transition:opacity .2s,color .2s}
@@ -1357,7 +1357,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
-@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 /* ---------- Светлая карточка брони (как форма TravelLine) на ночном фоне ---------- */
 .yp-bk{background:#fff;color:var(--yp-ink);border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 40px 90px -40px rgba(0,0,0,.75)}
 .yp-bk__tabs{background:var(--yp-bg)}

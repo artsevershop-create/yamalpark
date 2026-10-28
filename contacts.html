@@ -1246,7 +1246,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-rt{padding-block:clamp(56px,10vw,150px) clamp(50px,6vw,90px)}
 .yp-rt__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);margin-top:clamp(36px,4vw,56px);align-items:stretch}
 .yp-rt__steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
-.yp-rt__steps li{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--yp-line)}
+.yp-rt__steps li{counter-increment:s;display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;padding:18px 0;border-top:1px solid var(--yp-line)}
 .yp-rt__steps li::before{content:counter(s);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--yp-ink);color:#fff;font:500 15px var(--yp-mono)}
 .yp-rt__steps b{display:block;font-weight:600;margin-bottom:4px}
 .yp-rt__steps span{color:var(--yp-muted)}
@@ -1466,7 +1466,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 .yp-wx__t b{font:300 clamp(64px,7vw,104px)/.9 var(--yp-fd);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
 .yp-wx__t svg{width:64px;height:64px;flex:0 0 auto;margin-top:6px}
 .yp-wx__cond{margin-top:10px;font-size:18px}
-.yp-wx__meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:auto;padding-top:22px;font-size:14px;color:#C8D6E0}
+.yp-wx__meta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 18px;margin-top:auto;padding-top:22px;font-size:14px;color:#C8D6E0}
 .yp-wx__meta span{display:block;font:500 11px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:#8EA6B8;margin-bottom:3px}
 .yp-wx__days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)}
 .yp-wd{position:relative;border-radius:24px;padding:20px 18px 18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);display:flex;flex-direction:column;gap:10px;transition:transform .45s var(--yp-ease),box-shadow .45s}
@@ -1912,9 +1912,12 @@ window.YP_MAP = [
   {n:1,  cat:"service", name:"Администрация", pts:[[91.2,15.2]], text:"Ресепшен, вопросы и заказ услуг."},
   {n:2,  cat:"service", name:"Стоянка для автомобилей", pts:[[94.8,24.2],[53.2,37.6],[20.4,48.6],[9.6,58.8]], text:"Парковка на 50 машин."},
   {n:3,  cat:"family",  name:"Детская площадка", pts:[[93,32.6]], text:"Безопасная игровая площадка для детей."},
-  {n:4,  cat:"zoo",     name:"Вольер с лисами", pts:[[66.8,21.2],[72.4,19.8]], text:"Лисы и песец."},
+  {n:4,  cat:"zoo",     name:"Вольер с лисами", pts:[[66.8,21.2]], text:"Лисы и песец."},
   {n:5,  cat:"zoo",     name:"Вольер", pts:[[64.6,15.8]], text:"Вольер мини-зоопарка.", page:"/zoo"},
   {n:"р", cat:"zoo",    name:"Вольер с рысями", pts:[[31.2,31.6]], text:"Новый вольер с рысями.", page:"/zoo"},
+  {n:"е", cat:"zoo",    name:"Вольер с енотами", pts:[[33.0,27.7]], text:"Два енота — над вольером рысей.", page:"/zoo"},
+  {n:"к", cat:"zoo",    name:"Вольер с кроликами", pts:[[36.7,25.4]], text:"Кролики — любимцы детей.", page:"/zoo"},
+  {n:"з", cat:"zoo",    name:"Вольер с косулей и козами", pts:[[44.5,25.4]], text:"Косуля и две козы в общем вольере.", page:"/zoo"},
   {n:6,  cat:"grill",   name:"Гостевой дом №1", pts:[[91.3,40.4]], text:"20–25 гостей · 8 000 / 12 000 ₽ в день.", page:"/grill"},
   {n:7,  cat:"grill",   name:"Гостевой дом №2", pts:[[82.8,46.8]], text:"20–25 гостей · 8 000 / 12 000 ₽ в день.", page:"/grill"},
   {n:8,  cat:"grill",   name:"Летняя беседка", pts:[[69.3,13.2]], text:"До 15 гостей · 6 000 ₽ в день · 12:00–22:00.", page:"/grill"},
@@ -2023,7 +2026,7 @@ window.YP_MAP = [
 .yp-seo__faq summary i::after{transform:rotate(90deg)}
 .yp-seo__faq details[open] summary i::after{transform:none}
 .yp-seo__faq details>div{padding:0 0 16px;color:var(--yp-muted);font-size:15px}
-@media (max-width:900px){.yp-seo__grid{grid-template-columns:1fr}}
+@media (max-width:900px){.yp-seo__grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 <section class="yp yp-seo" id="about">
   <div class="yp-wrap">
@@ -2054,7 +2057,7 @@ window.YP_MAP = [
 .yp-contacts a:hover{padding-left:10px;color:var(--yp-aurora)}
 .yp-contacts span{font:500 12px var(--yp-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--yp-snowmuted);align-self:center}
 .yp-bk{background:rgba(17,27,38,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--yp-nightline);border-radius:28px;padding:clamp(16px,2.4vw,28px);position:relative;overflow:hidden}
-.yp-bk__tabs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:4px;border-radius:16px;background:rgba(0,0,0,.3);margin-bottom:clamp(16px,2vw,24px)}
+.yp-bk__tabs{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;padding:4px;border-radius:16px;background:rgba(0,0,0,.3);margin-bottom:clamp(16px,2vw,24px)}
 .yp-bk__tabs button{position:relative;z-index:1;border:0;background:transparent;color:var(--yp-snowmuted);font:600 14px/1.2 var(--yp-f);padding:12px 8px;border-radius:12px;cursor:pointer;transition:color .3s}
 .yp-bk__tabs button[aria-selected="true"]{color:#03140D}
 .yp-bk__pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 12px)/3);border-radius:12px;background:var(--yp-aurora);transition:transform .55s var(--yp-ease)}
@@ -2079,7 +2082,7 @@ window.YP_MAP = [
 .yp-bk__row .yp-btn{flex:1 1 auto;min-height:54px}
 .yp-bk__note{margin:14px 0 0;font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot{padding-block:56px 40px;border-top:1px solid var(--yp-nightline)}
-.yp-foot__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.yp-foot__grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:32px}
 .yp-foot h4{margin:0 0 14px;font:500 11px var(--yp-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--yp-snowmuted)}
 .yp-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
 .yp-foot ul a{text-decoration:none;opacity:.85;transition:opacity .2s,color .2s}
@@ -2088,7 +2091,7 @@ window.YP_MAP = [
 .yp-foot__addr{color:var(--yp-snowmuted);font-size:15px;margin:16px 0 0;max-width:30ch}
 .yp-foot__copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--yp-nightline);font-size:13px;color:var(--yp-snowmuted)}
 .yp-foot__copy a{color:var(--yp-snowmuted)}
-@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.yp-booking__in{grid-template-columns:minmax(0,1fr)}.yp-foot__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 /* ---------- Светлая карточка брони (как форма TravelLine) на ночном фоне ---------- */
 .yp-bk{background:#fff;color:var(--yp-ink);border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 40px 90px -40px rgba(0,0,0,.75)}
 .yp-bk__tabs{background:var(--yp-bg)}
