@@ -19,7 +19,7 @@
 </section>
 <script>YP.pageHero(document.getElementById("top"), {fx:"embers", dark:.2});</script>
 
-<!-- Гриль-дома · 02 · Пять домов: карточки по данным YP.DAYHOUSES (00-head) — цены, вместимость, что внутри -->
+<!-- Гриль-дома · 02 · Шесть площадок: карточки по данным YP.DAYHOUSES (00-head) — цены, вместимость, что внутри -->
 <style>
 .yp-gh2{padding-block:clamp(56px,10vw,150px) clamp(50px,6vw,90px)}
 .yp-gh2__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
@@ -52,7 +52,7 @@
 <section class="yp yp-sheet yp-gh2" id="houses">
   <div class="yp-wrap">
     <div class="yp-gh2__head">
-      <div><span class="yp-eyebrow" style="--c:var(--yp-red)"><i></i>Пять домов</span><h2 class="yp-h2" data-yp-split>Свой дом <b>на целый день</b></h2></div>
+      <div><span class="yp-eyebrow" style="--c:var(--yp-red)"><i></i>Шесть площадок</span><h2 class="yp-h2" data-yp-split>Свой дом <b>на целый день</b></h2></div>
       <p class="yp-lead" data-yp-reveal>Бронируется весь день с 12:00 до 22:00. Тариф выходного дня — в пятницу, субботу и праздники.</p>
     </div>
     <div class="yp-dh" data-yp-dh></div>
@@ -62,12 +62,12 @@
 (function(){
   var box = document.querySelector("[data-yp-dh]"); if(!box) return;
   var YP = window.YP || {};
-  var PH = {g1:"https://artsevershop-create.github.io/yamalpark/img/p/grill1-in.webp", g2:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-a.webp", g3:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-c.webp", h1:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-in.webp", h2:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp"};
+  var PH = {g1:"https://artsevershop-create.github.io/yamalpark/img/p/grill1-in.webp", g2:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-a.webp", g3:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-c.webp", h1:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-in.webp", h2:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp", b1:"https://artsevershop-create.github.io/yamalpark/img/p/besedka.webp"};
   var html = (YP.DAYHOUSES || []).map(function(h){
     var grill = h.id.charAt(0) === "g";
     var ph = PH[h.id] ? '<img src="' + PH[h.id] + '" alt="' + h.name + '" loading="lazy">'
                      : '<div class="yp-dh__big"><div>' + h.guests + '<small>гостей</small></div></div>';
-    return '<article class="yp-dh__c" data-yp-tilt><div class="yp-dh__ph">' + ph + '<span class="yp-dh__type">' + (grill ? "Гриль-дом" : "Гостевой дом") + '</span></div>' +
+    return '<article class="yp-dh__c" data-yp-tilt><div class="yp-dh__ph">' + ph + '<span class="yp-dh__type">' + (grill ? "Гриль-дом" : h.id.charAt(0) === "b" ? "Беседка" : "Гостевой дом") + '</span></div>' +
       '<div class="yp-dh__b"><h3>' + h.name + '</h3><div class="yp-dh__meta"><span>' + h.guests + ' гостей</span><span>12:00–22:00</span></div>' +
       '<div class="yp-dh__price"><div><b>' + YP.fmtRub(h.wd) + '</b><span>вс–чт</span></div><div><b>' + YP.fmtRub(h.we) + '</b><span>пт, сб, праздники</span></div></div>' +
       '<ul class="yp-dh__feat">' + h.feat.map(function(f){ return "<li>" + f + "</li>"; }).join("") + '</ul>' +
@@ -143,7 +143,7 @@
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 /* На телефоне календарь остаётся сеткой из семи дней в строке. */
-@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:11px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -175,7 +175,7 @@
 (function(){
   var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
   var YP = window.YP || {}, U = YP.UNITS || {};
-  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2","b1"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
   var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
@@ -389,7 +389,7 @@
 .yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
 .yp-wk__say.is-on{opacity:1;transform:none}
 .yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb small{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
 .yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
 .yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
@@ -453,8 +453,8 @@
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
-    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
-          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    banquet:{kick:"Мероприятия · " + V, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/banquet-tour", short:"Банкетный зал", sub:V + " · 19 с",
+          cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
@@ -467,7 +467,7 @@
     /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
     /grill/.test(p)    ? ["grill23","grill1","guest"] :
     /etno/.test(p)     ? ["chum"] :
-    /events/.test(p)   ? ["tent","banquet","park"] :
+    /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
     /zoo/.test(p)      ? ["lynx","deer"] :
     ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
@@ -613,7 +613,7 @@
       <details><summary>Сколько стоит?<i></i></summary><div class="yp-faq__a"><div><p>Гриль-дом №1 — 6 000 ₽ (вс–чт) и 8 000 ₽ (пт, сб, праздники). Гриль-дома №2 и №3 — 8 000 ₽ и 10 000 ₽. Гостевые дома №1 и №2 — 8 000 ₽ и 12 000 ₽. С 15 декабря по 10 января: гриль-дом №1 — 10 000 ₽, №2 и №3 — 12 000 ₽, гостевые дома — 15 000 ₽.</p></div></div></details>
       <details><summary>Что есть внутри?<i></i></summary><div class="yp-faq__a"><div><p>В гриль-домах: гриль-установка, лавки и столешница вокруг гриля, телевизор, микроволновка, умывальник. В гостевых домах: стол и 4 лавки, телевизор, микроволновка, холодильник, умывальник и шкаф, а гриль-зона — в отдельном здании рядом.</p></div></div></details>
       <details><summary>Сколько человек помещается?<i></i></summary><div class="yp-faq__a"><div><p>Гриль-дома — 15–20 гостей, гостевые дома — 20–25. Для больших компаний есть банкетный зал на 100–150 человек.</p></div></div></details>
-      <details><summary>Как забронировать и отменить?<i></i></summary><div class="yp-faq__a"><div><p>Через форму на сайте, по телефону +7 900 399-10-33 или в VK и Telegram (@yamalpark). Отмена за 7 дней и раньше — возврат 100%, менее чем за 3 дня — предоплата не возвращается.</p></div></div></details>
+      <details><summary>Как забронировать и отменить?<i></i></summary><div class="yp-faq__a"><div><p>Через форму на сайте, по телефону +7 900 399-10-33 или в VK и Telegram (@yamalpark). Отмена менее чем за 3 дня или неявка — предоплата не возвращается.</p></div></div></details>
     </div>
   </div>
 </section>

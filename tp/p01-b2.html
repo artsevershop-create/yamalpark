@@ -42,7 +42,7 @@
 .yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
 .yp-wk__say.is-on{opacity:1;transform:none}
 .yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb small{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
 .yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
 .yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
@@ -106,8 +106,8 @@
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
-    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
-          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    banquet:{kick:"Мероприятия · " + V, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/banquet-tour", short:"Банкетный зал", sub:V + " · 19 с",
+          cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
@@ -120,7 +120,7 @@
     /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
     /grill/.test(p)    ? ["grill23","grill1","guest"] :
     /etno/.test(p)     ? ["chum"] :
-    /events/.test(p)   ? ["tent","banquet","park"] :
+    /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
     /zoo/.test(p)      ? ["lynx","deer"] :
     ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
@@ -324,9 +324,10 @@
       <p class="yp-lead">Нажмите на точку на схеме — покажем фото, цену и что внутри. Бронирование в один клик.</p>
     </div>
     <div class="yp-pk__tabs" role="group" aria-label="Что выбрать" data-yp-pkt>
-      <button type="button" aria-pressed="true" data-cat="stay" style="--c:var(--yp-blue)"><i></i>Проживание <small>3</small></button>
+      <button type="button" aria-pressed="true" data-cat="all" style="--c:var(--yp-ink)"><i></i>Все объекты <small>14</small></button>
+      <button type="button" aria-pressed="false" data-cat="stay" style="--c:var(--yp-blue)"><i></i>Проживание <small>3</small></button>
       <button type="button" aria-pressed="false" data-cat="banya" style="--c:var(--yp-red)"><i></i>Бани <small>3</small></button>
-      <button type="button" aria-pressed="false" data-cat="grill" style="--c:#E07A2E"><i></i>Гриль и гостевые дома <small>5</small></button>
+      <button type="button" aria-pressed="false" data-cat="grill" style="--c:#E07A2E"><i></i>Гриль и гостевые дома <small>6</small></button>
       <button type="button" aria-pressed="false" data-cat="etno" style="--c:#8A6A3D"><i></i>Чум и шатёр <small>2</small></button>
     </div>
     <div class="yp-pk__grid">
@@ -336,7 +337,7 @@
             <img src="https://artsevershop-create.github.io/yamalpark/img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
             <div class="yp-pk__dim" aria-hidden="true"></div>
           </div>
-          <div class="yp-pk__ui"><span class="yp-pk__hint">Нажмите на точку</span><button class="yp-pk__all" type="button" data-yp-pkall>Вся схема</button></div>
+          <div class="yp-pk__ui"><span class="yp-pk__hint">Все объекты на схеме · нажмите на точку</span><button class="yp-pk__all" type="button" data-yp-pkall>Вся схема</button></div>
         </div>
       </div>
       <article class="yp-pk__card" aria-live="polite" data-yp-pkc>
@@ -377,34 +378,36 @@
     {id:"g2", cat:"grill", n:10, pt:[47.9,14.7], name:"Гриль-дом №2", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-a.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
     {id:"g3", cat:"grill", n:11, pt:[41.3,14.7], name:"Гриль-дом №3", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-c.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
     {id:"h1", cat:"grill", n:6, pt:[91.3,40.4], name:"Гостевой дом №1", img:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-in.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
+    {id:"b1", cat:"grill", n:8, pt:[69.3,13.2], name:"Летняя беседка", img:"https://artsevershop-create.github.io/yamalpark/img/p/besedka.webp", meta:["до 15 гостей","12:00–22:00"], price:6000, unit:"₽ / день", feat:["Одноразовая посуда","Розжиг","Решётка"], type:"grill", page:"/grill"},
     {id:"h2", cat:"grill", n:7, pt:[82.8,46.8], name:"Гостевой дом №2", img:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
     {id:"chum", cat:"etno", n:12, pt:[65.4,69.6], name:"Чум и смотровая площадка", img:"https://artsevershop-create.github.io/yamalpark/img/p/chum-in.webp", meta:["15–20 гостей","своя терраса"], price:12000, unit:"₽ пн–чт · пт–вс 15 000 ₽", feat:["Обогретый чум","Костровище","Казан и мангал"], type:"chum", page:"/etno"},
     {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"https://artsevershop-create.github.io/yamalpark/img/p/tent-aurora-in.webp", meta:["40 м²","до 20 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
   ];
   var view = sec.querySelector("[data-yp-pkv]"), zoom = sec.querySelector("[data-yp-pkz]"), dim = zoom.querySelector(".yp-pk__dim");
   var card = sec.querySelector("[data-yp-pkc]"), ph = sec.querySelector("[data-yp-pkph]"), wipe = ph.querySelector(".yp-pk__wipe");
-  var list = sec.querySelector("[data-yp-pkl]"), cat = "stay", cur = null, shown = 0, pins = {};
+  var inCat = function(u, c){ return c === "all" || u.cat === c; };
+  var list = sec.querySelector("[data-yp-pkl]"), cat = "all", cur = null, shown = 0, pins = {};
   U.forEach(function(u){
     var b = document.createElement("button"); b.type = "button"; b.className = "yp-pk__pin"; b.style.left = u.pt[0] + "%"; b.style.top = u.pt[1] + "%";
     b.style.setProperty("--c", COL[u.cat]); b.setAttribute("aria-label", u.name); b.setAttribute("data-yp-cursor", "Выбрать");
     b.innerHTML = ICON[u.cat] + '<span class="yp-pk__tip">' + u.name + "</span>";
     if(u.pt[0] > 70) b.classList.add("tip-l"); else if(u.pt[0] < 30) b.classList.add("tip-r");
-    b.addEventListener("click", function(){ if(u.cat !== cat) setCat(u.cat, true); select(u, true); });
+    b.addEventListener("click", function(){ if(cat !== "all" && u.cat !== cat) setCat(u.cat, true); select(u, true); });
     zoom.appendChild(b); pins[u.id] = b;
   });
   function renderList(){
-    list.innerHTML = U.filter(function(u){ return u.cat === cat; }).map(function(u){ return '<button type="button" data-id="' + u.id + '" style="--c:' + COL[u.cat] + '">' + u.name + "</button>"; }).join("");
+    list.innerHTML = U.filter(function(u){ return inCat(u, cat); }).map(function(u){ return '<button type="button" data-id="' + u.id + '" style="--c:' + COL[u.cat] + '">' + u.name + "</button>"; }).join("");
     list.querySelectorAll("button").forEach(function(b){ b.classList.toggle("is-on", cur && b.getAttribute("data-id") === cur.id); });
   }
   list.addEventListener("click", function(e){ var b = e.target.closest("button[data-id]"); if(b) select(U.filter(function(u){ return u.id === b.getAttribute("data-id"); })[0], true); });
   function setCat(c, silent){
     cat = c;
     sec.querySelectorAll("[data-yp-pkt] button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-cat") === c)); });
-    U.forEach(function(u){ pins[u.id].classList.toggle("is-off", u.cat !== c); });
+    U.forEach(function(u){ pins[u.id].classList.toggle("is-off", !inCat(u, c)); });
     if(sec.classList.contains("is-zoom")) zoomOut();
-    if(motion) G.fromTo(U.filter(function(u){ return u.cat === c; }).map(function(u){ return pins[u.id]; }), {scale:0}, {scale:1, duration:.55, ease:"back.out(2.4)", stagger:.06, overwrite:true, clearProps:"transform"});
+    if(motion) G.fromTo(U.filter(function(u){ return inCat(u, c); }).map(function(u){ return pins[u.id]; }), {scale:0}, {scale:1, duration:.55, ease:"back.out(2.4)", stagger:.06, overwrite:true, clearProps:"transform"});
     renderList();
-    if(!silent) select(U.filter(function(u){ return u.cat === c; })[0], false);
+    if(!silent) select(U.filter(function(u){ return inCat(u, c); })[0], false);
   }
   sec.querySelectorAll("[data-yp-pkt] button").forEach(function(b){ b.addEventListener("click", function(){ setCat(b.getAttribute("data-cat")); }); });
 
@@ -461,14 +464,13 @@
   sec.querySelector("[data-yp-pkbook]").addEventListener("click", function(){ if(cur) YP.openBooking({type:cur.type, object:cur.id}); });
   window.addEventListener("resize", function(){ if(sec.classList.contains("is-zoom") && cur) zoomTo(cur); });
 
-  setCat("stay", true); fill(U[0]); cur = U[0]; renderList();
+  setCat("all", true); fill(U[0]); cur = U[0]; renderList();
   if(motion && window.ScrollTrigger){
     var all = U.map(function(u){ return pins[u.id]; });
     G.set(all, {scale:0});
     ScrollTrigger.create({trigger:view, start:"top 70%", once:true, onEnter:function(){
       G.to(all, {scale:1, duration:.6, ease:"back.out(2.5)", stagger:{each:.05, from:"random"}, clearProps:"transform"});
-      /* подсказка: через секунду показываем, как работает приближение */
-      setTimeout(function(){ if(!sec.classList.contains("is-zoom") && cur) { select(cur, true); } }, 1600);
+      /* сначала вся схема со всеми объектами; приближение — только по клику */
     }});
   }
 })();
@@ -536,7 +538,7 @@
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 /* На телефоне календарь остаётся сеткой из семи дней в строке. */
-@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:11px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -568,7 +570,7 @@
 (function(){
   var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
   var YP = window.YP || {}, U = YP.UNITS || {};
-  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2","b1"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
   var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
@@ -709,7 +711,7 @@
 .yp-pkg__sub button[aria-pressed="true"]{background:var(--yp-green-d);color:#fff}
 .yp-pkg__sub[hidden]{display:none}
 .yp-pkg__when{display:flex;gap:8px;flex-wrap:wrap}
-.yp-pkg__sum{position:sticky;top:96px;border-radius:28px;background:var(--yp-ink);color:#fff;padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:14px;overflow:hidden;isolation:isolate}
+.yp-pkg__sum{position:sticky;top:calc(var(--yp-hdr-h,80px) + 16px);border-radius:28px;background:var(--yp-ink);color:#fff;padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:14px;overflow:hidden;isolation:isolate}
 .yp-pkg__sum::before{content:"";position:absolute;inset:-30% -30% auto auto;width:80%;height:80%;background:radial-gradient(closest-side,rgba(92,255,192,.16),transparent);z-index:-1}
 .yp-pkg__sum h3{margin:0;font-weight:300;font-size:24px;letter-spacing:-.02em}
 .yp-pkg__lines{list-style:none;margin:0;padding:0;display:grid;gap:10px}

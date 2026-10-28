@@ -771,9 +771,9 @@
       <details open><summary>Во сколько заезд и выезд?<i></i></summary><div class="yp-faq__a"><div><p>Купол: заезд с 14:00, выезд до 12:00 следующего дня.</p><p>Дома «Волк» и «Медведь»: заезд с 15:00, выезд до 13:00.</p><p>Ранний заезд и поздний выезд возможны по договорённости, если объект свободен.</p></div></div></details>
       <details><summary>Сколько стоит баня?<i></i></summary><div class="yp-faq__a"><div><p>Цена за час: в понедельник–среду до 14:00 — 2 500 ₽, после 14:00 — 3 500 ₽; с четверга по воскресенье — 5 000 ₽ («Черника» — 4 000 ₽). После 23:00 — 7 000 ₽. Минимальная аренда — 3 часа.</p></div></div></details>
       <details><summary>Как работает Алиса в бане?<i></i></summary><div class="yp-faq__a"><div><p>В парных «Морошки» и «Брусники» скажите «Алиса, включи дождь», «вьюгу», «музыку» или «свет». В «Бруснике» есть ещё туман. В фито-сауне «Морошки»: фито, туман, музыка, вьюга и ветер.</p><p>«Вьюга» — это подача пара на каменку.</p><p>В «Чернике» Алисы нет: дождь и ветер включаются кнопками на панели.</p></div></div></details>
-      <details><summary>Можно приехать с детьми?<i></i></summary><div class="yp-faq__a"><div><p>Да. На территории есть детская площадка и мини-зоопарк: рыси, лисы и песец, кролики, козы и косуля. Детям до 5 лет проживание и баня обычно бесплатны, уточняйте при бронировании.</p></div></div></details>
+      <details><summary>Можно приехать с детьми?<i></i></summary><div class="yp-faq__a"><div><p>Да. На территории есть детская площадка и мини-зоопарк: рыси, лисы и песец, еноты, кролики, козы и косуля. Детям до 5 лет проживание и баня бесплатны.</p></div></div></details>
       <details><summary>Работаете зимой? Будет ли северное сияние?<i></i></summary><div class="yp-faq__a"><div><p>Работаем круглый год. Сияние чаще всего видно с сентября по апрель в ясную погоду, лучше всего со смотровой площадки. В домиках тёплые полы, комфортно даже в −40 °C.</p></div></div></details>
-      <details><summary>Какие условия отмены?<i></i></summary><div class="yp-faq__a"><div><p>Отмена за 7 дней и раньше: возврат 100% предоплаты. Отмена менее чем за 3 дня или неявка: предоплата не возвращается. Полные условия в разделе «Документы».</p></div></div></details>
+      <details><summary>Какие условия отмены?<i></i></summary><div class="yp-faq__a"><div><p>Отмена менее чем за 3 дня или неявка: предоплата не возвращается. Полные условия в разделе «Документы».</p></div></div></details>
     </div>
   </div>
 </section>
@@ -830,7 +830,7 @@
 .yp-slots li>span{color:#A9B0AD;white-space:nowrap;font:500 12px var(--yp-mono)}
 .yp-slots li div{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
 .yp-slots em{display:inline-block;width:34px;text-align:center;font:500 11px/1 var(--yp-mono);font-style:normal;padding:7px 0;border-radius:7px;background:rgba(255,255,255,.06);color:#6E7572}
-.yp-slots li.is-head{font:500 10px var(--yp-mono);color:#7E8682;text-transform:uppercase;letter-spacing:.04em}
+.yp-slots li.is-head{font:500 11px var(--yp-mono);color:#7E8682;text-transform:uppercase;letter-spacing:.04em}
 .yp-slots li.is-head div span{display:inline-block;width:34px;text-align:center}
 .yp-slots em.free{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s}
 .yp-slots em.free:hover{transform:translateY(-2px);background:#4CC248}
@@ -886,7 +886,7 @@
         <img src="https://static.tildacdn.com/tild3835-3063-4135-b435-343534613561/photo1719894279_1.jpeg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
         <span class="yp-tile__k" style="--c:var(--yp-green)"><i></i>Мини-зоопарк</span>
         <div class="yp-tile__end">
-          <h3 class="yp-tile__t"><span class="yp-live" data-yp-t-zlive><i></i><span data-yp-t-zoo>Рыси, лисы, кролики, козы и косуля</span></span></h3>
+          <h3 class="yp-tile__t"><span class="yp-live" data-yp-t-zlive><i></i><span data-yp-t-zoo>Рыси, лисы, еноты, кролики, козы и косуля</span></span></h3>
           <p class="yp-tile__s" data-yp-t-zoonote style="margin-top:8px">На территории комплекса</p>
         </div>
       </article>
@@ -947,7 +947,7 @@
   var ZOO = null;
   var zoo = q("[data-yp-t-zoo]"), zn = q("[data-yp-t-zoonote]"), zl = q("[data-yp-t-zlive]");
   function fmt(m){ var h = Math.floor(m/60), mm = m%60; return (h ? h + " ч " : "") + (mm ? mm + " мин" : (h ? "" : "0 мин")); }
-  if(!ZOO){ zoo.textContent = "Вход бесплатный"; zn.textContent = "Рыси, лисы и песец, кролики, козы и косуля — на территории комплекса"; }
+  if(!ZOO){ zoo.textContent = "Вход бесплатный"; zn.textContent = "Открыто с 10:00 до 23:00 · рыси, лисы и песец, еноты, кролики, козы и косуля"; }
   else if(mins < ZOO.open[0] || mins >= ZOO.open[1]){ zoo.textContent = "Животные отдыхают"; zn.textContent = "Вольеры открыты с " + String(ZOO.open[0]/60|0).padStart(2,"0") + ":00 до " + String(ZOO.open[1]/60|0).padStart(2,"0") + ":00"; zl.classList.add("is-off"); }
   else { var next = ZOO.feed.filter(function(f){ return f > mins; })[0]; zoo.textContent = "Вольеры открыты";
     zn.textContent = next ? "Кормление через " + fmt(next - mins) + " · в " + String(next/60|0).padStart(2,"0") + ":00" : "Кормления на сегодня закончились"; }

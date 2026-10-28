@@ -9,7 +9,7 @@
       <h1 class="yp-ph__title"><span>Северные</span><span class="hl">соседи</span></h1>
       <div class="yp-ph__row">
         <div>
-          <p class="yp-ph__lead" data-yp-in>Рыси, лисы и песец, кролики, козы и косуля живут прямо на территории. Рядом детская площадка, пейнтбол и лазертаг.</p>
+          <p class="yp-ph__lead" data-yp-in>Рыси, лисы и песец, еноты, кролики, козы и косуля живут прямо на территории. Рядом детская площадка, пейнтбол и лазертаг.</p>
           <div class="yp-ph__chips" data-yp-in><span>Вход бесплатный</span><span>Для всей семьи</span><span>Новый вольер с рысями</span><span>Круглый год</span></div>
         </div>
         <div class="yp-ph__cta" data-yp-in><a class="yp-btn yp-btn--green" href="#animals">Кто здесь живёт</a><a class="yp-btn yp-btn--ghost" href="/contacts#map">Вольеры на карте</a></div>
@@ -24,7 +24,7 @@
 .yp-an{padding-block:clamp(56px,10vw,150px) clamp(60px,7vw,100px)}
 .yp-an__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end}
 .yp-an__head .yp-lead{margin:0}
-.yp-an__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:clamp(36px,4vw,56px);perspective:1400px}
+.yp-an__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:clamp(36px,4vw,56px);perspective:1400px}
 .yp-ac{position:relative;aspect-ratio:3/4.2;cursor:pointer;border:0;padding:0;background:transparent;text-align:left;font:inherit;color:inherit}
 .yp-ac__in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s var(--yp-ease)}
 .yp-ac.is-flip .yp-ac__in{transform:rotateY(180deg)}
@@ -78,6 +78,10 @@
       <button class="yp-ac" type="button" style="--bg:#7A5A3A" aria-label="Косуля — подробнее"><span class="yp-ac__in">
         <span class="yp-ac__f"><img src="https://artsevershop-create.github.io/yamalpark/img/new/zoo-roe.webp" alt="" loading="lazy"><span class="yp-ac__hint">↻</span><span></span><span><h3>Косуля</h3><small>общий вольер с козами</small></span></span>
         <span class="yp-ac__b"><h4>Косуля</h4><p>Небольшой изящный олень с белым «зеркальцем» сзади. Очень пугливы — подходите тихо.</p><span class="tag">Вольер с козами</span></span>
+      </span></button>
+      <button class="yp-ac" type="button" style="--bg:#4A5058" aria-label="Еноты — подробнее"><span class="yp-ac__in">
+        <span class="yp-ac__f"><span class="yp-ac__hint">↻</span><span class="yp-ac__num">🦝</span><span><h3>Еноты</h3><small>2 енота</small></span></span>
+        <span class="yp-ac__b"><h4>Два енота</h4><p>Любопытные зверьки в «маске» и с полосатым хвостом. Лапки у енота очень чуткие — он ощупывает всё, что находит.</p><span class="tag">Фото скоро</span></span>
       </span></button>
     </div>
     <div class="yp-lynx">
@@ -148,7 +152,7 @@
 .yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
 .yp-wk__say.is-on{opacity:1;transform:none}
 .yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb small{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
 .yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
 .yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
@@ -212,8 +216,8 @@
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
-    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
-          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    banquet:{kick:"Мероприятия · " + V, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/banquet-tour", short:"Банкетный зал", sub:V + " · 19 с",
+          cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
@@ -226,7 +230,7 @@
     /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
     /grill/.test(p)    ? ["grill23","grill1","guest"] :
     /etno/.test(p)     ? ["chum"] :
-    /events/.test(p)   ? ["tent","banquet","park"] :
+    /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
     /zoo/.test(p)      ? ["lynx","deer"] :
     ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
@@ -419,8 +423,8 @@
     <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Мини-зоопарк под Салехардом</span>
     <h2 class="yp-h2" data-yp-split>Мини-зоопарк <b>для всей семьи</b></h2>
     <div class="yp-seo__grid">
-      <div class="yp-seo__txt" data-yp-reveal><p>В мини-зоопарке Ямал Парка живут <b>две рыси, лисы и песец, кролики</b>, а в новом вольере — <b>две козы и косуля</b>. Это животные Севера, которых в городе не увидишь так близко. <b>Мини-зоопарк бесплатный</b> — он находится прямо на территории комплекса.</p><p>Рядом с вольерами — <b>детская площадка</b>, а для компаний — <b>пейнтбол и лазертаг</b>. После прогулки можно погреться в гриль-доме, в чуме или в бане.</p><p>Ямал Парк находится в 12 км от Салехарда, на дороге в Горнокнязевск, — около 16 минут на машине. Парковка на 50 машин. Часы работы уточняйте у администратора: <b>+7 900 399-10-33</b>.</p></div>
-      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Сколько стоит вход в мини-зоопарк?<i></i></summary><div>Бесплатно: мини-зоопарк находится на территории комплекса.</div></details><details><summary>Какие животные есть в мини-зоопарке?<i></i></summary><div>Две рыси, лисы и песец, кролики, две козы и косуля.</div></details><details><summary>Подходит ли мини-зоопарк для детей?<i></i></summary><div>Да, рядом с вольерами есть детская площадка.</div></details><details><summary>Что ещё есть рядом?<i></i></summary><div>Пейнтбол, лазертаг, гриль-дома, чум, бани и глэмпинг.</div></details><details><summary>Как добраться до мини-зоопарка?<i></i></summary><div>На машине — 12-й км дороги Салехард — Горнокнязевск, около 16 минут от центра Салехарда. Есть парковка на 50 машин.</div></details><details><summary>Когда работает мини-зоопарк?<i></i></summary><div>Часы работы уточняйте у администратора по телефону +7 900 399-10-33.</div></details></div>
+      <div class="yp-seo__txt" data-yp-reveal><p>В мини-зоопарке Ямал Парка живут <b>две рыси, лисы и песец, два енота, кролики</b>, а в новом вольере — <b>две козы и косуля</b>. Это животные Севера, которых в городе не увидишь так близко. <b>Мини-зоопарк бесплатный</b> — он находится прямо на территории комплекса.</p><p>Рядом с вольерами — <b>детская площадка</b>, а для компаний — <b>пейнтбол и лазертаг</b>. После прогулки можно погреться в гриль-доме, в чуме или в бане.</p><p>Ямал Парк находится в 12 км от Салехарда, на дороге в Горнокнязевск, — около 16 минут на машине. Парковка на 50 машин. Мини-зоопарк открыт с 10:00 до 23:00.</p></div>
+      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Сколько стоит вход в мини-зоопарк?<i></i></summary><div>Бесплатно: мини-зоопарк находится на территории комплекса.</div></details><details><summary>Какие животные есть в мини-зоопарке?<i></i></summary><div>Две рыси, лисы и песец, два енота, кролики, две козы и косуля.</div></details><details><summary>Подходит ли мини-зоопарк для детей?<i></i></summary><div>Да, рядом с вольерами есть детская площадка.</div></details><details><summary>Что ещё есть рядом?<i></i></summary><div>Пейнтбол, лазертаг, гриль-дома, чум, бани и глэмпинг.</div></details><details><summary>Как добраться до мини-зоопарка?<i></i></summary><div>На машине — 12-й км дороги Салехард — Горнокнязевск, около 16 минут от центра Салехарда. Есть парковка на 50 машин.</div></details><details><summary>Когда работает мини-зоопарк?<i></i></summary><div>Мини-зоопарк открыт с 10:00 до 23:00.</div></details></div>
     </div>
   </div>
 </section>

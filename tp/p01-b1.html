@@ -87,7 +87,7 @@
 @keyframes ypBirds{from{transform:translate(-200px,0)}to{transform:translate(1900px,-60px)}}
 @keyframes ypFlap{from{transform:scaleY(1)}to{transform:scaleY(.35)}}
 @media (prefers-reduced-motion:reduce){.yp-land .smoke,.yp-land .birds,.yp-land .birds path{animation:none}}
-.yp-hero__content{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;align-items:center;padding-top:calc(96px + env(safe-area-inset-top,0px));padding-bottom:28px}
+.yp-hero__content{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;align-items:center;padding-top:calc(var(--yp-hdr-h,80px) + 16px + env(safe-area-inset-top,0px));padding-bottom:28px}
 .yp-hero__chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .yp-chip{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--yp-mono);padding:9px 14px;border-radius:999px;background:rgba(10,18,28,.5);border:1px solid var(--yp-nightline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);white-space:nowrap}
 .yp-chip b{font-weight:500;color:var(--yp-aurora)}
@@ -149,6 +149,9 @@
   .yp-hero__hint,.yp-chip.is-opt{display:none}
 }
 @media (max-width:1320px) and (min-width:769px){.yp-hero__svc{grid-template-columns:1fr 1fr}}
+/* низкие телефоны: разделы уже в закреплённом ряду шапки — плитки не нужны, иначе кнопка «Выбрать даты» уезжает за экран */
+@media (max-width:768px) and (max-height:740px){.yp-hero__svc{display:none!important}}
+@media (max-width:768px) and (max-height:620px){.yp-hero__title{font-size:clamp(26px,8.2vw,34px)!important}.yp-hero__kicker{display:none}.yp-hero__content{padding-bottom:20px}}
 @media (prefers-reduced-motion:reduce){.yp-hero__stars{animation:none}}
 /* ---------- Разгруженный первый экран: в центре только заголовок; разделы — колонкой слева, небо — значками справа ---------- */
 .yp-hero__title{font-size:clamp(36px,4.7vw,86px)}
@@ -825,7 +828,7 @@
       <a class="yp-pcard" href="/zoo" style="--c:var(--yp-green)">
         <img src="https://static.tildacdn.com/tild3835-3063-4135-b435-343534613561/photo1719894279_1.jpeg" alt="Чернобурая лиса в мини-зоопарке" loading="lazy">
         <span class="yp-pcard__tag"><i></i>бесплатно</span>
-        <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в мини-зоопарке <span>→</span></span>
+        <h3>Мини-зоопарк</h3><p>Рыси, лисы и песец, еноты, кролики, козы и косуля. Рядом детская площадка, пейнтбол и лазертаг.</p><span class="yp-pcard__more">Кто живёт в мини-зоопарке <span>→</span></span>
       </a>
     </div>
   </div>

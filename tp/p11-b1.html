@@ -117,7 +117,7 @@
 .yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
 .yp-wk__say.is-on{opacity:1;transform:none}
 .yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb small{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
 .yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
 .yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
@@ -181,8 +181,8 @@
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
-    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
-          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    banquet:{kick:"Мероприятия · " + V, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/banquet-tour", short:"Банкетный зал", sub:V + " · 19 с",
+          cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
@@ -195,7 +195,7 @@
     /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
     /grill/.test(p)    ? ["grill23","grill1","guest"] :
     /etno/.test(p)     ? ["chum"] :
-    /events/.test(p)   ? ["tent","banquet","park"] :
+    /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
     /zoo/.test(p)      ? ["lynx","deer"] :
     ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];

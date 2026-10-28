@@ -117,7 +117,7 @@
 .yp-bb{padding-block:clamp(56px,10vw,150px) clamp(40px,5vw,80px);border-radius:32px 32px 0 0;margin-top:-32px;position:relative;z-index:2}
 .yp-bb__head{max-width:780px;margin-bottom:clamp(30px,4vw,60px)}
 .yp-bb__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(30px,5vw,80px)}
-.yp-bb__stick{position:sticky;top:96px;height:calc(100vh - 136px);height:calc(100svh - 136px);border-radius:28px;overflow:hidden;background:#1a0f0a}
+.yp-bb__stick{position:sticky;top:calc(var(--yp-hdr-h,80px) + 16px);height:calc(100vh - var(--yp-hdr-h,80px) - 56px);height:calc(100svh - var(--yp-hdr-h,80px) - 56px);border-radius:28px;overflow:hidden;background:#1a0f0a}
 .yp-bb__ph{position:absolute;inset:0;clip-path:inset(100% 0 0 0)}
 .yp-bb__ph.is-on{clip-path:inset(0 0 0 0)}
 .yp-bb__ph img{width:100%;height:100%;object-fit:cover}
@@ -315,7 +315,7 @@
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 /* На телефоне календарь остаётся сеткой из семи дней в строке. */
-@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:11px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -347,7 +347,7 @@
 (function(){
   var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
   var YP = window.YP || {}, U = YP.UNITS || {};
-  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2","b1"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
   var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
@@ -879,7 +879,7 @@
           </tbody>
           <tfoot><tr><td colspan="4">Минимум 3 часа. Продление после 23:00 — 7 000 ₽ в час. В праздничные дни — по тарифу четверга–воскресенья. С 15 декабря по 10 января — 6 000 ₽ в час («Черника» — 5 000 ₽).</td></tr></tfoot>
         </table></div></div>
-        <div class="yp-bp__note" data-yp-reveal=".1"><b>Входит:</b> парная, термопот, посуда, телевизор, Wi-Fi, холодильник, посудомоечная машина, санузел, душ, раздевалка. <b>Дополнительно:</b> полотенца, простыни, халаты, веники, закуски, напитки, PS5. Детям до 5 лет — обычно бесплатно.</div>
+        <div class="yp-bp__note" data-yp-reveal=".1"><b>Входит:</b> парная, термопот, посуда, телевизор, Wi-Fi, холодильник, посудомоечная машина, санузел, душ, раздевалка. <b>Дополнительно:</b> полотенца, простыни, халаты, веники, закуски, напитки, PS5. Детям до 5 лет бесплатно.</div>
       </div>
       <form class="yp-calc" data-yp-calc data-yp-reveal=".15" onsubmit="return false">
         <h3>Посчитать вечер</h3>

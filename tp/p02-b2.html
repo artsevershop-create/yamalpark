@@ -70,9 +70,10 @@
       <p class="yp-lead">Нажмите на точку на схеме — покажем фото, цену и что внутри. Бронирование в один клик.</p>
     </div>
     <div class="yp-pk__tabs" role="group" aria-label="Что выбрать" data-yp-pkt>
-      <button type="button" aria-pressed="true" data-cat="stay" style="--c:var(--yp-blue)"><i></i>Проживание <small>3</small></button>
+      <button type="button" aria-pressed="true" data-cat="all" style="--c:var(--yp-ink)"><i></i>Все объекты <small>14</small></button>
+      <button type="button" aria-pressed="false" data-cat="stay" style="--c:var(--yp-blue)"><i></i>Проживание <small>3</small></button>
       <button type="button" aria-pressed="false" data-cat="banya" style="--c:var(--yp-red)"><i></i>Бани <small>3</small></button>
-      <button type="button" aria-pressed="false" data-cat="grill" style="--c:#E07A2E"><i></i>Гриль и гостевые дома <small>5</small></button>
+      <button type="button" aria-pressed="false" data-cat="grill" style="--c:#E07A2E"><i></i>Гриль и гостевые дома <small>6</small></button>
       <button type="button" aria-pressed="false" data-cat="etno" style="--c:#8A6A3D"><i></i>Чум и шатёр <small>2</small></button>
     </div>
     <div class="yp-pk__grid">
@@ -82,7 +83,7 @@
             <img src="https://artsevershop-create.github.io/yamalpark/img/new/map-2026.webp" alt="Схема загородного комплекса Ямал Парк, 2026 год" loading="lazy">
             <div class="yp-pk__dim" aria-hidden="true"></div>
           </div>
-          <div class="yp-pk__ui"><span class="yp-pk__hint">Нажмите на точку</span><button class="yp-pk__all" type="button" data-yp-pkall>Вся схема</button></div>
+          <div class="yp-pk__ui"><span class="yp-pk__hint">Все объекты на схеме · нажмите на точку</span><button class="yp-pk__all" type="button" data-yp-pkall>Вся схема</button></div>
         </div>
       </div>
       <article class="yp-pk__card" aria-live="polite" data-yp-pkc>
@@ -123,34 +124,36 @@
     {id:"g2", cat:"grill", n:10, pt:[47.9,14.7], name:"Гриль-дом №2", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-a.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
     {id:"g3", cat:"grill", n:11, pt:[41.3,14.7], name:"Гриль-дом №3", img:"https://artsevershop-create.github.io/yamalpark/img/p/grill-in-c.webp", meta:["15–20 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 10 000 ₽", feat:["Гриль под вытяжкой","Лавки вокруг гриля","Шкаф"], type:"grill", page:"/grill"},
     {id:"h1", cat:"grill", n:6, pt:[91.3,40.4], name:"Гостевой дом №1", img:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-in.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
+    {id:"b1", cat:"grill", n:8, pt:[69.3,13.2], name:"Летняя беседка", img:"https://artsevershop-create.github.io/yamalpark/img/p/besedka.webp", meta:["до 15 гостей","12:00–22:00"], price:6000, unit:"₽ / день", feat:["Одноразовая посуда","Розжиг","Решётка"], type:"grill", page:"/grill"},
     {id:"h2", cat:"grill", n:7, pt:[82.8,46.8], name:"Гостевой дом №2", img:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp", meta:["20–25 гостей","12:00–22:00"], price:8000, unit:"₽ / день, вс–чт · пт–сб 12 000 ₽", feat:["Гриль-зона рядом","Стол и 4 лавки","Холодильник"], type:"grill", page:"/grill"},
     {id:"chum", cat:"etno", n:12, pt:[65.4,69.6], name:"Чум и смотровая площадка", img:"https://artsevershop-create.github.io/yamalpark/img/p/chum-in.webp", meta:["15–20 гостей","своя терраса"], price:12000, unit:"₽ пн–чт · пт–вс 15 000 ₽", feat:["Обогретый чум","Костровище","Казан и мангал"], type:"chum", page:"/etno"},
     {id:"tent", cat:"etno", n:13, pt:[80.6,68.2], name:"Шатёр «Сияние севера»", img:"https://artsevershop-create.github.io/yamalpark/img/p/tent-aurora-in.webp", meta:["40 м²","до 20 гостей","12:00–23:00"], price:10000, unit:"₽ / день, вс–чт · пт–сб 15 000 ₽", feat:["Панорамное окно","Дровяная печь","Сияние над столом"], type:"event", page:"/events"}
   ];
   var view = sec.querySelector("[data-yp-pkv]"), zoom = sec.querySelector("[data-yp-pkz]"), dim = zoom.querySelector(".yp-pk__dim");
   var card = sec.querySelector("[data-yp-pkc]"), ph = sec.querySelector("[data-yp-pkph]"), wipe = ph.querySelector(".yp-pk__wipe");
-  var list = sec.querySelector("[data-yp-pkl]"), cat = "stay", cur = null, shown = 0, pins = {};
+  var inCat = function(u, c){ return c === "all" || u.cat === c; };
+  var list = sec.querySelector("[data-yp-pkl]"), cat = "all", cur = null, shown = 0, pins = {};
   U.forEach(function(u){
     var b = document.createElement("button"); b.type = "button"; b.className = "yp-pk__pin"; b.style.left = u.pt[0] + "%"; b.style.top = u.pt[1] + "%";
     b.style.setProperty("--c", COL[u.cat]); b.setAttribute("aria-label", u.name); b.setAttribute("data-yp-cursor", "Выбрать");
     b.innerHTML = ICON[u.cat] + '<span class="yp-pk__tip">' + u.name + "</span>";
     if(u.pt[0] > 70) b.classList.add("tip-l"); else if(u.pt[0] < 30) b.classList.add("tip-r");
-    b.addEventListener("click", function(){ if(u.cat !== cat) setCat(u.cat, true); select(u, true); });
+    b.addEventListener("click", function(){ if(cat !== "all" && u.cat !== cat) setCat(u.cat, true); select(u, true); });
     zoom.appendChild(b); pins[u.id] = b;
   });
   function renderList(){
-    list.innerHTML = U.filter(function(u){ return u.cat === cat; }).map(function(u){ return '<button type="button" data-id="' + u.id + '" style="--c:' + COL[u.cat] + '">' + u.name + "</button>"; }).join("");
+    list.innerHTML = U.filter(function(u){ return inCat(u, cat); }).map(function(u){ return '<button type="button" data-id="' + u.id + '" style="--c:' + COL[u.cat] + '">' + u.name + "</button>"; }).join("");
     list.querySelectorAll("button").forEach(function(b){ b.classList.toggle("is-on", cur && b.getAttribute("data-id") === cur.id); });
   }
   list.addEventListener("click", function(e){ var b = e.target.closest("button[data-id]"); if(b) select(U.filter(function(u){ return u.id === b.getAttribute("data-id"); })[0], true); });
   function setCat(c, silent){
     cat = c;
     sec.querySelectorAll("[data-yp-pkt] button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-cat") === c)); });
-    U.forEach(function(u){ pins[u.id].classList.toggle("is-off", u.cat !== c); });
+    U.forEach(function(u){ pins[u.id].classList.toggle("is-off", !inCat(u, c)); });
     if(sec.classList.contains("is-zoom")) zoomOut();
-    if(motion) G.fromTo(U.filter(function(u){ return u.cat === c; }).map(function(u){ return pins[u.id]; }), {scale:0}, {scale:1, duration:.55, ease:"back.out(2.4)", stagger:.06, overwrite:true, clearProps:"transform"});
+    if(motion) G.fromTo(U.filter(function(u){ return inCat(u, c); }).map(function(u){ return pins[u.id]; }), {scale:0}, {scale:1, duration:.55, ease:"back.out(2.4)", stagger:.06, overwrite:true, clearProps:"transform"});
     renderList();
-    if(!silent) select(U.filter(function(u){ return u.cat === c; })[0], false);
+    if(!silent) select(U.filter(function(u){ return inCat(u, c); })[0], false);
   }
   sec.querySelectorAll("[data-yp-pkt] button").forEach(function(b){ b.addEventListener("click", function(){ setCat(b.getAttribute("data-cat")); }); });
 
@@ -207,14 +210,13 @@
   sec.querySelector("[data-yp-pkbook]").addEventListener("click", function(){ if(cur) YP.openBooking({type:cur.type, object:cur.id}); });
   window.addEventListener("resize", function(){ if(sec.classList.contains("is-zoom") && cur) zoomTo(cur); });
 
-  setCat("stay", true); fill(U[0]); cur = U[0]; renderList();
+  setCat("all", true); fill(U[0]); cur = U[0]; renderList();
   if(motion && window.ScrollTrigger){
     var all = U.map(function(u){ return pins[u.id]; });
     G.set(all, {scale:0});
     ScrollTrigger.create({trigger:view, start:"top 70%", once:true, onEnter:function(){
       G.to(all, {scale:1, duration:.6, ease:"back.out(2.5)", stagger:{each:.05, from:"random"}, clearProps:"transform"});
-      /* подсказка: через секунду показываем, как работает приближение */
-      setTimeout(function(){ if(!sec.classList.contains("is-zoom") && cur) { select(cur, true); } }, 1600);
+      /* сначала вся схема со всеми объектами; приближение — только по клику */
     }});
   }
 })();
@@ -435,7 +437,7 @@
 .yp-night__best{margin:6px 0 0;font-size:14px;color:#C3D0D8;min-height:2.9em}
 .yp-chart{position:relative;height:130px;margin-top:12px;display:grid;grid-template-columns:repeat(13,1fr);gap:3px;align-items:end;padding-right:56px}
 .yp-chart__ref{position:absolute;left:0;right:56px;border-top:1px dashed rgba(234,241,244,.18);pointer-events:none}
-.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
+.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
 .yp-bar{position:relative;height:100%;display:flex;align-items:flex-end;cursor:default}
 .yp-bar b,.yp-bar s{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 1px 1px;transform-origin:50% 100%}
 .yp-bar s{background:rgba(234,241,244,.12);text-decoration:none}
@@ -443,7 +445,7 @@
 .yp-bar.is-light b,.yp-bar.is-light s{background:repeating-linear-gradient(45deg,rgba(234,241,244,.10) 0 3px,transparent 3px 6px);height:100%!important}
 .yp-bar:hover b{filter:brightness(1.3)}
 .yp-bar.is-peak::after{content:"";position:absolute;left:50%;top:-12px;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--yp-aurora)}
-.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted)}
 .yp-chart__x span{text-align:center;white-space:nowrap}
 .yp-night__tip{margin:10px 0 0;font:500 12px var(--yp-mono);color:#D7E2E8;min-height:1.4em}
 .yp-night .yp-btn{margin-top:12px;align-self:flex-start;padding:12px 18px;font-size:14px}
@@ -727,8 +729,8 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
       <details><summary>Сколько стоит проживание?<i></i></summary><div class="yp-faq__a"><div><p>Купольный домик — 9 000 ₽ за сутки с воскресенья по четверг и 13 000 ₽ в пятницу и субботу. Дома «Волк» и «Медведь» — 8 000 ₽ с понедельника по четверг и 12 000 ₽ с пятницы по воскресенье. С 15 декабря по 10 января — новогодние цены: купол 13 000 ₽, «Волк» и «Медведь» 15 000 ₽. Продление в день выезда — 1 000 ₽ в час, если домик свободен.</p></div></div></details>
       <details><summary>Не холодно ли зимой?<i></i></summary><div class="yp-faq__a"><div><p>Нет. В домиках тёплые полы, комфортно даже в −40 °C. Комплекс работает круглый год.</p></div></div></details>
       <details><summary>Есть ли Wi-Fi?<i></i></summary><div class="yp-faq__a"><div><p>Да, бесплатный Wi-Fi работает в большинстве домиков, банях и на основной территории. В отдалённых точках сигнал может быть слабее.</p></div></div></details>
-      <details><summary>Можно с детьми?<i></i></summary><div class="yp-faq__a"><div><p>Да. На территории есть детская площадка и мини-зоопарк. Детям до 5 лет проживание обычно бесплатно, уточняйте при бронировании.</p></div></div></details>
-      <details><summary>Какие условия отмены?<i></i></summary><div class="yp-faq__a"><div><p>Отмена за 7 дней и раньше — возврат 100%. Отмена менее чем за 3 дня или неявка — предоплата не возвращается. Полные условия в разделе «Документы».</p></div></div></details>
+      <details><summary>Можно с детьми?<i></i></summary><div class="yp-faq__a"><div><p>Да. На территории есть детская площадка и мини-зоопарк. Детям до 5 лет проживание бесплатно.</p></div></div></details>
+      <details><summary>Какие условия отмены?<i></i></summary><div class="yp-faq__a"><div><p>Отмена менее чем за 3 дня или неявка — предоплата не возвращается. Полные условия в разделе «Документы».</p></div></div></details>
     </div>
   </div>
 </section>

@@ -59,6 +59,35 @@
 .yp-hdr__in{gap:16px}.yp-nav a{padding:10px 8px}
 @media (max-width:1320px){.yp-nav,.yp-hdr__in>.yp-btn{display:none}.yp-burger{display:block}}
 @media (min-width:1321px){.yp-menu{display:none}}
+:root{--yp-hdr-h:80px}
+.yp-subnav{display:none}
+@media (max-width:1320px){
+  :root{--yp-hdr-h:120px}
+  .yp-hdr__in{height:68px}
+  .yp-subnav{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 var(--yp-gutter) 10px}
+  .yp-subnav::-webkit-scrollbar{display:none}
+  .yp-subnav a{flex:0 0 auto;text-decoration:none;font-size:14px;font-weight:500;line-height:1;padding:13px 16px;border-radius:999px;white-space:nowrap;box-shadow:inset 0 0 0 1px var(--yp-line);transition:background .25s,color .25s}
+  .yp-hdr.is-dark .yp-subnav a{box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+  .yp-subnav a:hover{background:rgba(127,127,127,.14)}
+  .yp-subnav a[aria-current="page"]{background:var(--yp-ink);color:#fff;box-shadow:none}
+  .yp-hdr.is-dark .yp-subnav a[aria-current="page"]{background:#fff;color:var(--yp-ink)}
+  .yp-hdr.is-open .yp-subnav{display:none}
+}
+
+/* нижняя панель на телефоне: позвонить и забронировать — всегда под рукой после первого экрана */
+.yp-act{display:none}
+@media (max-width:768px){
+  .yp.yp-act{position:fixed;left:0;right:0;bottom:0;z-index:9985;display:flex;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:rgba(243,244,241,.9);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);box-shadow:0 -1px 0 var(--yp-line);transform:translateY(110%);transition:transform .35s var(--yp-ease);pointer-events:none}
+  .yp.yp-act.is-on{transform:none;pointer-events:auto}
+  .yp-act a,.yp-act button{flex:1 1 0;min-height:48px;border-radius:999px;font:600 16px var(--yp-f);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border:0;cursor:pointer}
+  .yp-act a{flex:0 0 auto;padding:0 20px;background:#fff;color:var(--yp-ink);box-shadow:inset 0 0 0 1px var(--yp-line)}
+  .yp-act a svg{width:18px;height:18px}
+  .yp-act button{background:var(--yp-ink);color:#fff}
+  html.yp-act-on .hotbot-widget-buttons-wrap-chat{bottom:calc(12px + 70px) !important}
+  html.yp-act-on .hotbot-widget-buttons-wrap-shop{bottom:calc(66px + 70px) !important}
+  html.yp-act-on body{padding-bottom:0}
+}
+@media (max-width:370px){.yp-hdr__in{gap:10px}.yp-logo{gap:8px}.yp-logo svg{width:38px;height:16px}.yp-logo img{height:13px}.yp-hdr__call{width:40px;height:40px}.yp-burger{width:42px;height:42px}.yp-burger span,.yp-burger::before,.yp-burger::after{left:12px;right:12px}.yp-burger::before{top:15px}.yp-burger span{top:20px}.yp-burger::after{top:25px}}
 </style>
 <header class="yp yp-hdr" id="yp-hdr">
   <div class="yp-wrap yp-hdr__in">
@@ -96,7 +125,18 @@
       <nav class="yp-lang" aria-label="Язык сайта" data-yp-notr><a href="/" data-yp-to="ru" data-yp-nolang lang="ru">RU</a><a href="/en" data-yp-to="en" data-yp-nolang lang="en">EN</a><a href="/zh" data-yp-to="zh" data-yp-nolang lang="zh">中文</a></nav>
     </div>
   </div>
+  <nav class="yp-subnav" aria-label="Основное меню">
+    <a href="/glamping">Глэмпинг</a>
+    <a href="/bani">Бани</a>
+    <a href="/grill">Гриль-дома</a>
+    <a href="/etno">Этно</a>
+    <a href="/zoo">Мини-зоопарк</a>
+    <a href="/severnoe-siyanie">Сияние</a>
+    <a href="/events">Мероприятия</a>
+    <a href="/contacts">Контакты</a>
+  </nav>
 </header>
+<div class="yp yp-act" id="yp-act" aria-label="Быстрые действия"><a href="tel:+79003991033" aria-label="Позвонить: +7 900 399-10-33"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Позвонить</a><button type="button" data-yp-book>Забронировать</button></div>
 <script>
 (function(){
   var h = document.getElementById("yp-hdr"); if(!h) return;
@@ -129,5 +169,30 @@
     });
   }
   langLinks(); window.addEventListener("hashchange", langLinks);
+  /* нижняя панель (телефон): после первого экрана, прячется у блока брони, в подвале и при открытом меню */
+  var bar = document.getElementById("yp-act"), hide = 0, mq = window.matchMedia("(max-width:768px)");
+  function barState(){
+    if(!bar) return;
+    var on = mq.matches && window.scrollY > 520 && !hide && !h.classList.contains("is-open");
+    bar.classList.toggle("is-on", on); document.documentElement.classList.toggle("yp-act-on", on);
+  }
+  if(bar && "IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.__v = e.isIntersecting; }); hide = [].some.call(document.querySelectorAll("#booking,#tl-search-form,.yp-foot,.yp-faq__form"), function(n){ return n.__v; }) ? 1 : 0; barState(); }, {threshold:0, rootMargin:"0px 0px -60px 0px"});
+    document.addEventListener("DOMContentLoaded", function(){ document.querySelectorAll("#booking,#tl-search-form,.yp-foot,.yp-faq__form").forEach(function(n){ io.observe(n); }); });
+    window.addEventListener("load", function(){ document.querySelectorAll("#booking,#tl-search-form,.yp-foot,.yp-faq__form").forEach(function(n){ io.observe(n); }); });
+  }
+  window.addEventListener("scroll", barState, {passive:true}); window.addEventListener("resize", barState); document.addEventListener("click", function(){ setTimeout(barState, 50); }); barState();
+  /* второй ряд разделов: подсветить текущий и прокрутить к нему */
+  function seg(u){ var p = String(u||"").split("#")[0].split("?")[0].split("/").filter(Boolean).pop() || ""; return p.replace(".html",""); }
+  function markSub(){
+    var cur = seg(location.pathname), sn = h.querySelector(".yp-subnav"); if(!sn) return;
+    sn.querySelectorAll("a").forEach(function(a){
+      var on = cur && seg(a.getAttribute("data-yp-path") || a.getAttribute("href")) === cur;
+      if(on) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+      if(on && sn.scrollWidth > sn.clientWidth) sn.scrollLeft = Math.max(0, a.offsetLeft - 24);
+    });
+  }
+  h.querySelectorAll(".yp-subnav a").forEach(function(a){ a.setAttribute("data-yp-path", a.getAttribute("href")); });
+  markSub(); window.addEventListener("load", markSub);
 })();
 </script>

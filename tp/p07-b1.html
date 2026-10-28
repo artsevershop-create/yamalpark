@@ -62,8 +62,8 @@
     </div>
     <div class="yp-vg" data-yp-vg>
       <article class="yp-vc yp-vc--big" data-min="40" data-max="150">
-        <div class="yp-vc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/new/banquet-aerial.webp" alt="Банкетный зал под куполом с высоты" loading="lazy"><span class="yp-vc__cap">100–150 гостей</span></div>
-        <div class="yp-vc__b"><h3>Банкетный зал под куполом</h3><p>Просторный зал с панорамным остеклением: гости видят тундру прямо во время праздника. Купольная форма выдерживает северные ветра и снег — как чум.</p><span class="yp-vc__price">50 000 ₽ пн–чт · 70 000 ₽ пт–вс · 15.12–10.01 — 120 000 ₽ · 12:00–23:00</span></div>
+        <div class="yp-vc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-wide.webp" alt="Банкетный зал под куполом: длинные столы и панорамные окна" loading="lazy"><span class="yp-vc__cap">100–150 гостей</span></div>
+        <div class="yp-vc__b"><h3>Банкетный зал под куполом</h3><p>Просторный зал с панорамным остеклением: гости видят тундру прямо во время праздника. Купольная форма выдерживает северные ветра и снег — как чум.</p><span class="yp-vc__price">50 000 ₽ пн–чт · 70 000 ₽ пт–вс и 15.12–10.01 · 12:00–23:00</span></div>
       </article>
       <article class="yp-vc" data-min="10" data-max="20">
         <div class="yp-vc__ph"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-aurora-in.webp" alt="Северное сияние сквозь грани шатра «Сияние севера»" loading="lazy"><span class="yp-vc__cap">до 20 гостей</span></div>
@@ -100,6 +100,76 @@
   inp.addEventListener("input", upd); upd();
   if(window.gsap && window.ScrollTrigger && !YP.reduced)
     gsap.from(cards, {y:60, opacity:0, duration:1, ease:"power3.out", stagger:.08, clearProps:"transform,opacity", scrollTrigger:{trigger:sec.querySelector("[data-yp-vg]"), start:"top 82%"}});
+})();
+</script>
+
+<!-- Мероприятия · 02b · Банкетный зал под куполом: большое фото + лента снимков зала, характеристики и цены (по каталогу сайта).
+     Фото зала — присланы владельцем 19.10.2026 (без людей и без имён гостей). -->
+<style>
+.yp-hl{padding-block:clamp(56px,9vw,140px);overflow:hidden}
+.yp-hl__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,64px);align-items:center}
+.yp-hl__view{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:4/4.5;background:#cfd6d9;box-shadow:0 50px 90px -45px rgba(20,30,40,.55)}
+.yp-hl__view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.yp-hl__view img.is-out{opacity:0}
+.yp-hl__strip{display:flex;gap:8px;margin-top:12px;overflow-x:auto;scrollbar-width:none;padding:4px 2px}
+.yp-hl__strip::-webkit-scrollbar{display:none}
+.yp-hl__strip button{flex:0 0 auto;width:78px;height:98px;padding:0;border:0;border-radius:14px;overflow:hidden;cursor:pointer;opacity:.65;outline:2px solid transparent;outline-offset:2px;transition:opacity .3s,outline-color .3s,transform .4s var(--yp-ease)}
+.yp-hl__strip button:hover{opacity:1;transform:translateY(-3px)}
+.yp-hl__strip button.is-on{opacity:1;outline-color:var(--yp-green)}
+.yp-hl__strip img{width:100%;height:100%;object-fit:cover}
+.yp-hl dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:26px 0 0;background:var(--yp-line);border-radius:18px;overflow:hidden}
+.yp-hl dl div{background:var(--yp-paper);padding:14px 16px}
+.yp-hl dt{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-muted)}
+.yp-hl dd{margin:4px 0 0;font-weight:600}
+.yp-hl__ideas{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.yp-hl__ideas span{font-size:13px;padding:7px 11px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--yp-line)}
+.yp-hl__buy{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:24px}
+.yp-hl__price{font:300 clamp(30px,3vw,44px)/1 var(--yp-fd);letter-spacing:-.04em}
+.yp-hl__price small{display:block;margin-top:8px;font:400 14px var(--yp-f);letter-spacing:0;color:var(--yp-muted)}
+@media (max-width:980px){.yp-hl__grid{grid-template-columns:minmax(0,1fr)}.yp-hl__view{aspect-ratio:4/3.6}}
+</style>
+<section class="yp yp-hl" id="hall">
+  <div class="yp-wrap yp-hl__grid">
+    <div>
+      <div class="yp-hl__view" data-yp-hlv>
+        <img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-ceiling.webp" alt="Банкетный зал изнутри: купол со складками белой ткани и панорамные окна" loading="lazy">
+      </div>
+      <div class="yp-hl__strip" data-yp-hls>
+        <button type="button" class="is-on" data-src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-ceiling.webp" data-alt="Банкетный зал изнутри: купол со складками белой ткани и панорамные окна" aria-label="Зал: купол и окна"><img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-ceiling.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-wide.webp" data-alt="Банкетный зал: длинные столы и купол" aria-label="Зал: длинные столы"><img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-wide.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-tables.webp" data-alt="Банкетный зал: накрытые столы у панорамных окон" aria-label="Зал: накрытые столы"><img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-tables.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-window.webp" data-alt="Банкетный зал: столы с белыми чехлами у окон" aria-label="Зал: столы у окон"><img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-window.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-exterior.webp" data-alt="Банкетный зал снаружи в ясный день" aria-label="Зал снаружи"><img src="https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-exterior.webp" alt="" loading="lazy"></button>
+      </div>
+    </div>
+    <div>
+      <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Для больших праздников</span>
+      <h2 class="yp-h2" data-yp-split>Банкетный зал <b>под куполом</b></h2>
+      <p class="yp-lead">Просторный зал с панорамными окнами и мягким светом под куполом. Столы можно расставить под свадьбу, корпоратив или длинный общий стол.</p>
+      <dl>
+        <div><dt>Гости</dt><dd>100–150</dd></div>
+        <div><dt>Время</dt><dd>весь день, 12:00–23:00</dd></div>
+        <div><dt>Внутри</dt><dd>панорамные окна, купол</dd></div>
+        <div><dt>Рядом</dt><dd>площадь и парковка на 50 машин</dd></div>
+      </dl>
+      <div class="yp-hl__ideas"><span>Свадьбы</span><span>Корпоративы</span><span>Юбилеи</span><span>Дни рождения</span><span>Презентации</span></div>
+      <div class="yp-hl__buy">
+        <div class="yp-hl__price">50 000 ₽<small>пн–чт и вс · пт, сб, праздники и с 15 декабря по 10 января — 70 000 ₽</small></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="yp-btn yp-btn--green" type="button" data-yp-book="event">Обсудить праздник</button><a class="yp-btn yp-btn--ghost" href="/corporate">Корпоративы</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec = document.getElementById("hall"); if(!sec) return;
+  var view = sec.querySelector("[data-yp-hlv]"), strip = sec.querySelector("[data-yp-hls]"), img = view.querySelector("img");
+  strip.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b || b.classList.contains("is-on")) return;
+    strip.querySelectorAll("button").forEach(function(x){ x.classList.toggle("is-on", x === b); });
+    img.classList.add("is-out");
+    setTimeout(function(){ img.src = b.dataset.src; img.alt = b.dataset.alt || ""; img.onload = function(){ img.classList.remove("is-out"); }; }, 220);
+  });
 })();
 </script>
 
@@ -147,6 +217,9 @@
       <div class="yp-tn__strip" data-yp-tns>
         <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-inside.webp" aria-label="Шатёр изнутри: панорамное окно"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-inside.webp" alt="" loading="lazy"></button>
         <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-inside2.webp" aria-label="Шатёр изнутри: печь и вход"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-inside2.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-table-dome.webp" aria-label="Шатёр: длинный стол с закусками и вид на тайгу"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-table-dome.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-table-1.webp" aria-label="Шатёр: накрытый стол с закусками"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-table-1.webp" alt="" loading="lazy"></button>
+        <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-table-2.webp" aria-label="Шатёр: закуски на столе"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-table-2.webp" alt="" loading="lazy"></button>
         <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-ext.webp" aria-label="Шатёр снаружи"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-ext.webp" alt="" loading="lazy"></button>
         <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-frost.webp" aria-label="Шатёр в инее"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-frost.webp" alt="" loading="lazy"></button>
         <button type="button" data-src="https://artsevershop-create.github.io/yamalpark/img/p/tent-aurora.webp" aria-label="Сияние над территорией у шатра"><img src="https://artsevershop-create.github.io/yamalpark/img/p/tent-aurora.webp" alt="" loading="lazy"></button>
@@ -255,7 +328,7 @@
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 /* На телефоне календарь остаётся сеткой из семи дней в строке. */
-@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:11px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -287,7 +360,7 @@
 (function(){
   var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
   var YP = window.YP || {}, U = YP.UNITS || {};
-  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2","b1"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
   var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
@@ -450,7 +523,7 @@
 .yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
 .yp-wk__say.is-on{opacity:1;transform:none}
 .yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb small{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
 .yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
 .yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
@@ -514,8 +587,8 @@
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
-    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
-          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    banquet:{kick:"Мероприятия · " + V, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/banquet-tour", short:"Банкетный зал", sub:V + " · 19 с",
+          cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
@@ -528,7 +601,7 @@
     /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
     /grill/.test(p)    ? ["grill23","grill1","guest"] :
     /etno/.test(p)     ? ["chum"] :
-    /events/.test(p)   ? ["tent","banquet","park"] :
+    /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
     /zoo/.test(p)      ? ["lynx","deer"] :
     ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
@@ -660,7 +733,7 @@
 })();
 </script>
 
-<!-- Мероприятия · 03 · Форматы (бегущие ленты в двух направлениях) и прошедший фестиваль «Лето в Ямал Парке» (12 июня 2026) -->
+<!-- Мероприятия · 03 · Форматы (бегущие ленты в двух направлениях) и прошедший фестиваль «Лето в Ямал Парке» (12 июня 2025) -->
 <style>
 .yp-fm{padding-block:clamp(56px,8vw,120px);background:var(--yp-paper);overflow:hidden}
 .yp-fm__rows{margin-top:clamp(30px,4vw,50px);display:grid;gap:12px}
@@ -669,7 +742,14 @@
 .yp-fm__row span.hl{background:var(--yp-ink);color:#fff}
 .yp-fest{margin-top:clamp(60px,7vw,100px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);align-items:center}
 .yp-fest__img{border-radius:30px;overflow:hidden;aspect-ratio:4/3}
-.yp-fest__img img{width:100%;height:100%;object-fit:cover}
+.yp-fest__img{position:relative;background:#000}
+.yp-fest__img img,.yp-fest__img video{width:100%;height:100%;object-fit:cover;display:block}
+.yp-fest__img.is-video{aspect-ratio:16/9}.yp-fest__img video{object-fit:contain}
+.yp-fest__play{position:absolute;left:18px;bottom:18px;display:flex;align-items:center;gap:12px;border:0;cursor:pointer;padding:10px 20px 10px 10px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--yp-ink);font:600 15px var(--yp-f);transition:transform .4s var(--yp-ease)}
+.yp-fest__play:hover{transform:scale(1.04)}
+.yp-fest__play svg{width:40px;height:40px;padding:12px;border-radius:50%;background:var(--yp-red);color:#fff}
+.yp-fest__play span{display:grid;text-align:left;line-height:1.2}
+.yp-fest__play small{font:400 12px var(--yp-f);color:var(--yp-muted)}
 .yp-fest h3{margin:12px 0 0;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;letter-spacing:-.03em}
 .yp-fest p{color:var(--yp-muted);margin:16px 0 0;max-width:46ch}
 .yp-fest ul{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
@@ -687,9 +767,9 @@
   </div>
   <div class="yp-wrap">
     <div class="yp-fest">
-      <div class="yp-fest__img" data-yp-img><img src="https://artsevershop-create.github.io/yamalpark/img/new/fest-stage-top-1.webp" alt="Летний фестиваль в Ямал Парке: сцена и гости, вид сверху" loading="lazy"></div>
+      <div class="yp-fest__img" data-yp-img data-yp-fv><img src="https://artsevershop-create.github.io/yamalpark/img/new/fest-stage-top-1.webp" alt="Летний фестиваль в Ямал Парке: сцена и гости, вид сверху" loading="lazy"><button class="yp-fest__play" type="button" aria-label="Смотреть фильм о фестивале"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><span>Смотреть фильм<small>2 минуты</small></span></button></div>
       <div data-yp-reveal>
-        <span class="yp-eyebrow" style="--c:var(--yp-red)"><i></i>Было · 12 июня 2026</span>
+        <span class="yp-eyebrow" style="--c:var(--yp-red)"><i></i>Было · 12 июня 2025</span>
         <h3>«Лето в Ямал Парке»</h3>
         <p>Первый летний музыкальный фестиваль года: живой звук, DJ, фудкорт, зоны отдыха и северный колорит. Следите за анонсами следующих событий в наших соцсетях.</p>
         <ul><li>Живой звук</li><li>DJ</li><li>Фудкорт</li><li>18+</li></ul>
@@ -698,6 +778,15 @@
     </div>
   </div>
 </section>
+<script>
+(function(){
+  var box = document.querySelector("[data-yp-fv]"); if(!box) return;
+  box.querySelector(".yp-fest__play").addEventListener("click", function(){
+    var v = document.createElement("video"); v.src = "https://artsevershop-create.github.io/yamalpark/img/video/festival-leto.mp4"; v.poster = "https://artsevershop-create.github.io/yamalpark/img/video/festival-leto.webp"; v.controls = true; v.autoplay = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("aria-label", "Фильм о фестивале «Лето в Ямал Парке»");
+    box.innerHTML = ""; box.classList.add("is-video"); box.appendChild(v); v.play && v.play().catch(function(){});
+  });
+})();
+</script>
 <script>
 (function(){
   var rows = document.querySelectorAll("[data-yp-fm]"); if(!rows.length) return;

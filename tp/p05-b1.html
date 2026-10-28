@@ -159,7 +159,7 @@
 @media (max-width:1000px){.yp-free__box{grid-template-columns:minmax(0,1fr)}}
 @media (pointer:coarse),(max-width:768px){.yp-free__len button,.yp-free__units button,.yp-free__groups button{min-height:42px}}
 /* На телефоне календарь остаётся сеткой из семи дней в строке. */
-@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:10px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
+@media (max-width:768px){.yp-free__days.month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;mask-image:none}.yp-free__days.month .yp-free__day{min-height:62px;padding:7px 2px 6px}.yp-free__days.month .yp-free__day b{font-size:16px}.yp-free__days.month .yp-free__day small{font-size:11px;letter-spacing:-.02em}.yp-free__days.month .yp-free__day small i{display:none}.yp-free__week{gap:4px}.yp-free__month{margin-top:14px}}
 </style>
 <section class="yp yp-free" id="free">
   <div class="yp-wrap">
@@ -191,7 +191,7 @@
 (function(){
   var sec = document.getElementById("free"); if(!sec || sec.getAttribute("data-yp-done")) return; sec.setAttribute("data-yp-done", "1");
   var YP = window.YP || {}, U = YP.UNITS || {};
-  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
+  var GROUPS = {stay:["Глэмпинг", ["dome","volk","medved"], 30], banya:["Бани", ["moroshka","brusnika","chernika"], 14], day:["Гриль и гостевые дома", ["g1","g2","g3","h1","h2","b1"], 30], fest:["Чум и праздники", ["chum","tent","hall"], 30]};
   var p = location.pathname.replace(/^\/(en|zh)(?=\/|$)/, "").replace(/^(.*\/)?(en-|zh-)?/, "/").replace(/\.html$/, "").replace(/^\/index$/, "/");
   var SET = /new-year/.test(p) ? ["stay","fest","banya"] : /glamping/.test(p) ? ["stay"] : /bani/.test(p) ? ["banya"] : /grill/.test(p) ? ["day"] : /etno/.test(p) ? [["fest", ["chum"]]] : /events/.test(p) ? [["fest", ["tent","hall","chum"]]] : ["stay","banya","day","fest"];
   var groups = SET.map(function(g){ var k = typeof g === "string" ? g : g[0], G = GROUPS[k]; return {k:k, name:G[0], units:typeof g === "string" ? G[1] : g[1], days:G[2]}; });
@@ -354,7 +354,7 @@
 .yp-wk__say{font:500 13px var(--yp-f);color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;background:rgba(10,18,28,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--yp-ease);white-space:nowrap}
 .yp-wk__say.is-on{opacity:1;transform:none}
 .yp-wk__fxb{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:18px;background:rgba(10,18,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.yp-wk__fxb small{font:500 10px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
+.yp-wk__fxb small{font:500 11px var(--yp-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--yp-aurora);padding:4px 8px 2px}
 .yp-wk__fxb button{display:flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:9px 12px;background:transparent;color:#fff;font:600 13px var(--yp-f);cursor:pointer;text-align:left;transition:background .25s,color .25s}
 .yp-wk__fxb button:hover{background:rgba(255,255,255,.12)}
 .yp-wk__fxb button[aria-pressed="true"]{background:var(--yp-red);color:#fff}
@@ -418,8 +418,8 @@
           cap:"Нарты в снегу · чум летом · терраса · внутри · дымовое отверстие", chips:["Обогретый чум","Костровище","До 15–20 гостей"]},
     tent:{kick:"Мероприятия · " + V, title:"Шатёр «Сияние севера»", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-tent", short:"Шатёр «Сияние севера»", sub:V + " · 27 с",
           cap:"Летом: терраса, столы и панорамное окно · зимой: шатёр изнутри с печью", chips:["До 20 гостей","Панорамное окно","Дровяная печь"]},
-    banquet:{kick:"Мероприятия · " + F, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-banquet", short:"Банкетный зал", sub:F + " · 12 с",
-          cap:"Зал под куполом · площадь с скульптурами · вид с высоты", chips:["100–150 гостей","Панорамное остекление"]},
+    banquet:{kick:"Мероприятия · " + V, title:"Банкетный зал", src:"https://artsevershop-create.github.io/yamalpark/img/video/banquet-tour", short:"Банкетный зал", sub:V + " · 19 с",
+          cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
@@ -432,7 +432,7 @@
     /bani/.test(p)     ? ["moroshka","brusnika","chernika"] :
     /grill/.test(p)    ? ["grill23","grill1","guest"] :
     /etno/.test(p)     ? ["chum"] :
-    /events/.test(p)   ? ["tent","banquet","park"] :
+    /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
     /zoo/.test(p)      ? ["lynx","deer"] :
     ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
@@ -750,7 +750,7 @@
 .yp-night__best{margin:6px 0 0;font-size:14px;color:#C3D0D8;min-height:2.9em}
 .yp-chart{position:relative;height:130px;margin-top:12px;display:grid;grid-template-columns:repeat(13,1fr);gap:3px;align-items:end;padding-right:56px}
 .yp-chart__ref{position:absolute;left:0;right:56px;border-top:1px dashed rgba(234,241,244,.18);pointer-events:none}
-.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
+.yp-chart__ref span{position:absolute;right:-56px;top:-7px;width:52px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted);text-align:left}
 .yp-bar{position:relative;height:100%;display:flex;align-items:flex-end;cursor:default}
 .yp-bar b,.yp-bar s{position:absolute;left:0;right:0;bottom:0;border-radius:4px 4px 1px 1px;transform-origin:50% 100%}
 .yp-bar s{background:rgba(234,241,244,.12);text-decoration:none}
@@ -758,7 +758,7 @@
 .yp-bar.is-light b,.yp-bar.is-light s{background:repeating-linear-gradient(45deg,rgba(234,241,244,.10) 0 3px,transparent 3px 6px);height:100%!important}
 .yp-bar:hover b{filter:brightness(1.3)}
 .yp-bar.is-peak::after{content:"";position:absolute;left:50%;top:-12px;width:0;height:0;margin-left:-5px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--yp-aurora)}
-.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 10px var(--yp-mono);color:var(--yp-snowmuted)}
+.yp-chart__x{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;padding-right:56px;margin-top:6px;font:500 11px var(--yp-mono);color:var(--yp-snowmuted)}
 .yp-chart__x span{text-align:center;white-space:nowrap}
 .yp-night__tip{margin:10px 0 0;font:500 12px var(--yp-mono);color:#D7E2E8;min-height:1.4em}
 .yp-night .yp-btn{margin-top:12px;align-self:flex-start;padding:12px 18px;font-size:14px}
