@@ -103,6 +103,8 @@ html.lenis,html.lenis body{height:auto}
 /* плавающая кнопка TravelLine «Узнать цены» дублирует наше бронирование и закрывает текст справа — прячем (форма бронирования TravelLine работает как раньше) */
 .x-tl-booking-widget-container{display:none!important}
 /* кнопки HotBot (заказ услуг и чат) на телефоне — меньше и ближе к краю, чтобы не закрывали текст и кнопки */
+/* страховка от горизонтальной прокрутки на телефоне: ничего не выступает за край экрана */
+@media (max-width:768px){#allrecords,.t-records{overflow-x:clip}}
 /* телефон: удобные области нажатия (≥44 px) у вкладок, переключателей и кнопок в календарях и схеме */
 @media (max-width:768px){
   .yp .yp-free__groups button,.yp .yp-free__units button,.yp .yp-free__len button,.yp .yp-pk__tabs button,.yp .yp-pk__all{min-height:44px}
@@ -1076,17 +1078,17 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
 }
 
 /* нижняя панель на телефоне: позвонить и забронировать — всегда под рукой после первого экрана */
-.yp-bar{display:none}
+.yp-act{display:none}
 @media (max-width:768px){
-  .yp.yp-bar{position:fixed;left:0;right:0;bottom:0;z-index:9985;display:flex;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:rgba(243,244,241,.9);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);box-shadow:0 -1px 0 var(--yp-line);transform:translateY(110%);transition:transform .35s var(--yp-ease);pointer-events:none}
-  .yp.yp-bar.is-on{transform:none;pointer-events:auto}
-  .yp-bar a,.yp-bar button{flex:1 1 0;min-height:48px;border-radius:999px;font:600 16px var(--yp-f);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border:0;cursor:pointer}
-  .yp-bar a{flex:0 0 auto;padding:0 20px;background:#fff;color:var(--yp-ink);box-shadow:inset 0 0 0 1px var(--yp-line)}
-  .yp-bar a svg{width:18px;height:18px}
-  .yp-bar button{background:var(--yp-ink);color:#fff}
-  html.yp-bar-on .hotbot-widget-buttons-wrap-chat{bottom:calc(12px + 70px) !important}
-  html.yp-bar-on .hotbot-widget-buttons-wrap-shop{bottom:calc(66px + 70px) !important}
-  html.yp-bar-on body{padding-bottom:0}
+  .yp.yp-act{position:fixed;left:0;right:0;bottom:0;z-index:9985;display:flex;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:rgba(243,244,241,.9);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);box-shadow:0 -1px 0 var(--yp-line);transform:translateY(110%);transition:transform .35s var(--yp-ease);pointer-events:none}
+  .yp.yp-act.is-on{transform:none;pointer-events:auto}
+  .yp-act a,.yp-act button{flex:1 1 0;min-height:48px;border-radius:999px;font:600 16px var(--yp-f);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border:0;cursor:pointer}
+  .yp-act a{flex:0 0 auto;padding:0 20px;background:#fff;color:var(--yp-ink);box-shadow:inset 0 0 0 1px var(--yp-line)}
+  .yp-act a svg{width:18px;height:18px}
+  .yp-act button{background:var(--yp-ink);color:#fff}
+  html.yp-act-on .hotbot-widget-buttons-wrap-chat{bottom:calc(12px + 70px) !important}
+  html.yp-act-on .hotbot-widget-buttons-wrap-shop{bottom:calc(66px + 70px) !important}
+  html.yp-act-on body{padding-bottom:0}
 }
 @media (max-width:370px){.yp-hdr__in{gap:10px}.yp-logo{gap:8px}.yp-logo svg{width:38px;height:16px}.yp-logo img{height:13px}.yp-hdr__call{width:40px;height:40px}.yp-burger{width:42px;height:42px}.yp-burger span,.yp-burger::before,.yp-burger::after{left:12px;right:12px}.yp-burger::before{top:15px}.yp-burger span{top:20px}.yp-burger::after{top:25px}}
 </style>
@@ -1137,7 +1139,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     <a href="contacts.html">Контакты</a>
   </nav>
 </header>
-<div class="yp yp-bar" id="yp-bar" aria-label="Быстрые действия"><a href="tel:+79003991033" aria-label="Позвонить: +7 900 399-10-33"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Позвонить</a><button type="button" data-yp-book>Забронировать</button></div>
+<div class="yp yp-act" id="yp-act" aria-label="Быстрые действия"><a href="tel:+79003991033" aria-label="Позвонить: +7 900 399-10-33"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Позвонить</a><button type="button" data-yp-book>Забронировать</button></div>
 <script>
 (function(){
   var h = document.getElementById("yp-hdr"); if(!h) return;
@@ -1171,11 +1173,11 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   }
   langLinks(); window.addEventListener("hashchange", langLinks);
   /* нижняя панель (телефон): после первого экрана, прячется у блока брони, в подвале и при открытом меню */
-  var bar = document.getElementById("yp-bar"), hide = 0, mq = window.matchMedia("(max-width:768px)");
+  var bar = document.getElementById("yp-act"), hide = 0, mq = window.matchMedia("(max-width:768px)");
   function barState(){
     if(!bar) return;
     var on = mq.matches && window.scrollY > 520 && !hide && !h.classList.contains("is-open");
-    bar.classList.toggle("is-on", on); document.documentElement.classList.toggle("yp-bar-on", on);
+    bar.classList.toggle("is-on", on); document.documentElement.classList.toggle("yp-act-on", on);
   }
   if(bar && "IntersectionObserver" in window){
     var io = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.__v = e.isIntersecting; }); hide = [].some.call(document.querySelectorAll("#booking,#tl-search-form,.yp-foot,.yp-faq__form"), function(n){ return n.__v; }) ? 1 : 0; barState(); }, {threshold:0, rootMargin:"0px 0px -60px 0px"});
