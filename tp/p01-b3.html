@@ -1,3 +1,52 @@
+<!-- 15 · Кинетическая бегущая строка между блоками: скорость и направление зависят от прокрутки, при быстром скролле строка наклоняется.
+     Слова — ссылки на разделы. -->
+<style>
+.yp-mq{padding-block:clamp(36px,5vw,70px);overflow:hidden;background:var(--yp-bg)}
+.yp-mq__band{transform:rotate(-2deg);margin-inline:-4vw;display:grid;gap:6px}
+.yp-mq__row{display:flex;width:max-content;will-change:transform}
+.yp-mq__row a{display:inline-flex;align-items:center;gap:clamp(18px,2vw,32px);padding-right:clamp(18px,2vw,32px);font:300 clamp(40px,7vw,108px)/1.05 var(--yp-fd);letter-spacing:-.03em;text-decoration:none;color:var(--yp-ink);white-space:nowrap;transition:color .3s}
+.yp-mq__row a.o{color:transparent;-webkit-text-stroke:1.5px var(--yp-ink)}
+.yp-mq__row a:hover{color:var(--yp-green);-webkit-text-stroke-color:var(--yp-green)}
+.yp-mq__row a i{display:inline-block;width:0;height:0;border-left:.18em solid transparent;border-right:.18em solid transparent;border-bottom:.3em solid var(--c)}
+.yp-mq__row--2 a{font-size:clamp(22px,3vw,40px);color:var(--yp-muted);font-family:var(--yp-mono);letter-spacing:.06em;text-transform:uppercase}
+.yp-mq__row--2 a.o{-webkit-text-stroke:0;color:var(--yp-muted)}
+</style>
+<section class="yp yp-mq" aria-label="Что есть в Ямал Парке">
+  <div class="yp-mq__band">
+    <div class="yp-mq__row" data-yp-mq="1">
+      <a href="/glamping">Глэмпинг<i style="--c:var(--yp-blue)"></i></a><a class="o" href="/bani">Умные бани<i style="--c:var(--yp-red)"></i></a><a href="/#forecast">Северное сияние<i style="--c:var(--yp-green)"></i></a><a class="o" href="/zoo">Мини-зоопарк<i style="--c:var(--yp-blue)"></i></a><a href="/grill">Гриль-дома<i style="--c:var(--yp-red)"></i></a><a class="o" href="/etno">Чум<i style="--c:var(--yp-green)"></i></a>
+    </div>
+    <div class="yp-mq__row yp-mq__row--2" data-yp-mq="-1" aria-hidden="true">
+      <a tabindex="-1" href="/contacts">66°33′ с. ш.<i style="--c:var(--yp-green)"></i></a><a tabindex="-1" class="o" href="/contacts">16 минут от Салехарда<i style="--c:var(--yp-blue)"></i></a><a tabindex="-1" href="/#forecast">сияние с сентября по апрель<i style="--c:var(--yp-red)"></i></a><a tabindex="-1" class="o" href="/bani">пар по команде Алисе<i style="--c:var(--yp-green)"></i></a><a tabindex="-1" href="/glamping">тёплые полы в −40 °C<i style="--c:var(--yp-blue)"></i></a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var rows = [].slice.call(document.querySelectorAll("[data-yp-mq]")); if(!rows.length) return;
+  var YP = window.YP || {};
+  rows.forEach(function(r){ var h = r.innerHTML; r.innerHTML = h + h + h; [].slice.call(r.querySelectorAll("a")).slice(r.children.length/3).forEach(function(a){ a.setAttribute("tabindex","-1"); a.setAttribute("aria-hidden","true"); }); });
+  if(YP.reduced) return;
+  var x = rows.map(function(){ return 0; }), dirSign = 1, vel = 0, lastY = scrollY, vis = false, hover = 0;
+  if(window.IntersectionObserver) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; }).observe(rows[0].closest("section")); else vis = true;
+  window.addEventListener("scroll", function(){ var d = scrollY - lastY; lastY = scrollY; if(d) dirSign = d > 0 ? 1 : -1; vel = Math.max(-40, Math.min(40, vel + d*.12)); }, {passive:true});
+  rows[0].closest("section").addEventListener("pointerenter", function(){ hover = 1; });
+  rows[0].closest("section").addEventListener("pointerleave", function(){ hover = 0; });
+  (function tick(){
+    if(vis){
+      vel *= .9;
+      var base = (hover ? .25 : 1.1) * dirSign;
+      rows.forEach(function(r, i){
+        var w = r.scrollWidth / 3, k = +r.getAttribute("data-yp-mq");
+        x[i] -= (base + vel*.35) * k; if(x[i] <= -w) x[i] += w; if(x[i] > 0) x[i] -= w;
+        r.style.transform = "translate3d(" + x[i] + "px,0,0) skewX(" + (Math.max(-12, Math.min(12, -vel*.5))) + "deg)";
+      });
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+
 <!-- 05 · Умные бани с Алисой. Реальные команды по зонам: Морошка (парная, фито-сауна), Брусника (парная).
      Нажатие на команду (или автодемо) печатает фразу и включает эффект на фото: дождь, вьюга, туман, ветер, фито, свет, музыка. -->
 <style>

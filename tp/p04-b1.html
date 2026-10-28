@@ -92,7 +92,9 @@
 .yp-free__groups button,.yp-free__units button,.yp-free__len button{border:0;cursor:pointer;font:500 14px/1 var(--yp-f);padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.08);color:#DCE3E0;transition:background .25s,color .25s,transform .2s}
 .yp-free__groups button[aria-selected="true"]{background:#fff;color:var(--yp-ink)}
 .yp-free__units{display:flex;gap:6px;flex-wrap:wrap}
-.yp-free__units button{font-size:13.5px;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.yp-free__units button{font-size:13.5px;padding:6px 14px 6px 6px;display:flex;align-items:center;gap:10px;text-align:left}
+.yp-free__units button .yp-free__ph{width:44px;height:44px;border-radius:12px;object-fit:cover;flex:0 0 auto;background:rgba(255,255,255,.1)}
+.yp-free__units button[aria-selected="true"] .yp-free__ph{box-shadow:0 0 0 2px rgba(255,255,255,.85)}
 .yp-free__units button i{width:7px;height:7px;border-radius:50%;background:#5D6461;flex:0 0 auto;transition:background .3s}
 .yp-free__units button i.ok{background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
 .yp-free__units button[aria-selected="true"]{background:var(--yp-green-d);color:#fff}
@@ -200,10 +202,13 @@
   tEl.addEventListener("click", function(e){ var b = e.target.closest("[data-t]"); if(b) YP.bookUnit(cur.u, cur.date); });
   bookBtn.addEventListener("click", function(){ YP.bookUnit(cur.u, cur.date); });
   var data = {};
+  /* фото объектов рядом с названием */
+  var UPH = {dome:"https://artsevershop-create.github.io/yamalpark/img/p/dome-window.webp", volk:"https://artsevershop-create.github.io/yamalpark/img/p/volk-ext.webp", medved:"https://artsevershop-create.github.io/yamalpark/img/p/medved-ext.webp", moroshka:"https://artsevershop-create.github.io/yamalpark/img/p/moroshka-parnaya.webp", brusnika:"https://artsevershop-create.github.io/yamalpark/img/p/brusnika-parnaya.webp", chernika:"https://artsevershop-create.github.io/yamalpark/img/p/chernika-parnaya.webp",
+    g1:"https://artsevershop-create.github.io/yamalpark/img/p/grill1-ext.webp", g2:"https://artsevershop-create.github.io/yamalpark/img/p/grill-aurora-b.webp", g3:"https://artsevershop-create.github.io/yamalpark/img/p/grill-aurora-c.webp", h1:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-ext.webp", h2:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp", b1:"https://artsevershop-create.github.io/yamalpark/img/p/besedka.webp", chum:"https://artsevershop-create.github.io/yamalpark/img/p/chum-terrace.webp", tent:"https://artsevershop-create.github.io/yamalpark/img/p/tent-ext.webp", hall:"https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-exterior.webp"};
   function selGroup(i){
     cur.g = i; gEl.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(+b.getAttribute("data-g") === i)); });
     var g = groups[i];
-    uEl.innerHTML = g.units.map(function(id){ return '<button type="button" role="tab" aria-selected="false" data-u="' + id + '"><i></i>' + U[id].name + "</button>"; }).join("");
+    uEl.innerHTML = g.units.map(function(id){ var ph = UPH[id]; return '<button type="button" role="tab" aria-selected="false" data-u="' + id + '">' + (ph ? '<img class="yp-free__ph" src="' + ph + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : "") + "<span>" + U[id].name + "</span><i></i></button>"; }).join("");
     g.units.forEach(function(id){ load(id, g.days, false).then(function(list){ var n = list.filter(function(x){ return x.free; }).length; var dot = uEl.querySelector('[data-u="' + id + '"] i'); if(dot) dot.classList.toggle("ok", n > 0); }, function(){}); });
     selUnit(g.units[0]);
   }
@@ -457,6 +462,12 @@
           cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
+    lynxhut:{kick:"Мини-зоопарк · " + V, title:"Рысь в каменном укрытии", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx-hut", short:"Рысь в укрытии", sub:V + " · 7 с",
+          cap:"Рысь выглядывает из каменного домика в новом вольере", chips:["Вход бесплатный","Новый вольер"]},
+    rabbits:{kick:"Мини-зоопарк · " + V, title:"Кролики", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-rabbits", short:"Кролики", sub:V + " · 8 с",
+          cap:"Белые кролики в домике с вольером — любимцы детей", chips:["Вход бесплатный","Для детей"]},
+    goat:{kick:"Мини-зоопарк · " + V, title:"Коза в домике", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-goat-house", short:"Коза", sub:V + " · 5 с",
+          cap:"Коза выглядывает из тёплого домика", chips:["Вход бесплатный","Для всей семьи"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
           cap:"Общий вольер под лиственницами · косуля и две козы", chips:["Вход бесплатный","Для всей семьи"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
@@ -469,8 +480,8 @@
     /etno/.test(p)     ? ["chum"] :
     /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
-    /zoo/.test(p)      ? ["lynx","deer"] :
-    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
+    /zoo/.test(p)      ? ["lynxhut","lynx","rabbits","deer","goat"] :
+    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynxhut","rabbits","deer","tent","banquet","arch"];
   var L = SET.map(function(k){ return ALL[k]; }), cur = 0, playing = !YP.reduced, inView = false;
   if(L.length === 1) sec.classList.add("is-single");
   var stage = sec.querySelector("[data-yp-wks]"), bars = sec.querySelector("[data-yp-wkb]"), nav = sec.querySelector("[data-yp-wkn]"), btn = sec.querySelector("[data-yp-wkp]");
@@ -554,8 +565,7 @@
     if(!o.fx){ fxp.hidden = true; return; }
     fxp.hidden = false;
     fxb.innerHTML = "<small>" + (o.alice ? "Алиса, включи…" : "Кнопки на панели") + "</small>" + o.fx.map(function(k){ return '<button type="button" aria-pressed="false" data-fx="' + k + '"' + (k === "steam" ? ' title="Вьюга — подача пара на каменку"' : "") + ">" + FXI[k] + FXL[k] + "</button>"; }).join("");
-    /* показ: если никто не нажимал, через 2,5 с включаем первый эффект, потом следующий */
-    if(!YP.reduced){ var n = 0; (function demo(){ fxDemo = setTimeout(function(){ if(L[cur] !== o) return; if(Date.now() - fxUser > 8000 && inView){ runFx(o.fx[n++ % o.fx.length]); } demo(); }, n ? 4500 : 2500); })(); }
+    /* эффекты сами не включаются: человек выбирает дождь, вьюгу или туман сам */
   }
   fxb.addEventListener("click", function(e){ e.stopPropagation(); var b = e.target.closest("button[data-fx]"); if(b) runFx(b.getAttribute("data-fx"), true); });
 

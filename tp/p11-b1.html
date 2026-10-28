@@ -185,6 +185,12 @@
           cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
+    lynxhut:{kick:"Мини-зоопарк · " + V, title:"Рысь в каменном укрытии", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx-hut", short:"Рысь в укрытии", sub:V + " · 7 с",
+          cap:"Рысь выглядывает из каменного домика в новом вольере", chips:["Вход бесплатный","Новый вольер"]},
+    rabbits:{kick:"Мини-зоопарк · " + V, title:"Кролики", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-rabbits", short:"Кролики", sub:V + " · 8 с",
+          cap:"Белые кролики в домике с вольером — любимцы детей", chips:["Вход бесплатный","Для детей"]},
+    goat:{kick:"Мини-зоопарк · " + V, title:"Коза в домике", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-goat-house", short:"Коза", sub:V + " · 5 с",
+          cap:"Коза выглядывает из тёплого домика", chips:["Вход бесплатный","Для всей семьи"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
           cap:"Общий вольер под лиственницами · косуля и две козы", chips:["Вход бесплатный","Для всей семьи"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
@@ -197,8 +203,8 @@
     /etno/.test(p)     ? ["chum"] :
     /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
-    /zoo/.test(p)      ? ["lynx","deer"] :
-    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
+    /zoo/.test(p)      ? ["lynxhut","lynx","rabbits","deer","goat"] :
+    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynxhut","rabbits","deer","tent","banquet","arch"];
   var L = SET.map(function(k){ return ALL[k]; }), cur = 0, playing = !YP.reduced, inView = false;
   if(L.length === 1) sec.classList.add("is-single");
   var stage = sec.querySelector("[data-yp-wks]"), bars = sec.querySelector("[data-yp-wkb]"), nav = sec.querySelector("[data-yp-wkn]"), btn = sec.querySelector("[data-yp-wkp]");
@@ -282,8 +288,7 @@
     if(!o.fx){ fxp.hidden = true; return; }
     fxp.hidden = false;
     fxb.innerHTML = "<small>" + (o.alice ? "Алиса, включи…" : "Кнопки на панели") + "</small>" + o.fx.map(function(k){ return '<button type="button" aria-pressed="false" data-fx="' + k + '"' + (k === "steam" ? ' title="Вьюга — подача пара на каменку"' : "") + ">" + FXI[k] + FXL[k] + "</button>"; }).join("");
-    /* показ: если никто не нажимал, через 2,5 с включаем первый эффект, потом следующий */
-    if(!YP.reduced){ var n = 0; (function demo(){ fxDemo = setTimeout(function(){ if(L[cur] !== o) return; if(Date.now() - fxUser > 8000 && inView){ runFx(o.fx[n++ % o.fx.length]); } demo(); }, n ? 4500 : 2500); })(); }
+    /* эффекты сами не включаются: человек выбирает дождь, вьюгу или туман сам */
   }
   fxb.addEventListener("click", function(e){ e.stopPropagation(); var b = e.target.closest("button[data-fx]"); if(b) runFx(b.getAttribute("data-fx"), true); });
 

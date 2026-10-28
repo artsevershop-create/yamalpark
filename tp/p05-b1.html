@@ -35,6 +35,22 @@
 .yp-chm__pics .p1{left:0;top:0;width:68%;height:62%}
 .yp-chm__pics .p2{right:0;top:22%;width:46%;height:46%;border:6px solid var(--yp-bg)}
 .yp-chm__pics .p3{left:12%;bottom:0;width:56%;height:40%;border:6px solid var(--yp-bg)}
+
+.yp-chi{margin-top:clamp(50px,6vw,90px)}
+.yp-chi h3{margin:12px 0 0;font-weight:300;font-size:clamp(28px,3.2vw,48px);line-height:1.05;letter-spacing:-.03em}
+.yp-chi__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:clamp(22px,2.6vw,34px)}
+.yp-chi__f{position:relative;border:0;padding:0;border-radius:22px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--yp-paper);box-shadow:0 18px 40px -26px rgba(20,30,25,.55)}
+.yp-chi__f.wide{grid-column:span 2}
+.yp-chi__f img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--yp-ease)}
+.yp-chi__f:hover img{transform:scale(1.05)}
+.yp-chi__f:focus-visible{outline:2px solid var(--yp-green);outline-offset:3px}
+.yp-chi__lb{position:fixed;inset:0;z-index:10035;display:none;align-items:center;justify-content:center;background:rgba(4,7,11,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.yp-chi__lb.is-open{display:flex}
+.yp-chi__lb img{max-width:min(94vw,1500px);max-height:84vh;object-fit:contain;border-radius:14px}
+.yp-chi__lb button{position:absolute;border:0;border-radius:50%;width:52px;height:52px;background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.yp-chi__lb .x{top:max(16px,env(safe-area-inset-top,0px));right:16px}.yp-chi__lb .pv{left:14px;top:50%;margin-top:-26px}.yp-chi__lb .nx{right:14px;top:50%;margin-top:-26px}
+.yp-chi__lb .cn{position:absolute;bottom:max(18px,env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;font:500 13px var(--yp-mono);color:#DCE6EA;letter-spacing:.08em}
+@media (max-width:900px){.yp-chi__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.yp-chi__f{border-radius:18px}.yp-chi__lb .pv,.yp-chi__lb .nx{top:auto;bottom:max(14px,env(safe-area-inset-bottom,0px));margin:0}}
 .yp-three{margin-top:clamp(70px,8vw,120px);border-radius:32px;overflow:hidden;position:relative;color:#fff;isolation:isolate;min-height:min(80vh,680px);display:flex;align-items:flex-end}
 .yp-three__bg{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;z-index:-2}
 .yp-three__bg img{width:100%;height:100%;object-fit:cover}
@@ -71,6 +87,23 @@
         <figure class="p3"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-terrace.webp" alt="Терраса чума с костровищем зимой" loading="lazy"></figure>
       </div>
     </div>
+    <div class="yp-chi" id="chum-inside" data-yp-reveal>
+      <span class="yp-eyebrow" style="--c:#C89B6D"><i></i>Фото</span>
+      <h3>Внутри чума</h3>
+      <div class="yp-chi__grid" data-yp-chigal>
+        <button type="button" class="yp-chi__f wide" data-i="0" aria-label="Открыть фото: Чум внутри: печь, длинный стол и лавки"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i1.webp" alt="Чум внутри: печь, длинный стол и лавки" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="1" aria-label="Открыть фото: Длинный стол с лавками в чуме"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i2.webp" alt="Длинный стол с лавками в чуме" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="2" aria-label="Открыть фото: Печь, казан и посуда внутри чума"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i3.webp" alt="Печь, казан и посуда внутри чума" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="3" aria-label="Открыть фото: Печь с чайником внутри чума"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i4.webp" alt="Печь с чайником внутри чума" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="4" aria-label="Открыть фото: Стол и деревянные стулья в чуме"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i5.webp" alt="Стол и деревянные стулья в чуме" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="5" aria-label="Открыть фото: Детали интерьера чума: ткани и казан"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i6.webp" alt="Детали интерьера чума: ткани и казан" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f wide" data-i="6" aria-label="Открыть фото: Оленьи шкуры внутри чума"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i7.webp" alt="Оленьи шкуры внутри чума" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="7" aria-label="Открыть фото: Дрова для печи в чуме"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i8.webp" alt="Дрова для печи в чуме" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="8" aria-label="Открыть фото: Чайник на подставке в чуме"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i9.webp" alt="Чайник на подставке в чуме" loading="lazy" decoding="async"></button>
+        <button type="button" class="yp-chi__f" data-i="9" aria-label="Открыть фото: Купол чума изнутри"><img src="https://artsevershop-create.github.io/yamalpark/img/p/chum-i10.webp" alt="Купол чума изнутри" loading="lazy" decoding="async"></button>
+      </div>
+    </div>
+    <div class="yp-chi__lb" data-yp-chilb role="dialog" aria-modal="true" aria-label="Фото чума"><img alt=""><button type="button" class="x" aria-label="Закрыть">×</button><button type="button" class="pv" aria-label="Предыдущее">‹</button><button type="button" class="nx" aria-label="Следующее">›</button><div class="cn"></div></div>
     <div class="yp-three" data-yp-reveal>
       <div class="yp-three__bg"><img src="https://artsevershop-create.github.io/yamalpark/img/new/chums-camp.webp" alt="Три чума этно-стойбища летом" loading="lazy"><img src="https://artsevershop-create.github.io/yamalpark/img/new/chums-top.webp" alt="Этно-стойбище из трёх чумов с высоты" loading="lazy"></div>
       <span class="yp-three__badge">Постоянное стойбище</span>
@@ -97,6 +130,20 @@
 })();
 </script>
 
+<script>
+(function(){
+  var g = document.querySelector("[data-yp-chigal]"), lb = document.querySelector("[data-yp-chilb]"); if(!g || !lb) return;
+  var btns = [].slice.call(g.querySelectorAll("button")), img = lb.querySelector("img"), cn = lb.querySelector(".cn"), cur = 0;
+  function show(i){ cur = (i + btns.length) % btns.length; var im = btns[cur].querySelector("img"); img.src = im.currentSrc || im.src; img.alt = im.alt; cn.textContent = (cur + 1) + " / " + btns.length; }
+  function open(i){ show(i); lb.classList.add("is-open"); document.documentElement.style.overflow = "hidden"; if(window.YP && YP.lenis) YP.lenis.stop(); }
+  function close(){ lb.classList.remove("is-open"); document.documentElement.style.overflow = ""; if(window.YP && YP.lenis) YP.lenis.start(); }
+  btns.forEach(function(b, i){ b.addEventListener("click", function(){ open(i); }); });
+  lb.querySelector(".x").addEventListener("click", close); lb.querySelector(".pv").addEventListener("click", function(){ show(cur - 1); }); lb.querySelector(".nx").addEventListener("click", function(){ show(cur + 1); });
+  lb.addEventListener("click", function(e){ if(e.target === lb) close(); });
+  document.addEventListener("keydown", function(e){ if(!lb.classList.contains("is-open")) return; if(e.key === "Escape") close(); if(e.key === "ArrowLeft") show(cur - 1); if(e.key === "ArrowRight") show(cur + 1); });
+})();
+</script>
+
 <!-- 18 · Свободные даты и время по каждому дому — живые данные TravelLine (глэмпинг) и HotBot (бани, гриль- и гостевые дома, чум, шатёр, зал).
      Набор домов зависит от страницы: главная — все, /glamping — дома, /bani — бани, /grill — гриль- и гостевые дома, /etno — чум, /events — площадки. -->
 <style>
@@ -108,7 +155,9 @@
 .yp-free__groups button,.yp-free__units button,.yp-free__len button{border:0;cursor:pointer;font:500 14px/1 var(--yp-f);padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.08);color:#DCE3E0;transition:background .25s,color .25s,transform .2s}
 .yp-free__groups button[aria-selected="true"]{background:#fff;color:var(--yp-ink)}
 .yp-free__units{display:flex;gap:6px;flex-wrap:wrap}
-.yp-free__units button{font-size:13.5px;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.yp-free__units button{font-size:13.5px;padding:6px 14px 6px 6px;display:flex;align-items:center;gap:10px;text-align:left}
+.yp-free__units button .yp-free__ph{width:44px;height:44px;border-radius:12px;object-fit:cover;flex:0 0 auto;background:rgba(255,255,255,.1)}
+.yp-free__units button[aria-selected="true"] .yp-free__ph{box-shadow:0 0 0 2px rgba(255,255,255,.85)}
 .yp-free__units button i{width:7px;height:7px;border-radius:50%;background:#5D6461;flex:0 0 auto;transition:background .3s}
 .yp-free__units button i.ok{background:var(--yp-aurora);box-shadow:0 0 10px var(--yp-aurora)}
 .yp-free__units button[aria-selected="true"]{background:var(--yp-green-d);color:#fff}
@@ -216,10 +265,13 @@
   tEl.addEventListener("click", function(e){ var b = e.target.closest("[data-t]"); if(b) YP.bookUnit(cur.u, cur.date); });
   bookBtn.addEventListener("click", function(){ YP.bookUnit(cur.u, cur.date); });
   var data = {};
+  /* фото объектов рядом с названием */
+  var UPH = {dome:"https://artsevershop-create.github.io/yamalpark/img/p/dome-window.webp", volk:"https://artsevershop-create.github.io/yamalpark/img/p/volk-ext.webp", medved:"https://artsevershop-create.github.io/yamalpark/img/p/medved-ext.webp", moroshka:"https://artsevershop-create.github.io/yamalpark/img/p/moroshka-parnaya.webp", brusnika:"https://artsevershop-create.github.io/yamalpark/img/p/brusnika-parnaya.webp", chernika:"https://artsevershop-create.github.io/yamalpark/img/p/chernika-parnaya.webp",
+    g1:"https://artsevershop-create.github.io/yamalpark/img/p/grill1-ext.webp", g2:"https://artsevershop-create.github.io/yamalpark/img/p/grill-aurora-b.webp", g3:"https://artsevershop-create.github.io/yamalpark/img/p/grill-aurora-c.webp", h1:"https://artsevershop-create.github.io/yamalpark/img/p/guest1-ext.webp", h2:"https://artsevershop-create.github.io/yamalpark/img/p/guest2-ext.webp", b1:"https://artsevershop-create.github.io/yamalpark/img/p/besedka.webp", chum:"https://artsevershop-create.github.io/yamalpark/img/p/chum-terrace.webp", tent:"https://artsevershop-create.github.io/yamalpark/img/p/tent-ext.webp", hall:"https://artsevershop-create.github.io/yamalpark/img/p/banquet-hall-exterior.webp"};
   function selGroup(i){
     cur.g = i; gEl.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", String(+b.getAttribute("data-g") === i)); });
     var g = groups[i];
-    uEl.innerHTML = g.units.map(function(id){ return '<button type="button" role="tab" aria-selected="false" data-u="' + id + '"><i></i>' + U[id].name + "</button>"; }).join("");
+    uEl.innerHTML = g.units.map(function(id){ var ph = UPH[id]; return '<button type="button" role="tab" aria-selected="false" data-u="' + id + '">' + (ph ? '<img class="yp-free__ph" src="' + ph + '" alt="" width="44" height="44" loading="lazy" decoding="async">' : "") + "<span>" + U[id].name + "</span><i></i></button>"; }).join("");
     g.units.forEach(function(id){ load(id, g.days, false).then(function(list){ var n = list.filter(function(x){ return x.free; }).length; var dot = uEl.querySelector('[data-u="' + id + '"] i'); if(dot) dot.classList.toggle("ok", n > 0); }, function(){}); });
     selUnit(g.units[0]);
   }
@@ -422,6 +474,12 @@
           cap:"Вечер в зале · свет под куполом · столы и сцена · окна в огнях · площадь у зала", chips:["100–150 гостей","Панорамное остекление"]},
     lynx:{kick:"Мини-зоопарк · " + V, title:"Рыси", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx", short:"Рыси", sub:V + " · 28 с",
           cap:"Две рыси в новом вольере · кисточки на ушах · лапы-«снегоступы»", chips:["Вход бесплатный","Новый вольер","Рядом с баней «Брусника»"]},
+    lynxhut:{kick:"Мини-зоопарк · " + V, title:"Рысь в каменном укрытии", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-lynx-hut", short:"Рысь в укрытии", sub:V + " · 7 с",
+          cap:"Рысь выглядывает из каменного домика в новом вольере", chips:["Вход бесплатный","Новый вольер"]},
+    rabbits:{kick:"Мини-зоопарк · " + V, title:"Кролики", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-rabbits", short:"Кролики", sub:V + " · 8 с",
+          cap:"Белые кролики в домике с вольером — любимцы детей", chips:["Вход бесплатный","Для детей"]},
+    goat:{kick:"Мини-зоопарк · " + V, title:"Коза в домике", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-goat-house", short:"Коза", sub:V + " · 5 с",
+          cap:"Коза выглядывает из тёплого домика", chips:["Вход бесплатный","Для всей семьи"]},
     deer:{kick:"Мини-зоопарк · " + V, title:"Косуля и козы", src:"https://artsevershop-create.github.io/yamalpark/img/video/zoo-deer", short:"Косуля и козы", sub:V + " · 15 с",
           cap:"Общий вольер под лиственницами · косуля и две козы", chips:["Вход бесплатный","Для всей семьи"]},
     arch:{kick:"Как добраться · " + V, title:"Въезд в Ямал Парк", src:"https://artsevershop-create.github.io/yamalpark/img/video/walk-arch", short:"Въезд в парк", sub:V + " · 14 с",
@@ -434,8 +492,8 @@
     /etno/.test(p)     ? ["chum"] :
     /events|corporate/.test(p)   ? ["tent","banquet","park"] :
     /contacts/.test(p) ? ["arch","park"] :
-    /zoo/.test(p)      ? ["lynx","deer"] :
-    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynx","deer","tent","banquet","arch"];
+    /zoo/.test(p)      ? ["lynxhut","lynx","rabbits","deer","goat"] :
+    ["park","dome","volk","medved","moroshka","brusnika","chernika","grill23","grill1","guest","chum","lynxhut","rabbits","deer","tent","banquet","arch"];
   var L = SET.map(function(k){ return ALL[k]; }), cur = 0, playing = !YP.reduced, inView = false;
   if(L.length === 1) sec.classList.add("is-single");
   var stage = sec.querySelector("[data-yp-wks]"), bars = sec.querySelector("[data-yp-wkb]"), nav = sec.querySelector("[data-yp-wkn]"), btn = sec.querySelector("[data-yp-wkp]");
@@ -519,8 +577,7 @@
     if(!o.fx){ fxp.hidden = true; return; }
     fxp.hidden = false;
     fxb.innerHTML = "<small>" + (o.alice ? "Алиса, включи…" : "Кнопки на панели") + "</small>" + o.fx.map(function(k){ return '<button type="button" aria-pressed="false" data-fx="' + k + '"' + (k === "steam" ? ' title="Вьюга — подача пара на каменку"' : "") + ">" + FXI[k] + FXL[k] + "</button>"; }).join("");
-    /* показ: если никто не нажимал, через 2,5 с включаем первый эффект, потом следующий */
-    if(!YP.reduced){ var n = 0; (function demo(){ fxDemo = setTimeout(function(){ if(L[cur] !== o) return; if(Date.now() - fxUser > 8000 && inView){ runFx(o.fx[n++ % o.fx.length]); } demo(); }, n ? 4500 : 2500); })(); }
+    /* эффекты сами не включаются: человек выбирает дождь, вьюгу или туман сам */
   }
   fxb.addEventListener("click", function(e){ e.stopPropagation(); var b = e.target.closest("button[data-fx]"); if(b) runFx(b.getAttribute("data-fx"), true); });
 
@@ -850,32 +907,4 @@
 })();
 window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.querySelector("[data-yp-afst]"); if(el && YP.dataStamp) el.textContent = YP.dataStamp(); });
 </script>
-
-<!-- SEO-текст и частые вопросы страницы (видимый текст для поисковиков; вопросы попадают в разметку FAQPage при сборке) -->
-<style>
-.yp-seo{padding-block:clamp(56px,8vw,120px)}
-.yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
-.yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
-.yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
-.yp-seo__faq{display:grid;gap:10px}
-.yp-seo__faq details{border-radius:18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:2px 20px}
-.yp-seo__faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center;padding:16px 0;font:600 16px/1.35 var(--yp-f)}
-.yp-seo__faq summary::-webkit-details-marker{display:none}
-.yp-seo__faq summary i{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--yp-bg);position:relative}
-.yp-seo__faq summary i::before,.yp-seo__faq summary i::after{content:"";position:absolute;left:7px;right:7px;top:12px;height:2px;background:var(--yp-ink);transition:transform .4s var(--yp-ease)}
-.yp-seo__faq summary i::after{transform:rotate(90deg)}
-.yp-seo__faq details[open] summary i::after{transform:none}
-.yp-seo__faq details>div{padding:0 0 16px;color:var(--yp-muted);font-size:15px}
-@media (max-width:900px){.yp-seo__grid{grid-template-columns:1fr}}
-</style>
-<section class="yp yp-seo" id="about">
-  <div class="yp-wrap">
-    <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Чум под Салехардом</span>
-    <h2 class="yp-h2" data-yp-split>Аренда чума <b>и этно-стойбище</b></h2>
-    <div class="yp-seo__grid">
-      <div class="yp-seo__txt" data-yp-reveal><p>Чум — традиционное жилище оленеводов Ямала. В Ямал Парке можно <b>арендовать настоящий обогретый чум</b> для компании до 15–20 гостей: со своей террасой, костровищем, казаном и мангальной зоной. Аренда — <b>12 000 ₽</b> с понедельника по четверг и <b>15 000 ₽</b> с пятницы по воскресенье.</p><p>Рядом со смотровой площадкой чума в ясные ночи с сентября по апрель видно <b>северное сияние</b>. Летом здесь светло почти круглые сутки — белые ночи.</p><p>На территории есть и <b>постоянное этно-стойбище «Три чума»</b>, а в парковой зоне стоят деревянные скульптуры. «Ямал» по-ненецки значит «край земли». Ямал Парк — в 12 км от Салехарда, на дороге в Горнокнязевск.</p></div>
-      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Сколько стоит аренда чума?<i></i></summary><div>12 000 ₽ с понедельника по четверг, 15 000 ₽ с пятницы по воскресенье. В стоимость входят обогретый чум, терраса, костровище, казан и мангальная зона.</div></details><details><summary>На сколько человек рассчитан чум?<i></i></summary><div>До 15–20 гостей.</div></details><details><summary>Можно ли арендовать чум зимой?<i></i></summary><div>Да, чум обогревается и работает круглый год.</div></details><details><summary>Можно ли готовить еду в чуме?<i></i></summary><div>Да: рядом мангальная зона, казан и костровище.</div></details><details><summary>Где находится чум?<i></i></summary><div>В Ямал Парке, на 12-м км дороги Салехард — Горнокнязевск, примерно в 16 минутах от центра Салехарда.</div></details></div>
-    </div>
-  </div>
-</section>
 

@@ -135,7 +135,7 @@
   var list = sec.querySelector("[data-yp-pkl]"), cat = "all", cur = null, shown = 0, pins = {};
   U.forEach(function(u){
     var b = document.createElement("button"); b.type = "button"; b.className = "yp-pk__pin"; b.style.left = u.pt[0] + "%"; b.style.top = u.pt[1] + "%";
-    b.style.setProperty("--c", COL[u.cat]); b.setAttribute("aria-label", u.name); b.setAttribute("data-yp-cursor", "Выбрать");
+    b.style.setProperty("--c", COL[u.cat]); b.setAttribute("aria-label", u.name);
     b.innerHTML = ICON[u.cat] + '<span class="yp-pk__tip">' + u.name + "</span>";
     if(u.pt[0] > 70) b.classList.add("tip-l"); else if(u.pt[0] < 30) b.classList.add("tip-r");
     b.addEventListener("click", function(){ if(cat !== "all" && u.cat !== cat) setCat(u.cat, true); select(u, true); });

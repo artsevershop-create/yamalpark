@@ -1,0 +1,28 @@
+<!-- SEO-текст и частые вопросы страницы (видимый текст для поисковиков; вопросы попадают в разметку FAQPage при сборке) -->
+<style>
+.yp-seo{padding-block:clamp(56px,8vw,120px)}
+.yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
+.yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
+.yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
+.yp-seo__faq{display:grid;gap:10px}
+.yp-seo__faq details{border-radius:18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:2px 20px}
+.yp-seo__faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center;padding:16px 0;font:600 16px/1.35 var(--yp-f)}
+.yp-seo__faq summary::-webkit-details-marker{display:none}
+.yp-seo__faq summary i{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--yp-bg);position:relative}
+.yp-seo__faq summary i::before,.yp-seo__faq summary i::after{content:"";position:absolute;left:7px;right:7px;top:12px;height:2px;background:var(--yp-ink);transition:transform .4s var(--yp-ease)}
+.yp-seo__faq summary i::after{transform:rotate(90deg)}
+.yp-seo__faq details[open] summary i::after{transform:none}
+.yp-seo__faq details>div{padding:0 0 16px;color:var(--yp-muted);font-size:15px}
+@media (max-width:900px){.yp-seo__grid{grid-template-columns:1fr}}
+</style>
+<section class="yp yp-seo" id="about">
+  <div class="yp-wrap">
+    <span class="yp-eyebrow" style="--c:var(--yp-green)"><i></i>Чум под Салехардом</span>
+    <h2 class="yp-h2" data-yp-split>Аренда чума <b>и этно-стойбище</b></h2>
+    <div class="yp-seo__grid">
+      <div class="yp-seo__txt" data-yp-reveal><p>Чум — традиционное жилище оленеводов Ямала. В Ямал Парке можно <b>арендовать настоящий обогретый чум</b> для компании до 15–20 гостей: со своей террасой, костровищем, казаном и мангальной зоной. Аренда — <b>12 000 ₽</b> с понедельника по четверг и <b>15 000 ₽</b> с пятницы по воскресенье.</p><p>Рядом со смотровой площадкой чума в ясные ночи с сентября по апрель видно <b>северное сияние</b>. Летом здесь светло почти круглые сутки — белые ночи.</p><p>На территории есть и <b>постоянное этно-стойбище «Три чума»</b>, а в парковой зоне стоят деревянные скульптуры. «Ямал» по-ненецки значит «край земли». Ямал Парк — в 12 км от Салехарда, на дороге в Горнокнязевск.</p></div>
+      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Сколько стоит аренда чума?<i></i></summary><div>12 000 ₽ с понедельника по четверг, 15 000 ₽ с пятницы по воскресенье. В стоимость входят обогретый чум, терраса, костровище, казан и мангальная зона.</div></details><details><summary>На сколько человек рассчитан чум?<i></i></summary><div>До 15–20 гостей.</div></details><details><summary>Можно ли арендовать чум зимой?<i></i></summary><div>Да, чум обогревается и работает круглый год.</div></details><details><summary>Можно ли готовить еду в чуме?<i></i></summary><div>Да: рядом мангальная зона, казан и костровище.</div></details><details><summary>Где находится чум?<i></i></summary><div>В Ямал Парке, на 12-м км дороги Салехард — Горнокнязевск, примерно в 16 минутах от центра Салехарда.</div></details></div>
+    </div>
+  </div>
+</section>
+
