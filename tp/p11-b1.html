@@ -131,7 +131,7 @@
       <div><span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Видео-прогулка</span><h2 class="yp-h2" data-yp-split>Пройдитесь <b>по Ямал Парку</b></h2></div>
       <p class="yp-lead" data-yp-reveal>Каждый дом, баня и площадка — в коротком ролике. Ролики идут подряд, а в банях можно включить дождь, туман и пар прямо на видео.</p>
     </div>
-    <div class="yp-wk__stage" data-yp-wks data-yp-cursor="Пауза">
+    <div class="yp-wk__stage" data-yp-wks>
       <video class="yp-wk__real" data-yp-wkreal muted playsinline loop preload="none" aria-hidden="true"></video>
       <canvas class="yp-wk__fx" data-yp-wkfx aria-hidden="true"></canvas>
       <div class="yp-wk__fxp" data-yp-wkfxp hidden><span class="yp-wk__say" data-yp-wksay></span><div class="yp-wk__fxb" data-yp-wkfxb></div></div>
@@ -222,7 +222,6 @@
   function sync(){
     vids.forEach(function(v, i){ if(i === cur && playing && inView) v.play().catch(function(){}); else v.pause(); });
     btn.innerHTML = playing ? PAUSE : PLAY; btn.setAttribute("aria-label", playing ? "Пауза" : "Смотреть");
-    stage.setAttribute("data-yp-cursor", playing ? "Пауза" : "Смотреть");
   }
   /* ---------- эффекты бани поверх видео: дождь, вьюга (пар на каменку), туман, ветер, фито ---------- */
   var FXI = {
