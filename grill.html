@@ -530,12 +530,96 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     if(window.YP_SNAP) return Promise.resolve(window.YP_SNAP);
     return snapP || (snapP = fetch(SNAP_URL + "?t=" + Math.floor(Date.now() / 600000)).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){ window.YP_SNAP = j; return j; }));
   }
+  /* Второй источник погоды — MET Norway (api.met.no): ответ приводится к формату Open-Meteo, остальной код не меняется.
+     Расчёт солнца (восход, закат, светло ли) — по формулам, без запросов. Если Open-Meteo молчит больше 2,5 с или не отвечает, берём MET Norway. */
+  function sunElev(ms, lat, lon){
+    var R = Math.PI / 180, d = ms / 864e5 + 2440587.5 - 2451545.0, g = (357.529 + 0.98560028 * d) * R, q = 280.459 + 0.98564736 * d;
+    var L = (q + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * R, e = (23.439 - 3.6e-7 * d) * R;
+    var ra = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L)), dec = Math.asin(Math.sin(e) * Math.sin(L));
+    var ha = (280.46061837 + 360.98564736629 * d) * R + lon * R - ra;
+    return Math.asin(Math.sin(lat * R) * Math.sin(dec) + Math.cos(lat * R) * Math.cos(dec) * Math.cos(ha)) / R;
+  }
+  function sunTimes(date, lat, lon){
+    var t0 = Date.parse(date + "T00:00:00Z") - 5 * 3600e3, rise = null, set = null, prev = sunElev(t0, lat, lon);
+    function hm(m){ m = Math.round(m); return date + "T" + ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + m % 60).slice(-2); }
+    for(var m = 5; m <= 1440; m += 5){
+      var cur = sunElev(t0 + m * 60e3, lat, lon), f = (-.833 - prev) / (cur - prev);
+      if(prev < -.833 && cur >= -.833 && rise === null) rise = hm(m - 5 + f * 5);
+      if(prev >= -.833 && cur < -.833) set = hm(m - 5 + f * 5);
+      prev = cur;
+    }
+    return {rise: rise, set: set};
+  }
+  function wmoFromMetno(sym){
+    var s = String(sym || "").replace(/_(day|night|polartwilight)$/, ""), light = /^light/.test(s), heavy = /^heavy/.test(s);
+    if(/thunder/.test(s)) return 95;
+    if(/snowshowers/.test(s)) return 85;
+    if(/snow/.test(s)) return heavy ? 75 : light ? 71 : 73;
+    if(/sleet/.test(s)) return 67;
+    if(/rainshowers/.test(s)) return heavy ? 82 : 80;
+    if(/rain/.test(s)) return heavy ? 65 : light ? 61 : 63;
+    return s === "fog" ? 45 : s === "clearsky" ? 0 : s === "fair" ? 1 : s === "partlycloudy" ? 2 : 3;
+  }
+  var metnoP = null;
+  function metnoGet(){
+    return metnoP || (metnoP = fetch("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=" + YP.coords.lat.toFixed(4) + "&lon=" + YP.coords.lon.toFixed(4))
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }));
+  }
+  function metnoAdapt(key, j){
+    var lat = YP.coords.lat, lon = YP.coords.lon, OFF = 5 * 3600e3;
+    var P = j.properties.timeseries.map(function(e){
+      var d = e.data.instant.details, n = e.data.next_1_hours || e.data.next_6_hours || {};
+      return {t: Date.parse(e.time), temp: d.air_temperature, wind: d.wind_speed, cloud: d.cloud_area_fraction, sym: n.summary && n.summary.symbol_code, pr: n.details ? n.details.precipitation_amount : 0};
+    });
+    function loc(ms){ return new Date(ms + OFF).toISOString(); }
+    if(key === "current"){
+      var c = P[0];
+      return {current: {temperature_2m: c.temp, wind_speed_10m: c.wind, cloud_cover: c.cloud, is_day: sunElev(Date.now(), lat, lon) > -.833 ? 1 : 0,
+        weather_code: wmoFromMetno(c.sym), snowfall: (c.pr > 0 && /snow/.test(c.sym || "")) ? c.pr : 0, precipitation: c.pr}};
+    }
+    if(key === "hourly"){
+      var time = [], cl = [], dy = [], end = Date.now() + 4 * 864e5;
+      for(var i = 0; i < P.length - 1; i++){
+        for(var s = 0, steps = Math.round((P[i + 1].t - P[i].t) / 3600e3); s < steps; s++){
+          var ms = P[i].t + s * 3600e3; if(ms > end) break;
+          time.push(loc(ms).slice(0, 13) + ":00"); cl.push(P[i].cloud); dy.push(sunElev(ms + 1800e3, lat, lon) > -.833 ? 1 : 0);
+        }
+      }
+      return {hourly: {time: time, cloud_cover: cl, is_day: dy}};
+    }
+    var days = {}, order = [];
+    P.forEach(function(p){
+      var ds = loc(p.t).slice(0, 10), d = days[ds];
+      if(!d){ d = days[ds] = {tmax: -99, tmin: 99, w: 0, code: -1}; order.push(ds); }
+      if(p.temp > d.tmax) d.tmax = p.temp; if(p.temp < d.tmin) d.tmin = p.temp; if(p.wind > d.w) d.w = p.wind;
+      if(p.sym){ var hh = new Date(p.t + OFF).getUTCHours(), wc = wmoFromMetno(p.sym); if(hh >= 6 && hh <= 21 && wc > d.code) d.code = wc; }   /* днём берём самую «тяжёлую» погоду: осадки важнее облачности */
+    });
+    var D = order.slice(0, 4), out = {time: D, weather_code: [], temperature_2m_max: [], temperature_2m_min: [], wind_speed_10m_max: [], precipitation_probability_max: [], sunrise: [], sunset: []};
+    D.forEach(function(ds){
+      var d = days[ds], st = sunTimes(ds, lat, lon);
+      out.weather_code.push(d.code >= 0 ? d.code : 3); out.temperature_2m_max.push(d.tmax); out.temperature_2m_min.push(d.tmin); out.wind_speed_10m_max.push(d.w);
+      out.precipitation_probability_max.push(null); out.sunrise.push(st.rise); out.sunset.push(st.set);
+    });
+    return {daily: out};
+  }
+  function altFor(url){
+    var k = snapKey(url);
+    return (k === "current" || k === "hourly" || k === "daily") ? function(){ return metnoGet().then(function(j){ return metnoAdapt(k, j); }); } : null;
+  }
   function getJSON(url, ms){
     return new Promise(function(res, rej){
-      var done = false;
-      function fail(err){ if(done) return; done = true; var k = snapKey(url); snapGet().then(function(S){ if(S && k && S[k]){ YP.snapTime = new Date(S.time); res(S[k]); } else rej(err); }, function(){ rej(err); }); }
-      var t = setTimeout(function(){ fail(new Error("timeout")); }, ms);
-      fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){ if(done) return; done = true; clearTimeout(t); res(j); }, function(e){ clearTimeout(t); fail(e); });
+      var done = false, pending = 1, alt = altFor(url), altStarted = false, primaryFailed = false, lastErr, t, h;
+      function ok(v){ if(done) return; done = true; clearTimeout(t); clearTimeout(h); res(v); }
+      function snapshot(){
+        if(done) return; var k = snapKey(url);
+        snapGet().then(function(S){ if(done) return; done = true; if(S && k && S[k]){ YP.snapTime = new Date(S.time); res(S[k]); } else rej(lastErr); }, function(){ if(done) return; done = true; rej(lastErr); });
+      }
+      function bad(e){ lastErr = e; if(--pending <= 0) snapshot(); }
+      function launchAlt(){ if(!alt || altStarted || done) return; altStarted = true; pending++; alt().then(ok, bad); }
+      function primaryFail(e){ if(primaryFailed) return; primaryFailed = true; clearTimeout(t); launchAlt(); bad(e); }
+      h = setTimeout(launchAlt, 2500);
+      t = setTimeout(function(){ primaryFail(new Error("timeout")); }, ms);
+      fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){ if(!primaryFailed) ok(j); }, primaryFail);
     });
   }
   /* Подпись к данным: «сейчас» или «данные на 7 октября, 15:40», если показан снимок */
