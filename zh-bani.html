@@ -903,6 +903,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   }
   /* Курсор: кольцо догоняет мышь, над ссылками растёт, над [data-yp-cursor] показывает подпись */
   function cursor(){
+    return; /* круг-курсор с подписью отключён по просьбе владельца (октябрь 2026) */
     if(!YP.fine) return;
     var c = document.createElement("div"); c.className = "yp-cur is-hidden"; c.setAttribute("aria-hidden","true");
     c.innerHTML = '<div class="yp-cur__ring"><span></span></div><div class="yp-cur__dot"></div>'; document.body.appendChild(c);
