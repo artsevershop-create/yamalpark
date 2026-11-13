@@ -1814,9 +1814,11 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
             var h = ["ru-ibe.tlintegration.ru", "ibe.tlintegration.ru", "ibe.tlintegration.com"];
             var t = w.travelline = (w.travelline || {}), ti = t.integration = (t.integration || {});
             ti.__cq = ti.__cq ? ti.__cq.concat(q) : q;
-            if(!ti.__loader){
+            var d = w.document, c = d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0];
+            /* модуль TravelLine (около 30 запросов) грузим, когда до формы осталось пара экранов, при нажатии «Забронировать» или через 20 с — страница открывается быстрее */
+            function startLoader(){
+              if(ti.__loader) return;
               ti.__loader = true;
-              var d = w.document, c = d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0];
               function e(s, f){ return function(){ w.TL || (c.removeChild(s), f()); }; }
               (function l(h){
                 if(0 === h.length) return; var s = d.createElement("script");
@@ -1824,6 +1826,12 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
                 s.onerror = s.onload = e(s, function(){ l(h.slice(1, h.length)); }); c.appendChild(s);
               })(h);
             }
+            function arm(){
+              var box = d.getElementById("tl-search-form");
+              if(w.IntersectionObserver && box){ var io = new IntersectionObserver(function(en){ if(en[0].isIntersecting){ io.disconnect(); startLoader(); } }, {rootMargin:"1600px 0px"}); io.observe(box); } else startLoader();
+            }
+            if(d.readyState === "loading") d.addEventListener("DOMContentLoaded", arm); else arm();
+            d.addEventListener("yp:booking", startLoader); setTimeout(startLoader, 20000);
           })(window);
           </script>
           <div class="yp-tl" data-yp-tl>

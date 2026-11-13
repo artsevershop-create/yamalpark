@@ -2044,8 +2044,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       PLAY = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>';
   /* видео, полосы «историй» и кнопки объектов */
   var vids = L.map(function(o, i){
-    var v = document.createElement("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = i === 0 ? "metadata" : "none";
-    v.poster = o.src + ".jpg"; v.src = o.src + ".mp4"; v.setAttribute("aria-label", "Видео: " + o.title);
+    var v = document.createElement("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "none";
+    v.setAttribute("data-poster", o.src + ".jpg"); v.src = o.src + ".mp4"; v.setAttribute("aria-label", "Видео: " + o.title);
     v.loop = L.length === 1; stage.insertBefore(v, bars); return v;
   });
   bars.innerHTML = L.map(function(o, i){ return '<button type="button" aria-label="' + o.title + '"><i></i></button>'; }).join("");
@@ -2123,10 +2123,18 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   }
   fxb.addEventListener("click", function(e){ e.stopPropagation(); var b = e.target.closest("button[data-fx]"); if(b) runFx(b.getAttribute("data-fx"), true); });
 
+  /* видео и постеры тянем только когда плеер на экране (или человек сам выбрал ролик): на главной это экономит ~12 МБ при загрузке */
+  function warm(){
+    if(!(inView || userPicked)) return;
+    var v = vids[cur]; if(v){ if(!v.poster && v.getAttribute("data-poster")) v.poster = v.getAttribute("data-poster"); if(v.preload !== "auto") v.preload = "auto"; }
+    var n = vids[cur + 1]; if(n){ if(!n.poster && n.getAttribute("data-poster")) n.poster = n.getAttribute("data-poster"); if(n.preload === "none") n.preload = "metadata"; }
+  }
+  var userPicked = false;
   function select(i, user){
+    if(user) userPicked = true;
     cur = (i + L.length) % L.length; var o = L[cur];
-    vids.forEach(function(v, k){ v.classList.toggle("is-on", k === cur); if(k === cur && v.preload !== "auto") v.preload = "auto"; });
-    if(vids[cur + 1]) vids[cur + 1].preload = "metadata";
+    vids.forEach(function(v, k){ v.classList.toggle("is-on", k === cur); });
+    warm();
     barEls.forEach(function(b, k){ b.classList.toggle("is-done", k < cur); if(k >= cur) b.firstChild.style.width = "0"; });
     navEls.forEach(function(b, k){ b.setAttribute("aria-selected", String(k === cur)); });
     if(user && navEls[cur]) nav.scrollTo({left:navEls[cur].offsetLeft - 20, behavior:"smooth"});
@@ -2154,7 +2162,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     e.stopPropagation(); var v = vids[cur];
     if(v.requestFullscreen) v.requestFullscreen(); else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();
   });
-  if(window.IntersectionObserver) new IntersectionObserver(function(e){ inView = e[0].isIntersecting; sync(); }, {threshold:.35}).observe(stage);
+  if(window.IntersectionObserver) new IntersectionObserver(function(e){ inView = e[0].isIntersecting; warm(); sync(); }, {threshold:.35}).observe(stage);
   else inView = true;
   /* вход блока: видео-окно раскрывается из узкой полосы */
   if(G && window.ScrollTrigger && !YP.reduced)
@@ -3040,9 +3048,11 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
             var h = ["ru-ibe.tlintegration.ru", "ibe.tlintegration.ru", "ibe.tlintegration.com"];
             var t = w.travelline = (w.travelline || {}), ti = t.integration = (t.integration || {});
             ti.__cq = ti.__cq ? ti.__cq.concat(q) : q;
-            if(!ti.__loader){
+            var d = w.document, c = d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0];
+            /* модуль TravelLine (около 30 запросов) грузим, когда до формы осталось пара экранов, при нажатии «Забронировать» или через 20 с — страница открывается быстрее */
+            function startLoader(){
+              if(ti.__loader) return;
               ti.__loader = true;
-              var d = w.document, c = d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0];
               function e(s, f){ return function(){ w.TL || (c.removeChild(s), f()); }; }
               (function l(h){
                 if(0 === h.length) return; var s = d.createElement("script");
@@ -3050,6 +3060,12 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
                 s.onerror = s.onload = e(s, function(){ l(h.slice(1, h.length)); }); c.appendChild(s);
               })(h);
             }
+            function arm(){
+              var box = d.getElementById("tl-search-form");
+              if(w.IntersectionObserver && box){ var io = new IntersectionObserver(function(en){ if(en[0].isIntersecting){ io.disconnect(); startLoader(); } }, {rootMargin:"1600px 0px"}); io.observe(box); } else startLoader();
+            }
+            if(d.readyState === "loading") d.addEventListener("DOMContentLoaded", arm); else arm();
+            d.addEventListener("yp:booking", startLoader); setTimeout(startLoader, 20000);
           })(window);
           </script>
           <div class="yp-tl" data-yp-tl>
