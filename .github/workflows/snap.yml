@@ -1,0 +1,27 @@
+name: Снимок погоды и Kp
+on:
+  schedule:
+    - cron: "7 * * * *"      # каждый час в :07
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/snap.yml", "snap-gh.js"]
+permissions:
+  contents: write
+concurrency:
+  group: snap
+  cancel-in-progress: false
+jobs:
+  snap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node snap-gh.js
+      - name: Сохранить snap.json
+        run: |
+          git config user.name "Yamal Park bot"
+          git config user.email "bot@yamalpark.ru"
+          git add snap.json
+          if git diff --cached --quiet; then echo "без изменений"; else git commit -m "Снимок погоды и Kp" && git pull --rebase -q && git push; fi

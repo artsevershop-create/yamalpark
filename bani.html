@@ -469,6 +469,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  YP.HB_SHOP_URL = "https://shop.hotbot.ai/yamalpark/";
   /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
   YP.YM_ID = 111264194;
   YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
@@ -488,16 +489,25 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
-  YP.openShop = function(){
-    if(window.HotBot && HotBot.openShop){ try{ HotBot.openShop(); return true; }catch(e){} }
+  /* Вкладки магазина HotBot (путь внутри магазина: категория#раздел). Кнопка на странице услуги открывает окно HotBot сразу на нужной вкладке. */
+  YP.HB_PATHS = {
+    banya:"bath-complex", moroshka:"bath-complex#banya-moroshka", brusnika:"bath-complex#bathhouse-brusnika", chernika:"bath-complex#russian-bathhouse",
+    grill:"at-home#grill-houses", g1:"at-home#grill-houses", g2:"at-home#grill-houses", g3:"at-home#grill-houses",
+    guest:"at-home#guest-houses", h1:"at-home#guest-houses", h2:"at-home#guest-houses",
+    b1:"at-home/product/66d83447884559001edf4fb2",
+    chum:"at-home#Chum", event:"at-home#dome-ball-northern-lights", tent:"at-home#dome-ball-northern-lights", hall:"at-home#dome-ball-northern-lights"
+  };
+  YP.hbPath = function(type, object){ return YP.HB_PATHS[object] || YP.HB_PATHS[type] || null; };
+  YP.openShop = function(path){
+    if(window.HotBot && HotBot.openShop){ try{ HotBot.openShop(path ? {path:path} : {}); return true; }catch(e){} }
     return false;
   };
   YP.openBooking = function(opts){
     opts = opts || {};
     document.dispatchEvent(new CustomEvent("yp:booking", {detail: opts}));
     /* праздники: в магазине HotBot раздел «Мероприятия» пустой, а банкетный зал и шатёр лежат в «Аренда домиков → Купольный шатёр» — ведём сразу туда */
-    if(opts.type === "event"){ window.open("https://shop.hotbot.ai/yamalpark/at-home#dome-ball-northern-lights", "_blank", "noopener"); return; }
-    if(YP.isHourly(opts.type) && YP.openShop()) return;
+    if(opts.type === "event"){ if(!YP.openShop(YP.hbPath("event"))) window.open(YP.HB_SHOP_URL + "at-home#dome-ball-northern-lights", "_blank", "noopener"); return; }
+    if(YP.isHourly(opts.type) && YP.openShop(YP.hbPath(opts.type, opts.object))) return;
     YP.scrollTo("#booking");
   };
   /* HotBot: онлайн-запись на почасовую аренду, обратный звонок и чат */
@@ -872,7 +882,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       var url = new URL(location.href); url.searchParams.set("date", iso); url.searchParams.set("nights", "1"); url.searchParams.set("adults", "2"); url.searchParams.set("yp_book", "1"); url.hash = "booking";
       location.href = url.toString(); return;
     }
-    window.open(YP.HB_SHOP + u.cat + "/product/" + (u.hb), "_blank", "noopener");
+    if(!YP.openShop(u.cat + "/product/" + u.hb)) window.open(YP.HB_SHOP + u.cat + "/product/" + (u.hb), "_blank", "noopener");
   };
   YP.isoDate = function(d){ return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); };
 
@@ -1054,7 +1064,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     }
     document.addEventListener("click", function(e){
       var b = e.target.closest && e.target.closest("[data-yp-book]"); if(!b) return;
-      e.preventDefault(); document.dispatchEvent(new CustomEvent("yp:menu-close")); YP.openBooking({type:b.getAttribute("data-yp-book") || ""});
+      e.preventDefault(); document.dispatchEvent(new CustomEvent("yp:menu-close")); YP.openBooking({type:b.getAttribute("data-yp-book") || "", object:b.getAttribute("data-yp-object") || undefined});
     });
     document.addEventListener("keydown", function(e){ if(e.key==="Enter" && e.target.matches && e.target.matches("[data-yp-book]:not(button):not(a)")) e.target.click(); });
     var bar = document.createElement("div"); bar.className = "yp-progress"; document.body.appendChild(bar);
@@ -1493,7 +1503,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
           <div class="yp-zone"><h4>Парная <span>скажите Алисе</span></h4><div class="yp-zone__cmds"><span>включи дождь</span><span title="подача пара на каменку">включи вьюгу</span><span>включи музыку</span><span>включи свет</span></div></div>
           <div class="yp-zone"><h4>Фито-сауна <span>скажите Алисе</span></h4><div class="yp-zone__cmds"><span>включи фито</span><span>включи туман</span><span>включи музыку</span><span>включи вьюгу</span><span>включи ветер</span><span>включи свет</span></div></div>
           <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/moroshka-steam.webp" data-alt="Пар в парной «Морошки»" aria-label="Пар в парной «Морошки»"><img src="img/p/moroshka-steam.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-parnaya.webp" data-alt="Парная «Морошки» с подсветкой" aria-label="Парная «Морошки» с подсветкой"><img src="img/p/moroshka-parnaya.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-stove.webp" data-alt="Каменка в «Морошке»" aria-label="Каменка в «Морошке»"><img src="img/p/moroshka-stove.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-lounge.webp" data-alt="Комната отдыха «Морошки»" aria-label="Комната отдыха «Морошки»"><img src="img/p/moroshka-lounge.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/moroshka-panel.webp" data-alt="Панель «Алиса, включи…» в фито-сауне" aria-label="Панель «Алиса, включи…» в фито-сауне"><img src="img/p/moroshka-panel.webp" alt="" loading="lazy"></button></div>
-          <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать «Морошку»</button></div>
+          <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya" data-yp-object="moroshka">Забронировать «Морошку»</button></div>
         </article>
         <article class="yp-ch" data-i="1">
           <div class="yp-ch__ph"><img src="img/p/brusnika-parnaya.webp" alt="Парная бани «Брусника»" loading="lazy"></div>
@@ -1503,7 +1513,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
           <p>Единственная парная, где Алиса включает и дождь, и вьюгу, и туман. Для тех, кто приезжает за впечатлениями.</p>
           <div class="yp-zone"><h4>Парная <span>скажите Алисе</span></h4><div class="yp-zone__cmds"><span>включи дождь</span><span>включи вьюгу</span><span>включи туман</span><span>включи музыку</span><span>включи свет</span></div></div>
           <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/brusnika-parnaya.webp" data-alt="Парная «Брусники» с окном" aria-label="Парная «Брусники» с окном"><img src="img/p/brusnika-parnaya.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-hammam.webp" data-alt="Хаммам в «Бруснике»" aria-label="Хаммам в «Бруснике»"><img src="img/p/brusnika-hammam.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-lounge.webp" data-alt="Комната отдыха «Брусники»" aria-label="Комната отдыха «Брусники»"><img src="img/p/brusnika-lounge.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/brusnika-showers.webp" data-alt="Душевые в «Бруснике»" aria-label="Душевые в «Бруснике»"><img src="img/p/brusnika-showers.webp" alt="" loading="lazy"></button></div>
-          <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать «Бруснику»</button></div>
+          <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya" data-yp-object="brusnika">Забронировать «Бруснику»</button></div>
         </article>
         <article class="yp-ch" data-i="2">
           <div class="yp-ch__ph"><img src="img/p/chernika-parnaya.webp" alt="Парная бани «Черника»" loading="lazy"></div>
@@ -1513,7 +1523,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
           <p>Дровяная печь и живой жар. «Дождь» распыляет воду для влажности, «ветер» включает вентиляцию. Алисы здесь нет — всё управляется кнопками на панели.</p>
           <div class="yp-zone"><h4>Парная <span>кнопки на панели</span></h4><div class="yp-zone__cmds"><span>включи дождь</span><span>включи ветер</span></div></div>
           <div class="yp-ch__strip" data-yp-strip aria-label="Фото бани"><button type="button" class="is-on" data-src="img/p/chernika-parnaya.webp" data-alt="Парная «Черники»" aria-label="Парная «Черники»"><img src="img/p/chernika-parnaya.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-stones.webp" data-alt="Камни в печи «Черники»" aria-label="Камни в печи «Черники»"><img src="img/p/chernika-stones.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-lounge.webp" data-alt="Комната отдыха «Черники»" aria-label="Комната отдыха «Черники»"><img src="img/p/chernika-lounge.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-panel.webp" data-alt="Кнопки «дождь» и «ветер» в «Чернике»" aria-label="Кнопки «дождь» и «ветер» в «Чернике»"><img src="img/p/chernika-panel.webp" alt="" loading="lazy"></button><button type="button" data-src="img/p/chernika-dusk.webp" data-alt="Баня «Черника» в сумерках" aria-label="Баня «Черника» в сумерках"><img src="img/p/chernika-dusk.webp" alt="" loading="lazy"></button></div>
-          <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya">Забронировать «Чернику»</button></div>
+          <div class="yp-ch__cta"><button class="yp-btn yp-btn--red" type="button" data-yp-book="banya" data-yp-object="chernika">Забронировать «Чернику»</button></div>
         </article>
       </div>
     </div>

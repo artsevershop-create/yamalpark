@@ -468,6 +468,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
      бани, гриль-дома, чум, праздники (почасовая и дневная аренда) → магазин HotBot. */
   YP.HOTBOT_APP = "66c60692f635a1001eb69a23";
   YP.HOTBOT_PAGE = "https://shop.hotbot.ai/yamalpark/page/67335cc2b3944980427a0cde";
+  YP.HB_SHOP_URL = "https://shop.hotbot.ai/yamalpark/";
   /* Яндекс Метрика: цели (счётчик подключается в настройках Tilda; без счётчика — ничего не делаем) */
   YP.YM_ID = 111264194;
   YP.goal = function(name, params){ try{ if(window.ym) ym(YP.YM_ID, "reachGoal", name, params || {}); }catch(e){} };
@@ -487,16 +488,25 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   }, true);
   YP.TL_CONTEXT = "TL-INT-yamalpark-ru_2024-08-22";
   YP.isHourly = function(type){ return /^(banya|grill|chum|event|hourly)$/.test(type || ""); };
-  YP.openShop = function(){
-    if(window.HotBot && HotBot.openShop){ try{ HotBot.openShop(); return true; }catch(e){} }
+  /* Вкладки магазина HotBot (путь внутри магазина: категория#раздел). Кнопка на странице услуги открывает окно HotBot сразу на нужной вкладке. */
+  YP.HB_PATHS = {
+    banya:"bath-complex", moroshka:"bath-complex#banya-moroshka", brusnika:"bath-complex#bathhouse-brusnika", chernika:"bath-complex#russian-bathhouse",
+    grill:"at-home#grill-houses", g1:"at-home#grill-houses", g2:"at-home#grill-houses", g3:"at-home#grill-houses",
+    guest:"at-home#guest-houses", h1:"at-home#guest-houses", h2:"at-home#guest-houses",
+    b1:"at-home/product/66d83447884559001edf4fb2",
+    chum:"at-home#Chum", event:"at-home#dome-ball-northern-lights", tent:"at-home#dome-ball-northern-lights", hall:"at-home#dome-ball-northern-lights"
+  };
+  YP.hbPath = function(type, object){ return YP.HB_PATHS[object] || YP.HB_PATHS[type] || null; };
+  YP.openShop = function(path){
+    if(window.HotBot && HotBot.openShop){ try{ HotBot.openShop(path ? {path:path} : {}); return true; }catch(e){} }
     return false;
   };
   YP.openBooking = function(opts){
     opts = opts || {};
     document.dispatchEvent(new CustomEvent("yp:booking", {detail: opts}));
     /* праздники: в магазине HotBot раздел «Мероприятия» пустой, а банкетный зал и шатёр лежат в «Аренда домиков → Купольный шатёр» — ведём сразу туда */
-    if(opts.type === "event"){ window.open("https://shop.hotbot.ai/yamalpark/at-home#dome-ball-northern-lights", "_blank", "noopener"); return; }
-    if(YP.isHourly(opts.type) && YP.openShop()) return;
+    if(opts.type === "event"){ if(!YP.openShop(YP.hbPath("event"))) window.open(YP.HB_SHOP_URL + "at-home#dome-ball-northern-lights", "_blank", "noopener"); return; }
+    if(YP.isHourly(opts.type) && YP.openShop(YP.hbPath(opts.type, opts.object))) return;
     YP.scrollTo("#booking");
   };
   /* HotBot: онлайн-запись на почасовую аренду, обратный звонок и чат */
@@ -871,7 +881,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       var url = new URL(location.href); url.searchParams.set("date", iso); url.searchParams.set("nights", "1"); url.searchParams.set("adults", "2"); url.searchParams.set("yp_book", "1"); url.hash = "booking";
       location.href = url.toString(); return;
     }
-    window.open(YP.HB_SHOP + u.cat + "/product/" + (u.hb), "_blank", "noopener");
+    if(!YP.openShop(u.cat + "/product/" + u.hb)) window.open(YP.HB_SHOP + u.cat + "/product/" + (u.hb), "_blank", "noopener");
   };
   YP.isoDate = function(d){ return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); };
 
@@ -1053,7 +1063,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     }
     document.addEventListener("click", function(e){
       var b = e.target.closest && e.target.closest("[data-yp-book]"); if(!b) return;
-      e.preventDefault(); document.dispatchEvent(new CustomEvent("yp:menu-close")); YP.openBooking({type:b.getAttribute("data-yp-book") || ""});
+      e.preventDefault(); document.dispatchEvent(new CustomEvent("yp:menu-close")); YP.openBooking({type:b.getAttribute("data-yp-book") || "", object:b.getAttribute("data-yp-object") || undefined});
     });
     document.addEventListener("keydown", function(e){ if(e.key==="Enter" && e.target.matches && e.target.matches("[data-yp-book]:not(button):not(a)")) e.target.click(); });
     var bar = document.createElement("div"); bar.className = "yp-progress"; document.body.appendChild(bar);
