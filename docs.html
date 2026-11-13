@@ -493,6 +493,8 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
   YP.openBooking = function(opts){
     opts = opts || {};
     document.dispatchEvent(new CustomEvent("yp:booking", {detail: opts}));
+    /* праздники: в магазине HotBot раздел «Мероприятия» пустой, а банкетный зал и шатёр лежат в «Аренда домиков → Купольный шатёр» — ведём сразу туда */
+    if(opts.type === "event"){ window.open("https://shop.hotbot.ai/yamalpark/at-home#dome-ball-northern-lights", "_blank", "noopener"); return; }
     if(YP.isHourly(opts.type) && YP.openShop()) return;
     YP.scrollTo("#booking");
   };
