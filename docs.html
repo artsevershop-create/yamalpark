@@ -152,17 +152,6 @@ input[type=text],input[type=tel],input[type=email],input[type=search],textarea{c
 .yp-curtain__logo img{height:clamp(17px,1.9vw,25px);width:auto;max-width:none}
 html:has(.yp-curtain.is-on) [class*="hotbot-widget"]{opacity:0!important;pointer-events:none!important;transition:opacity .25s}
 html.yp-trin::after{content:"";position:fixed;inset:0;z-index:10049;background:#060A10}
-.yp-cur__ring{opacity:0}.yp-cur.is-label .yp-cur__ring{opacity:1}.yp-cur__dot{display:none}
-.yp-cur{position:fixed;left:0;top:0;z-index:10040;pointer-events:none;width:0;height:0}
-.yp-cur__dot{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--yp-aurora);mix-blend-mode:difference}
-.yp-cur__ring{position:absolute;left:-20px;top:-20px;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(160,170,170,.7);display:grid;place-items:center;transition:width .35s var(--yp-ease),height .35s var(--yp-ease),left .35s var(--yp-ease),top .35s var(--yp-ease),background .35s,border-color .35s}
-.yp-cur__ring span{font:600 12px/1 var(--yp-f);color:var(--yp-ink);opacity:0;transform:scale(.6);transition:opacity .25s,transform .35s var(--yp-ease);white-space:nowrap}
-.yp-cur.is-link .yp-cur__ring{width:56px;height:56px;left:-28px;top:-28px;border-color:var(--yp-green)}
-.yp-cur.is-label .yp-cur__ring{width:96px;height:96px;left:-48px;top:-48px;background:var(--yp-aurora);border-color:transparent}
-.yp-cur.is-label .yp-cur__ring span{opacity:1;transform:none}
-.yp-cur.is-label .yp-cur__dot,.yp-cur.is-hidden{opacity:0}
-@media (hover:none),(pointer:coarse){.yp-cur{display:none}}
-@media (prefers-reduced-motion:reduce){.yp-cur{display:none}}
 /* ---------- Кнопка «Наверх»: слева внизу (справа — виджеты HotBot), кольцо показывает, сколько страницы пройдено ---------- */
 .yp-top{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:9980;width:52px;height:52px;border:0;padding:0;border-radius:50%;cursor:pointer;background:rgba(30,36,35,.86);color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.25);display:grid;place-items:center;opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .4s,transform .5s var(--yp-ease),background .3s}
 .yp-top.is-on{opacity:1;transform:none;pointer-events:auto}
@@ -1006,25 +995,6 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
     });
     window.addEventListener("pageshow", function(e){ if(e.persisted){ gsap.set(c, {opacity:0}); c.classList.remove("is-on"); html.classList.remove("yp-trin"); } });
   }
-  /* Курсор: кольцо догоняет мышь, над ссылками растёт, над [data-yp-cursor] показывает подпись */
-  function cursor(){
-    return; /* круг-курсор с подписью отключён по просьбе владельца (октябрь 2026) */
-    if(!YP.fine) return;
-    var c = document.createElement("div"); c.className = "yp-cur is-hidden"; c.setAttribute("aria-hidden","true");
-    c.innerHTML = '<div class="yp-cur__ring"><span></span></div><div class="yp-cur__dot"></div>'; document.body.appendChild(c);
-    var ring = c.querySelector(".yp-cur__ring"), dot = c.querySelector(".yp-cur__dot"), label = ring.querySelector("span");
-    var rx = gsap.quickTo(ring, "x", {duration:.45, ease:"power3"}), ry = gsap.quickTo(ring, "y", {duration:.45, ease:"power3"});
-    var dx = gsap.quickTo(dot, "x", {duration:.08}), dy = gsap.quickTo(dot, "y", {duration:.08});
-    window.addEventListener("pointermove", function(e){
-      if(e.pointerType && e.pointerType !== "mouse") return;
-      c.classList.remove("is-hidden"); rx(e.clientX); ry(e.clientY); dx(e.clientX); dy(e.clientY);
-      var t = e.target && e.target.closest ? e.target : null, lab = t && t.closest("[data-yp-cursor]");
-      if(lab){ label.textContent = lab.getAttribute("data-yp-cursor"); c.classList.add("is-label"); c.classList.remove("is-link"); }
-      else { c.classList.remove("is-label"); c.classList.toggle("is-link", !!(t && t.closest("a,button,select,input,label,[role=button]"))); }
-    }, {passive:true});
-    document.documentElement.addEventListener("mouseleave", function(){ c.classList.add("is-hidden"); });
-    document.addEventListener("pointerdown", function(){ gsap.fromTo(ring, {scale:1}, {scale:.82, duration:.15, yoyo:true, repeat:1}); });
-  }
   /* на телефоне виджеты HotBot бледнеют, пока страницу листают, и не закрывают текст */
   (function(){ var t; window.addEventListener("scroll", function(){ if(innerWidth > 768) return; var h = document.documentElement; h.classList.add("yp-scrolling"); clearTimeout(t); t = setTimeout(function(){ h.classList.remove("yp-scrolling"); }, 700); }, {passive:true}); })();
   function init(){
@@ -1081,7 +1051,7 @@ html[lang^="zh"] .yp-eyebrow{letter-spacing:.06em}
       up.classList.toggle("is-on", scrollY > innerHeight*.9); upRing.style.strokeDashoffset = (144.5*(1 - k)).toFixed(1); }
     window.addEventListener("scroll", prog, {passive:true}); prog();
     if(YP.reduced || !hasG) return;
-    pageTransitions(); cursor();
+    pageTransitions();
 
     gsap.utils.toArray("[data-yp-split]").forEach(function(el){
       gsap.from(YP.splitWords(el), {yPercent:115, duration:1.1, ease:"power4.out", stagger:.05, scrollTrigger:{trigger:el, start:"top 88%"}});
