@@ -57,17 +57,24 @@ async function hbSlots(o, startISO) {
   if (o.res) sl = sl.filter(s => s.res.indexOf(o.res) >= 0);
   return sl;
 }
+const hhmm = ms => new Date(ms + OFF).toISOString().slice(11, 16);
+function windows(arr) {                                    // свободные слоты дня → объединённые окна «10:00–23:00»
+  const a = arr.slice().sort((x, y) => x.from - y.from), out = [];
+  a.forEach(s => { const l = out[out.length - 1]; if (l && s.from <= l[1]) l[1] = Math.max(l[1], s.to); else out.push([s.from, s.to]); });
+  return out.map(([f, t]) => hhmm(f) + "–" + hhmm(t));
+}
 async function collect(startISO) {
   const dates = [...Array(DAYS)].map((_, i) => addDays(startISO, i));
   const tl = await tlNights(dates);
   for (const c of CATS) for (const o of c.objects) {
-    const free = {}; let min = Infinity, hours = null;
-    if (o.tl) { Object.entries(tl[o.tl] || {}).forEach(([d, p]) => { free[d] = true; if (p < min) min = p; }); }
+    const free = {}, det = {}; let min = Infinity, hours = null;
+    if (o.tl) { Object.entries(tl[o.tl] || {}).forEach(([d, p]) => { free[d] = true; det[d] = { price: Math.round(p) }; if (p < min) min = p; }); }
     else {
-      const sl = await hbSlots(o, startISO);
-      sl.forEach(s => { const d = localISO(s.from); if (dates.includes(d)) { free[d] = true; if (s.price && s.price < min) { min = s.price; hours = Math.round((s.to - s.from) / 3600e3); } } });
+      const sl = await hbSlots(o, startISO), per = {};
+      sl.forEach(s => { const d = localISO(s.from); if (dates.includes(d)) { free[d] = true; (per[d] = per[d] || []).push(s); if (s.price && s.price < min) { min = s.price; hours = Math.round((s.to - s.from) / 3600e3); } } });
+      Object.entries(per).forEach(([d, arr]) => { det[d] = { win: windows(arr), n: arr.length }; });
     }
-    o.dates = dates; o.free = dates.filter(d => free[d]); o.min = isFinite(min) ? min : null; o.hours = hours;
+    o.det = det; o.dates = dates; o.free = dates.filter(d => free[d]); o.min = isFinite(min) ? min : null; o.hours = hours;
   }
   return dates;
 }
@@ -112,16 +119,21 @@ body{font-family:Onest,"Segoe UI",Arial,sans-serif;color:#fff;background:#07101a
 .f{font-family:Unbounded,Onest,Arial,sans-serif;font-weight:500;letter-spacing:-.02em}
 .free{color:#5CFFC0}.mut{color:rgba(255,255,255,.72)}
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
-.d{border-radius:14px;padding:10px 0 8px;text-align:center;background:rgba(255,255,255,.09);color:rgba(255,255,255,.35)}
-.d b{display:block;font-size:34px;font-weight:600}.d i{display:block;font-style:normal;font-size:19px;letter-spacing:.06em;text-transform:uppercase}
-.d.y{background:#3FAB3C;color:#fff}.d.y i{color:rgba(255,255,255,.85)}
-.d.n b{text-decoration:line-through}
+.c{border-radius:14px;overflow:hidden;background:rgba(255,255,255,.07);text-align:center}
+.c .h{padding:8px 0 6px;background:rgba(255,255,255,.16);font-size:27px;line-height:1.1}.c .h i{font-style:normal;font-size:19px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}.c .h b{font-weight:700;font-size:32px}
+.c .s{display:flex;align-items:center;justify-content:center;min-height:78px;padding:6px 4px;font-size:21px;line-height:1.2;font-weight:600;background:#3FAB3C;color:#fff}
+.c.n{background:rgba(255,255,255,.05)}.c.n .h{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4)}.c.n .s{background:transparent;color:rgba(255,255,255,.32);font-weight:500;font-size:18px}
+.c .s u{text-decoration:none;font-size:.78em;opacity:.85;font-weight:500}.st.dn .c .h{font-size:22px;padding:4px 0 3px}.st.dn .c .h i{font-size:15px}.st.dn .c .h b{font-size:24px}.st.dn .c .s{min-height:46px;padding:2px;font-size:17px;letter-spacing:-.02em;white-space:nowrap}.st.dn .c .s br{display:none}.st.dn .c.n .s{font-size:13px}.st.dn .c .s u{margin-left:3px}
+.c.big .s{min-height:92px;font-size:23px}
+.cal.st{gap:6px}.cal.st .c .h{font-size:22px;padding:5px 0 4px}.cal.st .c .h i{font-size:15px}.cal.st .c .h b{font-size:25px}.cal.st .c .s{min-height:58px;font-size:17px;font-weight:600}.cal.st .c.n .s{font-size:15px}
 .cta{display:inline-block;padding:20px 40px;border-radius:999px;background:#5CFFC0;color:#06121b;font-weight:700;font-size:34px}
 `;
 const imgUrl = n => pathToFileURL(path.join(ROOT, "img", "p", n + ".jpg")).href;
 const logoUrl = pathToFileURL(path.join(ROOT, "img", "brand", "wordmark-white.png")).href;
-const dayCell = (d, free) => { const wd = new Date(d + "T12:00:00Z").getUTCDay(); return `<div class="d ${free ? "y" : "n"}"><i>${WD[wd]}</i><b>${+d.slice(8)}</b></div>`; };
-const calHTML = o => `<div class="cal">${o.dates.map(d => dayCell(d, o.free.includes(d))).join("")}</div>`;
+const slotText = (o, d, short) => { const f = o.det && o.det[d]; if (!f) return ""; return f.price != null ? rub(f.price).replace(" ₽", " ₽") : (short && f.win.length > 1 ? f.win[0] + "<br><u>+" + (f.win.length - 1) + " окно</u>" : f.win.slice(0, 2).join("<br>")); };
+const dayCell = (o, d, big, short) => { const wd = new Date(d + "T12:00:00Z").getUTCDay(), ok = o.free.includes(d), t = slotText(o, d, short);
+  return `<div class="c ${ok ? "y" : "n"} ${big ? "big" : ""}"><div class="h"><i>${WD[wd]}</i> <b>${+d.slice(8)}</b></div><div class="s">${ok ? t : "занято"}</div></div>`; };
+const calHTML = (o, days, big) => `<div class="cal">${(days || o.dates).map(d => dayCell(o, d, big, !!days)).join("")}</div>`;
 const shell = (inner, w, h) => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body style="width:${w}px;height:${h}px">${inner}</body></html>`;
 const shade = "linear-gradient(180deg,rgba(7,16,26,.55) 0%,rgba(7,16,26,.1) 32%,rgba(7,16,26,.86) 66%,#07101a 100%)";
 
@@ -143,8 +155,8 @@ function slideObject(c, o) {
     <div class="f" style="font-size:78px;line-height:1.04;margin-bottom:14px">${o.name}</div>
     <div class="mut" style="font-size:30px;margin-bottom:30px">${o.spec}</div>
     <div style="display:flex;align-items:baseline;gap:22px;margin-bottom:26px"><b class="${o.free.length ? "free" : "mut"}" style="font-size:44px">${o.free.length ? "Свободно " + o.free.length + " из " + o.dates.length : "Ближайшие " + o.dates.length + " дн. заняты"}</b><span style="font-size:34px">${priceLine(o)}</span></div>
-    ${calHTML(o)}
-    <div class="mut" style="font-size:26px;margin-top:22px">Зелёным — свободные даты. Бронь: ${SITE}/${c.page}</div>
+    ${calHTML(o, null, true)}
+    <div class="mut" style="font-size:26px;margin-top:22px">Под датой — свободное время${o.det && Object.values(o.det).some(x => x.price != null) ? " и цена за ночь" : ""}. Бронь: ${SITE}/${c.page}</div>
   </div>`, 1080, 1350);
 }
 function slideCTA(c, dates) {
@@ -159,14 +171,14 @@ function slideCTA(c, dates) {
   </div>`, 1080, 1350);
 }
 function story(c, dates) {
-  const o = c.objects[0], rows = c.objects.map(x => `<div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px"><span style="font-size:44px;font-weight:600">${x.name}</span><b class="${x.free.length ? "free" : "mut"}" style="font-size:34px">${x.free.length ? x.free.length + " " + plural(x.free.length, "день", "дня", "дней") : "занято"}</b></div>
-    <div style="display:grid;grid-template-columns:repeat(${x.dates.length},1fr);gap:5px">${x.dates.map(d => `<div style="height:34px;border-radius:7px;background:${x.free.includes(d) ? "#3FAB3C" : "rgba(255,255,255,.12)"}"></div>`).join("")}</div>
-    <div class="mut" style="font-size:26px;margin-top:8px">${x.free.length ? ranges(x.free) : "ближайшие даты заняты"}${x.min ? " · " + priceLine(x) : ""}</div></div>`).join("");
+  const o = c.objects[0], dn = c.objects.length > 4, rows = c.objects.map(x => `<div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:${dn ? 6 : 12}px"><span style="font-size:${dn ? 36 : 44}px;font-weight:600">${x.name}</span><b class="${x.free.length ? "free" : "mut"}" style="font-size:${dn ? 28 : 34}px">${x.free.length ? x.free.length + " " + plural(x.free.length, "день", "дня", "дней") : "занято"}</b></div>
+    <div class="st${dn ? " dn" : ""}">${calHTML(x, x.dates.slice(0, 7))}</div>
+    <div class="mut" style="font-size:${dn ? 21 : 24}px;margin-top:${dn ? 4 : 8}px">${x.free.length ? "Ещё свободно: " + ranges(x.free.filter(d => d > x.dates[6])) : "ближайшие даты заняты"}${x.min ? " · " + priceLine(x) : ""}</div></div>`).join("");
   return shell(`<div class="bg" style="background-image:url(${imgUrl(o.img)});filter:blur(2px) brightness(.55)"></div><div class="sh" style="background:linear-gradient(180deg,rgba(7,16,26,.35),rgba(7,16,26,.78) 40%,#07101a 100%)"></div>
   <img class="logo" style="left:64px;top:120px" src="${logoUrl}">
   <div style="position:absolute;left:64px;right:64px;top:260px;bottom:360px;display:flex;flex-direction:column">
     <div class="mut" style="font-size:36px;margin-bottom:14px">Свободные даты · ${period(dates)}</div>
-    <div class="f" style="font-size:84px;line-height:1.04;margin-bottom:30px">${c.title}</div>
+    <div class="f" style="font-size:${dn ? 64 : 84}px;line-height:1.04;margin-bottom:${dn ? 14 : 30}px">${c.title}</div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly">${rows}</div>
   </div>
   <div style="position:absolute;left:64px;right:64px;bottom:170px;text-align:center"><div class="cta">Бронь на ${SITE}</div><div class="mut" style="font-size:28px;margin-top:22px">${PHONE}</div></div>`, 1080, 1920);

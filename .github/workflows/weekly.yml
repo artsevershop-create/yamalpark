@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "0 3 * * 1"      # каждый понедельник в 03:00 UTC = 08:00 в Салехарде
   workflow_dispatch:
+    inputs:
+      publish:
+        description: "Опубликовать во ВКонтакте и Telegram"
+        type: boolean
+        default: false
   push:
     paths: [".github/workflows/weekly.yml", "weekly/gen.js"]
 permissions:
@@ -20,6 +25,14 @@ jobs:
           node-version: 20
       - run: npm i --no-save playwright-core
       - run: node weekly/gen.js
+      - name: Опубликовать во ВКонтакте и Telegram
+        if: github.event_name == 'schedule' || inputs.publish
+        env:
+          VK_TOKEN: ${{ secrets.VK_TOKEN }}
+          VK_GROUP_ID: ${{ secrets.VK_GROUP_ID }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: node weekly/publish.js
       - name: Сохранить результат
         run: |
           git config user.name "Yamal Park bot"
