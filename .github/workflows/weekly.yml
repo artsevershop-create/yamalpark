@@ -1,0 +1,28 @@
+name: Контент по понедельникам
+on:
+  schedule:
+    - cron: "0 3 * * 1"      # каждый понедельник в 03:00 UTC = 08:00 в Салехарде
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/weekly.yml", "weekly/gen.js"]
+permissions:
+  contents: write
+concurrency:
+  group: weekly
+  cancel-in-progress: false
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i --no-save playwright-core
+      - run: node weekly/gen.js
+      - name: Сохранить результат
+        run: |
+          git config user.name "Yamal Park bot"
+          git config user.email "bot@yamalpark.ru"
+          git add -A weekly
+          if git diff --cached --quiet; then echo "без изменений"; else git commit -m "Свободные даты: контент на неделю" && git pull --rebase -q && git push; fi
