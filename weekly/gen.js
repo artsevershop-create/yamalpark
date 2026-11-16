@@ -26,15 +26,15 @@ const CATS = [
     { id: "brusnika", name: "Баня «Брусника»", hb: "6703b3e49209f3001e9b7ad1", cat: "bath-complex", img: "brusnika-parnaya", spec: "до 10 гостей · хаммам · управление голосом (Алиса)", unit: "за сеанс" },
     { id: "chernika", name: "Баня «Черника»", hb: "6724ddd3f30425d64654da2b", cat: "bath-complex", img: "chernika-parnaya", spec: "64 м² · до 8 гостей · на дровах", unit: "за сеанс" } ] },
   { id: "grill", title: "Гриль-дома и беседка", emoji: "🍖", page: "grill", tags: "#грильдом #отдых", objects: [
-    { id: "g1", name: "Гриль-дом №1", hb: "66d83883884559001edf5427", cat: "at-home", img: "grill1-ext", spec: "15–20 гостей · 12:00–22:00", unit: "за день" },
-    { id: "g2", name: "Гриль-дом №2", hb: "66d83951884559001edf54d4", cat: "at-home", img: "grill-aurora-b", spec: "15–20 гостей · 12:00–22:00", unit: "за день" },
-    { id: "g3", name: "Гриль-дом №3", hb: "66d839f8884559001edf5582", cat: "at-home", img: "grill-aurora-c", spec: "15–20 гостей · 12:00–22:00", unit: "за день" },
-    { id: "h1", name: "Гостевой дом №1", hb: "670386589209f3001e9b1748", res: "66d82f1f884559001edf4933", cat: "at-home", img: "guest1-ext", spec: "20–25 гостей · 12:00–22:00", unit: "за день" },
-    { id: "h2", name: "Гостевой дом №2", hb: "670386589209f3001e9b1748", res: "66d83141884559001edf4c5e", cat: "at-home", img: "guest2-ext", spec: "20–25 гостей · 12:00–22:00", unit: "за день" },
-    { id: "b1", name: "Летняя беседка", hb: "66d83447884559001edf4fb2", cat: "at-home", img: "besedka", spec: "до 15 гостей · 12:00–22:00", unit: "за день" } ] },
+    { id: "g1", name: "Гриль-дом №1", hb: "66d83883884559001edf5427", cat: "at-home", img: "grill1-ext", spec: "15–20 гостей · 24 м² · аренда на день", unit: "за день" },
+    { id: "g2", name: "Гриль-дом №2", hb: "66d83951884559001edf54d4", cat: "at-home", img: "grill-aurora-b", spec: "20–30 гостей · 30 м² · аренда на день", unit: "за день" },
+    { id: "g3", name: "Гриль-дом №3", hb: "66d839f8884559001edf5582", cat: "at-home", img: "grill-aurora-c", spec: "20–30 гостей · 30 м² · аренда на день", unit: "за день" },
+    { id: "h1", name: "Гостевой дом №1", hb: "670386589209f3001e9b1748", res: "66d82f1f884559001edf4933", cat: "at-home", img: "guest1-ext", spec: "20–30 гостей · аренда до 22:00", unit: "за день" },
+    { id: "h2", name: "Гостевой дом №2", hb: "670386589209f3001e9b1748", res: "66d83141884559001edf4c5e", cat: "at-home", img: "guest2-ext", spec: "20–30 гостей · аренда до 22:00", unit: "за день" },
+    { id: "b1", name: "Летняя беседка", hb: "66d83447884559001edf4fb2", cat: "at-home", img: "besedka", spec: "до 15 гостей · аренда на день", unit: "за день" } ] },
   { id: "fest", title: "Чум, шатёр и банкетный зал", emoji: "🎉", page: "events", tags: "#банкет #праздник #корпоратив", objects: [
-    { id: "chum", name: "Этно-чум на террасе", hb: "6ac5e30e93714c44cd6cf783", cat: "at-home", img: "chum-terrace", spec: "аренда на день · терраса с видом", unit: "за день" },
-    { id: "tent", name: "Шатёр «Сияние севера»", hb: "6800b971aa3e1d17e7fc6ff5", cat: "at-home", img: "tent-ext", spec: "до 20 гостей · купольный шатёр", unit: "за день" },
+    { id: "chum", name: "Этно-чум на террасе", hb: "6ac5e30e93714c44cd6cf783", cat: "at-home", img: "chum-terrace", spec: "15–20 гостей · терраса с видом", unit: "за день" },
+    { id: "tent", name: "Шатёр «Сияние севера»", hb: "6800b971aa3e1d17e7fc6ff5", cat: "at-home", img: "tent-ext", spec: "25–30 гостей · купольный шатёр", unit: "за день" },
     { id: "hall", name: "Банкетный зал", hb: "6a4ba66a524b79aaa65737d3", cat: "at-home", img: "banquet-hall-wide", spec: "100–150 гостей · под куполом", unit: "за день" } ] },
 ];
 
