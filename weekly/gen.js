@@ -73,8 +73,12 @@ async function collect(startISO) {
       const sl = await hbSlots(o, startISO), per = {};
       sl.forEach(s => { const d = localISO(s.from); if (dates.includes(d)) { free[d] = true; (per[d] = per[d] || []).push(s); if (s.price && s.price < min) { min = s.price; hours = Math.round((s.to - s.from) / 3600e3); } } });
       Object.entries(per).forEach(([d, arr]) => { det[d] = { win: windows(arr), n: arr.length }; });
+      const all = Object.values(per).flat();                         // «полный день» объекта = самое раннее начало … самый поздний конец среди всех слотов периода
+      if (all.length) { const tod = ms => (ms + OFF) % 864e5, fm = t => new Date(t).toISOString().slice(11, 16); o.fullWin = fm(Math.min(...all.map(x => tod(x.from)))) + "–" + fm(Math.max(...all.map(x => tod(x.to) || 864e5))); }
+      Object.values(det).forEach(x => { x.part = !(x.win.length === 1 && x.win[0] === o.fullWin); });
     }
-    o.det = det; o.dates = dates; o.free = dates.filter(d => free[d]); o.min = isFinite(min) ? min : null; o.hours = hours;
+    o.det = det; o.dates = dates; o.free = dates.filter(d => free[d]);
+    o.full = o.free.filter(d => !det[d].part); o.part = o.free.filter(d => det[d].part); o.min = isFinite(min) ? min : null; o.hours = hours;
   }
   return dates;
 }
@@ -89,11 +93,13 @@ function ranges(list) {                                    // ["2026-11-16","202
   return byMonth.map(x => x.parts.join(", ") + " " + MON[x.m - 1]).join(" · ");
 }
 const period = dates => { const a = dates[0], b = dates[dates.length - 1], ma = +a.slice(5, 7), mb = +b.slice(5, 7); return ma === mb ? `${+a.slice(8)}–${+b.slice(8)} ${MON[ma - 1]}` : `${+a.slice(8)} ${MON[ma - 1]} – ${+b.slice(8)} ${MON[mb - 1]}`; };
+const avail = o => [o.full.length ? "свободно целиком " + ranges(o.full) : "", o.part.length ? (o.full.length ? "частично " : "частично свободно ") + ranges(o.part) : ""].filter(Boolean).join("; ");
+const cntLabel = o => !o.free.length ? "занято" : !o.part.length ? o.full.length + " " + plural(o.full.length, "день", "дня", "дней") : !o.full.length ? o.part.length + " " + plural(o.part.length, "день", "дня", "дней") + " частично" : o.full.length + " целиком · " + o.part.length + " частично";
 const priceLine = o => o.min == null ? "" : `от ${rub(o.min)}` + (o.unit === "за сеанс" && o.hours ? ` за ${o.hours} ${plural(o.hours, "час", "часа", "часов")}` : o.unit === "за ночь" ? " за ночь" : " за день");
 
 function postText(c, dates) {
   const lines = [`${c.emoji} ${c.title} · свободные даты на ${period(dates)}`, ""];
-  c.objects.forEach(o => { lines.push(o.free.length ? `• ${o.name}: ${ranges(o.free)}${o.min ? " · " + priceLine(o) : ""}` : `• ${o.name}: на эти недели занято`); });
+  c.objects.forEach(o => { lines.push(o.free.length ? `• ${o.name}: ${avail(o)}${o.min ? " · " + priceLine(o) : ""}` : `• ${o.name}: на эти недели занято`); });
   if (c.objects.every(o => !o.free.length)) lines.push("", "Ближайшие даты заняты — следующие свободные смотрите на сайте.");
   if (c.id === "glamping") lines.push("", "С террас «Волка» и «Медведя» видно северное сияние (сентябрь–апрель).");
   if (c.id === "bani") lines.push("", "Сеанс от 3 часов, от 2 500 ₽ в час.");
@@ -102,7 +108,7 @@ function postText(c, dates) {
 }
 function overviewText(dates) {
   const lines = [`📅 Ямал Парк · свободные даты на ${period(dates)}`, ""];
-  CATS.forEach(c => { lines.push(`${c.emoji} ${c.title}`); c.objects.forEach(o => lines.push(`   ${o.name}: ${o.free.length ? ranges(o.free) : "занято"}`)); lines.push(""); });
+  CATS.forEach(c => { lines.push(`${c.emoji} ${c.title}`); c.objects.forEach(o => lines.push(`   ${o.name}: ${o.free.length ? avail(o) : "занято"}`)); lines.push(""); });
   lines.push(`Бронь онлайн: ${SITE} · ${PHONE} · Max: ${MAX}`, "", "#ЯмалПарк #Салехард #глэмпинг #баня #северноесияние");
   return lines.join("\n");
 }
@@ -122,6 +128,7 @@ body{font-family:Onest,"Segoe UI",Arial,sans-serif;color:#fff;background:#07101a
 .c{border-radius:14px;overflow:hidden;background:rgba(255,255,255,.07);text-align:center}
 .c .h{padding:8px 0 6px;background:rgba(255,255,255,.16);font-size:27px;line-height:1.1}.c .h i{font-style:normal;font-size:19px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}.c .h b{font-weight:700;font-size:32px}
 .c .s{display:flex;align-items:center;justify-content:center;min-height:78px;padding:6px 4px;font-size:21px;line-height:1.2;font-weight:600;background:#3FAB3C;color:#fff}
+.c.p .s{background:#D79A1E;color:#1b1204}.c.p .h{background:rgba(215,154,30,.35)}
 .c.n{background:rgba(255,255,255,.05)}.c.n .h{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4)}.c.n .s{background:transparent;color:rgba(255,255,255,.32);font-weight:500;font-size:18px}
 .c .s u{text-decoration:none;font-size:.78em;opacity:.85;font-weight:500}.st.dn .c .h{font-size:22px;padding:4px 0 3px}.st.dn .c .h i{font-size:15px}.st.dn .c .h b{font-size:24px}.st.dn .c .s{min-height:46px;padding:2px;font-size:17px;letter-spacing:-.02em;white-space:nowrap}.st.dn .c .s br{display:none}.st.dn .c.n .s{font-size:13px}.st.dn .c .s u{margin-left:3px}
 .c.big .s{min-height:92px;font-size:23px}
@@ -132,7 +139,7 @@ const imgUrl = n => pathToFileURL(path.join(ROOT, "img", "p", n + ".jpg")).href;
 const logoUrl = pathToFileURL(path.join(ROOT, "img", "brand", "wordmark-white.png")).href;
 const slotText = (o, d, short) => { const f = o.det && o.det[d]; if (!f) return ""; return f.price != null ? rub(f.price).replace(" ₽", " ₽") : (short && f.win.length > 1 ? f.win[0] + "<br><u>+" + (f.win.length - 1) + " окно</u>" : f.win.slice(0, 2).join("<br>")); };
 const dayCell = (o, d, big, short) => { const wd = new Date(d + "T12:00:00Z").getUTCDay(), ok = o.free.includes(d), t = slotText(o, d, short);
-  return `<div class="c ${ok ? "y" : "n"} ${big ? "big" : ""}"><div class="h"><i>${WD[wd]}</i> <b>${+d.slice(8)}</b></div><div class="s">${ok ? t : "занято"}</div></div>`; };
+  return `<div class="c ${!ok ? "n" : o.det[d] && o.det[d].part ? "p" : "y"} ${big ? "big" : ""}"><div class="h"><i>${WD[wd]}</i> <b>${+d.slice(8)}</b></div><div class="s">${ok ? t : "занято"}</div></div>`; };
 const calHTML = (o, days, big) => `<div class="cal">${(days || o.dates).map(d => dayCell(o, d, big, !!days)).join("")}</div>`;
 const shell = (inner, w, h) => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body style="width:${w}px;height:${h}px">${inner}</body></html>`;
 const shade = "linear-gradient(180deg,rgba(7,16,26,.55) 0%,rgba(7,16,26,.1) 32%,rgba(7,16,26,.86) 66%,#07101a 100%)";
@@ -144,7 +151,7 @@ function slideCover(c, dates) {
   <div style="position:absolute;left:64px;right:64px;bottom:90px">
     <div class="mut" style="font-size:34px;margin-bottom:18px">Свободные даты</div>
     <div class="f" style="font-size:92px;line-height:1.02;margin-bottom:44px">${c.title}</div>
-    ${c.objects.map(x => `<div style="display:flex;justify-content:space-between;font-size:36px;padding:14px 0;border-top:1px solid rgba(255,255,255,.18)"><span>${x.name}</span><b class="${x.free.length ? "free" : "mut"}">${x.free.length ? x.free.length + " " + plural(x.free.length, "день", "дня", "дней") : "занято"}</b></div>`).join("")}
+    ${c.objects.map(x => `<div style="display:flex;justify-content:space-between;font-size:36px;padding:14px 0;border-top:1px solid rgba(255,255,255,.18)"><span>${x.name}</span><b class="${x.free.length ? "free" : "mut"}">${cntLabel(x)}</b></div>`).join("")}
     <div class="mut" style="font-size:28px;margin-top:26px">Листайте → ${tot ? "выбирайте дату" : "ближайшие даты заняты"}</div>
   </div>`, 1080, 1350);
 }
@@ -154,9 +161,9 @@ function slideObject(c, o) {
   <div style="position:absolute;left:64px;right:64px;bottom:64px">
     <div class="f" style="font-size:78px;line-height:1.04;margin-bottom:14px">${o.name}</div>
     <div class="mut" style="font-size:30px;margin-bottom:30px">${o.spec}</div>
-    <div style="display:flex;align-items:baseline;gap:22px;margin-bottom:26px"><b class="${o.free.length ? "free" : "mut"}" style="font-size:44px">${o.free.length ? "Свободно " + o.free.length + " из " + o.dates.length : "Ближайшие " + o.dates.length + " дн. заняты"}</b><span style="font-size:34px">${priceLine(o)}</span></div>
+    <div style="display:flex;align-items:baseline;gap:22px;margin-bottom:26px"><b class="${o.free.length ? "free" : "mut"}" style="font-size:34px">${!o.free.length ? "Ближайшие " + o.dates.length + " дн. заняты" : o.part.length ? "Свободно целиком: " + o.full.length + " · частично: " + o.part.length : "Свободно " + o.full.length + " из " + o.dates.length}</b><span style="font-size:30px;white-space:nowrap">${priceLine(o)}</span></div>
     ${calHTML(o, null, true)}
-    <div class="mut" style="font-size:26px;margin-top:22px">Под датой — свободное время${o.det && Object.values(o.det).some(x => x.price != null) ? " и цена за ночь" : ""}. Бронь: ${SITE}/${c.page}</div>
+    <div class="mut" style="font-size:26px;margin-top:22px">Зелёный — день свободен целиком, жёлтый — часть времени уже занята. Под датой — свободное время${o.det && Object.values(o.det).some(x => x.price != null) ? " и цена за ночь" : ""}. Бронь: ${SITE}/${c.page}</div>
   </div>`, 1080, 1350);
 }
 function slideCTA(c, dates) {
@@ -171,7 +178,7 @@ function slideCTA(c, dates) {
   </div>`, 1080, 1350);
 }
 function story(c, dates) {
-  const o = c.objects[0], dn = c.objects.length > 4, rows = c.objects.map(x => `<div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:${dn ? 6 : 12}px"><span style="font-size:${dn ? 36 : 44}px;font-weight:600">${x.name}</span><b class="${x.free.length ? "free" : "mut"}" style="font-size:${dn ? 28 : 34}px">${x.free.length ? x.free.length + " " + plural(x.free.length, "день", "дня", "дней") : "занято"}</b></div>
+  const o = c.objects[0], dn = c.objects.length > 4, rows = c.objects.map(x => `<div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:${dn ? 6 : 12}px"><span style="font-size:${dn ? 36 : 44}px;font-weight:600">${x.name}</span><b class="${x.free.length ? "free" : "mut"}" style="font-size:${dn ? 28 : 34}px">${cntLabel(x)}</b></div>
     <div class="st${dn ? " dn" : ""}">${calHTML(x, x.dates.slice(0, 7))}</div>
     <div class="mut" style="font-size:${dn ? 21 : 24}px;margin-top:${dn ? 4 : 8}px">${x.free.length ? "Ещё свободно: " + ranges(x.free.filter(d => d > x.dates[6])) : "ближайшие даты заняты"}${x.min ? " · " + priceLine(x) : ""}</div></div>`).join("");
   return shell(`<div class="bg" style="background-image:url(${imgUrl(o.img)});filter:blur(2px) brightness(.55)"></div><div class="sh" style="background:linear-gradient(180deg,rgba(7,16,26,.35),rgba(7,16,26,.78) 40%,#07101a 100%)"></div>
