@@ -698,6 +698,34 @@ window.YP && YP.forecast && YP.forecast.then(function(){ var el = document.query
 })();
 </script>
 
+<!-- Глэмпинг · 06 · SEO-текст «Где остановиться в Салехарде»: запросы «гостиница / отель / проживание Салехард» (видимый текст; вопросы попадают в FAQPage при сборке) -->
+<style>
+.yp-seo{padding-block:clamp(56px,8vw,120px)}
+.yp-seo__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(24px,3vw,40px);align-items:start}
+.yp-seo__txt p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--yp-muted)}
+.yp-seo__txt p b{color:var(--yp-ink);font-weight:600}
+.yp-seo__faq{display:grid;gap:10px}
+.yp-seo__faq details{border-radius:18px;background:var(--yp-paper);box-shadow:0 1px 0 var(--yp-line);padding:2px 20px}
+.yp-seo__faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center;padding:16px 0;font:600 16px/1.35 var(--yp-f)}
+.yp-seo__faq summary::-webkit-details-marker{display:none}
+.yp-seo__faq summary i{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--yp-bg);position:relative}
+.yp-seo__faq summary i::before,.yp-seo__faq summary i::after{content:"";position:absolute;left:7px;right:7px;top:12px;height:2px;background:var(--yp-ink);transition:transform .4s var(--yp-ease)}
+.yp-seo__faq summary i::after{transform:rotate(90deg)}
+.yp-seo__faq details[open] summary i::after{transform:none}
+.yp-seo__faq details>div{padding:0 0 16px;color:var(--yp-muted);font-size:15px}
+@media (max-width:900px){.yp-seo__grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+<section class="yp yp-seo" id="stay">
+  <div class="yp-wrap">
+    <span class="yp-eyebrow" style="--c:var(--yp-blue)"><i></i>Проживание в Салехарде</span>
+    <h2 class="yp-h2" data-yp-split>Где остановиться <b>в Салехарде</b></h2>
+    <div class="yp-seo__grid">
+      <div class="yp-seo__txt" data-yp-reveal><p>Ищете <b>гостиницу или отель в Салехарде</b> для отдыха, а не только для ночёвки? Ямал Парк — <b>загородный комплекс в 16 минутах от центра Салехарда</b>, на 12-м км дороги на Горнокнязевск. Вместо номера в городе — отдельный домик в тайге: <b>купольный домик</b> с панорамным окном и <b>дома с террасой «Волк» и «Медведь»</b> по 50 м².</p><p>В каждом доме — тёплые полы, санузел с душем, кровать и посуда, у «Волка» и «Медведя» — кухня и раскладной диван, у всех домиков — мангал. <b>Проживание от 8 000 ₽ за сутки</b>, на 2–4 гостя. Заезд с 14:00 или 15:00, бронирование онлайн с мгновенным подтверждением.</p><p>Это тихое место для выходных, годовщины или командировки с семьёй: <b>северное сияние</b> видно прямо с террасы и из купола, рядом — <b>бани с Алисой</b>, мини-зоопарк и парковка у каждого домика.</p></div>
+      <div class="yp-seo__faq" data-yp-reveal=".1"><details open><summary>Это гостиница?<i></i></summary><div>Ямал Парк — загородная база отдыха с домиками для проживания: купольный домик и два дома с террасой. Каждый домик — отдельный, со своим входом, санузлом и мангалом. Ресторана и обслуживания номеров нет, продукты можно привозить с собой.</div></details><details><summary>Сколько стоит проживание?<i></i></summary><div>Купольный домик — 9 000 ₽ за сутки с воскресенья по четверг и 13 000 ₽ в пятницу и субботу. Дома «Волк» и «Медведь» — 8 000 ₽ с понедельника по четверг и 12 000 ₽ с пятницы по воскресенье.</div></details><details><summary>Далеко ли от Салехарда?<i></i></summary><div>16 минут на машине или такси от центра Салехарда, у каждого домика есть парковка.</div></details><details><summary>Как забронировать?<i></i></summary><div>Онлайн на этой странице: выберите даты — свободные домики и цены видно сразу, подтверждение приходит мгновенно. Вопросы — администратору: +7 900 399-10-33.</div></details></div>
+    </div>
+  </div>
+</section>
+
 <!-- Глэмпинг · 05 · Вопросы о проживании (по FAQ текущего сайта). Также ставит «Глэмпинг» по умолчанию в форме брони -->
 <style>
 .yp-faq{padding-block:clamp(56px,10vw,150px)}
