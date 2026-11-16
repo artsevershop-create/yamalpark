@@ -93,12 +93,18 @@ function ranges(list) {                                    // ["2026-11-16","202
   return byMonth.map(x => x.parts.join(", ") + " " + MON[x.m - 1]).join(" · ");
 }
 const period = dates => { const a = dates[0], b = dates[dates.length - 1], ma = +a.slice(5, 7), mb = +b.slice(5, 7); return ma === mb ? `${+a.slice(8)}–${+b.slice(8)} ${MON[ma - 1]}` : `${+a.slice(8)} ${MON[ma - 1]} – ${+b.slice(8)} ${MON[mb - 1]}`; };
-const avail = o => [o.full.length ? "свободно целиком " + ranges(o.full) : "", o.part.length ? (o.full.length ? "частично " : "частично свободно ") + ranges(o.part) : ""].filter(Boolean).join("; ");
+const avail = o => !o.part.length ? "свободно " + ranges(o.full) : [o.full.length ? "весь день свободно " + ranges(o.full) : "", (o.full.length ? "часть дня " : "свободна часть дня ") + ranges(o.part)].filter(Boolean).join("; ");
 const cntLabel = o => !o.free.length ? "занято" : !o.part.length ? o.full.length + " " + plural(o.full.length, "день", "дня", "дней") : !o.full.length ? o.part.length + " " + plural(o.part.length, "день", "дня", "дней") + " частично" : o.full.length + " целиком · " + o.part.length + " частично";
 const priceLine = o => o.min == null ? "" : `от ${rub(o.min)}` + (o.unit === "за сеанс" && o.hours ? ` за ${o.hours} ${plural(o.hours, "час", "часа", "часов")}` : o.unit === "за ночь" ? " за ночь" : " за день");
 
+const INTRO = {
+  glamping: "Хотите выходные у Полярного круга и, если повезёт, северное сияние над головой? Показываем, какие домики свободны в ближайшие две недели.",
+  bani: "Баня на вечер — лучший способ согреться в ноябре. Смотрите, когда свободны наши бани. Если день отмечен «часть дня», на слайдах указано точное свободное время.",
+  grill: "Собраться компанией, отметить день рождения или провести семейный день у огня. Свободные дни в гриль-домах, гостевых домах и беседке на ближайшие две недели.",
+  fest: "Банкет, корпоратив, праздник под куполом или на террасе с видом. Свободные даты в чуме, шатре и банкетном зале на ближайшие две недели."
+};
 function postText(c, dates) {
-  const lines = [`${c.emoji} ${c.title} · свободные даты на ${period(dates)}`, ""];
+  const lines = [`${c.emoji} ${c.title} · свободные даты на ${period(dates)}`, "", INTRO[c.id], ""];
   c.objects.forEach(o => { lines.push(o.free.length ? `• ${o.name}: ${avail(o)}${o.min ? " · " + priceLine(o) : ""}` : `• ${o.name}: на эти недели занято`); });
   if (c.objects.every(o => !o.free.length)) lines.push("", "Ближайшие даты заняты — следующие свободные смотрите на сайте.");
   if (c.id === "glamping") lines.push("", "С террас «Волка» и «Медведя» видно северное сияние (сентябрь–апрель).");
@@ -163,7 +169,7 @@ function slideObject(c, o) {
     <div class="mut" style="font-size:30px;margin-bottom:30px">${o.spec}</div>
     <div style="display:flex;align-items:baseline;gap:22px;margin-bottom:26px"><b class="${o.free.length ? "free" : "mut"}" style="font-size:34px">${!o.free.length ? "Ближайшие " + o.dates.length + " дн. заняты" : o.part.length ? "Свободно целиком: " + o.full.length + " · частично: " + o.part.length : "Свободно " + o.full.length + " из " + o.dates.length}</b><span style="font-size:30px;white-space:nowrap">${priceLine(o)}</span></div>
     ${calHTML(o, null, true)}
-    <div class="mut" style="font-size:26px;margin-top:22px">Зелёный — день свободен целиком, жёлтый — часть времени уже занята. Под датой — свободное время${o.det && Object.values(o.det).some(x => x.price != null) ? " и цена за ночь" : ""}. Бронь: ${SITE}/${c.page}</div>
+    <div class="mut" style="font-size:26px;margin-top:22px">${o.part.length ? "Зелёный — день свободен целиком, жёлтый — часть времени уже занята. " : ""}Под датой — свободное время${o.det && Object.values(o.det).some(x => x.price != null) ? " и цена за ночь" : ""}. Бронь: ${SITE}/${c.page}</div>
   </div>`, 1080, 1350);
 }
 function slideCTA(c, dates) {
@@ -230,6 +236,7 @@ function viewer(date, dates, files) {
   }
   fs.writeFileSync(path.join(outDir, "post-all.txt"), overviewText(dates));
   fs.writeFileSync(path.join(outDir, "index.html"), viewer(startISO, dates, files));
+  fs.writeFileSync(path.join(outDir, "ВСЕ-ПОСТЫ.txt"), CATS.map(c => "=== " + c.title.toUpperCase() + " (карусель + сторис)\n\n" + postText(c, dates)).join("\n\n\n") + "\n\n\n=== ОБЩИЙ ПОСТ (по желанию)\n\n" + overviewText(dates) + "\n");
   fs.writeFileSync(path.join(outDir, "data.json"), JSON.stringify(CATS.map(c => ({ id: c.id, objects: c.objects.map(o => ({ id: o.id, name: o.name, free: o.free, min: o.min })) })), null, 1));
   await browser.close(); fs.rmSync(tmp, { recursive: true, force: true });
   // latest + архив (храним 4 последние недели)
