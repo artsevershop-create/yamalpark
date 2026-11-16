@@ -687,6 +687,7 @@ html.yp-as-open .yp-as__btn{opacity:0;pointer-events:none}
       return bot(f.html + CTA, pivot(f.target, f.more));
     }
     if(/связат|контакт|телефон|телеграм|ватсап|whatsapp|(^|\s)почт|написать вам|как вам написать/.test(t) && !u.objs.length) return bot(kbA("Какие телефоны и контакты?") + CTA, pivot(lastTarget()));
+    if(/шум|громк|тишин|(^|s)музык/.test(t) && !u.objs.length) return bot(kbA("Можно ли шуметь и включать музыку?") + CTA, pivot(lastTarget()));
     if(/доставк/.test(t) && !/сертификат/.test(t)) return bot(kbA("Есть ли доставка еды?") + CTA, pivot(lastTarget()));
     if(/беседк/.test(t) && /зим|мороз|холод/.test(t)) return bot("Беседка — летняя. Зимой для компании подойдут гриль-дома (гриль прямо внутри), чум с обогревом или шатёр «Сияние севера» с дровяной печью." + CTA, pivot("@grill", [{t:"Забронировать: Чум", go:true, fn:function(){ pick("chum"); }}]));
     var topic = topicOf(text); if(topic) state.last = topic;
